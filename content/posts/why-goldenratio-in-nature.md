@@ -4,7 +4,7 @@ slug: "why-goldenratio-in-nature"
 date: "2026-01-08"
 category: "i-wonder-why"
 excerpt: ". The math itself is internally consistent. The number is not arbitrary. So when people say φ is special, they are not completely wrong."
-banner: "/assets/banners/iwonderwhy3.png"
+banner: "/assets/banners/iwonderwhy3.webp"
 ---
 ## The first time I met it, it felt bigger than it needed to be
 I remember learning about the golden ratio in school as if it were a secret.

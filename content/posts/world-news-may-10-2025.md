@@ -4,7 +4,7 @@ slug: "world-news-may-10-2025"
 date: "2025-05-10"
 category: "world-watch"
 excerpt: "A weekly roundup: drone warfare escalations, diplomatic moves for Ukraine, U.S.–China trade talks, climate alarms, and more."
-banner: "/assets/banners/worldwatch.jpg"
+banner: "/assets/banners/worldwatch.webp"
 ---
 
 As global events continue to unfold rapidly, staying informed has become more crucial than ever. This edition brings you essential developments from around the world, highlighting events that shape our collective future.

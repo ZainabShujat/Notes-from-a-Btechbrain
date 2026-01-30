@@ -4,7 +4,7 @@ slug: "why-not-all-thoughts-sentences"
 date: "2026-01-16"
 category: "i-wonder-why"
 excerpt: "The moment I start speaking, the thought collapses a little. What felt clear in my head suddenly sounds incomplete, or oddly wrong... makes me wonder whether the thought was ever a sentence to begin with"
-banner: "/assets/banners/iwonderwhy7.png"
+banner: "/assets/banners/iwonderwhy7.webp"
 ---
 Sometimes I know exactly what I’m thinking until I try to put it into words.
 

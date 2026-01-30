@@ -4,7 +4,7 @@ slug: "why-memories-in-shower"
 date: "2026-01-14"
 category: "i-wonder-why"
 excerpt: "I’ll be in the shower, or in the kitchen, doing something that doesn’t really need my attention. then suddenly... Some random moment from years ago. Just a normal slice of time I didn’t know I’d kept."
-banner: "/assets/banners/iwonderwhy6.png"
+banner: "/assets/banners/iwonderwhy6.webp"
 ---
 This almost always happens when I’m not thinking about anything important.
 

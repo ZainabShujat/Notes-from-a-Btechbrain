@@ -4,7 +4,7 @@ slug: "before-you-learn-tools"
 date: "2025-04-25"
 category: "milestone-stories-and-miscellaneous"
 excerpt: "Certifications can be powerful — but only when you understand why you're doing them."
-banner: "/assets/banners/edition2.jpg"
+banner: "/assets/banners/edition2.webp"
 ---
 
 ## Why This Topic?

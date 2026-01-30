@@ -4,7 +4,7 @@ slug: "the-quiet-math-of-equality-in-stem"
 date: "2025-11-09"
 category: "girlhood-and-stem-experiences"
 excerpt: "Equality in STEM looks clean on paper — but lived reality has its own quiet calculations."
-banner: "/assets/banners/girlhood2.png"
+banner: "/assets/banners/girlhood2.webp"
 ---
 
 ## The Surface of Equality

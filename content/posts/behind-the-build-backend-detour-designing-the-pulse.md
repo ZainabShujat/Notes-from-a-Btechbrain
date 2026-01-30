@@ -4,7 +4,7 @@ slug: "behind-the-build-backend-detour-designing-the-pulse"
 date: "2025-12-17"
 category: "behind-the-scenes"
 excerpt: "From cloud databases and environment-variable chaos to late-night design decisions — the middle stretch where the site learned to breathe, feel, and look like home."
-banner: "/assets/banners/behind-build-2.png"
+banner: "/assets/banners/behind-build-2.webp"
 ---
 
 **Behind the Scenes — Part 2 (Days 4–6)**  

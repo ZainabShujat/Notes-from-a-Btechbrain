@@ -4,7 +4,7 @@ slug: "july-crisis-backlogs"
 date: "2025-07-19"
 category: "july-crisis"
 excerpt: "A backlog can shake your momentum — but it can’t erase your effort or your growth."
-banner: "/assets/banners/julycrisis.jpg"
+banner: "/assets/banners/julycrisis.webp"
 ---
 
 Some results hit harder than others. It’s not just about marks or a number on a screen. Sometimes it feels like a verdict on your effort. Or worse, your potential.

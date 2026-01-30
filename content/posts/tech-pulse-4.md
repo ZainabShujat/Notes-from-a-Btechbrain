@@ -4,7 +4,7 @@ slug: "tech-pulse-4"
 date: "2025-05-17"
 category: "tech-pulse"
 excerpt: "AI workforce growth, agriculture automation, national security upgrades, big acquisitions, gaming launches, AI laptops, and a $2.57B renewable project — a packed week for India's tech landscape."
-banner: "/assets/banners/techpulse.jpg"
+banner: "/assets/banners/techpulse.webp"
 ---
 
 This week, we explore major shifts in India’s AI landscape, powerful new tech launches, and important developments across startups and renewable energy.  

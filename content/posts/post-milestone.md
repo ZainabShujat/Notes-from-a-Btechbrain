@@ -4,7 +4,7 @@ slug: post-milestone
 date: "2025-12-10"
 category: "milestone-stories-and-miscellaneous"
 excerpt: "Hitting 50 editions was big.Instead of pausing, i panicked. Am I afraid of something? "
-banner: "/assets/banners/50theditionaftermath.png"
+banner: "/assets/banners/50theditionaftermath.webp"
 ---
 
 Everyone keeps asking how I stayed consistent. How I wrote for seven months. How I built things one after another. How I managed the pace, the output, the discipline.

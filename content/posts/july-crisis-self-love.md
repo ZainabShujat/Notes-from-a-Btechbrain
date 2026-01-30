@@ -4,7 +4,7 @@ slug: "july-crisis-self-love"
 date: "2025-07-05"
 category: "july-crisis"
 excerpt: "Gen Z wrapped self-love in aesthetics — but somewhere along the way, we forgot that real self-love requires accountability, not avoidance."
-banner: "/assets/banners/julycrisis.jpg"
+banner: "/assets/banners/julycrisis.webp"
 ---
 
 Candles. Bubble baths. Cutting people off. Netflix binges are labelled as “recharging.” That’s the aesthetic we’ve wrapped self-love in.

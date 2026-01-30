@@ -4,7 +4,7 @@ slug: "when-passion-meets-paycheck"
 date: "2025-10-26"
 category: "financial-month"
 excerpt: "Growing up is real when passion gets tangled with pressure, purpose, and the need to earn."
-banner: "/assets/banners/financialmonth4.jpg"
+banner: "/assets/banners/financialmonth4.webp"
 ---
 
 Somewhere between our first few college lectures and the chaos of third year, everything started to change.

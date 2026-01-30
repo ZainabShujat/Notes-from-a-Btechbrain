@@ -4,7 +4,7 @@ slug: "september-in-a-nutshell"
 date: "2025-09-26"
 category: "friday-insights"
 excerpt: "September didn’t go as expected — from curriculum shifts to lost projects, unexpected growth, and quieter personal wins. Here’s the month as it really felt."
-banner: "/assets/banners/friday-insights-sept.jpg"
+banner: "/assets/banners/friday-insights-sept.webp"
 ---
 
 This month began underwhelming.  

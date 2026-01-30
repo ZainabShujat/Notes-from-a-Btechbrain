@@ -4,7 +4,7 @@ slug: "the-puzzle-that-broke-my-brain"
 date: "2025-12-25"
 category: "curiosity-series"
 excerpt: "A mathematically beautiful coincidence, an almost impossible puzzle, and why it reminded me why I fell in love with tech."
-banner: "/assets/banners/puzzle-2025.png"
+banner: "/assets/banners/puzzle-2025.webp"
 ---
 
 Sometimes you stumble onto something on the internet that doesn’t just entertain you — it taps right into the part of your brain you thought had gone quiet.

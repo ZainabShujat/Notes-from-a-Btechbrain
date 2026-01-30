@@ -4,7 +4,7 @@ slug: "why-letters-are-silent"
 date: "2026-01-04"
 category: "i-wonder-why"
 excerpt: "Writing words with silent letters could be annoying. But why do silent letters exist in the first place?"
-banner: "/assets/banners/iwonderwhy1.png"
+banner: "/assets/banners/iwonderwhy1.webp"
 ---
 ## Why this even bothered me in the first place
 

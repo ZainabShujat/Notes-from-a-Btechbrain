@@ -4,7 +4,7 @@ slug: "the-invisible-fights-we-all-carry"
 date: "2025-05-02"
 category: "friday-insights"
 excerpt: "A reflection on grief, resilience, and the quiet emotional battles people carry without ever speaking about them."
-banner: "/assets/banners/friday-insights.jpg"
+banner: "/assets/banners/friday-insights.webp"
 ---
 
 Even though we often see people act formal or professional around us, in their personal lives, they could be fighting huge battles – with themselves, with their loved ones, or even with their enemies.

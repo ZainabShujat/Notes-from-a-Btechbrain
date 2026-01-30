@@ -4,7 +4,7 @@ slug: a-beginning-amidst-the-chaos
 date: "2025-04-20"
 category: "milestone-stories-and-miscellaneous"
 excerpt: "Starting a newsletter as a way to make sense of life, tech, and myself – one issue at a time."
-banner: "/assets/banners/edition1.jpg"
+banner: "/assets/banners/edition1.webp"
 ---
 
 Hi there!  

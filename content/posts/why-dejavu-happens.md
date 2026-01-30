@@ -4,7 +4,7 @@ slug: "why-dejavu-happens"
 date: "2026-01-06"
 category: "i-wonder-why"
 excerpt: "You feel certain that this exact moment has already happened. Not similar. Not familiar. The same. The same room. The same angle. The same thought forming in your head. And then it’s gone."
-banner: "/assets/banners/iwonderwhy2.png"
+banner: "/assets/banners/iwonderwhy2.webp"
 ---
 ## The moment it catches you off guard
 Déjà vu never arrives dramatically.

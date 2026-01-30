@@ -4,7 +4,7 @@ slug: "tech-pulse-6"
 date: "2025-06-01"
 category: "tech-pulse"
 excerpt: "India’s first indigenous semiconductor chip, AI-driven railway safety, wildlife drones, Google I/O and Microsoft Build highlights, stealth jet approval, and quick global bytes."
-banner: "/assets/banners/techpulse.jpg"
+banner: "/assets/banners/techpulse.webp"
 ---
 
 # 🔧 India’s Tech Advancements

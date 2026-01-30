@@ -4,7 +4,7 @@ slug: "money-in-the-mess"
 date: "2025-10-05"
 category: "financial-month"
 excerpt: "College teaches us survival math long before it teaches us finance."
-banner: "/assets/banners/financialmonth1.jpg"
+banner: "/assets/banners/financialmonth1.webp"
 ---
 
 ### The Mid-Month Broke Chronicles

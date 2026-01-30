@@ -4,7 +4,7 @@ slug: "tech-pulse-3"
 date: "2025-05-11"
 category: "tech-pulse"
 excerpt: "AI talent shortages, IndiaAI collaborations, military robotics, and the rise of 'vibe coding' — here’s what shaped tech this week."
-banner: "/assets/banners/techpulse.jpg"
+banner: "/assets/banners/techpulse.webp"
 ---
 
 As technology evolves, staying updated on the latest developments is crucial.  

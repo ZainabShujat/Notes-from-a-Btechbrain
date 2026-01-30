@@ -4,7 +4,7 @@ slug: "world-watch-july-10-2025"
 date: "2025-07-10"
 category: "world-watch"
 excerpt: "From monsoon chaos and labour unrest to rising regional tensions and trade fights — what India and the world are facing this week."
-banner: "/assets/banners/worldwatch.jpg"
+banner: "/assets/banners/worldwatch.webp"
 ---
 
 “**From Monsoons to Monopolies: What’s Shaping India & the World**”

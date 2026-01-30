@@ -4,7 +4,7 @@ slug: "tech-pulse-apr-30-2025"
 date: "2025-04-30"
 category: "tech-pulse"
 excerpt: "Six key developments from the AI world this week — from DeepSeek-powered cars to India’s expanding AI education ecosystem."
-banner: "/assets/banners/techpulseai.jpg"
+banner: "/assets/banners/techpulseai.webp"
 ---
 
 Some weeks, it feels like AI moves more than we do — and this was one of them.  
@@ -20,7 +20,7 @@ BMW is set to integrate **DeepSeek AI** into its upcoming car models in China. D
 
 We’re officially entering the era of cars that understand more than just steering and speed.
 
-![BMW x DeepSeek AI](/assets/articles/tech-pulse-apr30/bmw-deepseek.jpg)
+![BMW x DeepSeek AI](/assets/articles/tech-pulse-apr30/bmw-deepseek.webp)
 
 ---
 
@@ -31,7 +31,7 @@ While it still lives inside X (formerly Twitter), its capabilities are starting 
 
 A glimpse into where all chatbots are headed: **versatile, visual, and very fast-learning**.
 
-![Grok Vision Upgrade](/assets/articles/tech-pulse-apr30/grok-vision.jpg)
+![Grok Vision Upgrade](/assets/articles/tech-pulse-apr30/grok-vision.webp)
 
 While it’s easy to brush this off as just another “Musk thing,” the underlying tech hints at something bigger:  
 AI tools learning to *see and speak* like us — across languages and formats.
@@ -45,7 +45,7 @@ This digital assistant focuses on human-like conversation, blending task support
 
 The AI assistant space is clearly getting crowded — but it’s also getting personal.
 
-![Baidu Xinxiang AI Agent](/assets/articles/tech-pulse-apr30/baidu-xinxiang.jpg)
+![Baidu Xinxiang AI Agent](/assets/articles/tech-pulse-apr30/baidu-xinxiang.webp)
 
 It’s one thing to ask an assistant to set alarms, another when it can chat back like a companion.  
 AI’s next phase might just be… **personality**.
@@ -59,7 +59,7 @@ The lab introduces students to robotics, computer vision, and practical AI appli
 
 Growing up around here, we never imagined humanoid robots in classrooms — now they’re practically peers.
 
-![DPS AI Lab](/assets/articles/tech-pulse-apr30/dps-ai-lab.jpg)
+![DPS AI Lab](/assets/articles/tech-pulse-apr30/dps-ai-lab.webp)
 
 
 For a student from Ghaziabad, this one hits close.  
@@ -74,7 +74,7 @@ It aims to equip school and college students with practical skills beyond theory
 
 The kind of AI you build depends on the questions you ask — and this program seems to be asking the right ones.
 
-![AI for Youth Program](/assets/articles/tech-pulse-apr30/ai-for-youth.jpg)
+![AI for Youth Program](/assets/articles/tech-pulse-apr30/ai-for-youth.webp)
 
 
 There’s a quiet shift happening in how we teach technology.  
@@ -90,7 +90,7 @@ This includes health-tech, ed-tech, agri-tech, and finance innovations.
 
 It’s not about joining a trend — it’s about staying relevant to where the world is headed.
 
-![AI Startups in India](/assets/articles/tech-pulse-apr30/ai-startups.jpg)
+![AI Startups in India](/assets/articles/tech-pulse-apr30/ai-startups.webp)
 
 ---
 

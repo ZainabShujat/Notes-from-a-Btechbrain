@@ -5,7 +5,7 @@ date: "2025-12-27"
 category: "curiosity-series"
 series: "Curiosity Edition"
 excerpt: "A quiet YouTube video, a familiar voice stepping back, and why it didn’t feel like an ending at all."
-banner: "/assets/banners/veritasium-future.png"
+banner: "/assets/banners/veritasium-future.webp"
 ---
 
 Sometimes a YouTube video doesn’t just show up on your feed — it lingers.

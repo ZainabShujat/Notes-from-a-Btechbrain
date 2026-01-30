@@ -4,7 +4,7 @@ slug: "behind-the-build-breaking-rebuilding-going-live"
 date: "2025-12-21"
 category: "Behind-the-scenes"
 excerpt: "The sprint, the crash, the pivot, and the moment the site finally became a living archive."
-banner: "/assets/banners/behind-build-3.png"
+banner: "/assets/banners/behind-build-3.webp"
 ---
 
 **Behind the Scenes — Part 3 (Days 7–9)**  

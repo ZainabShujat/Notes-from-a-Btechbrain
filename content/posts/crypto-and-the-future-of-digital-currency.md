@@ -4,7 +4,7 @@ slug: "crypto-and-the-future-of-digital-currency"
 date: "2025-08-24"
 category: "tech-demystified"
 excerpt: "Crypto isn't just hype — it's shaping the next era of money, value, and digital trust."
-banner: "/assets/banners/tech-demystified4.jpg"
+banner: "/assets/banners/tech-demystified4.webp"
 ---
 
 When people hear the word “crypto,” their minds often jump straight to flashy headlines about Bitcoin millionaires, meme coins like Dogecoin, or wild price crashes. But before getting lost in the hype, it helps to ask a simple question: why does knowing about cryptocurrency even matter?
@@ -25,7 +25,7 @@ During COVID-19, the world rapidly digitized. Payments, shopping, even the way w
 
 And then came the memes. Remember Dogecoin? It started as a joke based on an internet dog meme, yet it exploded into a real currency that people actually traded. Communities on Reddit and Twitter rallied around it, turning humor into financial energy. For many, this was their first hands-on experience with crypto.
 
-![article content](/assets/articles/techdemystified4/pic1.jpg)
+![article content](/assets/articles/techdemystified4/pic1.webp)
 
 ### Beyond the Hype
 

@@ -4,7 +4,7 @@ slug: "girlhood-in-defense-mode"
 date: "2025-11-02"
 category: "girlhood-and-stem-experiences"
 excerpt: "How girlhood quietly becomes self-defense — and the invisible math we learn just to exist safely."
-banner: "/assets/banners/girlhood1.png"
+banner: "/assets/banners/girlhood1.webp"
 ---
 
 ## The Trip That Should Have Been Simple

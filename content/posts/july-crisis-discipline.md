@@ -4,7 +4,7 @@ slug: "july-crisis-discipline"
 date: "2025-07-12"
 category: "july-crisis"
 excerpt: "Motivation is unreliable. Discipline is what carries you when you feel nothing at all."
-banner: "/assets/banners/julycrisis.jpg"
+banner: "/assets/banners/julycrisis.webp"
 ---
 
 A lot of us are waiting. Waiting to feel happy. Energized. Ready. We think we need to be in the perfect mood before we can start working on ourselves, our goals, and our dreams.

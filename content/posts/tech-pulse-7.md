@@ -4,7 +4,7 @@ slug: "tech-pulse-7"
 date: "2025-06-08"
 category: "tech-pulse"
 excerpt: "AI demo nights, AMD's new AI team, Apple Watch updates, Tesla stock turbulence, AI policy shifts, Infosys at Roland-Garros, and Amazon’s humanoid robots."
-banner: "/assets/banners/techpulse.jpg"
+banner: "/assets/banners/techpulse.webp"
 ---
 
 # 🧠 AI & Innovation

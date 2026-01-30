@@ -4,7 +4,7 @@ slug: "the-saviour-complex-in-women"
 date: "2025-11-30"
 category: "girlhood-and-stem-experiences"
 excerpt: "A look at the quiet emotional labour girls learn long before they even realise they’re doing it."
-banner: "/assets/banners/girlhood5.png"
+banner: "/assets/banners/girlhood5.webp"
 ---
 
 I think one of the strangest things about growing up as a girl is how early we start feeling responsible for things that aren’t really ours to fix. Nobody sits us down and tells us to become the emotional support system for everyone around us. It just happens in small ways, almost invisibly, until it becomes second nature.

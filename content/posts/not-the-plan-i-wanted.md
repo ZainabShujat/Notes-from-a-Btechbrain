@@ -4,7 +4,7 @@ slug: "not-the-plan-i-wanted"
 date: "2025-06-06"
 category: "friday-insights"
 excerpt: "Some semesters feel chaotic, others feel confusing — and sometimes the plans that fall apart are the ones that push us into the growth we never expected."
-banner: "/assets/banners/friday-insights.jpg"
+banner: "/assets/banners/friday-insights.webp"
 ---
 
 Some semesters feel like chaos.  

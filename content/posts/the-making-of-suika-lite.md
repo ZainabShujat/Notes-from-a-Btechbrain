@@ -4,7 +4,7 @@ slug: "the-making-of-suika-lite"
 date: "2025-10-22"
 category: "behind-the-scenes"
 excerpt: "A four-hour curiosity turned into a full physics-based mini-game — built from scratch with hand-drawn fruits, chaotic bugs, and Zee-style stubbornness."
-banner: "/assets/banners/suika1.jpg"
+banner: "/assets/banners/suika1.webp"
 ---
 
 It started in the ST week, that quiet middle stretch when everything feels paused but not really. Classes slow down, teachers go easier, and suddenly there’s this tiny pocket of time you don’t know what to do with. I remember sitting there with nothing in particular to study that evening, half-bored, half-restless, and thinking: “What if I try to make a game in four hours?”
@@ -13,7 +13,7 @@ That’s how most of my chaos begins — one throwaway thought that sounds harml
 
 I wasn’t planning to build anything big. Just a blank HTML file, a cup of chai that went cold too quickly, and two libraries, p5.js and matter.js, that I barely understood yet.
 
-![article content](/assets/articles/suika/pic1.jpg)
+![article content](/assets/articles/suika/pic1.webp)
 
 The goal wasn’t even a goal. It was more of a test: could I make something fall, bounce, behave like it had a mind of its own? But curiosity is my worst best habit. Once I open a file, I can’t stop.
 
@@ -39,7 +39,7 @@ At first, it was just random geometry. A few circles, a makeshift gravity settin
 
 I froze for a second because I hadn’t actually written that logic intentionally. It just happened because the physics engine was in a good mood. I stared at the screen, whispered “huhhh,” and then started smiling like an idiot.
 
-![article content](/assets/articles/suika/pic2.jpg)
+![article content](/assets/articles/suika/pic2.webp)
 
 That’s when it clicked. The line between experiment and project vanished instantly.
 
@@ -53,7 +53,7 @@ I didn’t want to copy the original. I wanted to make something that carried it
 
 Every fruit had its own carefully chosen size, bounce, and colour — because yes, those are hand-drawn fruits, not imported sprites.
 
-![article content](/assets/articles/suika/pic3.jpg)
+![article content](/assets/articles/suika/pic3.webp)
 
 I wanted them to have my touch, not someone else’s texture. I spent an embarrassing amount of time adjusting them until they felt just right. I refused to change the sizes later — I even told myself, “Don’t you dare touch these; they finally feel balanced.”
 
@@ -63,7 +63,7 @@ That’s when I realised I wasn’t just learning to code a game; I was learning
 
 It wasn’t perfect, obviously. The viewport on mobile refused to cooperate. Some fruits overlapped without merging. The game-over line acted like it had mood swings.
 
-![article content](/assets/articles/suika/pic4.jpg)
+![article content](/assets/articles/suika/pic4.webp)
 
 I spent hours muttering at my screen, trying to understand why something that worked yesterday suddenly didn’t.
 
@@ -71,7 +71,7 @@ But every bug fixed felt like a small confession from the game itself. Every suc
 
 And I finally realised how much I’d underestimated the technical depth of even a simple game. There’s an entire physics world hidden behind one falling fruit: restitution, velocity thresholds, angular friction, and collision distance. It’s maths, art, and timing all tangled together.
 
-![article content](/assets/articles/suika/pic5.jpg)
+![article content](/assets/articles/suika/pic5.webp)
 
 No wonder Code Bullet laughs manically when his code finally works.
 

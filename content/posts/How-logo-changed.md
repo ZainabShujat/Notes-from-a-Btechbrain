@@ -4,7 +4,7 @@ slug: "How-logo-changed"
 date: "2026-01-15"
 category: "milestone-stories-and-miscellaneous"
 excerpt: "Most of my thinking still starts digitally. On a laptop, reading, researching, noticing patterns. But the real clarity happens when I slow down and write. That’s where things settle."
-banner: "/assets/banners/logochange.png"
+banner: "/assets/banners/logochange.webp"
 ---
 When I started Notes From A B. Tech Brain, I didn’t think of it as a “brand”. It was more like a space I wanted to build for myself. Somewhere I could put down everything that was going on in my head.
 
@@ -14,7 +14,7 @@ It had a laptop with “Loading…” because that’s exactly how I felt at the
 
 The notebook listed things like soft skills, programming, college life, blogs. Not because I was confused, but because I didn’t want to narrow myself too early. I wanted room to explore without being boxed into one identity.
 
-![article content](/assets/articles/logochange/pic1.png) 
+![article content](/assets/articles/logochange/pic1.webp) 
 The OG Logo
 The pen, ink, brain, lightbulb. All of it was basically an inventory of what lived in my mind then. The logo wasn’t polished, but it was honest. It helped me start without pressure.
 
@@ -34,7 +34,7 @@ Most of my thinking still starts digitally. On a laptop, reading, researching, n
 
 That’s why the idea became a *laptop turning into a notebook*.
 
-![article content](/assets/articles/logochange/pic2.png) 
+![article content](/assets/articles/logochange/pic2.webp) 
 The screen represents the digital world. Tech, information, ideas coming in. The notebook and fountain pen represent reflection. Processing those ideas in my own way and turning them into writing.
 
 Instead of showing everything inside my head, the focus shifted to how ideas move through it.

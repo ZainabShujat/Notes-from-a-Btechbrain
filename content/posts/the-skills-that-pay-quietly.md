@@ -4,7 +4,7 @@ slug: "the-skills-that-pay-quietly"
 date: "2025-10-19"
 category: "financial-month"
 excerpt: "Some skills make noise. Others quietly hold your entire life together."
-banner: "/assets/banners/financialmonth3.jpg"
+banner: "/assets/banners/financialmonth3.webp"
 ---
 
 Yesterday, I was telling my childhood friend that I’ve been writing financial articles this month. She nodded, smiled, and asked, “Oh, so you know about the stock market?”

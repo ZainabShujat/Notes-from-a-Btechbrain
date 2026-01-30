@@ -4,7 +4,7 @@ slug: "from-chaos-to-control"
 date: "2025-05-09"
 category: "friday-insights"
 excerpt: "College feels like chaos on wheels — but with the right habits, you can take back control of your time, your energy, and your peace."
-banner: "/assets/banners/friday-insights.jpg"
+banner: "/assets/banners/friday-insights.webp"
 ---
 
 College life as a B.Tech student can often feel like we’re juggling endless lectures, lab sessions, coding assignments, internships, and exams. It’s tough, right? Engineering is one of the most demanding UG courses, requiring hours of focused academic and practical work. Without a solid plan, it’s easy to get overwhelmed.

@@ -4,7 +4,7 @@ slug: "world-watch-may-17-2025"
 date: "2025-05-17"
 category: "world-watch"
 excerpt: "Ceasefire tensions in South Asia, Europe’s diplomatic push, U.S.–China trade talks, spiritual appeals from the Vatican, and major shifts in cricket—here’s what shaped the week."
-banner: "/assets/banners/worldwatch.jpg"
+banner: "/assets/banners/worldwatch.webp"
 ---
 
 As global events unfold rapidly, staying informed is more crucial than ever.  

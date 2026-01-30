@@ -4,7 +4,7 @@ slug: "why-timespeeds-as-age"
 date: "2026-01-10"
 category: "i-wonder-why"
 excerpt: "Time itself has not changed. But the way it feels absolutely has. So the question is not what happened to time. It is what happened to us."
-banner: "/assets/banners/iwonderwhy4.png"
+banner: "/assets/banners/iwonderwhy4.webp"
 ---
 
 ## The strange way years started slipping past

@@ -4,7 +4,7 @@ slug: "tech-pulse-5"
 date: "2025-05-25"
 category: "tech-pulse"
 excerpt: "Data localisation gets stricter, US–China tech tensions rise, cyberattacks spike, and India’s 5G rollout accelerates. Here’s what mattered this week."
-banner: "/assets/banners/techpulse.jpg"
+banner: "/assets/banners/techpulse.webp"
 ---
 
 **Dates Covered:** May 17–23, 2025

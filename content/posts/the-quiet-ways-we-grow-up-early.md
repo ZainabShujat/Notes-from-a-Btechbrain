@@ -4,7 +4,7 @@ slug: "the-quiet-ways-we-grow-up-early"
 date: "2025-11-24"
 category: "girlhood-and-stem-experiences"
 excerpt: "Growing up too fast doesn’t mean you lost your childhood — it just means you learned to carry more than you should have."
-banner: "/assets/banners/girlhood4.png"
+banner: "/assets/banners/girlhood4.webp"
 ---
 
 There are days when I realise I don’t feel nineteen the way nineteen is supposed to feel. Not because I’m unusually wise or sorted, I’m not, but because I’ve been thinking a little too hard, a little too early. And I know I’m not the only one. A lot of girls carry this quiet, internal tiredness that doesn’t match the number on their birthday cake.

@@ -4,7 +4,7 @@ slug: "world-watch-june-7-2025"
 date: "2025-06-07"
 category: "world-watch"
 excerpt: "Trade talks, geopolitical tensions, humanitarian updates, India's global role, climate observances, and historic sports moments — here’s what shaped the week."
-banner: "/assets/banners/worldwatch.jpg"
+banner: "/assets/banners/worldwatch.webp"
 ---
 
 ---

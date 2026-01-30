@@ -4,7 +4,7 @@ slug: "july-crisis-direction"
 date: "2025-07-26"
 category: "july-crisis"
 excerpt: "Unlimited options aren’t empowering when you lack clarity — they’re overwhelming. Direction is what turns potential into movement."
-banner: "/assets/banners/julycrisis.jpg"
+banner: "/assets/banners/julycrisis.webp"
 ---
 
 The Quiet Lie of "You Can Do Anything"  

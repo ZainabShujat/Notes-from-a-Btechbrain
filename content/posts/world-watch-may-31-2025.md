@@ -4,7 +4,7 @@ slug: "world-watch-may-31-2025"
 date: "2025-05-31"
 category: "world-watch"
 excerpt: "India–US tariff negotiations, early monsoon shifts, IPL chaos, upcoming football tournaments, Gaza ceasefire talks, and global student visa tensions — here’s everything that mattered this week."
-banner: "/assets/banners/worldwatch.jpg"
+banner: "/assets/banners/worldwatch.webp"
 ---
 
 ---

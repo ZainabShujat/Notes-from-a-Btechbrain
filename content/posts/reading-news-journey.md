@@ -4,7 +4,7 @@ slug: "reading-news-journey"
 date: "2025-05-16"
 category: "friday-insights"
 excerpt: "I used to get lost reading the news — confused, overwhelmed, and convinced everyone understood more than me. Here’s how I slowly made sense of it, one small step at a time."
-banner: "/assets/banners/friday-insights.jpg"
+banner: "/assets/banners/friday-insights.webp"
 ---
 
 Let me tell you something real. I used to get completely lost reading the news. I’d open an article and immediately be hit with words and references I didn’t understand.
@@ -47,7 +47,7 @@ But now? They click.
 
 💡 *Tip:* I kept a note on my phone with definitions. Now it’s my personal cheat sheet.
 
-![people](/assets/articles/fridayinsights1.jpg)
+![people](/assets/articles/fridayinsights1.webp)
 
 ---
 
@@ -112,7 +112,7 @@ Then I realised: I don’t have to read everything.
 💡 *Balance tip:* **30–40 minutes a day is enough** to stay updated without overwhelming yourself.
 
 ---
-![people](/assets/articles/fridayinsights2.jpg)
+![people](/assets/articles/fridayinsights2.webp)
 
 # 🗞️ So… Apps or Newspapers?
 

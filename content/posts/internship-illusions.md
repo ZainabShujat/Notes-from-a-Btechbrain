@@ -4,7 +4,7 @@ slug: "internship-illusions"
 date: "2025-10-12"
 category: "financial-month"
 excerpt: "Internships teach us more about worth than work — especially when the paycheck is missing."
-banner: "/assets/banners/financialmonth2.jpg"
+banner: "/assets/banners/financialmonth2.webp"
 ---
 
 ### The Offer Letter Euphoria

@@ -4,7 +4,7 @@ slug: "looking-smart-vs-being-curious"
 date: "2025-11-16"
 category: "girlhood-and-stem-experiences"
 excerpt: "Looking smart lasts for a moment. Being curious lasts for years."
-banner: "/assets/banners/girlhood3.png"
+banner: "/assets/banners/girlhood3.webp"
 ---
 
 There was a time when being a nerd simply meant being deeply interested in something. Not aesthetic. Not status. Not a personality template. Just genuine curiosity — the kind that quietly pulled you in for hours without anyone noticing. It wasn’t pretty or poetic. It didn’t come with filters or desk setups. It was private, sometimes even embarrassing, and that was exactly what made it real.

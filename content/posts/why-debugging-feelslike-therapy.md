@@ -4,7 +4,7 @@ slug: "why-debugging-feelslike-therapy"
 date: "2026-01-12"
 category: "i-wonder-why"
 excerpt: "You cannot rush it. You cannot complain your way out of it. You cannot pretend it is not there and hope it resolves itself quietly in the background..."
-banner: "/assets/banners/iwonderwhy5.png"
+banner: "/assets/banners/iwonderwhy5.webp"
 ---
 There is a certain kind of problem that does not respond to panic.
 

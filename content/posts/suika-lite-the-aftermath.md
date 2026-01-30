@@ -4,7 +4,7 @@ slug: "suika-lite-the-aftermath"
 date: "2025-10-24"
 category: "milestone-stories-and-miscellaneous"
 excerpt: "What stayed after the fruits stopped falling — reflections, unexpected opportunities, and the quiet lessons behind Suika Lite."
-banner: "/assets/banners/suika2.jpg"
+banner: "/assets/banners/suika2.webp"
 ---
 
 In the [last edition](https://btechbrain.vercel.app/post/the-making-of-suika-lite), I wrote about how Suika Lite came to life — a four-hour challenge that turned into a week of fruits, physics, and far too many browser tabs. This one’s about what stayed after the code stopped running.

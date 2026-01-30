@@ -4,7 +4,7 @@ slug: "world-watch-april-26"
 date: "2025-04-26"
 category: "world-watch"
 excerpt: "A weekly roundup of major geopolitical events — from Kashmir to Ukraine, global markets, and US trade policy."
-banner: "/assets/banners/worldwatch.jpg"
+banner: "/assets/banners/worldwatch.webp"
 ---
 
 # Welcome to World Watch

@@ -4,7 +4,7 @@ slug: "overthinking-ambition"
 date: "2025-05-30"
 category: "friday-insights"
 excerpt: "Ambition is powerful — until it starts to feel like pressure. For students in tech, especially away from home, productivity can become a quiet burden. Here’s what I learned about slowing down without losing drive."
-banner: "/assets/banners/friday-insights.jpg"
+banner: "/assets/banners/friday-insights.webp"
 ---
 
 There’s this quiet pressure that follows you around when you’re in tech, especially while you’re still at university.  

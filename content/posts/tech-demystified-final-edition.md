@@ -4,7 +4,7 @@ slug: "tech-demystified-final-edition"
 date: "2025-08-31"
 category: "tech-demystified"
 excerpt: "A month of curiosity, buzzwords, hiccups, and big wow moments — learning tech the human way."
-banner: "/assets/banners/tech-demystified5.png"
+banner: "/assets/banners/tech-demystified5.webp"
 ---
 
 Curiosity, Buzzwords, and a Month of Learning Together

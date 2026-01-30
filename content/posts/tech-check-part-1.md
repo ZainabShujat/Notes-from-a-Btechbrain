@@ -4,7 +4,7 @@ slug: "tech-check-part-1"
 date: "2025-08-03"
 category: "tech-demystified"
 excerpt: "AI, Cloud, Cybersecurity, Data — the buzzwords you nod at but never fully understood (until now)."
-banner: "/assets/banners/tech-demystified1.jpg"
+banner: "/assets/banners/tech-demystified1.webp"
 ---
 
 AI, Cloud, Cybersecurity, Data — the buzzwords you nod at but never fully understood (until now).
@@ -21,7 +21,7 @@ Right now, most of what we use falls under Narrow AI — meaning it’s trained 
 
 Whether or not you plan to build AI systems yourself, you’ll 100% interact with them in your daily work, your tools, and your feeds. So… better to know what’s going on, right?
 
-![article content](/assets/articles/techdemystified1/pic1.jpg)
+![article content](/assets/articles/techdemystified1/pic1.webp)
 *Proof I’ve been working with AI since before it became a core subject*
 
 ---
@@ -40,7 +40,7 @@ Cloud computing basically means:
 
 It’s not just storage either. Companies use the cloud to run apps, train AI models, host websites, and manage data — all without setting up a million servers of their own.
 
-![article content](/assets/articles/techdemystified1/pic2.jpg)
+![article content](/assets/articles/techdemystified1/pic2.webp)
 *The hero of all last-minute submissions*
 
 ---
@@ -63,7 +63,7 @@ And here's what I’ve learned: the goal isn’t to become paranoid. It’s to b
 
 Because in 2025? Digital hygiene is real hygiene.
 
-![article content](/assets/articles/techdemystified1/pic3.jpg)
+![article content](/assets/articles/techdemystified1/pic3.webp)
 *📊 Data: The fuel behind literally everything (including your wrong predictions)*
 
 ---
@@ -80,7 +80,7 @@ This is why understanding data matters — not just to code, but to build better
 
 In the world we’re moving into, data is power. But only if it’s collected, cleaned, and handled right.
 
-![article content](/assets/articles/techdemystified1/pic4.jpg)
+![article content](/assets/articles/techdemystified1/pic4.webp)
 *When the model is too optimistic for its own good 😅*
 
 ---

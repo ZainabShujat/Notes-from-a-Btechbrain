@@ -4,7 +4,7 @@ slug: "edition-50-milestone"
 date: "2025-12-05"
 category: "milestone-stories-and-miscellaneous"
 excerpt: "Fifty editions later — a journey of growth, chaos, clarity, and becoming visible."
-banner: "/assets/banners/milestone50.png"
+banner: "/assets/banners/milestone50.webp"
 ---
 
 Hi there.  
@@ -16,7 +16,7 @@ But something changed when I pressed “Post.”
 
 Something clicked.
 
-![article content](/assets/articles/milestone50/pic1.jpg)  
+![article content](/assets/articles/milestone50/pic1.webp)  
 *The digitally drawn logo*
 
 And now here we are: Edition Fifty.  
@@ -35,7 +35,7 @@ Meanwhile, I was:
 
 So I made one.
 
-![article content](/assets/articles/milestone50/pic2.jpg)
+![article content](/assets/articles/milestone50/pic2.webp)
 
 A small weekly corner where:
 

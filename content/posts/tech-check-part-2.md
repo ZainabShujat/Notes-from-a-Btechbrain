@@ -4,7 +4,7 @@ slug: "tech-check-part-2"
 date: "2025-08-10"
 category: "tech-demystified"
 excerpt: "APIs, UX, Automation, Web3 — the 'make life easier but still sound fancy' side of tech."
-banner: "/assets/banners/tech-demystified2.jpg"
+banner: "/assets/banners/tech-demystified2.webp"
 ---
 
 APIs, UX, Automation, Web3 — aka the “make life easier but still sound fancy” side of tech.
@@ -17,7 +17,7 @@ That’s literally how your weather app gets its forecast, how your online payme
 
 When I first heard “API,” I pictured hacker movie scenes with glowing green code. Reality? It’s just sending a neat little request and getting a neat little answer. Less Hollywood, more polite Google search.
 
-![article content](/assets/articles/techdemystified2/pic1.jpg)
+![article content](/assets/articles/techdemystified2/pic1.webp)
 
 💡 **TL;DR:** Learn the basics of APIs; they make your app feel like it’s part of a bigger conversation, not just sitting alone in the corner.
 
@@ -31,7 +31,7 @@ Good UX is why you can order coffee on an app in 10 seconds without thinking. Ba
 
 I once made a website for a project that looked gorgeous — pastel buttons, clean fonts, aesthetic banners... and then my friends started clicking around and said, “Uh… where’s the actual content?” Turns out, design ≠ experience. Lesson learnt.
 
-![article content](/assets/articles/techdemystified2/pic2.jpg)
+![article content](/assets/articles/techdemystified2/pic2.webp)
 
 💡 **TL;DR:** UX isn’t just “making it pretty.” It’s making it painless.
 
@@ -43,7 +43,7 @@ Automation is tech’s way of saying, “Chill, I’ve got this.” It’s why y
 
 My favourite automation hack? Google Forms + Sheets + email alerts during a college club drive. People filled the form, data went to my sheet, I got pinged instantly. Zero manual work, maximum main-character energy.
 
-![article content](/assets/articles/techdemystified2/pic3.jpg)
+![article content](/assets/articles/techdemystified2/pic3.webp)
 
 💡 **TL;DR:** Automate the boring stuff. Life’s too short for repetitive clicking.
 
@@ -61,7 +61,7 @@ It’s behind crypto, NFTs, and decentralised communities — all aiming for “
 
 Cool? Yes. Ready for prime time? Ehh. For every smart Web3 project, there’s a scammy one lurking nearby, so enthusiasm is fine, but keep your wallet zipped until you’ve done your homework.
 
-![article content](/assets/articles/techdemystified2/pic4.jpg)
+![article content](/assets/articles/techdemystified2/pic4.webp)
 
 💡 **TL;DR:** Web3 might be the next internet era. But right now, it’s still in its teenage phase.
 

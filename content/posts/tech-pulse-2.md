@@ -4,7 +4,7 @@ slug: "tech-pulse-2"
 date: "2025-05-04"
 category: "tech-pulse"
 excerpt: "A sharper, expanded Tech Pulse — now tracking both tech and AI developments that are shaping India’s digital future."
-banner: "/assets/banners/techpulse.jpg"
+banner: "/assets/banners/techpulse.webp"
 ---
 
 As technology continues to shape economies and redefine global influence, staying informed isn’t just about knowing what’s trending — it’s about understanding what’s transforming.

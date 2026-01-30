@@ -5,7 +5,7 @@ date: "2026-01-02"
 category: "curiosity-series"
 series: "Curiosity Edition"
 excerpt: "Stranger Things introduced a lot of us to exotic matter and the physics behind Hawkins. But how much of it is real?"
-banner: "/assets/banners/strangerthings.png"
+banner: "/assets/banners/strangerthings.webp"
 ---
 
 When Stranger Things casually dropped the term exotic matter, it didn’t pause to explain it.
@@ -32,7 +32,7 @@ why reality can tear and stay torn
 
 In other words, exotic matter *isn’t just a threat — it’s infrastructure.*
 
-![article content](/assets/articles/strangerthings/hawkins.png)
+![article content](/assets/articles/strangerthings/hawkins.webp)
 
 Destroy it, and the bridge between worlds collapses. Simple. Elegant. Terrifying.
 
@@ -84,7 +84,7 @@ Absolutely not portal-opening.
 
 But it’s enough to suggest that nature isn’t as rigid as it looks. Physics hasn’t slammed the door on exotic matter — it’s just not opening it anytime soon.
 
-![article content](/assets/articles/strangerthings/wormhole.png)
+![article content](/assets/articles/strangerthings/wormhole.webp)
 
 ## So… Was Stranger Things Actually Accurate?
 

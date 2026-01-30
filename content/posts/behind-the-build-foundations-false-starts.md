@@ -4,7 +4,7 @@ slug: "behind-the-build-foundations-false-starts"
 date: "2025-12-13"
 category: "behind-the-scenes"
 excerpt: "The behind-the-scenes story of how Notes From a B. Tech Brain slowly turned from scattered drafts into a living website — spanning false starts, backend fear, and the first real sense of flow."
-banner: "/assets/banners/behind-build-1.png"
+banner: "/assets/banners/behind-build-1.webp"
 ---
 
 **Behind the Scenes — Part 1 (Days 1–3)**  

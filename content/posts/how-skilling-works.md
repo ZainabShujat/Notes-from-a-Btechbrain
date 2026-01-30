@@ -4,7 +4,7 @@ slug: "how-skilling-works"
 date: "2025-05-23"
 category: "friday-insights"
 excerpt: "Skilling isn’t one-size-fits-all — reskilling, cross-skilling, upskilling, expert-skilling. Understanding the difference helps you stop scrolling and actually start."
-banner: "/assets/banners/friday-insights.jpg"
+banner: "/assets/banners/friday-insights.webp"
 ---
 
 Hey you — the one with eight tabs open on “how to learn XYZ in 2025.”  

@@ -4,7 +4,7 @@ slug: "blockchain-and-beyond"
 date: "2025-08-17"
 category: "tech-demystified"
 excerpt: "Learning blockchain together, one block at a time — made simple, relatable, and actually fun."
-banner: "/assets/banners/tech-demystified3.jpg"
+banner: "/assets/banners/tech-demystified3.webp"
 ---
 
 Learning Together, One Block at a Time
@@ -28,7 +28,7 @@ Think of it like a Google Doc everyone edits together, except once something is 
 
 For example, imagine a hackathon where your team has to track all submissions, edits, and votes. Blockchain-style thinking, decentralized, secure, verified, could prevent anyone from sneaking in a last-minute change or claim. Suddenly it’s not just theory, it’s your hackathon superpower. Watching blockchain in action is like seeing your coding assignment come alive, minus the panic.
 
-![article content](/assets/articles/techdemystified3/pic1.jpg)
+![article content](/assets/articles/techdemystified3/pic1.webp)
 *hyperlink in the pic: https://www.ibm.com/think/topics/blockchain#What+is+blockchain%3F*
 
 ---

@@ -4,7 +4,7 @@ slug: "tech-pulse-apr-27-2025"
 date: "2025-04-27"
 category: "tech-pulse"
 excerpt: "A curated roundup of major tech launches, AI updates, and innovations every student should stay sharp about."
-banner: "/assets/banners/techpulse.jpg"
+banner: "/assets/banners/techpulse.webp"
 ---
 
 In this series, I’ll be curating major tech updates: product launches, coding trends, and web innovations that every tech student should stay sharp about.
@@ -15,7 +15,7 @@ Let’s dive into what moved the world of technology this week.
 
 # 1. Microsoft Launches Phi-3 Mini — A New Small Language Model
 
-![Phi-3 Mini Model](/assets/articles/tech-pulse-apr27/phi3.jpg)
+![Phi-3 Mini Model](/assets/articles/tech-pulse-apr27/phi3.webp)
 
 Microsoft launched **Phi-3 Mini**, a powerful small-scale language model meant to run on mobile devices and laptops. Designed to make AI more accessible without huge infrastructure, Phi-3 Mini can handle tasks like summarization, translation, and even lightweight coding support.
 
@@ -26,7 +26,7 @@ Expect AI assistants integrated into even low-spec devices soon — developers n
 
 # 2. Google Releases Flutter 4.0 Preview
 
-![Flutter 4.0 Preview](/assets/articles/tech-pulse-apr27/flutter.jpg)
+![Flutter 4.0 Preview](/assets/articles/tech-pulse-apr27/flutter.webp)
 
 Google announced the **preview version of Flutter 4.0**, its open-source UI toolkit.  
 Key highlights include:
@@ -42,7 +42,7 @@ Front-end devs and app builders — Flutter is staying strong. Learning it now i
 
 # 3. GitHub Introduces Copilot Workspace (Beta)
 
-![GitHub Copilot Workspace](/assets/articles/tech-pulse-apr27/copilot.jpg)
+![GitHub Copilot Workspace](/assets/articles/tech-pulse-apr27/copilot.webp)
 
 GitHub is expanding its AI ecosystem with **Copilot Workspace**, allowing developers to write, test, and commit code directly on GitHub using AI-powered suggestions.
 
@@ -53,7 +53,7 @@ Coding workflows are evolving fast. Understanding AI-assisted development is bec
 
 # 4. Samsung Prepares to Launch XR Headset
 
-![Samsung XR Headset](/assets/articles/tech-pulse-apr27/samsung-xr.jpg)
+![Samsung XR Headset](/assets/articles/tech-pulse-apr27/samsung-xr.webp)
 
 Samsung is gearing up to enter the XR (Extended Reality) race, competing with the Apple Vision Pro.  
 Leaks suggest a headset launch by **early June 2025**, focusing on immersive AR and VR experiences.
