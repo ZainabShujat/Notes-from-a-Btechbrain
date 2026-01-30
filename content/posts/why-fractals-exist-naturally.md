@@ -3,6 +3,7 @@ title: "I Wonder Why Fractals Exist Naturally"
 slug: "why-fractals-exist-naturally"
 date: "2026-01-31"
 category: "i-wonder-why"
+subcategory: "Math, Structure & Quiet Beauty"
 excerpt: "Fractals appear in nature when simple rules repeat across scales, creating complexity without needing new instructions."
 banner: "/assets/banners/iwonderwhy14.webp"
 ---

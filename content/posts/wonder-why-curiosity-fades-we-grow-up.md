@@ -3,6 +3,7 @@ title: "I Wonder Why Curiosity Fades as We Grow Up"
 slug: "wonder-why-curiosity-fades-we-grow-up"
 date: "2026-02-22"
 category: "i-wonder-why"
+subcategory: "Curiosity, Patterns & Being Human"
 excerpt: "As a kid, questions came without effort. When you’re young, curiosity feels automatic."
 banner: "/assets/banners/iwonderwhy18.webp"
 ---

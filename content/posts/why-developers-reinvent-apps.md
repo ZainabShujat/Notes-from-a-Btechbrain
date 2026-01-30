@@ -3,6 +3,7 @@ title: "I Wonder Why Developers Keep Reinventing the Same Apps"
 slug: "why-developers-reinvent-apps"
 date: "2026-02-17"
 category: "i-wonder-why"
+subcategory: "Code, Work & Learning the Hard Way"
 excerpt: "Another to-do app. Another notes app. Another habit tracker. Another chat app with a slightly different colour palette."
 banner: "/assets/banners/iwonderwhy17.webp"
 ---

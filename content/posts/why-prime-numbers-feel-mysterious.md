@@ -3,6 +3,7 @@ title: "I Wonder Why Prime Numbers Feel Mysterious"
 slug: "why-prime-numbers-feel-mysterious"
 date: "2026-02-02"
 category: "i-wonder-why"
+subcategory: "Math, Structure & Quiet Beauty"
 excerpt: "Prime numbers follow clear rules, yet refuse to reveal a predictable pattern, making them feel more like discoveries than inventions."
 banner: "/assets/banners/iwonderwhy15.webp"
 ---

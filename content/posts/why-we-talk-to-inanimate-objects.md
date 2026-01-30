@@ -3,6 +3,7 @@ title: "I Wonder Why We Talk to Inanimate Objects"
 slug: "why-we-talk-to-inanimate-objects"
 date: "2026-01-26"
 category: "i-wonder-why"
+subcategory: "Curiosity, Patterns & Being Human"
 excerpt: "Talking to objects isn’t about expecting an answer; it’s a way to externalise frustration and regain a sense of control when something breaks our flow."
 banner: "/assets/banners/iwonderwhy11.webp"
 ---

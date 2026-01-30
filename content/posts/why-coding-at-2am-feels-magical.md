@@ -3,6 +3,7 @@ title: "I Wonder Why Coding at 2am Feels Magical"
 slug: "why-coding-at-2am-feels-magical"
 date: "2026-02-12"
 category: "i-wonder-why"
+subcategory: "Code, Work & Learning the Hard Way"
 excerpt: "Late at night, distractions fall away, failure feels lighter, and thinking finally moves at the same pace as the problem in front of you."
 banner: "/assets/banners/iwonderwhy16.webp"
 ---

@@ -3,6 +3,7 @@ title: "I Wonder Why Dreams Turn Into Stories"
 slug: "why-dreams-turn-into-stories"
 date: "2026-01-18"
 category: "i-wonder-why"
+subcategory: "Dreams, Imagination & Inner Narratives"
 excerpt: "Dreams arrive as fragments and feelings, but the moment we wake up, the brain turns them into stories so they can be remembered at all."
 banner: "/assets/banners/iwonderwhy8.webp"
 ---

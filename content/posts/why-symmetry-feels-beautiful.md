@@ -3,6 +3,7 @@ title: "I Wonder Why Symmetry Feels Beautiful"
 slug: "why-symmetry-feels-beautiful"
 date: "2026-01-24"
 category: "i-wonder-why"
+subcategory: "Math, Structure & Quiet Beauty"
 excerpt: "Symmetry feels beautiful because it gives the brain effortless order, but it only holds attention when something slightly imperfect breaks the mirror."
 banner: "/assets/banners/iwonderwhy10.webp"
 ---

@@ -3,6 +3,7 @@ title: "I Wonder Why the Brain Loves Patterns"
 slug: "why-the-brain-loves-patterns"
 date: "2026-01-20"
 category: "i-wonder-why"
+subcategory: "Curiosity, Patterns & Being Human"
 excerpt: "The brain keeps finding patterns even when they’re useless, because order—real or imagined—feels safer than randomness."
 banner: "/assets/banners/iwonderwhy9.webp"
 ---

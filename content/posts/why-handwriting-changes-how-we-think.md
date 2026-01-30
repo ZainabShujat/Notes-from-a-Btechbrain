@@ -3,6 +3,7 @@ title: "I Wonder Why Handwriting Changes How We Think"
 slug: "why-handwriting-changes-how-we-think"
 date: "2026-01-28"
 category: "i-wonder-why"
+subcategory: "Language, Thought & Inner Experience"
 excerpt: "Handwriting slows thought just enough to force attention, turning thinking into a physical act instead of a purely mental one."
 banner: "/assets/banners/iwonderwhy12.webp"
 ---

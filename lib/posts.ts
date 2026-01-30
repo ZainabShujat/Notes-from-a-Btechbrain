@@ -9,6 +9,7 @@ export type PostMeta = {
   slug: string;
   date: string;
   category: string;
+  subcategory?: string;
   excerpt?: string;
   banner?: string;
   content?: string; // ⭐ For full-content search

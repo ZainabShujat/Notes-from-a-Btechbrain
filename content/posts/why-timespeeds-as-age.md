@@ -3,6 +3,7 @@ title: "I Wonder Why Time Speeds Up as We Age"
 slug: "why-timespeeds-as-age"
 date: "2026-01-10"
 category: "i-wonder-why"
+subcategory: "Memory, Time & the Mind"
 excerpt: "Time itself has not changed. But the way it feels absolutely has. So the question is not what happened to time. It is what happened to us."
 banner: "/assets/banners/iwonderwhy4.webp"
 ---

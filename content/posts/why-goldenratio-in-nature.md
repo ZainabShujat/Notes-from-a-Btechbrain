@@ -3,6 +3,7 @@ title: "I Wonder Why the Golden Ratio Shows Up in Nature"
 slug: "why-goldenratio-in-nature"
 date: "2026-01-08"
 category: "i-wonder-why"
+subcategory: "Math, Structure & Quiet Beauty"
 excerpt: ". The math itself is internally consistent. The number is not arbitrary. So when people say φ is special, they are not completely wrong."
 banner: "/assets/banners/iwonderwhy3.webp"
 ---
