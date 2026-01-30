@@ -37,6 +37,9 @@ export default function IWYCategoryPage() {
   return (
     <main className="max-w-3xl mx-auto py-12 px-4">
       <h1 className="text-3xl font-bold mb-6 text-center">I Wonder Why</h1>
+      <div className="text-center mb-2">
+        <span className="block text-base text-gray-500 italic">Essays about thinking, noticing, and learning slowly.</span>
+      </div>
       <p className="mb-10 text-center text-lg text-gray-600">Explore by subcategory:</p>
       <div className="grid gap-6 md:grid-cols-2">
         {subcategories.map((sub) => (
