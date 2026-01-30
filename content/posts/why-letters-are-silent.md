@@ -3,6 +3,7 @@ title: "I Wonder Why Silent Letters Exist"
 slug: "why-letters-are-silent"
 date: "2026-01-04"
 category: "i-wonder-why"
+subcategory: "Language, Thought & Inner Experience"
 excerpt: "Writing words with silent letters could be annoying. But why do silent letters exist in the first place?"
 banner: "/assets/banners/iwonderwhy1.webp"
 ---
