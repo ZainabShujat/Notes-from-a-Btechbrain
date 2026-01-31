@@ -46,10 +46,10 @@ export default function IWYCategoryPage() {
           <Link
             key={sub.key}
             href={`/category/i-wonder-why/${sub.key}`}
-            className="block border rounded-lg p-6 hover:shadow-lg transition bg-white"
+            className="block border rounded-lg p-6 hover:shadow-lg transition bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100"
           >
-            <h2 className="text-xl font-semibold mb-2">{sub.title}</h2>
-            <p className="text-gray-500">{sub.description}</p>
+            <h2 className="text-xl font-semibold mb-2 dark:text-slate-100">{sub.title}</h2>
+            <p className="text-gray-500 dark:text-slate-300">{sub.description}</p>
           </Link>
         ))}
       </div>
