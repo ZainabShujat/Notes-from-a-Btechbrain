@@ -10,17 +10,16 @@ type Props = {
 };
 
 export default function CategoryCard({ color, title, desc, href }: Props) {
-  // Always use gold border for theme card in Birthday Theme
-  const borderClass = color === 'theme' ? 'border-amber-300' : color;
+  // If color is 'theme', use a default border class (e.g., border-indigo-500) to match the rest
+  const borderClass = color === 'theme' ? 'border-indigo-500' : color;
   return (
     <Link
       href={href}
-      className={`CategoryCard block rounded-xl bg-[#181c2a] shadow-md border ${borderClass} border-t-4 p-5 transition`}
-      style={{ color: '#f0f0f0' }}
+      className={`CategoryCard block rounded-xl bg-white/90 dark:bg-slate-900/90 shadow-sm hover:shadow-md border ${borderClass} border-t-4 p-5 transition dark:border-slate-700 dark:hover:shadow-lg`}
     >
-      <div className="font-semibold" style={{ color: '#ffd700', textShadow: '0 0 10px #1a1f3a, 0 0 10px #ffd70088' }}>{title}</div>
-      <p className="mt-1 text-sm" style={{ color: '#f0f0f0' }}>{desc}</p>
-      <div className="mt-2 text-xs" style={{ color: '#b983ff' }}>Explore →</div>
+      <div className="font-semibold text-slate-900 dark:text-white">{title}</div>
+      <p className="mt-1 text-sm text-slate-700 dark:text-slate-200">{desc}</p>
+      <div className="mt-2 text-xs text-purple-700 dark:text-purple-200">Explore →</div>
     </Link>
   );
 }

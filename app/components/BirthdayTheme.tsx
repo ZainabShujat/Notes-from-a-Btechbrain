@@ -111,12 +111,19 @@ export default function BirthdayTheme() {
           color: #f0f0f0 !important;
         }
 
+
         /* Settings, cards, and buttons: force dark backgrounds and light text */
         .settings-card, .CategoryCard, .dashboard-card, .theme-selection-card, .button, .btn, .save-theme-btn {
           background: #181c2a !important;
           color: #f0f0f0 !important;
           border: 1px solid rgba(255, 215, 0, 0.4) !important;
           box-shadow: 0 4px 30px rgba(0,0,0,0.3), 0 0 20px rgba(255,215,0,0.1);
+        }
+
+        /* CategoryCard heading color for Birthday Theme */
+        .CategoryCard .font-semibold {
+          color: #ffd700 !important;
+          text-shadow: 0 0 10px #1a1f3a, 0 0 10px #ffd70088;
         }
 
         /* Highlighted/selected theme: gold border, dark background, light text */
@@ -278,7 +285,7 @@ export default function BirthdayTheme() {
             #2d1b4e 75%,
             #1a1f3a 100%);
           padding: 12px 20px;
-          z-index: 10000;
+          z-index: 100;
           box-shadow: 
             0 4px 20px rgba(0, 0, 0, 0.5),
             0 0 40px rgba(255, 215, 0, 0.3);
@@ -341,7 +348,7 @@ export default function BirthdayTheme() {
           width: 100%;
           height: 100%;
           pointer-events: none;
-          z-index: 2;
+          z-index: 101;
           overflow: hidden;
         }
 
