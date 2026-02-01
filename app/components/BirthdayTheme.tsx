@@ -14,7 +14,7 @@ export default function BirthdayTheme() {
       <div className="birthday-banner">
         <div className="banner-content">
           <span className="constellation">✨</span>
-          <span className="banner-text">Celebrating the Admin's 20th Birthday! 🎂✨</span>
+          <span className="banner-text">Celebrating the Admin's 20th Birthday!</span>
           <span className="constellation">✨</span>
         </div>
       </div>
