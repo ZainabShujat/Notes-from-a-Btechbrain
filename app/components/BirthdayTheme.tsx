@@ -14,7 +14,7 @@ export default function BirthdayTheme() {
       <div className="birthday-banner">
         <div className="banner-content">
           <span className="constellation">✨</span>
-          <span className="banner-text">A New Decade Begins — Welcome to 20 ✨🌟</span>
+          <span className="banner-text">Celebrating the Admin's 20th Birthday! 🎂✨</span>
           <span className="constellation">✨</span>
         </div>
       </div>
@@ -83,39 +83,77 @@ export default function BirthdayTheme() {
       </div>
 
       <style jsx global>{`
+
         body {
           background: linear-gradient(135deg, #0a1128 0%, #1a1f3a 30%, #2d1b4e 60%, #1a1f3a 100%) !important;
           background-attachment: fixed;
           padding-top: 50px !important;
         }
 
+        /* Headings: gold for highlight, strong shadow for contrast */
         body > * h1, 
         body > * h2, 
         body > * h3 {
           color: #ffd700 !important;
-          text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+          text-shadow: 0 0 15px #1a1f3a, 0 0 15px rgba(255, 215, 0, 0.5);
         }
 
+        /* Subheadings: off-white for contrast */
         body > * h4,
         body > * h5 {
           color: #e8d7b8 !important;
         }
 
-        body > * p:not(.border-purple-500 *, .border-pink-400 *, .border-pink-300 *, .border-amber-300 *, .border-amber-500 *, .border-green-300 *, .border-emerald-300 *, .border-emerald-500 *, .border-blue-300 *, .border-blue-400 *),
-        body > * span:not(.border-purple-500 *, .border-pink-400 *, .border-pink-300 *, .border-amber-300 *, .border-amber-500 *, .border-green-300 *, .border-emerald-300 *, .border-emerald-500 *, .border-blue-300 *, .border-blue-400 *),
-        body > * li:not(.border-purple-500 *, .border-pink-400 *, .border-pink-300 *, .border-amber-300 *, .border-amber-500 *, .border-green-300 *, .border-emerald-300 *, .border-emerald-500 *, .border-blue-300 *, .border-blue-400 *) {
+        /* Main text: always light on dark, never yellow on white */
+        body > * p,
+        body > * span,
+        body > * li {
+          color: #f0f0f0 !important;
+        }
+
+        /* Settings, cards, and buttons: force dark backgrounds and light text */
+        .settings-card, .CategoryCard, .dashboard-card, .theme-selection-card, .button, .btn, .save-theme-btn {
+          background: #181c2a !important;
+          color: #f0f0f0 !important;
+          border: 1px solid rgba(255, 215, 0, 0.4) !important;
+          box-shadow: 0 4px 30px rgba(0,0,0,0.3), 0 0 20px rgba(255,215,0,0.1);
+        }
+
+        /* Highlighted/selected theme: gold border, dark background, light text */
+        .theme-selection-card.selected, .theme-selection-card[aria-checked="true"], .theme-selection-card.active {
+          background: #23264a !important;
+          color: #ffd700 !important;
+          border: 2px solid #ffd700 !important;
+        }
+
+        /* Button hover/focus: gold background, dark text for contrast */
+        .button:hover, .btn:hover, .save-theme-btn:hover {
+          background: #ffd700 !important;
+          color: #181c2a !important;
+        }
+
+        /* Ensure all radio/checkbox labels in settings are readable */
+        .theme-selection-card label, .settings-card label {
+          color: #f0f0f0 !important;
+        }
+
+        /* Fix for analytics/community/settings dashboard cards */
+        .dashboard-card {
+          background: #181c2a !important;
+          color: #ffd700 !important;
+        }
+
+        /* Prevent yellow text on white backgrounds anywhere */
+        .bg-white, .bg-light, .white-bg, .light-bg {
+          background: #181c2a !important;
           color: #f0f0f0 !important;
         }
 
         /* Galaxy-shimmer card styling */
         .CategoryCard {
-          background: linear-gradient(135deg, rgba(26, 31, 58, 0.85), rgba(45, 27, 78, 0.85)) !important;
-          backdrop-filter: blur(10px);
+          background: #181c2a !important;
           border: 1px solid rgba(255, 215, 0, 0.4) !important;
-          box-shadow: 
-            0 4px 30px rgba(0, 0, 0, 0.3),
-            0 0 20px rgba(255, 215, 0, 0.2),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.1);
           position: relative;
           overflow: hidden;
         }
@@ -226,12 +264,13 @@ export default function BirthdayTheme() {
 
       <style jsx>{`
         /* Banner */
+
         .birthday-banner {
           position: fixed;
           top: 0;
           left: 0;
           right: 0;
-          width: 100%;
+          width: 100vw;
           background: linear-gradient(90deg, 
             #1a1f3a 0%, 
             #2d1b4e 25%,
@@ -252,6 +291,8 @@ export default function BirthdayTheme() {
           justify-content: center;
           gap: 15px;
           font-family: 'Georgia', serif;
+          width: 100vw;
+          text-align: center;
         }
 
         .banner-text {
@@ -264,6 +305,7 @@ export default function BirthdayTheme() {
           background-clip: text;
           animation: gradientShift 3s ease infinite;
           letter-spacing: 0.5px;
+          text-align: center;
         }
 
         .constellation {

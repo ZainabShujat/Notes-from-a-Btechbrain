@@ -58,8 +58,8 @@ export default async function Home() {
 
       {/* This Month's Series */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-8">
-        <h2 className="text-center text-2xl md:text-3xl font-extrabold tracking-tight mb-4">
-          📅 <span className="text-purple-600">This Month's Series</span>
+        <h2 className="text-center text-2xl md:text-3xl font-extrabold tracking-tight mb-4" style={{ color: '#ffd700', textShadow: '0 0 15px #1a1f3a, 0 0 15px #ffd70088' }}>
+          📅 This Month's Series
         </h2>
         <div className="flex justify-center mt-6">
           <div className="rounded-2xl w-full max-w-5xl p-8">
