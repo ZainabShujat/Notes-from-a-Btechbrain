@@ -29,6 +29,7 @@ export default function Nav({ communityEnabled }: NavProps) {
           <Link href="/series-hub" className="hover:underline text-blue-700 font-semibold dark:text-blue-300">Series Hub</Link>
           <Link href="/browse" className="hover:underline dark:hover:text-amber-400">Browse</Link>
           <Link href="/about" className="hover:underline dark:hover:text-amber-400">About</Link>
+          <Link href="/notifications" className="hover:underline text-green-700 font-semibold dark:text-green-300">Notifications</Link>
           <Link href="/community" className="hover:underline dark:hover:text-amber-400">Community</Link>
           <Link href="/admin" className="ml-4 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Admin Dashboard">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -43,6 +44,11 @@ export default function Nav({ communityEnabled }: NavProps) {
 
         {/* Mobile admin icon button (left of hamburger) */}
         <div className="md:hidden flex items-center">
+          <Link href="/notifications" className="mr-2 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Notifications">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </Link>
           <Link href="/admin" className="mr-2 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Admin Dashboard">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />

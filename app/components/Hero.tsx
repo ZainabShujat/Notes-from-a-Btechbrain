@@ -33,7 +33,7 @@ export default function Hero() {
           <span>•</span>
           <span>student POV</span>
           <span>•</span>
-          <span>v{packageJson.version}</span>
+          <span>v0.9.0</span>
         </div>
       </div>
     </section>

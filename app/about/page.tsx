@@ -48,15 +48,9 @@ export default function AboutPage() {
           <li><span className="font-semibold">v0.6.0</span> — Launched "Coming Soon" section to preview upcoming features.</li>
           <li><span className="font-semibold">v0.7.0</span> — Added likes and views, introducing interactivity and engagement.</li>
           <li><span className="font-semibold">v0.7.5</span> — Added browse by keywords, categories, and title for easier content discovery.</li>
-          <li><span className="font-semibold">v0.8.0</span> — Introduced themes and admin section for a more robust, interactive experience.</li>
+          <li><span className="font-semibold">v0.9.0</span> — Introduced themes and admin section for a more robust, interactive experience.</li>
           <li>
-            <span className="relative inline-flex items-center">
-              <span className="font-semibold">v0.9.0</span>
-              <span className="ml-2 relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-              </span>
-            </span>
+            <span className="font-semibold">v0.9.0</span>
             — Buying custom domain and setting up the full site.
           </li>
           <li>
@@ -71,7 +65,7 @@ export default function AboutPage() {
           </li>
         </ul>
         <p className="text-slate-900 dark:text-slate-100 text-base mt-4">
-          <span className="font-semibold">Why v0.8.0?</span> Each version marks a meaningful step in the site's growth. v0.8.0 reflects a platform that’s not just a blog, but a growing community with dynamic content, admin tools, and user engagement features. The journey continues!
+          <span className="font-semibold">Why v0.9.0?</span> Each version marks a meaningful step in the site's growth. v0.9.0 reflects a platform that’s not just a blog, but a growing community with dynamic content, admin tools, and user engagement features. The journey continues!
         </p>
       </div>
       <h2 className="text-2xl font-semibold mt-10 mb-4 text-slate-900 dark:text-slate-100">Portfolio</h2>
@@ -79,12 +73,12 @@ export default function AboutPage() {
         Curious about my work? Check out my portfolio site:
         {" "}
         <a
-          href="https://zainabshujat.vercel.app/"
+          href="https://zainabshujat.dev/"
           target="_blank"
           rel="noopener noreferrer"
           className="underline text-blue-600 dark:text-blue-300 font-medium hover:text-blue-800 dark:hover:text-blue-400 transition-colors"
         >
-          zainabshujat.vercel.app
+          zainabshujat.dev
         </a>
       </p>
 
