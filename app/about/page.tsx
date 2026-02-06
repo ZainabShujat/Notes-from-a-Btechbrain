@@ -48,10 +48,7 @@ export default function AboutPage() {
           <li><span className="font-semibold">v0.6.0</span> — Launched "Coming Soon" section to preview upcoming features.</li>
           <li><span className="font-semibold">v0.7.0</span> — Added likes and views, introducing interactivity and engagement.</li>
           <li><span className="font-semibold">v0.7.5</span> — Added browse by keywords, categories, and title for easier content discovery.</li>
-          <li><span className="font-semibold">v0.9.0</span> — Introduced themes and admin section for a more robust, interactive experience.</li>
-          <li>
-            <span className="font-semibold">v0.9.0</span>
-            — Buying custom domain and setting up the full site.
+          <li><span className="font-semibold">v0.9.0</span> — Introduced themes and admin section for a more robust, interactive experience.Buying custom domain and setting up the full site.
           </li>
           <li>
             <span className="relative inline-flex items-center">
