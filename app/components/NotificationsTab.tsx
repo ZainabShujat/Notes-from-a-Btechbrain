@@ -4,6 +4,14 @@ import notifications from "../notifications";
 
 const PAGE_SIZE = 7;
 
+
+// Collect all unique versions and their colors from notifications
+const versionColors = Array.from(
+  notifications
+    .reduce((map, n) => map.set(n.version, n.color), new Map())
+    .entries()
+).map(([version, color]) => ({ version, color }));
+
 export default function NotificationsTab() {
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(notifications.length / PAGE_SIZE);
@@ -12,12 +20,20 @@ export default function NotificationsTab() {
   const currentNotifications = notifications.slice(startIdx, endIdx);
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white dark:bg-slate-900 rounded-lg shadow-lg mt-8">
+    <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-slate-900 rounded-lg shadow-lg mt-8">
       <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-slate-100">Site Updates & Notifications</h2>
+      {/* Version color legend removed as requested */}
       <ul className="space-y-4">
         {currentNotifications.map((note) => (
-          <li key={note.id} className="border-l-4 border-blue-500 pl-4 py-2 bg-slate-50 dark:bg-slate-800 rounded">
-            <div className="text-xs text-slate-500 dark:text-slate-400 mb-1">{note.date}</div>
+          <li
+            key={note.id}
+            className="pl-4 py-2 bg-slate-50 dark:bg-slate-800 rounded"
+            style={{ borderLeft: `6px solid ${note.color}` }}
+          >
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-xs text-slate-500 dark:text-slate-400">{note.date}</span>
+              <span className="text-xs font-semibold" style={{ color: note.color }}>{note.version}</span>
+            </div>
             <div className="font-semibold text-slate-900 dark:text-slate-100">{note.title}</div>
             <div className="text-slate-700 dark:text-slate-200">{note.message}</div>
           </li>
