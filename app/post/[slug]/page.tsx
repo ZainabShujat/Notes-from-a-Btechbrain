@@ -29,7 +29,7 @@ export default async function Page({ params }: PageProps) {
   return (
     <main className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-10 bg-white dark:bg-slate-900">
       <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100">{data.title}</h1>
-      <div className="flex items-center gap-4 mt-2 text-slate-500 dark:text-slate-300">
+      <div className="flex items-center gap-4 mt-2 text-slate-900 dark:text-slate-300">
         <span>{new Date(data.date).toLocaleDateString()}</span>
         <span>·</span>
         <span>{data.category}</span>
@@ -53,7 +53,7 @@ export default async function Page({ params }: PageProps) {
       )}
 
       <article
-        className="prose prose-slate dark:prose-invert mt-6 max-w-none text-slate-900 dark:text-slate-100"
+        className="prose prose-slate mt-6 max-w-none blog-content"
         dangerouslySetInnerHTML={{ __html: contentHtml }}
       />
 
@@ -63,3 +63,8 @@ export default async function Page({ params }: PageProps) {
     </main>
   );
 }
+
+// .blog-content, .blog-content p, .blog-content li, .blog-content small {
+//   color: #000 !important;
+//   text-shadow: none !important;
+// }

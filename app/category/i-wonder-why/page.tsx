@@ -38,9 +38,9 @@ export default function IWYCategoryPage() {
     <main className="max-w-3xl mx-auto py-12 px-4">
       <h1 className="text-3xl font-bold mb-6 text-center">I Wonder Why</h1>
       <div className="text-center mb-2">
-        <span className="block text-base text-gray-500 italic">Essays about thinking, noticing, and learning slowly.</span>
+        <span className="block text-base italic text-gray-400 dark:text-slate-300/80">Essays about thinking, noticing, and learning slowly.</span>
       </div>
-      <p className="mb-10 text-center text-lg text-gray-600">Explore by subcategory:</p>
+      <p className="mb-10 text-center text-lg text-gray-400 dark:text-slate-300/80">Explore by subcategory:</p>
       <div className="grid gap-6 md:grid-cols-2">
         {subcategories.map((sub) => (
           <Link
@@ -48,7 +48,7 @@ export default function IWYCategoryPage() {
             href={`/category/i-wonder-why/${sub.key}`}
             className="block border rounded-lg p-6 hover:shadow-lg transition bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100"
           >
-            <h2 className="text-xl font-semibold mb-2 dark:text-slate-100">{sub.title}</h2>
+            <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-slate-100">{sub.title}</h2>
             <p className="text-gray-500 dark:text-slate-300">{sub.description}</p>
           </Link>
         ))}

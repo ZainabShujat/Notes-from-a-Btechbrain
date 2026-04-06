@@ -73,12 +73,6 @@ export default function StartHerePage() {
       hasHistory.current = true;
     }
   }, []);
-  // Group mood sections into pairs for 2-in-1-line display
-  const moodEntries = Object.entries(grouped);
-  const moodPairs = [];
-  for (let i = 0; i < moodEntries.length; i += 2) {
-    moodPairs.push(moodEntries.slice(i, i + 2));
-  }
   const handleBack = () => {
     if (typeof window !== "undefined" && window.history.length > 1) {
       window.history.back();
@@ -87,16 +81,16 @@ export default function StartHerePage() {
     }
   };
   return (
-    <main className="w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-12 text-slate-900 dark:text-slate-100">
+    <main className="w-full max-w-4xl mx-auto px-4 sm:px-8 md:px-12 py-16 text-white">
       <button
         type="button"
         onClick={handleBack}
-        className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium transition dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-100"
+        className="mb-8 inline-flex items-center gap-2 px-5 py-2.5 rounded bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium transition dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-100"
       >
         ← Back
       </button>
       <motion.h1
-        className="text-5xl font-extrabold mb-6 text-black dark:text-slate-100"
+        className="text-6xl font-extrabold mb-4 text-white text-left"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -104,52 +98,136 @@ export default function StartHerePage() {
         Start Here
       </motion.h1>
       <motion.p
-        className="mb-12 text-xl text-slate-800 dark:text-slate-200 max-w-3xl"
+        className="text-xl text-purple-200 mb-2 font-medium text-left"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.7 }}
+      >
+        Pick based on how you feel, not what you think you should read.
+      </motion.p>
+      <motion.p
+        className="mb-14 text-2xl text-white/90 max-w-3xl text-left"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.7 }}
       >
-        Not sure where to begin? Here’s a handpicked guide to some of my favorite pieces, grouped by what you might be feeling or looking for.
+        Not sure where to begin? Pick what feels closest to you right now.
       </motion.p>
-      <div className="space-y-12">
-        {moodPairs.map((pair, rowIdx) => (
-          <div key={rowIdx} className="flex flex-col sm:flex-row gap-8 w-full">
-            {pair.map(([mood, articles], i) => (
-              <motion.section
-                key={mood}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 * (rowIdx * 2 + i), duration: 0.6 }}
-                className="flex-1 min-w-0"
-              >
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="text-2xl">{moodIcons[mood] || "✨"}</div>
-                  <div className="text-2xl font-extrabold text-black dark:text-slate-100 wrap-break-word">{mood}</div>
-                </div>
-                <ul className="grid gap-6">
-                  {articles.map((article, j) => (
-                    <motion.li
-                      key={article.slug}
-                      whileHover={{ scale: 1.04, boxShadow: "0 4px 24px 0 rgba(80, 70, 180, 0.10)" }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                      className="rounded-xl border border-slate-200 bg-white/80 dark:bg-slate-800/90 shadow-sm p-5 flex flex-col gap-2 transition-all duration-200 hover:border-blue-400 hover:bg-white dark:hover:bg-slate-700/90"
-                    >
-                      <Link
-                        href={`/post/${article.slug}`}
-                        className="text-lg font-semibold text-black dark:text-slate-100 hover:text-blue-900 dark:hover:text-blue-300 underline underline-offset-2"
-                      >
-                        {article.title}
-                      </Link>
-                      <p className="text-slate-700 dark:text-slate-200 text-base mt-1 flex-1">{article.description}</p>
-                      <span className="text-xs text-slate-400 mt-2">Read →</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.section>
-            ))}
+
+      <div className="space-y-16">
+        {/* 🧩 Feeling curious? */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col gap-3 text-left"
+        >
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-3xl">🧩</span>
+            <span className="text-3xl font-bold text-white">Feeling curious?</span>
           </div>
-        ))}
+          <Link href="/post/the-puzzle-that-broke-my-brain-in-the-best-way" className="text-2xl font-bold text-white hover:text-blue-200 underline underline-offset-2">
+            The Puzzle That Broke My Brain
+          </Link>
+          <p className="text-slate-200 text-lg mt-1">A beautiful logic rabbit hole that’ll mess with your brain (in a good way).</p>
+          <span className="text-base text-slate-400 mt-2"><Link href="/post/the-puzzle-that-broke-my-brain-in-the-best-way">→ Read</Link></span>
+        </motion.section>
+
+        {/* 🧭 Feeling stuck or questioning everything? */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col gap-3 text-left"
+        >
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-3xl">🧭</span>
+            <span className="text-3xl font-bold text-white">Feeling stuck or questioning everything?</span>
+          </div>
+          <Link href="/post/internship-illusions" className="text-2xl font-bold text-white hover:text-blue-200 underline underline-offset-2">
+            Internship Illusions
+          </Link>
+          <p className="text-slate-200 text-lg mt-1">What no one tells you about internships, burnout, and self-worth.</p>
+          <span className="text-base text-slate-400 mt-2"><Link href="/post/internship-illusions">→ Read</Link></span>
+        </motion.section>
+
+        {/* 👀 Need to feel understood? */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col gap-3 text-left"
+        >
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-3xl">👀</span>
+            <span className="text-3xl font-bold text-white">Need to feel understood?</span>
+          </div>
+          <Link href="/post/girlhood-in-defense-mode" className="text-2xl font-bold text-white hover:text-blue-200 underline underline-offset-2">
+            Girlhood in Defense Mode
+          </Link>
+          <p className="text-slate-200 text-lg mt-1">On growing up with invisible rules and constant awareness.</p>
+          <span className="text-base text-slate-400 mt-2"><Link href="/post/girlhood-in-defense-mode">→ Read</Link></span>
+        </motion.section>
+
+        {/* 🌱 Trying to restart? */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col gap-3 text-left"
+        >
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-3xl">🌱</span>
+            <span className="text-3xl font-bold text-white">Trying to restart?</span>
+          </div>
+          <Link href="/post/a-beginning-amidst-the-chaos" className="text-2xl font-bold text-white hover:text-blue-200 underline underline-offset-2">
+            A Beginning Amidst the Chaos
+          </Link>
+          <p className="text-slate-200 text-lg mt-1">A reset. A fresh start. A space to figure things out again.</p>
+          <span className="text-base text-slate-400 mt-2"><Link href="/post/a-beginning-amidst-the-chaos">→ Read</Link></span>
+        </motion.section>
+
+        {/* 🔨 Rebuilding your life? */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col gap-3 text-left"
+        >
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-3xl">🔨</span>
+            <span className="text-3xl font-bold text-white">Rebuilding your life?</span>
+          </div>
+          <Link href="/post/september-in-a-nutshell" className="text-2xl font-bold text-white hover:text-blue-200 underline underline-offset-2">
+            September In a Nutshell
+          </Link>
+          <p className="text-slate-200 text-lg mt-1">Small wins, setbacks, and what growth actually looks like.</p>
+          <span className="text-base text-slate-400 mt-2"><Link href="/post/september-in-a-nutshell">→ Read</Link></span>
+        </motion.section>
+
+        {/* 🤖 Curious about the future? */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col gap-3 text-left"
+        >
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-3xl">🤖</span>
+            <span className="text-3xl font-bold text-white">Curious about the future?</span>
+          </div>
+          <Link href="/post/crypto-and-the-future-of-digital-currency" className="text-2xl font-bold text-white hover:text-blue-200 underline underline-offset-2">
+            Crypto and the Future of Digital Currency
+          </Link>
+          <p className="text-slate-200 text-lg mt-1">A no-BS intro to crypto and why it actually matters.</p>
+          <span className="text-base text-slate-400 mt-2"><Link href="/post/crypto-and-the-future-of-digital-currency">→ Read</Link></span>
+        </motion.section>
       </div>
     </main>
   );

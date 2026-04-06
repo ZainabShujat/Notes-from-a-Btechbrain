@@ -1,8 +1,17 @@
+/* Force black text and remove text shadow for blog content */
+.blog-content, .blog-content p, .blog-content li, .blog-content small, .blog-content span, .blog-content strong, .blog-content em, .blog-content ul, .blog-content ol, .blog-content blockquote {
+  color: #000 !important;
+  text-shadow: none !important;
+}
 @import "tailwindcss";             /* v4 way */
 @plugin "@tailwindcss/typography"; /* for prose styles */
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #f5f5f5;
+  --heading: #fff;
+  --muted: #e0e0e0;
+  --text-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 
 @theme inline {
@@ -12,30 +21,47 @@
   --font-mono: var(--font-geist-mono);
 }
 
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --heading: #fff;
+    --muted: #cfcfcf;
+    --text-shadow: 0 2px 12px rgba(0,0,0,0.45);
   }
 }
+
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  background-image: url('/assets/banners/bg-main.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-shadow: var(--text-shadow);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-image: url('/assets/banners/bg-main-dark.jpg');
+  }
 }
 /* globals.css (or wherever your base styles are) */
 @layer base {
-  :root {
-    --heading: #0f172a; /* slate-900 */
-    --muted: #334155;   /* slate-600 */
+  h1, h2, h3, h4, h5 {
+    color: var(--heading);
+    text-shadow: var(--text-shadow);
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --heading: #f8fafc; /* slate-100 */
-      --muted: #94a3b8;   /* slate-300 */
-    }
+  p, li, small {
+    color: var(--muted);
+    text-shadow: var(--text-shadow);
   }
-  h1,h2,h3,h4,h5 { color: var(--heading); }
-  p, li, small { color: var(--muted); }
+  a, .link {
+    color: #fff;
+    text-shadow: var(--text-shadow);
+  }
 }

@@ -26,9 +26,5 @@ export default function StartHereBanner() {
       </div>
     );
   }
-  return (
-    <div className="fixed bottom-6 right-6 z-50">
-      <Link href="/start-here" className="bg-purple-600 text-white px-5 py-2 rounded-full shadow-lg font-semibold hover:bg-purple-700 transition-colors">Start Here</Link>
-    </div>
-  );
+  return null;
 }
