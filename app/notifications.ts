@@ -1,7 +1,32 @@
+  
 // This file contains update notifications for the site.
 // Add new updates as objects in the array below.
 
 const notifications = [
+  {
+    id: 20,
+    date: "2026-04-06",
+    title: "Full UI/UX Makeover & Card Redesign",
+    message: "Homepage hero and navigation rebuilt for clarity. 'Start Here' is now a glowing glass panel. Navbar button is bigger and bolder. All floating/hover Start Here buttons removed for focus.",
+    version: "v0.9.1",
+    color: "#a855f7", // purple
+  },
+  {
+    id: 21,
+    date: "2026-04-06",
+    title: "Cards & Visual Identity Overhaul",
+    message: "Post cards are now uniform in size, with full banner images, translucent tags, and a featured card option. Card overlays and gradient fades improve readability. Subtle hover animations and glowing CTAs add polish.",
+    version: "v0.9.1",
+    color: "#a855f7", // purple
+  },
+  {
+    id: 22,
+    date: "2026-04-06",
+    title: "Blog Readability & Content Polish",
+    message: "All blog content now uses pure black text with no shadow for maximum readability. Fixed global CSS overrides and restored proper prose formatting for paragraphs and spacing.",
+    version: "v0.9.1",
+    color: "#a855f7", // purple
+  },
   {
     id: 19,
     date: "2026-02-05",
