@@ -1,8 +1,3 @@
-/* Force black text and remove text shadow for blog content */
-.blog-content, .blog-content p, .blog-content li, .blog-content small, .blog-content span, .blog-content strong, .blog-content em, .blog-content ul, .blog-content ol, .blog-content blockquote {
-  color: #000 !important;
-  text-shadow: none !important;
-}
 @import "tailwindcss";             /* v4 way */
 
 
