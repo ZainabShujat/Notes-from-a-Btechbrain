@@ -34,7 +34,7 @@ export default function Nav({ communityEnabled }: NavProps) {
             ⭐ Explore Topics
           </Link>
           <Link href="/all-posts" className="hover:underline text-blue-700 font-semibold dark:text-blue-300">Library</Link>
-          {/* Topics link replaced by highlighted Explore Topics above */}
+          <Link href="/start-here" className="hover:underline text-green-700 font-semibold dark:text-green-300">Start Here</Link>
           <Link href="/series-hub" className="hover:underline text-slate-800 dark:hover:text-amber-400">Series</Link>
           <Link href="/themes" className="hover:underline text-slate-800 dark:hover:text-amber-400">Themes</Link>
         </div>
@@ -57,6 +57,9 @@ export default function Nav({ communityEnabled }: NavProps) {
           </Link>
           <Link href="/admin" className="mr-2 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Admin Dashboard">
             <span role="img" aria-label="Admin" className="text-xl">👤</span>
+          </Link>
+          <Link href="/start-here" className="mr-2 p-2 rounded hover:bg-green-50 dark:hover:bg-green-900/30 text-green-700 dark:text-green-300 font-semibold" aria-label="Start Here">
+            <span role="img" aria-label="Start Here" className="text-xl">🚩</span>
           </Link>
           <button
             aria-label="Toggle menu"

@@ -1,6 +1,7 @@
 import { getAllPosts, getLatestPerCategory } from "../lib/posts";
 import { upcomingSeries } from "../lib/upcoming-series";
 import Hero from "./components/Hero";
+import RecentReads from "./components/RecentReads";
 import CategoryCard from "./components/CategoryCard";
 import SeriesTrailerCard from "./components/SeriesTrailerCard";
 import PostCard from "./components/PostCard";
@@ -10,11 +11,38 @@ import StartHereBannerWrapper from "./components/StartHereBannerWrapper";
 export default async function Home() {
   const allPosts = await getAllPosts();
   const posts = allPosts.slice(0, 3); // Get latest 3 posts by date
+
   return (
     <main>
       <StartHereBannerWrapper />
       <Hero />
-
+      {/* RecentReads card below Latest Drop, above buttons */}
+        <div className="mt-4 w-full flex justify-center">
+          <RecentReads />
+        </div>
+         {/* Latest Drop Card - enhanced, now below RecentReads */}
+        <div className="mt-10 w-full max-w-xl mx-auto bg-white/20 border border-purple-400 rounded-3xl p-8 shadow-2xl backdrop-blur-2xl text-left flex flex-col gap-4 glow-purple"
+          style={{boxShadow: '0 0 32px 8px #a855f7, 0 2px 32px 0 rgba(0,0,0,0.25), 0 0 16px 4px #a855f7', border: '2px solid #a855f7'}}>
+          <div className="flex items-center gap-3 text-xl font-extrabold text-white drop-shadow-lg">
+            <span className="text-2xl">📚</span> Latest Drop
+          </div>
+          <div className="text-2xl md:text-3xl font-bold text-white mt-2 drop-shadow-xl">
+            I Wonder Why Developers Keep Reinventing the Same Apps
+          </div>
+          <div className="text-sm text-white/80 mt-2 flex flex-wrap gap-2">
+            <span>3 min read</span>
+            <span>•</span>
+            <span>Tech</span>
+            <span>•</span>
+            <span>Behind the scenes</span>
+          </div>
+          <div className="mt-5">
+            <Link href="post/why-developers-reinvent-apps" className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-linear-to-r from-indigo-400 via-purple-500 to-green-400 text-white font-bold shadow-xl hover:from-indigo-500 hover:to-green-500 transition text-lg">
+              Start Reading <span className="text-2xl">→</span>
+            </Link>
+          </div>
+        </div>
+      
       {/* This Month's Series */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-8">
         <h2 className="text-center text-2xl md:text-3xl font-extrabold tracking-tight mb-4 birthday-gold-header">
@@ -32,22 +60,25 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Start Here Section */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-12">
-        <div className="max-w-2xl mx-auto rounded-2xl bg-black/20 dark:bg-black/30 backdrop-blur-md shadow-lg p-8 flex flex-col items-center border-2 border-yellow-200" style={{boxShadow: '0 0 32px 4px rgba(168,85,247,0.25)'}}>
-          <h2 className="text-center text-3xl md:text-4xl font-extrabold tracking-tight mb-2 text-white">
-            ⭐ <span className="text-yellow-400">Start Here</span>
-          </h2>
-          <p className="text-center text-white/80 mt-1 text-lg md:text-xl font-medium mb-6">
-            Not sure where to begin? This is your guide to the best starting points, handpicked for new readers.
-          </p>
-          <Link href="/start-here">
-            <span className="inline-block px-8 py-3 rounded-full bg-purple-700 hover:bg-purple-800 text-white font-bold text-lg shadow-lg transition-colors border-4 border-white/20">
-              Guide Me
-            </span>
-          </Link>
+      {/* Start Here Preview Section (moved below series, above main Start Here) */}
+      <section className="mx-auto max-w-3xl px-4 sm:px-6 md:px-8 pt-8 pb-2">
+        <div className="rounded-2xl bg-purple-900/80 dark:bg-purple-900/60 backdrop-blur-md shadow-lg p-6 md:p-8 border-l-4 border-yellow-300 mb-6">
+          <h3 className="text-2xl md:text-3xl font-bold text-yellow-200 mb-2 flex items-center gap-2">
+            <span className="text-3xl">⭐</span> What’s Inside <span className="text-yellow-300">Start Here</span>
+          </h3>
+          <p className="text-white/90 mb-3 text-base md:text-lg">The <span className="font-semibold">Start Here</span> guide helps you find your way in. Pick a starting point based on your mood or what you’re curious about:</p>
+          <ul className="list-disc pl-6 space-y-1 text-white/80 text-base md:text-lg mb-2">
+            <li><span className="font-semibold">🧩 Feeling curious?</span> — Mind-bending puzzles and playful logic</li>
+            <li><span className="font-semibold">🧭 Feeling lost or questioning everything?</span> — Honest stories about internships, burnout, and finding your way</li>
+            <li><span className="font-semibold">👀 Need to feel understood?</span> — Reflections on identity, safety, and being seen</li>
+            <li><span className="font-semibold">🌱 Want a fresh start?</span> — Processing chaos and finding clarity</li>
+            <li><span className="font-semibold">🔨 Building or rebuilding?</span> — Growth, setbacks, and small wins</li>
+            <li><span className="font-semibold">🤖 Curious about tech & the future?</span> — Demystifying crypto and digital change</li>
+          </ul>
+          <p className="text-white/70 text-sm">Find the post that fits you best—or just explore. <Link href="/start-here" className="underline text-yellow-300 hover:text-yellow-200">See all starting points →</Link></p>
         </div>
       </section>
+
 
       {/* Categories */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-12">
@@ -137,11 +168,10 @@ export default async function Home() {
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
           {posts.length === 0 && (
             <p className="text-slate-600">
-              No posts yet. Create one in{" "}
+              No posts yet. Create one in
               <Link href="/admin" className="underline text-purple-600">
                 /admin
-              </Link>
-              .
+              </Link>.
             </p>
           )}
           {posts.map((p) => (
@@ -160,3 +190,4 @@ export default async function Home() {
     </main>
   );
 }
+
