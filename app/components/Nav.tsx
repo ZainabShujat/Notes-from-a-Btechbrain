@@ -28,11 +28,8 @@ export default function Nav({ communityEnabled }: NavProps) {
           <Link href="/" className="hover:underline text-slate-800 dark:hover:text-amber-400">Home</Link>
           <Link
             href="/browse"
-            className="hover:underline text-purple-700 font-extrabold dark:text-purple-300 text-lg px-4 py-1 rounded-lg border-2 border-purple-300/60 shadow-md bg-white/70 dark:bg-slate-900/70"
-            style={{
-              boxShadow: "0 0 12px 2px rgba(168,85,247,0.25), 0 0 0 2px rgba(168,85,247,0.15)",
-              letterSpacing: "0.01em"
-            }}
+            className="hover:underline text-purple-700 font-semibold dark:text-purple-300 px-4 py-1 rounded bg-purple-50 dark:bg-purple-900/40"
+            style={{ letterSpacing: "0.01em" }}
           >
             ⭐ Explore Topics
           </Link>
@@ -106,11 +103,8 @@ export default function Nav({ communityEnabled }: NavProps) {
         <div className="px-4 pt-3 pb-4 space-y-2">
           <Link
             href="/browse"
-            className="block py-3 px-3 rounded-lg bg-purple-100 text-purple-700 font-extrabold text-lg border-2 border-purple-300/60 shadow-md dark:bg-purple-900 dark:text-purple-200"
-            style={{
-              boxShadow: "0 0 12px 2px rgba(168,85,247,0.25), 0 0 0 2px rgba(168,85,247,0.15)",
-              letterSpacing: "0.01em"
-            }}
+            className="block py-2 px-3 rounded bg-purple-50 text-purple-700 font-semibold dark:bg-purple-900/40 dark:text-purple-200"
+            style={{ letterSpacing: "0.01em" }}
           >
             ⭐ Explore Topics
           </Link>

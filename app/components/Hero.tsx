@@ -19,7 +19,7 @@ export default function Hero() {
         <h1 className="text-3xl md:text-4xl font-bold leading-tight">
           <span className="text-white">Notes From a</span> <span className="text-yellow-400 font-extrabold">BTech Brain</span>
         </h1>
-        <p className="mt-2 text-base md:text-lg text-white/90">A thinking space for curious, confused, and building minds</p>
+        <p className="mt-2 text-base md:text-lg text-white/90">For when you’re thinking too much… and still don’t have answers</p>
 
         {/* Featured Card */}
         <div className="mt-6 w-full max-w-lg mx-auto bg-white/10 border border-white/20 rounded-2xl p-5 shadow-lg backdrop-blur-md text-left flex flex-col gap-2">
