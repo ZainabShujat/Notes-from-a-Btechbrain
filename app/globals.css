@@ -45,48 +45,8 @@ body {
   h1, h2, h3, h4, h5 {
     color: var(--heading);
     text-shadow: var(--text-shadow);
-  .blog-content h1 {
-    color: #000 !important;
-    font-weight: 900 !important;
-    font-size: 2.2rem !important;
-    margin-top: 1.5em;
-    margin-bottom: 0.45em;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
   }
-  .blog-content h2 {
-    color: #111 !important;
-    font-weight: 800 !important;
-    font-size: 1.5rem !important;
-    margin-top: 1.1em;
-    margin-bottom: 0.35em;
-    line-height: 1.18;
-    letter-spacing: -0.008em;
-  }
-  .blog-content h3 {
-    color: #222 !important;
-    font-weight: 700 !important;
-    font-size: 1.2rem !important;
-    margin-top: 0.8em;
-    margin-bottom: 0.18em;
-    line-height: 1.18;
-  }
-  .blog-content h4 {
-    color: #222 !important;
-    font-weight: 700 !important;
-    font-size: 1.05rem !important;
-    margin-top: 0.6em;
-    margin-bottom: 0.12em;
-    line-height: 1.2;
-  }
-  .blog-content h5, .blog-content h6 {
-    color: #333 !important;
-    font-weight: 600 !important;
-    font-size: 1rem !important;
-    margin-top: 0.4em;
-    margin-bottom: 0.08em;
-    line-height: 1.2;
-  }
+  /* Blog post content: black text for body, strong headings */
   .blog-content p,
   .blog-content li,
   .blog-content small,
@@ -97,9 +57,49 @@ body {
   .blog-content blockquote {
     color: #111 !important;
     text-shadow: none !important;
-    margin-bottom: 1.1em;
-    line-height: 1.7;
+    margin-bottom: 2.1em;
+    line-height: 1.8;
   }
+  .blog-content h1 {
+    color: #000 !important;
+    font-weight: 900 !important;
+    font-size: 2.2rem !important;
+    margin-top: 1.6em;
+    margin-bottom: 0.7em;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .blog-content h2 {
+    color: #111 !important;
+    font-weight: 800 !important;
+    font-size: 1.5rem !important;
+    margin-top: 0.7em;
+    margin-bottom: 0.5em;
+    line-height: 1.18;
+    letter-spacing: -0.008em;
+  }
+  .blog-content h3 {
+    color: #222 !important;
+    font-weight: 700 !important;
+    font-size: 1.2rem !important;
+    margin-top: 0.8em;
+    margin-bottom: 0.3em;
+    line-height: 1.18;
+  }
+  .blog-content h4 {
+    color: #222 !important;
+    font-weight: 700 !important;
+    font-size: 1.05rem !important;
+    margin-top: 1em;
+    margin-bottom: 0.2em;
+    line-height: 1.2;
+  }
+  .blog-content h5, .blog-content h6 {
+    color: #333 !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    margin-top: 0.7em;
+    margin-bottom: 0.15em;
     line-height: 1.2;
   }
   .blog-content ul, .blog-content ol {
