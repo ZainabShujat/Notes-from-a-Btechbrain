@@ -8,7 +8,7 @@ export default function CommunityPage() {
   useEffect(() => {
     // Fetch community_enabled from Supabase
     async function fetchEnabled() {
-      const { data } = await import("@/lib/supabase").then((m) => m.supabase.from("settings").select("community_enabled").single());
+      const { data } = await import("../../lib/supabase").then((m) => m.supabase.from("settings").select("community_enabled").single());
       setEnabled(data?.community_enabled ?? false);
     }
     fetchEnabled();

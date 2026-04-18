@@ -10,7 +10,7 @@ import BackButton from "../../components/BackButton";
 import ViewCounter from "../../components/ViewCounter";
 import LikeButton from "../../components/LikeButton";
 import PostCard from "../../components/PostCard";
-import { getAllPosts } from "lib/posts";
+import { getAllPosts } from "../../../lib/posts";
 // Client wrapper for PostReadTracker (must be imported after all Node.js/server imports)
 import PostReadTrackerWrapper from "../../components/PostReadTrackerWrapper";
 

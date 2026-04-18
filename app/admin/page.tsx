@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "../lib/supabase";
 import type { User } from "@supabase/supabase-js";
 import { THEME_CONFIG } from "../components/theme-config";
 import AdminSidebar from "../components/admin/AdminSidebar";
