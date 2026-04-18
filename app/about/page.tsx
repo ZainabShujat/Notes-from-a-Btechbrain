@@ -4,72 +4,83 @@ export default function AboutPage() {
       <h1 className="text-4xl font-bold mb-6 text-white">About Me</h1>
 
       <p className="text-lg text-white/90 leading-relaxed mb-4">
-        Hi, I’m <span className="font-semibold">Zainab Shujat</span> — a B.Tech CSE (AIML) student,
-        an aspiring web developer, and the writer behind 
-        <span className="font-semibold"> Notes From a B.Tech Brain</span>.
-        I build things, write things, and try to make sense of the world around me through both.
+        Hi, I’m <span className="font-semibold">Zainab Shujat</span> — a B.Tech CSE (AIML) student, builder, and writer behind <span className="font-semibold">Notes From a B.Tech Brain</span>.
+      </p>
+      <p className="text-lg text-white/90 leading-relaxed mb-4">
+        I build things. I write things. And somewhere in between, I try to make sense of what I’m learning, feeling, and figuring out in real time.
+      </p>
+      <p className="text-lg text-white/90 leading-relaxed mb-6">
+        This blog started as a weekly LinkedIn newsletter. Now, it’s a growing digital space — part blog, part thinking lab, part documentation of a life that refuses to stay in one box.
       </p>
 
+      <h2 className="text-2xl font-semibold mt-10 mb-4 text-white">What This Space Is</h2>
+      <p className="text-lg text-white/90 leading-relaxed mb-4">
+        This isn’t just a “tech blog.”
+      </p>
+      <ul className="list-disc pl-6 space-y-2 text-white/90 text-lg mb-4">
+        <li>curiosity meets confusion</li>
+        <li>logic meets emotion</li>
+        <li>and growth happens in public</li>
+      </ul>
       <p className="text-lg text-white/90 leading-relaxed mb-6">
-        This blog is where I explore technology, geopolitics, student life, soft skills,
-        and personal growth. It started as a weekly newsletter on LinkedIn and slowly 
-        grew into a space where I document my journey — the wins, the chaos, and the learning.
+        I write about tech, student life, personal growth, and the weird in-between phases no one really prepares you for.<br/>
+        Some posts are structured.<br/>
+        Some are messy.<br/>
+        All of them are honest.
       </p>
 
       <h2 className="text-2xl font-semibold mt-10 mb-4 text-white">What I Do</h2>
-      <ul className="list-disc pl-6 space-y-2 text-white/90 text-lg">
-        <li>Write weekly editions on tech, world events, and personal reflections</li>
-        <li>Build projects with HTML, CSS, JavaScript, React, and Next.js</li>
-        <li>Study Machine Learning and AI fundamentals</li>
-        <li>Document life as a girl in STEM</li>
-        <li>Share insights on productivity, communication, and emotional intelligence</li>
+      <ul className="list-disc pl-6 space-y-2 text-white/90 text-lg mb-6">
+        <li>Write weekly editions across tech, world events, and reflections</li>
+        <li>Build projects using HTML, CSS, JavaScript, React, and Next.js</li>
+        <li>Study AI/ML while trying to actually understand it (not just pass exams)</li>
+        <li>Document my journey as a girl in STEM</li>
+        <li>Break down ideas around productivity, communication, and emotional intelligence</li>
       </ul>
 
-      <h2 className="text-2xl font-semibold mt-10 mb-4 text-white">My Goals</h2>
+      <h2 className="text-2xl font-semibold mt-10 mb-4 text-white">Why This Exists</h2>
       <p className="text-lg text-white/90 leading-relaxed mb-6">
-        I want to grow as a developer, become financially independent, and build a space 
-        where students like me feel seen — especially those who don’t fit neatly into 
-        “college clubs” but still dream big.  
+        I’m not trying to be the “perfect student.” I’m trying to become someone who builds, thinks, and expresses clearly.<br/>
+        And I know there are others like me—<br/>
+        people who don’t fit neatly into college boxes,<br/>
+        but still want to create something meaningful.<br/>
+        This space is for them too.
       </p>
 
-      <p className="text-lg text-white/90 leading-relaxed mb-6">
-        Long-term? I want to publish a book, build useful products, and create a body of 
-        work I’m proud of. This site is the first step.
-      </p>
-
-      <h2 className="text-2xl font-semibold mt-10 mb-4 text-white">Site Version Timeline</h2>
-      <div className="mb-10">
-        <ul className="list-disc pl-6 space-y-2 text-white/90 text-lg">
-          <li><span className="font-semibold">v0.1.0</span> — Initial static blog outline, basic structure and landing page.</li>
-          <li><span className="font-semibold">v0.2.0</span> — Added multiple pages for richer navigation and content separation.</li>
-          <li><span className="font-semibold">v0.3.0</span> — Introduced categories for better content organization.</li>
-          <li><span className="font-semibold">v0.4.0</span> — Enabled individual posts, making the blog dynamic.</li>
-          <li><span className="font-semibold">v0.5.0</span> — Implemented navigation bar and improved user flow.</li>
-          <li><span className="font-semibold">v0.6.0</span> — Launched "Coming Soon" section to preview upcoming features.</li>
-          <li><span className="font-semibold">v0.7.0</span> — Added likes and views, introducing interactivity and engagement.</li>
-          <li><span className="font-semibold">v0.7.5</span> — Added browse by keywords, categories, and title for easier content discovery.</li>
-          <li><span className="font-semibold">v0.9.0</span> — Introduced themes and admin section for a more robust, interactive experience.Buying custom domain and setting up the full site.
-          </li>
-          <li>
-            <span className="relative inline-flex items-center">
-              <span className="font-semibold">v1.0.0</span>
-              <span className="ml-2 relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-              </span>
-            </span>
-            — Full community page and commenting mechanism.
-          </li>
+      <h2 className="text-2xl font-semibold mt-10 mb-4 text-white">What I’m Building Toward</h2>
+      <div className="mb-6">
+        <div className="mb-2 font-semibold">Short term:</div>
+        <ul className="list-disc pl-6 space-y-2 text-white/90 text-lg mb-4">
+          <li>Becoming a better developer</li>
+          <li>Becoming financially independent</li>
+          <li>Building things that actually matter</li>
         </ul>
-        <p className="text-white/80 text-base mt-4">
-          <span className="font-semibold">Why v0.9.0?</span> Each version marks a meaningful step in the site's growth. v0.9.0 reflects a platform that’s not just a blog, but a growing community with dynamic content, admin tools, and user engagement features. The journey continues!
-        </p>
+        <div className="mb-2 font-semibold">Long term:</div>
+        <ul className="list-disc pl-6 space-y-2 text-white/90 text-lg">
+          <li>Publishing a book</li>
+          <li>Creating products people genuinely use</li>
+          <li>Building a body of work I’m proud of</li>
+        </ul>
+        <p className="text-white/90 text-lg mt-4">This site? It’s not a side project. It’s the foundation.</p>
       </div>
+
+      <h2 className="text-2xl font-semibold mt-10 mb-4 text-white">Site Evolution</h2>
+      <div className="mb-10">
+        <p className="text-white/90 text-lg mb-2">This site didn’t appear fully formed. It was built, broken, and rebuilt—version by version.</p>
+        <ul className="list-disc pl-6 space-y-2 text-white/90 text-lg">
+          <li><span className="font-semibold">v0.1</span> → Static blog</li>
+          <li><span className="font-semibold">v0.3</span> → Structured content</li>
+          <li><span className="font-semibold">v0.5</span> → Navigation & UX improvements</li>
+          <li><span className="font-semibold">v0.7</span> → Engagement (likes, views)</li>
+          <li><span className="font-semibold">v0.9</span> → Themes, admin system, full platform shift</li>
+        </ul>
+        <p className="text-white/90 text-lg mt-4">Each version is a snapshot of me learning in public.<br/>And I’m not done yet.</p>
+      </div>
+
       <h2 className="text-2xl font-semibold mt-10 mb-4 text-white">Portfolio</h2>
       <p className="text-lg text-white/90 leading-relaxed mb-6">
-        Curious about my work? Check out my portfolio site:
-        {" "}
-        <a
+        If you want to see what I’m building beyond writing:<br/>
+        <span role="img" aria-label="point right">👉</span> <a
           href="https://zainabshujat.dev/"
           target="_blank"
           rel="noopener noreferrer"
@@ -81,13 +92,10 @@ export default function AboutPage() {
 
       <h2 className="text-2xl font-semibold mt-10 mb-4 text-white">Let’s Connect</h2>
       <p className="text-lg text-white/90 leading-relaxed">
-        Reach out on{" "}
-        <a href="https://www.linkedin.com/in/zainab-shujat-web-developer" 
-           target="_blank" 
-           className="underline text-purple-600 dark:text-purple-300 font-medium">
-          LinkedIn
-        </a>{" "}
-        — I’d love to talk, learn, and grow together.
+        If something here resonates,<br/>
+        or you’re building something of your own—<br/>
+        Let’s talk.<br/>
+        I’m always up for real conversations.
       </p>
     </main>
   );

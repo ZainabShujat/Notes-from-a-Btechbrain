@@ -4,6 +4,14 @@
 
 const notifications = [
   {
+    id: 23,
+    date: "2026-04-18",
+    title: "About Page Rewritten",
+    message: "The About section now has a more personal, conversational introduction, clearer sections on what this space is, why it exists, and what I'm building toward. Portfolio and contact links remain as before.",
+    version: "v0.9.1",
+    color: "#a855f7", // purple
+  },
+  {
     id: 20,
     date: "2026-04-06",
     title: "Full UI/UX Makeover & Card Redesign",
