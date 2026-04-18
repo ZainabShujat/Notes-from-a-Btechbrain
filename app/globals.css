@@ -4,7 +4,7 @@
   text-shadow: none !important;
 }
 @import "tailwindcss";             /* v4 way */
-@plugin "@tailwindcss/typography"; /* for prose styles */
+
 
 :root {
   --background: #ffffff;
@@ -14,12 +14,7 @@
   --text-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+
 
 
 @media (prefers-color-scheme: dark) {

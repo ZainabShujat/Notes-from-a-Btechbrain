@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Nav from "./Nav";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "../lib/supabase";
 
 export default function NavWithCommunity() {
   const [communityEnabled, setCommunityEnabled] = useState(false);
