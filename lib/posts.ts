@@ -13,6 +13,7 @@ export type PostMeta = {
   excerpt?: string;
   banner?: string;
   content?: string; // ⭐ For full-content search
+  theme?: string;
 };
 
 
