@@ -63,7 +63,7 @@ And here's what I’ve learned: the goal isn’t to become paranoid. It’s to b
 
 Because in 2025? Digital hygiene is real hygiene.
 
-![article content](/assets/articles/techdemystified1/pic3.webp)
+![article content](/public/assets/articles/techdemystified1/pic3.webp)
 *📊 Data: The fuel behind literally everything (including your wrong predictions)*
 
 ---

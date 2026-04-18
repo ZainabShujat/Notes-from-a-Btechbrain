@@ -8,7 +8,7 @@ export default function Hero() {
     <section
       className="relative w-full min-h-[50vh] flex flex-col justify-center items-center text-white overflow-hidden"
       style={{
-        backgroundImage: "url(/assets/banners/galaxy-bg.png)",
+        backgroundImage: "url(/assets/banners/galaxy-bg.webp)",
         backgroundSize: "cover",
         backgroundPosition: "center top",
         backgroundRepeat: "no-repeat"

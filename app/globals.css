@@ -27,7 +27,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   /* Combine gradient and image for proper overlay */
-  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('/assets/banners/bg-main.jpg');
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('/assets/banners/bg-main.webp');
   background-size: cover;
   background-attachment: fixed;
   background-position: center;

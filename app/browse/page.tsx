@@ -40,7 +40,7 @@ export default function BrowsePage() {
     <main
       className="relative min-h-screen w-full flex flex-col items-center justify-start px-4 py-12"
       style={{
-        backgroundImage: "url(/assets/banners/galaxy-bg.png)",
+        backgroundImage: "url(/assets/banners/galaxy-bg.webp)",
         backgroundSize: "cover",
         backgroundPosition: "center top",
         backgroundRepeat: "no-repeat",
