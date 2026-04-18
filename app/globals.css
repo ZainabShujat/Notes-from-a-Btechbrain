@@ -29,10 +29,10 @@
 
 
 body {
-  background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url('/assets/banners/bg-main.jpg');
+  /* Combine gradient and image for proper overlay */
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('/assets/banners/bg-main.jpg');
   background-size: cover;
   background-attachment: fixed;
   background-position: center;

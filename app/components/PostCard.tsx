@@ -45,7 +45,7 @@ export default function PostCard({ title, slug, excerpt, date, category, banner,
           alt={title}
           className="absolute inset-0 w-full h-full object-contain object-center z-0 transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
-          style={{ background: '#0a0020', opacity: 0.75, filter: 'brightness(0.5)' }}
+          style={{ background: '#0a0020', opacity: 0.95, filter: 'brightness(0.6)' }}
         />
       )}
 
