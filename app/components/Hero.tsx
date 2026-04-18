@@ -37,7 +37,7 @@ export default function Hero() {
             <span>Behind the scenes</span>
           </div>
           <div className="mt-3">
-            <Link href="/post/i-wonder-why-developers-keep-reinventing-the-same-apps" className="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-green-400 text-white font-semibold shadow hover:from-indigo-600 hover:to-green-500 transition">
+            <Link href="post/why-developers-reinvent-apps" className="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-green-400 text-white font-semibold shadow hover:from-indigo-600 hover:to-green-500 transition">
               Start Reading <span className="text-lg">→</span>
             </Link>
           </div>

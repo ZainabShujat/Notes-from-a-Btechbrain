@@ -5,46 +5,54 @@ summary: "Homepage Polish, Post Card Redesign, and Blog Readability Fixes"
 ---
 
 
-# 📝 Day 19 – April 6, 2026
 
-**Focus:** Homepage & Navigation Redesign, Card Visual Identity, and Blog Readability
+📝 Dev Journal – Day 19
 
-Today was a marathon session of UI and UX upgrades, touching nearly every part of the site:
+Today wasn’t about adding features.
+It was about fixing *how everything feels.*
 
-- 🚀 **Hero Section & Navigation Overhaul**
-	- Rebuilt the homepage hero section for clarity and focus.
-	- Updated navigation: made the "Start Here" button much larger and more prominent in the navbar, with a glowing effect for instant attention.
-	- Removed all floating/hover "Start Here" buttons for a cleaner, less distracting experience.
+I spent the entire session redesigning the homepage, post cards, and blog readability—basically touching every surface a reader interacts with.
 
-- ✨ **Section & Panel Visuals**
-	- Transformed the "Start Here" section into a glass blur panel with a border glow, making it stand out as the main call-to-action.
-	- Added a guiding line: “Pick based on how you feel, not what you think you should read.”
-	- Rewrote and restructured the "Start Here" page for clarity, emotion, and a more inviting flow.
+🚀 **Navigation & First Impressions**
 
-- 🪄 **Post Card Redesign**
-	- Made post cards uniform in size and aspect ratio for a consistent grid.
-	- Banner images are now the full visual identity of each card—fully visible, centered, never cropped or blurred.
-	- Category tags are now more translucent and always pinned to the top-left corner.
-	- Card content (title, excerpt, meta) is now a subtle overlay at the bottom, with a gradient fade for readability.
-	- Added a featured card option: the first card can be larger or span two columns for extra emphasis.
+* Rebuilt the hero section to be clearer and less noisy
+* Made “Start Here” impossible to ignore (bigger, glowing, intentional)
+* Removed floating buttons that were just… screaming for attention
 
-- 🖱️ **Micro-Interactions & Animation**
-	- Added subtle but premium hover animations: cards lift, images zoom, and the CTA button glows and lifts on hover.
-	- CTA button text changed to “Dive in →” for a more confident, on-brand vibe.
+✨ **Guided Experience**
 
-- 🏷️ **Category & Tag Polish**
-	- Made tags more translucent and visually balanced, so they never overpower the card image.
+* Turned “Start Here” into a glass-panel CTA
+* Added a simple line:
+	*“Pick based on how you feel, not what you think you should read.”*
+* Rewrote the page to feel like a guide, not a menu
 
-- 📝 **Blog Content Readability**
-	- Forced pure black text for all blog articles, removing all text shadows and color overrides.
-	- Tracked down and fixed global CSS that was making text grey/white (via `color: var(--muted)` on p/li/small in globals.css).
-	- Scoped a `.blog-content` class and CSS rule to enforce black text and no shadow, while restoring Tailwind prose formatting for proper spacing, headings, and structure.
+🪄 **Post Card Redesign**
 
-- 🐛 **Debugging & Iteration**
-	- Multiple rounds of micro-tweaks to text color, overlays, and card layout based on live feedback and screenshots.
-	- Ensured all changes worked in both light and dark mode, and that no global style leaks affected the blog content.
+* Clean, consistent grid (no more chaotic sizes)
+* Images now lead the experience, not fight with text
+* Added gradient overlays so titles are readable without killing visuals
+* Introduced a featured card to guide attention
+
+🖱️ **Micro-interactions**
+
+* Cards lift on hover
+* Images subtly zoom
+* CTA now says *“Dive in →”* (small change, big difference)
+
+📝 **Biggest invisible fix: Readability**
+
+* Killed all grey text and weird shadows
+* Forced clean black text inside articles
+* Scoped styles properly so global CSS stops sabotaging content
+
+🐛 **Reality check**
+Half of this wasn’t “design work.”
+It was hunting down tiny CSS decisions that were quietly ruining the experience.
 
 ---
 
 **Takeaway:**
-A full visual and UX makeover, from navigation to content, can transform the feel of a site. Today’s changes make the blog more inviting, readable, and visually consistent—ready for new readers and future growth.
+Good UI isn’t about adding more.
+It’s about removing friction until the experience feels obvious.
+
+Today, the site finally started feeling like a product—not just a project.
