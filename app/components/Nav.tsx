@@ -27,17 +27,17 @@ export default function Nav({ communityEnabled }: NavProps) {
         <div className="hidden md:flex items-center gap-6 text-sm mx-auto">
           <Link href="/" className="hover:underline text-slate-800 dark:hover:text-amber-400">Home</Link>
           <Link
-            href="/start-here"
+            href="/browse"
             className="hover:underline text-purple-700 font-extrabold dark:text-purple-300 text-lg px-4 py-1 rounded-lg border-2 border-purple-300/60 shadow-md bg-white/70 dark:bg-slate-900/70"
             style={{
               boxShadow: "0 0 12px 2px rgba(168,85,247,0.25), 0 0 0 2px rgba(168,85,247,0.15)",
               letterSpacing: "0.01em"
             }}
           >
-            ⭐ Start Here
+            ⭐ Explore Topics
           </Link>
           <Link href="/all-posts" className="hover:underline text-blue-700 font-semibold dark:text-blue-300">Library</Link>
-          <Link href="/browse" className="hover:underline text-slate-800 dark:hover:text-amber-400">Topics</Link>
+          {/* Topics link replaced by highlighted Explore Topics above */}
           <Link href="/series-hub" className="hover:underline text-slate-800 dark:hover:text-amber-400">Series</Link>
           <Link href="/themes" className="hover:underline text-slate-800 dark:hover:text-amber-400">Themes</Link>
         </div>
@@ -104,19 +104,18 @@ export default function Nav({ communityEnabled }: NavProps) {
         }`}
       >
         <div className="px-4 pt-3 pb-4 space-y-2">
-          <Link href="/" className="block py-2 px-2 rounded text-slate-800 hover:bg-slate-50 dark:hover:text-amber-400 dark:hover:bg-slate-800">Home</Link>
           <Link
-            href="/start-here"
+            href="/browse"
             className="block py-3 px-3 rounded-lg bg-purple-100 text-purple-700 font-extrabold text-lg border-2 border-purple-300/60 shadow-md dark:bg-purple-900 dark:text-purple-200"
             style={{
               boxShadow: "0 0 12px 2px rgba(168,85,247,0.25), 0 0 0 2px rgba(168,85,247,0.15)",
               letterSpacing: "0.01em"
             }}
           >
-            ⭐ Start Here
+            ⭐ Explore Topics
           </Link>
           <Link href="/all-posts" className="block py-2 px-2 rounded bg-blue-100 text-blue-700 font-semibold dark:bg-blue-900 dark:text-blue-200">Library</Link>
-          <Link href="/browse" className="block py-2 px-2 rounded text-slate-800 hover:bg-slate-50 dark:hover:text-amber-400 dark:hover:bg-slate-800">Topics</Link>
+          {/* Topics link replaced by highlighted Explore Topics above */}
           <Link href="/series-hub" className="block py-2 px-2 rounded text-slate-800 hover:bg-slate-50 dark:hover:text-amber-400 dark:hover:bg-slate-800">Series</Link>
           <Link href="/themes" className="block py-2 px-2 rounded text-slate-800 hover:bg-slate-50 dark:hover:text-amber-400 dark:hover:bg-slate-800">Themes</Link>
           <Link href="/about" className="block py-2 px-2 rounded text-slate-800 hover:bg-slate-50 dark:hover:text-amber-400 dark:hover:bg-slate-800">About</Link>
