@@ -38,7 +38,7 @@ Using the fact that 2025 is the sum of cubes, you can build a **45×45 square** 
 
 - 9 tiles of size 9×9  
 - 8 tiles of size 8×8  
-- …  
+- …     
 - 1 tile of size 1×1  
 
 All of these pieces must fit together perfectly — no gaps, no overlaps. Just pure tiling of the entire grid.
