@@ -27,17 +27,17 @@ export default async function Home() {
             <span className="text-2xl">📚</span> Latest Drop
           </div>
           <div className="text-2xl md:text-3xl font-bold text-white mt-2 drop-shadow-xl">
-            I Wonder Why Developers Keep Reinventing the Same Apps
+            ⭐ The Puzzle That Broke My Brain (In the Best Way)
           </div>
           <div className="text-sm text-white/80 mt-2 flex flex-wrap gap-2">
-            <span>3 min read</span>
+            <span>5 min read</span>
             <span>•</span>
-            <span>Tech</span>
+            <span>Curiosity Series</span>
             <span>•</span>
-            <span>Behind the scenes</span>
+            <span>Math & Puzzles</span>
           </div>
           <div className="mt-5">
-            <Link href="post/why-developers-reinvent-apps" className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-linear-to-r from-indigo-400 via-purple-500 to-green-400 text-white font-bold shadow-xl hover:from-indigo-500 hover:to-green-500 transition text-lg">
+            <Link href="/post/the-puzzle-that-broke-my-brain" className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-linear-to-r from-indigo-400 via-purple-500 to-green-400 text-white font-bold shadow-xl hover:from-indigo-500 hover:to-green-500 transition text-lg" target="_blank" rel="noopener noreferrer">
               Start Reading <span className="text-2xl">→</span>
             </Link>
           </div>
