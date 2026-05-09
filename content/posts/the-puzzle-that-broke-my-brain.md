@@ -32,13 +32,13 @@ A perfect square emerging from the sum of perfect cubes.
 
 It’s rare. Elegant. Slightly absurd in the best way. The kind of thing that makes mathematicians smile for no practical reason except that the universe aligned neatly for once.
 
-And this identity inspired a puzzle that is, honestly, gloriously insane. The Partridge Puzzle. 
+And this identity inspired a puzzle that is, honestly, gloriously insane. The Partridge Puzzle.
 
 Using the fact that 2025 is the sum of cubes, you can build a **45×45 square** using:
 
 - 9 tiles of size 9×9  
 - 8 tiles of size 8×8  
-- …     
+- …  
 - 1 tile of size 1×1  
 
 All of these pieces must fit together perfectly — no gaps, no overlaps. Just pure tiling of the entire grid.
