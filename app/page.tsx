@@ -34,6 +34,9 @@ export default async function Home() {
             <span>•</span>
             <span>Curiosity Series</span>
             <span>•</span>
+            <span>Partridge Puzzle</span>
+
+            <span>•</span>
             <span>Math & Puzzles</span>
           </div>
           <div className="mt-5">

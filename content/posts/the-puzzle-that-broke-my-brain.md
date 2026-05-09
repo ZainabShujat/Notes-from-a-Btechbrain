@@ -9,9 +9,9 @@ banner: "/assets/banners/puzzle-2025.webp"
 
 Sometimes you stumble onto something on the internet that doesn’t just entertain you — it taps right into the part of your brain you thought had gone quiet.
 
-That happened to me this week, thanks to a Matt Parker video and a puzzle that exists purely because **2025 is a mathematically beautiful year**. 
+That happened to me this week, thanks to a Matt Parker video and a puzzle that exists purely because **2025 is a mathematically beautiful year**. A sequel to THE PATRIDGE PUZZLE, one might say. 
 
-THE PATRIDGE PUZZLE
+
 
 So I thought… why not take you into my little spiral?
 
