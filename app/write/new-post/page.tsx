@@ -8,6 +8,9 @@ import { useState } from "react";
 import { supabase } from "../../../lib/supabase";
 import BackButton from "../../components/BackButton";
 
+import type { User } from "@supabase/supabase-js";
+import { useEffect } from "react";
+
 const generateSlug = (title: string) => {
   return title
     .toLowerCase()
@@ -22,8 +25,14 @@ export default function NewPostPage() {
   const [excerpt, setExcerpt] = useState("");
   const [category, setCategory] = useState("");
   const [featured, setFeatured] = useState(false);
-  const [published, setPublished] = useState(false);
   const [bannerUrl, setBannerUrl] = useState("");
+  const [user, setUser] = useState<User | null>(null);
+const [authLoading, setAuthLoading] = useState(true);
+
+const ADMIN_EMAILS = [
+  "zainabshujatali@gmail.com",
+  "zainabshujat826@gmail.com",
+];
 
   const editor = useEditor({
     extensions: [
@@ -47,6 +56,67 @@ export default function NewPostPage() {
       },
     },
   });
+  useEffect(() => {
+  const getUser = async () => {
+    const { data } = await supabase.auth.getUser();
+
+    setUser(data.user);
+
+    setAuthLoading(false);
+  };
+
+  getUser();
+}, []);
+useEffect(() => {
+  const savedDraft = localStorage.getItem("article-draft");
+
+  if (!savedDraft) return;
+
+  try {
+    const draft = JSON.parse(savedDraft);
+
+    setTitle(draft.title || "");
+    setSlug(draft.slug || "");
+    setExcerpt(draft.excerpt || "");
+    setCategory(draft.category || "");
+    setBannerUrl(draft.bannerUrl || "");
+    setFeatured(draft.featured || false);
+
+    if (editor && draft.content) {
+      editor.commands.setContent(draft.content);
+    }
+  } catch (err) {
+    console.error("Failed to restore draft", err);
+  }
+}, [editor]);
+
+useEffect(() => {
+  if (!editor) return;
+
+  const draft = {
+    title,
+    slug,
+    excerpt,
+    category,
+    bannerUrl,
+    featured,
+    content: editor.getHTML(),
+  };
+
+  localStorage.setItem(
+    "article-draft",
+    JSON.stringify(draft)
+  );
+}, [
+  title,
+  slug,
+  excerpt,
+  category,
+  bannerUrl,
+  featured,
+  editor,
+]);
+
 
  const handleSave = async (publish: boolean) => {
   const articleData = {
@@ -59,6 +129,13 @@ export default function NewPostPage() {
     featured,
     published: publish,
   };
+  if (
+  !user?.email ||
+  !ADMIN_EMAILS.includes(user.email)
+) {
+  alert("Please login with an authorized account to save or publish articles.");
+  return;
+}
 
   if (!title.trim()) {
   alert("Article title is required.");
@@ -79,24 +156,36 @@ if (!editor?.getHTML().trim() || editor.getText().trim().length < 10) {
   alert("Article content is too short.");
   return;
 }
+const { data: existingPost } = await supabase
+  .from("posts")
+  .select("id")
+  .eq("slug", slug)
+  .maybeSingle();
+
+if (existingPost) {
+  alert("An article with this slug already exists.");
+  return;
+}
 
   const { data, error } = await supabase
     .from("posts")
     .insert([articleData]);
+if (error) {
+  console.error(error);
+  alert("Failed to save article");
+  return;
+}
 
-  if (error) {
-    console.error(error);
-    alert("Failed to save article");
-    return;
-  }
+console.log(data);
 
-  console.log(data);
+// clear saved local draft
+localStorage.removeItem("article-draft");
 
-  alert(
-    publish
-      ? "Article published!"
-      : "Draft saved!"
-  );
+alert(
+  publish
+    ? "Article published!"
+    : "Draft saved!"
+);
 };
 
   return (
