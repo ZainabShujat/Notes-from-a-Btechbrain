@@ -170,25 +170,7 @@ export default function AdminDashboard() {
       themes: pendingThemeState,
       community_enabled: pendingCommunityEnabled,
     });
-      useEffect(() => {
-  const fetchDrafts = async () => {
-    if (tab !== "drafts") return;
-
-    const { data, error } = await supabase
-      .from("posts")
-      .select("*")
-      .eq("published", false)
-      .order("created_at", {
-        ascending: false,
-      });
-
-    if (!error && data) {
-      setDrafts(data);
-    }
-  };
-
-  fetchDrafts();
-}, [tab]);
+  
     const { error, data } = await supabase.from("settings").upsert({ id: 1, themes: pendingThemeState, community_enabled: pendingCommunityEnabled });
     if (error) {
       console.error("Supabase upsert error:", error);
@@ -199,6 +181,25 @@ export default function AdminDashboard() {
   };
 
   // Category handlers removed
+  useEffect(() => {
+  const fetchDrafts = async () => {
+    if (tab !== "drafts") return;
+
+    const { data, error } = await supabase
+      .from("posts")
+      .select("*")
+      .eq("published", false);
+
+    console.log("DRAFT DATA:", data);
+    console.log("DRAFT ERROR:", error);
+
+    if (data) {
+      setDrafts(data);
+    }
+  };
+
+  fetchDrafts();
+}, [tab]);
 
   if (loading) {
     return <div className="py-8 px-4 text-center">Loading...</div>;
@@ -306,23 +307,43 @@ export default function AdminDashboard() {
       Draft Articles
     </h2>
 
-    <div className="grid gap-4">
-      {drafts.map((draft) => (
-        <div
-          key={draft.id}
-          className="bg-zinc-900 border border-zinc-700 rounded-xl p-4"
-        >
-          <h3 className="text-xl font-bold">
-            {draft.title}
-          </h3>
+    <div className="grid gap-4 mt-6">
+  {drafts.map((draft) => (
+    <div
+      key={draft.id}
+      className="bg-zinc-900 border border-zinc-700 rounded-2xl p-5"
+    >
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-xs px-3 py-1 rounded-full bg-purple-500/20 text-purple-300">
+          Draft
+        </span>
 
-          <p className="text-zinc-400">
-            {draft.excerpt}
-          </p>
-        </div>
-      ))}
+        <span className="text-sm text-zinc-500">
+          {new Date(draft.created_at).toLocaleDateString()}
+        </span>
+      </div>
+
+      <h3 className="text-2xl font-bold mb-2 text-white">
+        {draft.title}
+      </h3>
+
+      <p className="text-zinc-400 mb-4">
+        {draft.excerpt}
+      </p>
+
+      <div className="flex gap-3">
+        <button className="px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 transition">
+          Edit Draft
+        </button>
+
+        <button className="px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition">
+          Preview
+        </button>
+      </div>
     </div>
-  </div>
+  ))}
+</div>
+    </div>
 )}
       </main>
     </div>
