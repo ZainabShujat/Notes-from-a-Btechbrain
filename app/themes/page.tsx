@@ -53,6 +53,12 @@ export default function ThemesPage() {
           <span className="text-3xl mb-2">📅</span>
           <h1 className="text-3xl md:text-4xl font-bold mb-1 text-slate-900">Themes</h1>
           <p className="text-center text-slate-700 text-lg">Explore a concept</p>
+          <Link
+            href="/series-hub"
+            className="mt-4 inline-block px-5 py-2 rounded-full bg-purple-100 text-purple-700 font-semibold shadow hover:bg-purple-200 transition"
+          >
+            View All Series →
+          </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
           {themes.map((theme) => (

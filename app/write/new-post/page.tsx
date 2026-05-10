@@ -60,6 +60,26 @@ export default function NewPostPage() {
     published: publish,
   };
 
+  if (!title.trim()) {
+  alert("Article title is required.");
+  return;
+}
+
+if (!excerpt.trim()) {
+  alert("Excerpt is required.");
+  return;
+}
+
+if (!category.trim()) {
+  alert("Please select a category.");
+  return;
+}
+
+if (!editor?.getHTML().trim() || editor.getText().trim().length < 10) {
+  alert("Article content is too short.");
+  return;
+}
+
   const { data, error } = await supabase
     .from("posts")
     .insert([articleData]);

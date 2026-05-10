@@ -35,7 +35,8 @@ export default function Nav({ communityEnabled }: NavProps) {
           </Link>
           <Link href="/all-posts" className="hover:underline font-semibold" style={{color: "var(--foreground)"}}>Library</Link>
           <Link href="/start-here" className="hover:underline font-semibold" style={{color: "var(--foreground)"}}>Start Here</Link>
-          <Link href="/series-hub" className="hover:underline" style={{color: "var(--foreground)"}}>Series</Link>
+          <Link href="/write/new-post" className="hover:underline font-semibold px-4 py-1 rounded bg-purple-100 text-purple-700 ml-1" style={{color: "#a855f7", background: "#f3e8ff"}}>Write</Link>
+          {/* <Link href="/series-hub" className="hover:underline" style={{color: "var(--foreground)"}}>Series</Link> */}
           <Link href="/themes" className="hover:underline" style={{color: "var(--foreground)"}}>Themes</Link>
         </div>
 
@@ -92,7 +93,8 @@ export default function Nav({ communityEnabled }: NavProps) {
           <Link href="/browse" className="block py-3 px-4 rounded font-semibold text-base" style={{background: "var(--muted)", color: "var(--foreground)", letterSpacing: "0.01em"}}>Explore Topics</Link>
           <Link href="/all-posts" className="block py-3 px-4 rounded font-semibold text-base" style={{color: "var(--foreground)"}}>Library</Link>
           <Link href="/start-here" className="block py-3 px-4 rounded font-semibold text-base" style={{color: "var(--foreground)"}}>Start Here</Link>
-          <Link href="/series-hub" className="block py-3 px-4 rounded text-base" style={{color: "var(--foreground)"}}>Series</Link>
+          <Link href="/write/new-post" className="block py-3 px-4 rounded font-semibold text-base" style={{color: "#a855f7", background: "#f3e8ff"}}>Write</Link>
+          {/* <Link href="/series-hub" className="block py-3 px-4 rounded text-base" style={{color: "var(--foreground)"}}>Series</Link> */}
           <Link href="/themes" className="block py-3 px-4 rounded text-base" style={{color: "var(--foreground)"}}>Themes</Link>
           <Link href="/about" className="block py-3 px-4 rounded text-base" style={{color: "var(--foreground)"}}>About</Link>
           <Link href="/notifications" className="block py-3 px-4 rounded text-base" style={{color: "var(--foreground)"}}>Notifications</Link>

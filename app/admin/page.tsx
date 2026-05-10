@@ -78,8 +78,7 @@ export default function AdminDashboard() {
     { key: "analytics", label: "Analytics", icon: "📊", desc: "View site stats and trends" },
     { key: "community", label: "Community", icon: "💬", desc: "Moderate comments & threads" },
     { key: "settings", label: "Settings", icon: "⚙️", desc: "Site-wide settings" },
-    {key: "new-post", label: "New Article", icon: "✍️",desc: "Write and publish new articles",
-},
+  
   ];
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -228,7 +227,7 @@ export default function AdminDashboard() {
                 key={t.key}
                 onClick={() => {
   if (t.key === "new-post") {
-    window.location.href = "/admin/new-post";
+    window.location.href = "/write/new-post";
   } else {
     setTab(t.key as Tab);
   }
