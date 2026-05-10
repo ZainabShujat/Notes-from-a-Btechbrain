@@ -23,7 +23,7 @@ export default function Hero() {
         <p className="mt-2 text-base md:text-lg text-white/90">For when you’re thinking too much… and still don’t have answers</p>
   {/* Latest Drop Card - enhanced, now below RecentReads */}
         <div
-          className="mt-8 w-full max-w-lg mx-auto rounded-2xl p-6 shadow-2xl backdrop-blur-2xl text-left flex flex-col gap-4 glow-purple"
+          className="mt-6 w-full max-w-lg mx-auto rounded-2xl p-6 shadow-2xl backdrop-blur-2xl text-left flex flex-col gap-4 glow-purple"
           style={{
             background: "var(--background, #fff)",
             color: "var(--foreground, #18181b)",
