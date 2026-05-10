@@ -103,4 +103,59 @@ body {
     color: #fff;
     text-shadow: var(--text-shadow);
   }
-}     }
+}    
+.ProseMirror ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+}
+
+
+.ProseMirror h1 {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.ProseMirror h2 {
+  color: white;
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.ProseMirror h3 {
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+.ProseMirror img {
+  border-radius: 1rem;
+  margin: 1rem 0;
+  max-width: 100%;
+}
+
+.ProseMirror p {
+  color: white;
+}
+
+.ProseMirror li {
+  color: white;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #71717a;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+}
