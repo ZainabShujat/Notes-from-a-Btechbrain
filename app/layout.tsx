@@ -26,6 +26,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       {/* ✅ GOOGLE ANALYTICS SCRIPT */}
+      <head>
+        <meta name="color-scheme" content="light" />
+        </head>
       <Script
         async
         src="https://www.googletagmanager.com/gtag/js?id=G-FWR505Z901"

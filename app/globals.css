@@ -1,6 +1,8 @@
 @import "tailwindcss";             /* v4 way */
 
-
+html {
+  color-scheme: light;
+}
 
  :root {
   --background: #0a0a0a;
