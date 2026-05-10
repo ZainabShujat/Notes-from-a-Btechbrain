@@ -20,31 +20,7 @@ export default async function Home() {
         <div className="mt-4 w-full flex justify-center">
           <RecentReads />
         </div>
-         {/* Latest Drop Card - enhanced, now below RecentReads */}
-        <div className="mt-10 w-full max-w-xl mx-auto bg-white/20 border border-purple-400 rounded-3xl p-8 shadow-2xl backdrop-blur-2xl text-left flex flex-col gap-4 glow-purple"
-          style={{boxShadow: '0 0 32px 8px #a855f7, 0 2px 32px 0 rgba(0,0,0,0.25), 0 0 16px 4px #a855f7', border: '2px solid #a855f7'}}>
-          <div className="flex items-center gap-3 text-xl font-extrabold text-white drop-shadow-lg">
-            <span className="text-2xl">📚</span> Latest Drop
-          </div>
-          <div className="text-2xl md:text-3xl font-bold text-white mt-2 drop-shadow-xl">
-            ⭐ The Puzzle That Broke My Brain (In the Best Way)
-          </div>
-          <div className="text-sm text-white/80 mt-2 flex flex-wrap gap-2">
-            <span>5 min read</span>
-            <span>•</span>
-            <span>Curiosity Series</span>
-            <span>•</span>
-            <span>Partridge Puzzle</span>
-
-            <span>•</span>
-            <span>Math & Puzzles</span>
-          </div>
-          <div className="mt-5">
-            <Link href="/post/the-puzzle-that-broke-my-brain" className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-linear-to-r from-indigo-400 via-purple-500 to-green-400 text-white font-bold shadow-xl hover:from-indigo-500 hover:to-green-500 transition text-lg" target="_blank" rel="noopener noreferrer">
-              Start Reading <span className="text-2xl">→</span>
-            </Link>
-          </div>
-        </div>
+       
       
       {/* This Month's Series */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-8">
@@ -127,11 +103,11 @@ export default async function Home() {
 
       {/* Coming Soon Series */}
       {upcomingSeries.length > 0 && (
-        <section className="mx-auto max-w-screen-xl px-4 sm:px-6 md:px-8 py-12">
+        <section className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-12">
           <h2 className="text-center text-2xl md:text-3xl font-extrabold tracking-tight mb-2">
             🎬 <span className="text-purple-600">Coming Soon</span>
           </h2>
-          <p className="text-center text-slate-600 mt-1 text-lg md:text-xl font-medium mb-6">
+          <p className="text-center text-yellow-200 mt-1 text-lg md:text-xl font-medium mb-6">
             Exciting new series launching next month.
           </p>
 
@@ -154,7 +130,7 @@ export default async function Home() {
       {/* Recent Posts - moved just above the footer */}
       <section
         id="recent"
-        className="mx-auto max-w-screen-xl px-4 sm:px-6 md:px-8 py-12"
+        className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-12"
       >
         <div className="flex items-center justify-between mb-2">
           <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight">

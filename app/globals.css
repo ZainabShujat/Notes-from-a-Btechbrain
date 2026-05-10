@@ -1,33 +1,24 @@
 @import "tailwindcss";             /* v4 way */
 
 
-:root {
-  --background: #ffffff;
-  --foreground: #f5f5f5;
+
+ :root {
+  --background: #0a0a0a;
+  --foreground: #47237c;
   --heading: #fff;
-  --muted: #e0e0e0;
-  --text-shadow: 0 2px 8px rgba(0,0,0,0.25);
-}
-
-
-
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --heading: #fff;
-    --muted: #cfcfcf;
-    --text-shadow: 0 2px 12px rgba(0,0,0,0.45);
-  }
-}
+  --background: #fff;
+  --foreground: #18181b;
+  --heading: #18181b;
+  --muted: #f3f4f6;
+  --text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --bg-image: url('/assets/banners/bg-main.webp');
 
 
 body {
   color: var(--foreground);
+  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-  /* Combine gradient and image for proper overlay */
-  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('/assets/banners/bg-main.webp');
+  background-image: var(--bg-image);
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -35,12 +26,6 @@ body {
   text-shadow: var(--text-shadow);
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-image: url('/assets/banners/bg-main-dark.jpg');
-  }
-}
-/* globals.css (or wherever your base styles are) */
 @layer base {
   h1, h2, h3, h4, h5 {
     color: var(--heading);
@@ -118,4 +103,4 @@ body {
     color: #fff;
     text-shadow: var(--text-shadow);
   }
-}
+}     }
