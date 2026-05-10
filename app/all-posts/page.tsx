@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+
 import { getAllPosts } from "../../lib/posts";
 import ArticleSearch from "../components/ArticleSearch";
 
@@ -8,16 +8,7 @@ export const metadata = {
 };
 
 export default function AllPostsPage() {
-  // Force light mode on mount
-  useEffect(() => {
-    document.documentElement.classList.remove("dark");
-    document.documentElement.classList.add("light");
-  }, []);
 
-  const [allPosts, setAllPosts] = React.useState<any[]>([]);
-  useEffect(() => {
-    getAllPosts().then(setAllPosts);
-  }, []);
 
   return (
     <main className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-12 text-slate-900 bg-white">

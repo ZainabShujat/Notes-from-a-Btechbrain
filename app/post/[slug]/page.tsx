@@ -19,14 +19,8 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-import React, { useEffect } from "react";
 
 export default function Page({ params }: PageProps) {
-  // Force light mode on mount
-  useEffect(() => {
-    document.documentElement.classList.remove("dark");
-    document.documentElement.classList.add("light");
-  }, []);
 
   // ...existing code for fetching post data, etc...
   // For brevity, you should move the async data fetching logic into a useEffect or use a client-side data fetching approach (e.g., SWR, useEffect+fetch).
