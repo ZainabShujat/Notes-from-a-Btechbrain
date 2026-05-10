@@ -44,7 +44,7 @@ const slug =
 
 const banner =
   item.banner ||
-  "/assets/hello-banner.png";
+  "/assets/banners/hello-banner.png";
 
 const progress = Math.max(
   5,
