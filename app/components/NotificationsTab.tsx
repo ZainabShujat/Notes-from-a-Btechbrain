@@ -35,7 +35,7 @@ export default function NotificationsTab() {
               <span className="text-xs font-semibold" style={{ color: note.color }}>{note.version}</span>
             </div>
             <div className="font-semibold text-slate-900 dark:text-slate-100">{note.title}</div>
-            <div className="text-slate-700 dark:text-slate-200">{note.message}</div>
+            <div className="text-slate-700 dark:text-slate-200" dangerouslySetInnerHTML={{ __html: note.message }} />
           </li>
         ))}
       </ul>

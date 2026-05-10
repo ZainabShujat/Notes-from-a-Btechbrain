@@ -4,6 +4,14 @@
 
 const notifications = [
   {
+    id: 25,
+    date: "2026-05-10",
+    title: "Custom CMS & Dynamic Publishing System",
+    message: `Notes From a BTech Brain now supports database-driven publishing through a custom-built internal CMS.<br><br>Articles can now be written and published directly from the website editor using TipTap, with support for:<ul style="margin: 0.5em 0 0.5em 1.5em; padding: 0;">\n<li>dynamic routing</li>\n<li>article banners</li>\n<li>rich text formatting</li>\n<li>categories and metadata</li>\n<li>hybrid markdown + database rendering</li>\n<li>live Supabase-backed publishing</li></ul><br>Older markdown posts continue to work alongside newer CMS-native articles as part of a gradual migration system.`,
+    version: "v0.10.0",
+    color: "#a855f7", // purple
+  },
+  {
     id: 24,
     date: "2026-04-18",
     title: "Related Articles UI Polished",
