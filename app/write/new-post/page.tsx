@@ -172,7 +172,11 @@ if (existingPost) {
     .insert([articleData]);
 if (error) {
   console.error(error);
-  alert("Failed to save article");
+
+  alert(
+    `Failed to save article: ${error.message}`
+  );
+
   return;
 }
 

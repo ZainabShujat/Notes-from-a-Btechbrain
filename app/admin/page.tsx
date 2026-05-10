@@ -70,7 +70,7 @@ const ADMIN_EMAILS = [
 ];
 
 
-type Tab = "dashboard" | "analytics" | "community" | "settings";
+type Tab = "dashboard" | "analytics" | "community" | "settings" | "drafts";
 
 
 export default function AdminDashboard() {
@@ -78,7 +78,12 @@ export default function AdminDashboard() {
     { key: "analytics", label: "Analytics", icon: "📊", desc: "View site stats and trends" },
     { key: "community", label: "Community", icon: "💬", desc: "Moderate comments & threads" },
     { key: "settings", label: "Settings", icon: "⚙️", desc: "Site-wide settings" },
-  
+    {
+  key: "drafts",
+  label: "Drafts",
+  icon: "📝",
+  desc: "View unpublished drafts",
+}
   ];
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -90,6 +95,7 @@ export default function AdminDashboard() {
   const [communityEnabled, setCommunityEnabled] = useState(false);
   const [pendingCommunityEnabled, setPendingCommunityEnabled] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [drafts, setDrafts] = useState<any[]>([]);
 
   useEffect(() => {
     const getUserAndData = async () => {
@@ -164,6 +170,25 @@ export default function AdminDashboard() {
       themes: pendingThemeState,
       community_enabled: pendingCommunityEnabled,
     });
+      useEffect(() => {
+  const fetchDrafts = async () => {
+    if (tab !== "drafts") return;
+
+    const { data, error } = await supabase
+      .from("posts")
+      .select("*")
+      .eq("published", false)
+      .order("created_at", {
+        ascending: false,
+      });
+
+    if (!error && data) {
+      setDrafts(data);
+    }
+  };
+
+  fetchDrafts();
+}, [tab]);
     const { error, data } = await supabase.from("settings").upsert({ id: 1, themes: pendingThemeState, community_enabled: pendingCommunityEnabled });
     if (error) {
       console.error("Supabase upsert error:", error);
@@ -275,6 +300,30 @@ export default function AdminDashboard() {
             saving={saving}
           />
         )}
+        {tab === "drafts" && (
+  <div>
+    <h2 className="text-3xl font-bold mb-6">
+      Draft Articles
+    </h2>
+
+    <div className="grid gap-4">
+      {drafts.map((draft) => (
+        <div
+          key={draft.id}
+          className="bg-zinc-900 border border-zinc-700 rounded-xl p-4"
+        >
+          <h3 className="text-xl font-bold">
+            {draft.title}
+          </h3>
+
+          <p className="text-zinc-400">
+            {draft.excerpt}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
       </main>
     </div>
   );
