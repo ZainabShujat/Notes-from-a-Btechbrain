@@ -1,7 +1,8 @@
+"use client";
 
 import { getAllPosts } from "../../lib/posts";
 import ArticleSearch from "../components/ArticleSearch";
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 export const metadata = {
   title: "All Posts | Notes Brain",
   description: "Search and explore all posts",
