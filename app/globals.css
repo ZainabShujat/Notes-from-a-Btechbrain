@@ -1,39 +1,70 @@
-@import "tailwindcss";             /* v4 way */
+@import "tailwindcss";
 
-html {
+/* =========================
+   ROOT THEME VARIABLES
+========================= */
+
+:root {
   color-scheme: light;
+
+  --background: #0a0a0a;
+  --foreground: #f3f4f6;
+  --heading: #ffffff;
+  --muted: #d1d5db;
+
+  --text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  --bg-image: url('/assets/banners/bg-main.webp');
 }
 
- :root {
-  --background: #0a0a0a;
-  --foreground: #47237c;
-  --heading: #fff;
-  --background: #fff;
-  --foreground: #18181b;
-  --heading: #18181b;
-  --muted: #f3f4f6;
-  --text-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  --bg-image: url('/assets/banners/bg-main.webp');
+/* =========================
+   GLOBAL BODY
+========================= */
 
+html,
+body {
+  min-height: 100%;
+}
 
 body {
   color: var(--foreground);
   background: var(--background);
+
   font-family: Arial, Helvetica, sans-serif;
+
   background-image: var(--bg-image);
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
+
   text-shadow: var(--text-shadow);
 }
 
+/* =========================
+   TYPOGRAPHY BASE
+========================= */
+
 @layer base {
-  h1, h2, h3, h4, h5 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     color: var(--heading);
     text-shadow: var(--text-shadow);
   }
-  /* Blog post content: black text for body, strong headings */
+
+  a,
+  .link {
+    color: #fff;
+    text-shadow: var(--text-shadow);
+  }
+
+  /* =========================
+     BLOG CONTENT
+  ========================= */
+
   .blog-content p,
   .blog-content li,
   .blog-content small,
@@ -42,70 +73,95 @@ body {
   .blog-content ul,
   .blog-content ol,
   .blog-content blockquote {
-    color: #111 !important;
+    color: #f3f4f6 !important;
     text-shadow: none !important;
+
     margin-bottom: 2.1em;
     line-height: 1.8;
   }
+
   .blog-content h1 {
-    color: #000 !important;
+    color: #ffffff !important;
     font-weight: 900 !important;
     font-size: 2.2rem !important;
+
     margin-top: 1.6em;
     margin-bottom: 0.7em;
+
     line-height: 1.1;
     letter-spacing: -0.01em;
   }
+
   .blog-content h2 {
-    color: #111 !important;
+    color: #ffffff !important;
     font-weight: 800 !important;
     font-size: 1.5rem !important;
+
     margin-top: 0.7em;
     margin-bottom: 0.5em;
+
     line-height: 1.18;
     letter-spacing: -0.008em;
   }
+
   .blog-content h3 {
-    color: #222 !important;
+    color: #f8fafc !important;
     font-weight: 700 !important;
     font-size: 1.2rem !important;
+
     margin-top: 0.8em;
     margin-bottom: 0.3em;
+
     line-height: 1.18;
   }
+
   .blog-content h4 {
-    color: #222 !important;
+    color: #f8fafc !important;
     font-weight: 700 !important;
     font-size: 1.05rem !important;
+
     margin-top: 1em;
     margin-bottom: 0.2em;
+
     line-height: 1.2;
   }
-  .blog-content h5, .blog-content h6 {
-    color: #333 !important;
+
+  .blog-content h5,
+  .blog-content h6 {
+    color: #e5e7eb !important;
     font-weight: 600 !important;
     font-size: 1rem !important;
+
     margin-top: 0.7em;
     margin-bottom: 0.15em;
+
     line-height: 1.2;
   }
-  .blog-content ul, .blog-content ol {
+
+  .blog-content ul,
+  .blog-content ol {
     padding-left: 1.7em;
     margin-bottom: 2em;
   }
+
   .blog-content blockquote {
-    border-left: 4px solid #e0e0e0;
+    border-left: 4px solid #6d28d9;
+
     padding-left: 1.5em;
-    color: #444 !important;
+
+    color: #d1d5db !important;
+
     font-style: italic;
+
     margin-bottom: 2em;
     margin-top: 2em;
   }
-  a, .link {
-    color: #fff;
-    text-shadow: var(--text-shadow);
-  }
-}    
+}
+
+/* =========================
+   PROSEMIRROR EDITOR
+========================= */
+
 .ProseMirror ul {
   list-style-type: disc;
   padding-left: 1.5rem;
@@ -116,18 +172,20 @@ body {
   padding-left: 1.5rem;
 }
 
-
 .ProseMirror h1 {
   color: white;
   font-size: 2rem;
   font-weight: bold;
+
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+
 .ProseMirror h2 {
   color: white;
   font-size: 1.6rem;
   font-weight: bold;
+
   margin-top: 1rem;
   margin-bottom: 0.75rem;
 }
@@ -136,28 +194,29 @@ body {
   color: white;
   font-size: 1.3rem;
   font-weight: bold;
+
   margin-top: 0.8rem;
   margin-bottom: 0.5rem;
 }
+
 .ProseMirror img {
   border-radius: 1rem;
   margin: 1rem 0;
   max-width: 100%;
 }
 
-.ProseMirror p {
-  color: white;
-}
-
+.ProseMirror p,
 .ProseMirror li {
   color: white;
 }
 
 .ProseMirror p.is-editor-empty:first-child::before {
   color: #71717a;
+
   content: attr(data-placeholder);
+
   float: left;
   height: 0;
+
   pointer-events: none;
-}
 }
