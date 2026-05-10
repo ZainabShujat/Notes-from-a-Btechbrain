@@ -7,10 +7,10 @@
 :root {
   color-scheme: light;
 
-  --background: #0a0a0a;
-  --foreground: #f3f4f6;
-  --heading: #ffffff;
-  --muted: #d1d5db;
+   --background: #ffffff;
+  --foreground: #18181b;
+  --heading: #18181b;
+  --muted: #6b7280;
 
   --text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 

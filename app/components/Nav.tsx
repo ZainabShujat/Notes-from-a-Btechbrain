@@ -29,7 +29,7 @@ export default function Nav({ communityEnabled }: NavProps) {
           <Link
             href="/browse"
             className="hover:underline font-semibold px-4 py-1 rounded"
-            style={{color: "var(--foreground)", background: "var(--muted)", letterSpacing: "0.01em"}}
+            style={{color: "var(--foreground)", background: "var(--muted)", letterSpacing: "0.01em  text-yellow-700 "}}
           >
             Explore Topics
           </Link>
