@@ -7,6 +7,7 @@ import AdminSidebar from "../components/admin/AdminSidebar";
 import AdminAnalytics from "../components/admin/AdminAnalytics";
 import AdminCommunity from "../components/admin/AdminCommunity";
 import AdminSettings from "../components/admin/AdminSettings";
+import BackButton from "../components/BackButton";
 
 
 // --- Helper functions ---
@@ -77,6 +78,8 @@ export default function AdminDashboard() {
     { key: "analytics", label: "Analytics", icon: "📊", desc: "View site stats and trends" },
     { key: "community", label: "Community", icon: "💬", desc: "Moderate comments & threads" },
     { key: "settings", label: "Settings", icon: "⚙️", desc: "Site-wide settings" },
+    {key: "new-post", label: "New Article", icon: "✍️",desc: "Write and publish new articles",
+},
   ];
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -214,14 +217,22 @@ export default function AdminDashboard() {
   // Dashboard landing grid (no sidebar)
   if (tab === "dashboard") {
     return (
+      
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col items-center justify-center">
+        <BackButton />
         <h1 className="text-4xl font-extrabold mb-10 mt-12 text-center text-slate-800 dark:text-white">Admin Dashboard</h1>
         <div className="flex justify-center w-full">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full max-w-3xl">
             {tabMeta.map((t) => ( 
               <button
                 key={t.key}
-                onClick={() => setTab(t.key as Tab)}
+                onClick={() => {
+  if (t.key === "new-post") {
+    window.location.href = "/admin/new-post";
+  } else {
+    setTab(t.key as Tab);
+  }
+}}
                 className="flex flex-col items-center justify-center bg-white dark:bg-slate-900 rounded-xl shadow-lg p-8 hover:shadow-amber-200 transition border-2 border-transparent hover:border-amber-400 focus:outline-none"
               >
                 <span className="text-4xl mb-2">{t.icon}</span>

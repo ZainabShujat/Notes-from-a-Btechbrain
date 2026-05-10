@@ -20,7 +20,7 @@ export default function Hero() {
         <h1 className="text-3xl md:text-4xl font-bold leading-tight">
           <span className="text-white">Notes From a</span> <span className="text-yellow-400 font-extrabold">BTech Brain</span>
         </h1>
-        <p className="mt-2 text-base md:text-lg text-white/90">For when you’re thinking too much… and still don’t have answers</p>
+        <p className="mt-2 text-base md:text-lg text-white/90 ">For when you’re thinking too much… and still don’t have answers</p>
   {/* Latest Drop Card - enhanced, now below RecentReads */}
         <div
           className="mt-6 w-full max-w-lg mx-auto rounded-2xl p-6 shadow-2xl backdrop-blur-2xl text-left flex flex-col gap-4 glow-purple"
@@ -28,7 +28,8 @@ export default function Hero() {
             background: "var(--background, #fff)",
             color: "var(--foreground, #18181b)",
             boxShadow: '0 0 32px 8px #a855f7, 0 2px 32px 0 rgba(0,0,0,0.25), 0 0 16px 4px #a855f7',
-            border: '2px solid #a855f7'
+            border: '2px solid #a855f7',
+            opacity: 0.75
           }}
         >
           <div className="flex items-center gap-3 text-xl font-extrabold drop-shadow-lg" style={{color: "var(--heading, #fff)"}}>

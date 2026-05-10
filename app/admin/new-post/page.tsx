@@ -5,6 +5,8 @@ import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import Image from "@tiptap/extension-image";
 import { useState } from "react";
+import { supabase } from "../../lib/supabase";
+import BackButton from "../../components/BackButton";
 
 const generateSlug = (title: string) => {
   return title
@@ -46,26 +48,41 @@ export default function NewPostPage() {
     },
   });
 
-  const handleSave = async (publish: boolean) => {
-    const articleData = {
-      title,
-      slug,
-      excerpt,
-      category,
-      banner: bannerUrl,
-      content: editor?.getHTML(),
-      featured,
-      published: publish,
-      date: new Date().toISOString(),
-    };
-
-    console.log(articleData);
+ const handleSave = async (publish: boolean) => {
+  const articleData = {
+    title,
+    slug,
+    excerpt,
+    category,
+    banner: bannerUrl,
+    content: editor?.getHTML(),
+    featured,
+    published: publish,
   };
+
+  const { data, error } = await supabase
+    .from("posts")
+    .insert([articleData]);
+
+  if (error) {
+    console.error(error);
+    alert("Failed to save article");
+    return;
+  }
+
+  console.log(data);
+
+  alert(
+    publish
+      ? "Article published!"
+      : "Draft saved!"
+  );
+};
 
   return (
     <main className="min-h-screen bg-zinc-950 text-white p-8">
       <div className="max-w-5xl mx-auto">
-
+        <BackButton />
         <h1
           className="text-4xl font-bold mb-6"
           style={{ color: "#a855f7" }}
