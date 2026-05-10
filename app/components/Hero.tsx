@@ -17,7 +17,7 @@ export default function Hero() {
       {/* Optional: add a dark overlay for better contrast */}
       <div className="absolute inset-0 bg-[#1a1440]/80 pointer-events-none select-none" />
       <div className="relative z-10 w-full max-w-xl mx-auto px-4 py-6 text-center flex flex-col items-center">
-        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight whitespace-nowrap">
+        <h1 className="text-3xl md:text-4xl font-bold leading-tight">
           <span className="text-white">Notes From a</span> <span className="text-yellow-400 font-extrabold">BTech Brain</span>
         </h1>
         <p className="mt-2 text-base md:text-lg text-white/90">For when you’re thinking too much… and still don’t have answers</p>
