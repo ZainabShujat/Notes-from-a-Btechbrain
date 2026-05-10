@@ -5,11 +5,28 @@ import CategoryCard from "./components/CategoryCard";
 import PostCard from "./components/PostCard";
 import Link from "next/link";
 import StartHereBannerWrapper from "./components/StartHereBannerWrapper";
+import { supabase } from "../lib/supabase";
 
 export default async function Home() {
-  const allPosts = await getAllPosts();
-  const posts = allPosts.slice(0, 3);
+  const markdownPosts = await getAllPosts();
 
+const { data: dbPosts } = await supabase
+  .from("posts")
+  .select("*")
+  .eq("published", true);
+
+const allPosts = [
+  ...markdownPosts,
+  ...(dbPosts || []),
+];
+
+allPosts.sort(
+  (a, b) =>
+    new Date(b.date || b.created_at).getTime() -
+    new Date(a.date || a.created_at).getTime()
+);
+
+const posts = allPosts.slice(0, 3);
   return (
     <main className="bg-linear-to-br from-violet-900 to-zinc-950 text-white">
       

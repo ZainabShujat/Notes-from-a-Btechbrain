@@ -11,6 +11,7 @@ import ViewCounter from "../../components/ViewCounter";
 import LikeButton from "../../components/LikeButton";
 import PostCard from "../../components/PostCard";
 import { getAllPosts } from "../../../lib/posts";
+import { supabase } from "../../../lib/supabase";
 // Client wrapper for PostReadTracker (must be imported after all Node.js/server imports)
 import PostReadTrackerWrapper from "../../components/PostReadTrackerWrapper";
 
@@ -21,14 +22,49 @@ type PageProps = {
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
 
-  const filePath = path.join(process.cwd(), "content", "posts", `${slug}.md`);
-  if (!fs.existsSync(filePath)) return notFound();
+ const filePath = path.join(
+  process.cwd(),
+  "content",
+  "posts",
+  `${slug}.md`
+);
+
+let data;
+let contentHtml = "";
+
+if (fs.existsSync(filePath)) {
+  // MARKDOWN POST
 
   const raw = fs.readFileSync(filePath, "utf8");
-  const { data, content } = matter(raw);
 
-  const processed = await remark().use(html).process(content);
-  const contentHtml = processed.toString();
+  const parsed = matter(raw);
+
+  data = parsed.data;
+
+  const processed = await remark()
+    .use(html)
+    .process(parsed.content);
+
+  contentHtml = processed.toString();
+
+} else {
+
+  // SUPABASE POST
+
+  const { data: dbPost, error } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+
+  if (error || !dbPost) {
+    return notFound();
+  }
+
+  data = dbPost;
+
+  contentHtml = dbPost.content;
+}
 
   // Related articles logic
   const allPosts = await getAllPosts();
@@ -44,7 +80,9 @@ export default async function Page({ params }: PageProps) {
       <PostReadTrackerWrapper slug={slug} postId={data?.id || slug} />
       <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100">{data.title}</h1>
       <div className="flex items-center gap-4 mt-2 text-slate-900 dark:text-slate-300">
-        <span>{new Date(data.date).toLocaleDateString()}</span>
+        <span>{new Date(
+  data.date || data.created_at
+).toLocaleDateString()}</span>
         <span>·</span>
         <span>{data.category}</span>
         <span>·</span>
@@ -91,7 +129,7 @@ export default async function Page({ params }: PageProps) {
                   title={p.title}
                   slug={p.slug}
                   excerpt={p.excerpt}
-                  date={p.date}
+                  date={p.date || p.created_at }
                   category={p.category}
                   banner={p.banner}
                 />

@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabase";
+import { supabase } from "../../lib/supabase";
 
 const themeComponents: Record<string, any> = {
   winter: dynamic(() => import("../components/WinterTheme"), { ssr: false }),

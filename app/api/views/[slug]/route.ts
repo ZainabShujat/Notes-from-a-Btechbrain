@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 // Update this import to match the actual export from '@/lib/supabase'
 // For example, if the default export is the client, use:
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '../../../../lib/supabase';
 // Or, if it's named differently, adjust accordingly:
 // import { supabase } from '@/lib/supabase';
 

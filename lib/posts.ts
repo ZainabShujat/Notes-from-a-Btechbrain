@@ -8,6 +8,7 @@ export type PostMeta = {
   title: string;
   slug: string;
   date: string;
+created_at: string;
   category: string;
   subcategory?: string;
   excerpt?: string;
