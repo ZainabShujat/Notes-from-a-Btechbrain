@@ -94,15 +94,15 @@ if (fs.existsSync(filePath)) {
       </div>
 
       {data?.banner && (
-        <figure className="w-full rounded-lg mb-6">
-          <img
-            src={data.banner || ""}
-            alt={data.title}
-            className="w-full h-auto rounded-lg mx-auto"
-            loading="lazy"
-          />
-        </figure>
-      )}
+  <figure className="w-full rounded-lg mb-6">
+    <img
+      src={data.banner || ""}
+      alt={data.title}
+      className="w-full h-auto rounded-lg mx-auto"
+      loading="lazy"
+    />
+  </figure>
+)}
 
 
       <article
