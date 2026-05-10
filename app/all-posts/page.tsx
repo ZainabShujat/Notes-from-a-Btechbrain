@@ -1,14 +1,19 @@
 
 import { getAllPosts } from "../../lib/posts";
 import ArticleSearch from "../components/ArticleSearch";
-
+import React, { useEffect } from "react";
 export const metadata = {
   title: "All Posts | Notes Brain",
   description: "Search and explore all posts",
 };
 
 export default function AllPostsPage() {
+  // Force light mode on mount
 
+  const [allPosts, setAllPosts] = React.useState<any[]>([]);
+  useEffect(() => {
+    getAllPosts().then(setAllPosts);
+  }, []);
 
   return (
     <main className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-12 text-slate-900 bg-white">
