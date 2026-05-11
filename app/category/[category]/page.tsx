@@ -1,4 +1,4 @@
-import { getAllPosts, PostMeta } from "../../../lib/posts";
+import { getCombinedPosts, PostMeta } from "../../../lib/posts";
 import PostCard from "../../components/PostCard";
 
 type Props = {
@@ -9,7 +9,7 @@ export default async function CategoryPage({ params }: Props) {
   const { category } = await params; // await the promise
   const cat = category.toLowerCase();
 
-  const posts = await getAllPosts();
+  const posts = await getCombinedPosts();
   const filtered = posts.filter(
     (p: PostMeta) => (p.category || "").toLowerCase() === cat
   );
@@ -32,8 +32,10 @@ export default async function CategoryPage({ params }: Props) {
             slug={p.slug}
             excerpt={p.excerpt}
             date={p.date}
+            created_at={p.created_at}
             category={p.category}
             banner={p.banner}
+
           />
         ))}
       </div>

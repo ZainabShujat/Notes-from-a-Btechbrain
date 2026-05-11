@@ -11,6 +11,7 @@ type Props = {
   date?: string;
   category?: string;
   banner?: string;
+  created_at?: string;
   likes?: number;   // <-- add this
   views?: number;   // <-- add this
 };
@@ -20,7 +21,10 @@ interface PostCardProps extends Props {
   small?: boolean;
 }
 
-export default function PostCard({ title, slug, excerpt, date, category, banner, featured, small }: PostCardProps) {
+export default function PostCard({ title, slug, excerpt, date, category, banner, featured, small, created_at }: PostCardProps) {
+  console.log("DATE:", date)
+  console.log("CREATED:", created_at)
+  
   let style: React.CSSProperties = {};
 
   if (featured) {
@@ -74,7 +78,11 @@ export default function PostCard({ title, slug, excerpt, date, category, banner,
             </p>
           )}
           <div className="flex items-center justify-between text-slate-200/90 text-xs mt-2">
-            {!small && date && <span className="text-[11px] text-slate-200/80 font-normal">{date}</span>}
+            {!small && (date || created_at) && (
+  <span className="text-[11px] text-slate-200/80 font-normal">
+    {new Date(date || created_at!).toLocaleDateString()}
+  </span>
+)}
             <Link
               href={`/post/${slug}`}
               className={`inline-block px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-400 to-purple-600 text-white font-medium text-xs shadow transition-all duration-200 group-hover:shadow-[0_0_12px_rgba(168,85,247,0.3)] group-hover:-translate-y-[1px] focus:outline-none focus:ring-2 focus:ring-purple-300 ${small ? 'text-xs px-2 py-1' : ''}`}

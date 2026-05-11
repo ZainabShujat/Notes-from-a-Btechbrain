@@ -1,4 +1,4 @@
-import { getAllPosts } from "../lib/posts";
+import { getCombinedPosts } from "../lib/posts";
 import Hero from "./components/Hero";
 import RecentReads from "./components/RecentReads";
 import CategoryCard from "./components/CategoryCard";
@@ -8,25 +8,13 @@ import StartHereBannerWrapper from "./components/StartHereBannerWrapper";
 import { supabase } from "../lib/supabase";
 
 export default async function Home() {
-  const markdownPosts = await getAllPosts();
-
-const { data: dbPosts } = await supabase
-  .from("posts")
-  .select("*")
-  .eq("published", true);
-
-const allPosts = [
-  ...markdownPosts,
-  ...(dbPosts || []),
-];
-
-allPosts.sort(
-  (a, b) =>
-    new Date(b.date || b.created_at).getTime() -
-    new Date(a.date || a.created_at).getTime()
-);
-
-const posts = allPosts.slice(0, 3);
+  const posts = (await getCombinedPosts())
+  .sort(
+    (a, b) =>
+      new Date(b.date || b.created_at).getTime() -
+      new Date(a.date || a.created_at).getTime()
+  )
+  .slice(0, 3);
   return (
     <main className="bg-linear-to-br from-violet-900 to-zinc-950 text-white">
       
@@ -284,10 +272,10 @@ const posts = allPosts.slice(0, 3);
             <p className="text-zinc-500">
               No posts yet. Create one in{" "}
               <Link
-                href="/admin"
+                href="/write/new-post"
                 className="underline text-purple-400"
               >
-                /admin
+                the editor
               </Link>
             </p>
           )}
@@ -299,6 +287,7 @@ const posts = allPosts.slice(0, 3);
               slug={p.slug}
               excerpt={p.excerpt}
               date={p.date}
+              created_at={p.created_at}
               category={p.category}
               banner={p.banner}
             />

@@ -10,7 +10,7 @@ import BackButton from "../../components/BackButton";
 import ViewCounter from "../../components/ViewCounter";
 import LikeButton from "../../components/LikeButton";
 import PostCard from "../../components/PostCard";
-import { getAllPosts } from "../../../lib/posts";
+import { getCombinedPosts } from "../../../lib/posts";
 import { supabase } from "../../../lib/supabase";
 // Client wrapper for PostReadTracker (must be imported after all Node.js/server imports)
 import PostReadTrackerWrapper from "../../components/PostReadTrackerWrapper";
@@ -67,7 +67,7 @@ if (fs.existsSync(filePath)) {
 }
 
   // Related articles logic
-  const allPosts = await getAllPosts();
+  const allPosts = await getCombinedPosts();
   const related = allPosts.filter(
     (p) =>
       p.slug !== slug &&

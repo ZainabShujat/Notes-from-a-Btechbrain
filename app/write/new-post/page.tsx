@@ -356,7 +356,7 @@ alert(
         <div className="bg-zinc-900 border border-zinc-700 rounded-2xl p-6 min-h-[500px]">
 
           {/* Toolbar */}
-          <div className="flex flex-wrap gap-3 mb-5 items-center">
+          <div className="sticky top-16 z-50 flex flex-wrap gap-3 mb-5 items-center bg-zinc-900/95 backdrop-blur-md py-3 border-b border-zinc-700">
 
             <button
               onClick={() =>

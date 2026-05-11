@@ -1,6 +1,6 @@
 // This file generates a proper XML sitemap for search engines like Google.
 import { NextResponse } from 'next/server';
-import { getAllPosts, PostMeta } from '../../lib/posts';
+import { getCombinedPosts, PostMeta } from '../../lib/posts';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
@@ -10,7 +10,7 @@ export async function GET() {
 
   let posts: PostMeta[] = [];
   try {
-    posts = await getAllPosts();
+    posts = await getCombinedPosts();
   } catch (error) {
     posts = [];
   }

@@ -1,4 +1,4 @@
-import { getAllPosts, PostMeta } from '../../../../lib/posts';
+import { getCombinedPosts, PostMeta } from '../../../../lib/posts';
 import PostCard from '../../../components/PostCard';
 import { notFound } from 'next/navigation';
 
@@ -17,7 +17,7 @@ export default async function IWYSubcategoryPage({ params }: { params: Promise<{
   const subcategoryName = subcategoryMap[subcategory as keyof typeof subcategoryMap];
   if (!subcategoryName) return notFound();
 
-  const posts = await getAllPosts();
+  const posts = await getCombinedPosts();
   const filtered = posts.filter(
     (p: PostMeta) =>
       (p.category || '').toLowerCase() === 'i-wonder-why' &&
@@ -47,6 +47,7 @@ export default async function IWYSubcategoryPage({ params }: { params: Promise<{
             slug={p.slug}
             excerpt={p.excerpt}
             date={p.date}
+            created_at={p.created_at}
             category={p.category}
             banner={p.banner}
           />

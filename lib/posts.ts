@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import { supabase } from "./supabase";
 
 const postsDir = path.join(process.cwd(), "content", "posts");
 
@@ -33,6 +34,45 @@ export async function getAllPosts(): Promise<PostMeta[]> {
     console.error("[getAllPosts] failed:", e);
     return [];
   }
+}
+export async function getCombinedPosts(): Promise<PostMeta[]> {
+  console.log(process.env.NEXT_PUBLIC_SUPABASE_URL);
+console.log(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+  const markdownPosts = await getAllPosts();
+
+  const { data: supabasePosts, error } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("published", true);
+
+  if (error) {
+    console.error("[getCombinedPosts] supabase failed:", error);
+    return markdownPosts;
+  }
+
+  const normalizedSupabasePosts: PostMeta[] = (supabasePosts || []).map(
+    (post: any) => ({
+      title: post.title,
+      slug: post.slug,
+      date: post.date || "",
+      created_at: post.created_at || "",
+      category: post.category || "uncategorized",
+      excerpt: post.excerpt || "",
+      banner: post.banner || "",
+      content: post.content || "",
+      subcategory: post.subcategory || "",
+      theme: post.theme || "",
+    })
+  );
+
+  const combined = [...markdownPosts, ...normalizedSupabasePosts];
+
+  return combined.sort((a, b) => {
+    const dateA = new Date(a.date || a.created_at).getTime();
+    const dateB = new Date(b.date || b.created_at).getTime();
+
+    return dateB - dateA;
+  });
 }
 // lib/posts.ts
 // Defensive getLatestPerCategory - handles missing category or categories array

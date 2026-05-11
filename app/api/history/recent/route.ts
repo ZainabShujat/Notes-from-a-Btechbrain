@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '../../../../lib/supabase';
 import { cookies } from 'next/headers';
-import { getAllPosts } from '../../../../lib/posts';
+import { getCombinedPosts } from '../../../../lib/posts';
 
 export async function GET() {
   const cookieStore = await cookies();
@@ -19,7 +19,7 @@ export async function GET() {
   }
 
   // Enrich with post title and banner
-  const posts = await getAllPosts();
+  const posts = await getCombinedPosts();
   const history = (data || []).map((entry) => {
     // Try to find the post by slug or id
     const post = posts.find((p: any) => p.slug === entry.post_slug || p.slug === entry.post_id || p.slug === entry.slug);
