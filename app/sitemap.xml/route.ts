@@ -23,6 +23,9 @@ export async function GET() {
     'series-hub',
     'admin',
     'community',
+    'write/new-post',
+    'themes',
+    'notifications',
   ];
 
   const categories = [
@@ -30,6 +33,7 @@ export async function GET() {
     'world-watch',
     'tech-pulse',
     'july-crisis',
+    'science-vs-sci-fi',
     'tech-demystified',
     'financial-month',
     'milestone-stories-and-miscellaneous',
