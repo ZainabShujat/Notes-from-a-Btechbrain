@@ -16,7 +16,11 @@ export default function Nav({ communityEnabled }: NavProps) {
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-3 flex items-center justify-between" style={{color: "var(--foreground, #18181b)"}}>
         {/* Left: Logo */}
         <Link href="/" className="flex items-center gap-3" style={{color: "var(--foreground, #18181b)"}}>
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-slate-800 to-amber-600 text-slate-900 font-bold dark:bg-linear-to-br dark:from-slate-200 dark:to-amber-400 dark:text-slate-900">N</span>
+          <img
+  src="/thumbnail.png"
+  alt="Notes From a B Tech Brain"
+  className="h-14 w-14 rounded-2xl object-cover shadow-lg border border-purple-500/20"
+/>
           <div className="leading-tight">
             <div className="font-semibold" style={{color: "var(--foreground, #18181b)"}}>Notes From a</div>
             <div className="text-xs font-semibold -mt-0.5" style={{color: "var(--heading, #fff)"}}>B Tech Brain</div>
