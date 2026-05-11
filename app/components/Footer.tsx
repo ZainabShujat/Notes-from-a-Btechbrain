@@ -162,7 +162,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Strip */}
-        <div className="border-t border-slate-800 mt-14 pt-6 text-slate-500 text-xs flex flex-col md:flex-row gap-3 md:justify-between">
+        <div className="border-t border-slate-800 mt-14 pt-6 text-slate-500 text-xs flex flex-col lg:flex-row gap-3 md:justify-between">
 
           <span>
             © {new Date().getFullYear()} Notes From a B Tech Brain.
