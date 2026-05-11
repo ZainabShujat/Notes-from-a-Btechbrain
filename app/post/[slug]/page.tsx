@@ -75,11 +75,11 @@ if (fs.existsSync(filePath)) {
   ).slice(0, 3); // Show up to 3 related
 
   return (
-    <main className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-10 bg-white dark:bg-slate-900">
+    <main className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-10 bg-zinc-900 text-white rounded-2xl shadow-xl">
       {/* Track this post as read for the current session */}
       <PostReadTrackerWrapper slug={slug} postId={data?.id || slug} />
-      <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100">{data.title}</h1>
-      <div className="flex items-center gap-4 mt-2 text-slate-900 dark:text-slate-300">
+      <h1 className="text-3xl md:text-4xl font-bold text-yellow-500 dark:text-slate-100">{data.title}</h1>
+      <div className="flex items-center gap-4 mt-2 text-yellow-600 dark:text-slate-300">
         <span>{new Date(
   data.date || data.created_at
 ).toLocaleDateString()}</span>
