@@ -64,14 +64,14 @@ export default function Nav({ communityEnabled }: NavProps) {
             </Link>
 
             <Link
-              href="/browse"
+              href="/map"
               className="hover:underline font-semibold px-4 py-1 rounded"
               style={{
                 color: "var(--foreground)",
                 background: "var(--muted)",
               }}
             >
-              Explore Topics
+              🗺 Map
             </Link>
 
             <Link
@@ -99,14 +99,6 @@ export default function Nav({ communityEnabled }: NavProps) {
               }}
             >
               Write
-            </Link>
-
-            <Link
-              href="/themes"
-              className="hover:underline"
-              style={{ color: "var(--foreground)" }}
-            >
-              Themes
             </Link>
           </div>
 
@@ -212,13 +204,6 @@ export default function Nav({ communityEnabled }: NavProps) {
             </Link>
 
             <Link
-              href="/browse"
-              className="block py-3 px-4 rounded-xl font-semibold text-base text-white bg-purple-500/10 border border-purple-400/20 hover:bg-purple-500/20 transition"
-            >
-              🧭 Explore Topics
-            </Link>
-
-            <Link
               href="/all-posts"
               className="block py-3 px-4 rounded-xl font-semibold text-base text-white hover:bg-white/5 transition"
             >
@@ -232,12 +217,6 @@ export default function Nav({ communityEnabled }: NavProps) {
               ✨ Start Here
             </Link>
 
-            <Link
-              href="/themes"
-              className="block py-3 px-4 rounded-xl font-semibold text-base text-white hover:bg-white/5 transition"
-            >
-              🎨 Themes
-            </Link>
 
             {/* Platform */}
             <p className="px-3 pt-6 text-xs uppercase tracking-[0.25em] text-slate-500 font-bold mb-2">
