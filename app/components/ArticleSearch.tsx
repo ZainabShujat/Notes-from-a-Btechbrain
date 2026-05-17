@@ -67,9 +67,17 @@ export default function ArticleSearch({ posts }: Props) {
     // Sort
     const sorted = [...filtered];
     if (sortOrder === "newest") {
-      sorted.sort((a, b) => +new Date(b.date) - +new Date(a.date));
+      sorted.sort((a, b) => {
+        const dateB = +new Date(b.date || b.created_at);
+        const dateA = +new Date(a.date || a.created_at);
+        return dateB - dateA;
+      });
     } else if (sortOrder === "oldest") {
-      sorted.sort((a, b) => +new Date(a.date) - +new Date(b.date));
+      sorted.sort((a, b) => {
+        const dateA = +new Date(a.date || a.created_at);
+        const dateB = +new Date(b.date || b.created_at);
+        return dateA - dateB;
+      });
     } else if (sortOrder === "alphabetical") {
       sorted.sort((a, b) => a.title.localeCompare(b.title));
     } else if (sortOrder === "relevance") {
@@ -183,6 +191,7 @@ export default function ArticleSearch({ posts }: Props) {
                 slug={post.slug}
                 excerpt={post.excerpt}
                 date={post.date}
+                created_at={post.created_at}
                 category={post.category}
                 banner={post.banner}
               />
