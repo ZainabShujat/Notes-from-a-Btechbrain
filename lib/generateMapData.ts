@@ -158,9 +158,10 @@ export async function generateMapData() {
         .slice(0, 5)
         .map(([tag]) => tag);
 
-      const tier = count >= 10 ? "large" : count >= 5 ? "medium" : "small";
+      const tier: "large" | "medium" | "small" =
+        count >= 10 ? "large" : count >= 5 ? "medium" : "small";
 
-      const distance = tier === "large" ? 1 : tier === "medium" ? 0.78 : 0.58;
+      const distance: number = tier === "large" ? 1 : tier === "medium" ? 0.78 : 0.58;
 
       return {
         id: tag,
