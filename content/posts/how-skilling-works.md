@@ -1,5 +1,13 @@
 ---
 title: "How Skilling Works — and Which One You Need Right Now"
+tags:
+- learning
+- skills
+- adaptation
+- personal-growth
+- reflection
+- identity
+- systems
 slug: "how-skilling-works"
 date: "2025-05-23"
 category: "friday-insights"

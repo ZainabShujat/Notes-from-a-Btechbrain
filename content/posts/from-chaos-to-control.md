@@ -1,5 +1,14 @@
 ---
 title: "From Chaos to Control: Time Management, My Way"
+tags:
+- student-life
+- systems
+- adaptation
+- learning
+- personal-growth
+- reflection
+- resilience
+- identity
 slug: "from-chaos-to-control"
 date: "2025-05-09"
 category: "friday-insights"

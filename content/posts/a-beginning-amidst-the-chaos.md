@@ -1,4 +1,15 @@
 ---
+tags:
+- student-life
+- reflection
+- adaptation
+- personal-growth
+- systems
+- identity
+- milestones
+- curiosity
+- self-expression
+- storytelling
 title: "A Beginning Amidst the Chaos"
 slug: a-beginning-amidst-the-chaos
 date: "2025-04-20"

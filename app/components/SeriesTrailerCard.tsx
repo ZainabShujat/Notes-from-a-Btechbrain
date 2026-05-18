@@ -5,7 +5,10 @@ type Props = {
   description: string;
   editionCount: string;
   launchTimeline: string;
-  color: string;
+  color: {
+    base: string;
+    glow: string;
+  }
   tagline?: string;
 };
 

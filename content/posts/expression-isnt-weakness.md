@@ -1,5 +1,14 @@
 ---
 title: "Expression Isn’t Weakness: It’s Wisdom"
+tags:
+- vulnerability
+- reflection
+- healing
+- personal-growth
+- resilience
+- identity
+- self-expression
+- adaptation
 slug: "expression-isnt-weakness"
 date: "2025-06-27"
 category: "friday-insights"

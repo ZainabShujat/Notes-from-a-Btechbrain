@@ -1,4 +1,14 @@
 ---
+tags:
+- learning
+- student-life
+- adaptation
+- personal-growth
+- milestones
+- systems
+- reflection
+- identity
+- storytelling
 title: "Before You Learn Tools, Know Which Ones Are Worth Learning"
 slug: "before-you-learn-tools"
 date: "2025-04-25"

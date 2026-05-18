@@ -3,6 +3,13 @@ title: "Tech Check Pt. 2"
 slug: "tech-check-part-2"
 date: "2025-08-10"
 category: "tech-demystified"
+tags:
+- tech-journey
+- learning
+- curiosity
+- reflection
+- adaptation
+- storytelling
 excerpt: "APIs, UX, Automation, Web3 — the 'make life easier but still sound fancy' side of tech."
 banner: "/assets/banners/tech-demystified2.webp"
 ---

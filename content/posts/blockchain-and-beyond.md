@@ -5,6 +5,12 @@ date: "2025-08-17"
 category: "tech-demystified"
 excerpt: "Learning blockchain together, one block at a time — made simple, relatable, and actually fun."
 banner: "/assets/banners/tech-demystified3.webp"
+tags:
+- tech-journey
+- learning
+- adaptation
+- curiosity
+- reflection
 ---
 
 Learning Together, One Block at a Time

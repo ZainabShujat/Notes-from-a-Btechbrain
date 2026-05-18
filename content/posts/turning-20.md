@@ -1,5 +1,14 @@
 ---
 title: "Turning 20"
+tags: 
+- reflection
+- personal-growth
+- adaptation
+- identity
+- resilience
+- milestones
+- systems
+- storytelling
 slug: "turning-20"
 date: "2026-02-07"
 category: "milestone-stories-and-miscellaneous"

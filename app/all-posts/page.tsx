@@ -1,5 +1,4 @@
 import { getCombinedPosts } from "../../lib/posts";
-
 import ArticleSearch from "../components/ArticleSearch";
 
 export const metadata = {
@@ -7,8 +6,15 @@ export const metadata = {
   description: "Search and explore all posts",
 };
 
-export default async function AllPostsPage() {
+export default async function AllPostsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tag?: string }>;
+}) {
   const allPosts = await getCombinedPosts();
+
+  const params = await searchParams;
+  const selectedTag = params?.tag || "";
 
   return (
     <main className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-12 text-slate-900 bg-white">
@@ -22,7 +28,10 @@ export default async function AllPostsPage() {
         </p>
       </div>
 
-      <ArticleSearch posts={allPosts} />
+      <ArticleSearch
+        posts={allPosts}
+        initialTag={selectedTag}
+      />
     </main>
   );
 }

@@ -5,6 +5,15 @@ date: "2025-08-15"
 category: "friday-insights"
 excerpt: "Somewhere between childhood curiosity and adult burnout, I forgot how to look up. This is what it feels like to find my way back to the sky."
 banner: "/assets/banners/seeing-the-night-sky.webp"
+tags:
+- curiosity
+- reflection
+- adaptation
+- burnout
+- astrophysics
+- personal-growth
+- identity
+- storytelling
 ---
 
 Have you ever looked at the sky and realised you weren’t seeing it anymore?

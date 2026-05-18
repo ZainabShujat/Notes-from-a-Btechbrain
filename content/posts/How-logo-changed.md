@@ -1,4 +1,13 @@
 ---
+tags:
+- self-expression
+- reflection
+- adaptation
+- personal-growth
+- milestones
+- identity
+- systems
+- storytelling
 title: "How The first logo came to be"
 slug: "How-logo-changed"
 date: "2026-01-15"

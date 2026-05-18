@@ -7,6 +7,7 @@ import Image from "@tiptap/extension-image";
 import { useState } from "react";
 import { supabase } from "../../../lib/supabase";
 import BackButton from "../../components/BackButton";
+import { ALL_TAGS } from "../../../lib/tags";
 
 import type { User } from "@supabase/supabase-js";
 import { useEffect } from "react";
@@ -26,8 +27,9 @@ export default function NewPostPage() {
   const [category, setCategory] = useState("");
   const [featured, setFeatured] = useState(false);
   const [bannerUrl, setBannerUrl] = useState("");
+  const [tags, setTags] = useState<string[]>([]);
   const [user, setUser] = useState<User | null>(null);
-const [authLoading, setAuthLoading] = useState(true);
+  const [authLoading, setAuthLoading] = useState(true);
 
 const ADMIN_EMAILS = [
   "zainabshujatali@gmail.com",
@@ -81,6 +83,7 @@ useEffect(() => {
     setCategory(draft.category || "");
     setBannerUrl(draft.bannerUrl || "");
     setFeatured(draft.featured || false);
+    setTags(draft.tags || []);
 
     if (editor && draft.content) {
       editor.commands.setContent(draft.content);
@@ -100,6 +103,7 @@ useEffect(() => {
     category,
     bannerUrl,
     featured,
+    tags,
     content: editor.getHTML(),
   };
 
@@ -110,6 +114,7 @@ useEffect(() => {
 }, [
   title,
   slug,
+  tags,
   excerpt,
   category,
   bannerUrl,
@@ -128,6 +133,7 @@ useEffect(() => {
     content: editor?.getHTML(),
     featured,
     published: publish,
+    tags,
   };
   if (
   !user?.email ||
@@ -288,6 +294,35 @@ alert(
             World Watch
           </option>
         </select>
+        {/* Tags */}
+<div className="mb-6">
+  <p className="mb-2 text-zinc-300 font-semibold">
+    Tags
+  </p>
+
+  <div className="flex flex-wrap gap-2">
+    {ALL_TAGS.map((tag) => (
+      <button
+        key={tag}
+        type="button"
+        onClick={() => {
+          if (tags.includes(tag)) {
+            setTags(tags.filter((t) => t !== tag));
+          } else {
+            setTags([...tags, tag]);
+          }
+        }}
+        className={`px-3 py-2 rounded-full text-sm transition ${
+          tags.includes(tag)
+            ? "bg-purple-700 text-white"
+            : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+        }`}
+      >
+        {tag}
+      </button>
+    ))}
+  </div>
+</div>
 
         {/* Featured Toggle */}
         <button

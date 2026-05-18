@@ -30,6 +30,7 @@ export default async function CategoryPage({ params }: Props) {
             key={p.slug}
             title={p.title}
             slug={p.slug}
+            tags={p.tags}
             excerpt={p.excerpt}
             date={p.date}
             created_at={p.created_at}

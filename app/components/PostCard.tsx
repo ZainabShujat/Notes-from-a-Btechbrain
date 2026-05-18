@@ -7,6 +7,12 @@ import ArticleStats from "./ArticleStats";
 type Props = {
   title: string;
   slug: string;
+  tags?: string[];
+  cluster?: string;
+pathway?: string;
+importance?: number;
+related?: string[];
+mapDescription?: string;
   excerpt?: string;
   date?: string;
   category?: string;

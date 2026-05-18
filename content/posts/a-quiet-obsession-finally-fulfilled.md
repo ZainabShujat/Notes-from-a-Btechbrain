@@ -1,4 +1,14 @@
 ---
+tags:
+- reflection
+- healing
+- milestones
+- adaptation
+- personal-growth
+- identity
+- resilience
+- relationship
+- storytelling
 title: "A Quiet Obsession, Finally Fulfilled"
 slug: "a-quiet-obsession-finally-fulfilled"
 date: "2026-02-24"

@@ -5,6 +5,14 @@ date: "2025-12-13"
 category: "behind-the-scenes"
 excerpt: "The behind-the-scenes story of how Notes From a B. Tech Brain slowly turned from scattered drafts into a living website — spanning false starts, backend fear, and the first real sense of flow."
 banner: "/assets/banners/behind-build-1.webp"
+tags:
+- tech-journey
+- learning
+- adaptation
+- reflection
+- systems
+- milestones
+- storytelling
 ---
 
 **Behind the Scenes — Part 1 (Days 1–3)**  

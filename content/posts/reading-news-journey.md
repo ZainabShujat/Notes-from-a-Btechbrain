@@ -5,6 +5,15 @@ date: "2025-05-16"
 category: "friday-insights"
 excerpt: "I used to get lost reading the news — confused, overwhelmed, and convinced everyone understood more than me. Here’s how I slowly made sense of it, one small step at a time."
 banner: "/assets/banners/friday-insights.webp"
+tags:
+- learning
+- curiosity
+- reflection
+- adaptation
+- personal-growth
+- resilience
+- identity
+- storytelling
 ---
 
 Let me tell you something real. I used to get completely lost reading the news. I’d open an article and immediately be hit with words and references I didn’t understand.

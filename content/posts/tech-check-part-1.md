@@ -5,6 +5,13 @@ date: "2025-08-03"
 category: "tech-demystified"
 excerpt: "AI, Cloud, Cybersecurity, Data — the buzzwords you nod at but never fully understood (until now)."
 banner: "/assets/banners/tech-demystified1.webp"
+tags:
+- tech-journey
+- learning
+- curiosity
+- reflection
+- adaptation
+- storytelling
 ---
 
 AI, Cloud, Cybersecurity, Data — the buzzwords you nod at but never fully understood (until now).

@@ -14,6 +14,7 @@ import { getCombinedPosts } from "../../../lib/posts";
 import { supabase } from "../../../lib/supabase";
 // Client wrapper for PostReadTracker (must be imported after all Node.js/server imports)
 import PostReadTrackerWrapper from "../../components/PostReadTrackerWrapper";
+import { getRelatedPosts } from "../../../lib/map";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -68,12 +69,10 @@ if (fs.existsSync(filePath)) {
 
   // Related articles logic
   const allPosts = await getCombinedPosts();
-  const related = allPosts.filter(
-    (p) =>
-      p.slug !== slug &&
-      (p.category === data.category || (data.theme && p.theme === data.theme))
-  ).slice(0, 3); // Show up to 3 related
+  const related = getRelatedPosts(data, allPosts)
+  .slice(0, 3);
 
+console.log(related);
   return (
     <main className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-10 bg-zinc-900 text-white rounded-2xl shadow-xl">
       {/* Track this post as read for the current session */}
@@ -124,14 +123,15 @@ if (fs.existsSync(filePath)) {
           <br /> {/* Extra spacing before the grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
             {related.map((p) => (
-              <div key={p.slug} className="min-w-0 w-full">
+              <div key={p.post.slug} className="min-w-0 w-full">
                 <PostCard
-                  title={p.title}
-                  slug={p.slug}
-                  excerpt={p.excerpt}
-                  date={p.date || p.created_at }
-                  category={p.category}
-                  banner={p.banner}
+                  title={p.post.title}
+                  slug={p.post.slug}
+                  tags={p.post.tags}
+                  excerpt={p.post.excerpt}
+                  date={p.post.date || p.post.created_at}
+                  category={p.post.category}
+                  banner={p.post.banner}
                 />
               </div>
             ))}
@@ -145,6 +145,7 @@ if (fs.existsSync(filePath)) {
     </main>
   );
 }
+
 
 // .blog-content, .blog-content p, .blog-content li, .blog-content small {
 //   color: #000 !important;

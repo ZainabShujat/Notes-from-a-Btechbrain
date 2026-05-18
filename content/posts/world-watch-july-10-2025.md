@@ -5,6 +5,13 @@ date: "2025-07-10"
 category: "world-watch"
 excerpt: "From monsoon chaos and labour unrest to rising regional tensions and trade fights — what India and the world are facing this week."
 banner: "/assets/banners/worldwatch.webp"
+tags:
+- geopolitics
+- climate-change
+- labour-rights
+- diplomacy
+- global-markets
+
 ---
 
 “**From Monsoons to Monopolies: What’s Shaping India & the World**”

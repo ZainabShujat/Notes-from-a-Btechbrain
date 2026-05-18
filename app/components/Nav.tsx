@@ -13,7 +13,7 @@ export default function Nav({ communityEnabled }: NavProps) {
   return (
     <>
       <header
-        className="sticky top-0 z-30 w-full border-b backdrop-blur"
+        className="sticky top-0 z-50 w-full border-b backdrop-blur"
         style={{
           background: "var(--background, #fff)",
           color: "var(--foreground, #18181b)",
@@ -170,7 +170,7 @@ export default function Nav({ communityEnabled }: NavProps) {
 
       {/* Mobile Overlay */}
       <div
-        className={`lg:hidden fixed inset-0 z-40 overflow-hidden transition-all duration-300 ${
+        className={`lg:hidden fixed inset-0 z-60 overflow-hidden transition-all duration-300 ${
           open ? "pointer-events-auto" : "pointer-events-none"
         }`}
       >

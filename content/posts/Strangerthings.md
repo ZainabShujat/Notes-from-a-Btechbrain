@@ -6,6 +6,13 @@ category: "curiosity-series"
 series: "Curiosity Edition"
 excerpt: "Stranger Things introduced a lot of us to exotic matter and the physics behind Hawkins. But how much of it is real?"
 banner: "/assets/banners/strangerthings.webp"
+tags:
+- curiosity
+- learning
+- astrophysics
+- tech-journey
+- reflection
+- storytelling
 ---
 
 When Stranger Things casually dropped the term exotic matter, it didn’t pause to explain it.

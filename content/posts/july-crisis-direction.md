@@ -1,5 +1,15 @@
 ---
 title: "🎯 You Can Do Anything is a Scam Without Direction"
+tags:
+- direction
+- personal-growth
+- self-discovery
+- reflection
+- adaptation
+- learning
+- identity
+- burnout
+- systems
 slug: "july-crisis-direction"
 date: "2025-07-26"
 category: "july-crisis"

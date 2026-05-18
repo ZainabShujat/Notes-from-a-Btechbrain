@@ -1,5 +1,14 @@
 ---
 title: "🍊 Suika Lite: The Aftermath"
+tags: 
+- tech-journey
+- learning
+- adaptation
+- curiosity
+- reflection
+- identity
+- milestones
+- systems
 slug: "suika-lite-the-aftermath"
 date: "2025-10-24"
 category: "milestone-stories-and-miscellaneous"

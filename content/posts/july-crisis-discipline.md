@@ -1,5 +1,14 @@
 ---
 title: "🧠 Why Discipline > Motivation (Every. Single. Time.)"
+tags:
+- discipline
+- personal-growth
+- resilience
+- adaptation
+- learning
+- identity
+- burnout
+- systems
 slug: "july-crisis-discipline"
 date: "2025-07-12"
 category: "july-crisis"

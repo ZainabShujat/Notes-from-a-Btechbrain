@@ -1,5 +1,13 @@
 ---
 title: "Internship Illusions"
+tags:
+- student-life
+- personal-growth
+- self-discovery
+- reflection
+- resilience
+- learning
+- career
 slug: "internship-illusions"
 date: "2025-10-12"
 category: "financial-month"

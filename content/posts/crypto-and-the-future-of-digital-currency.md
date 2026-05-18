@@ -1,5 +1,13 @@
 ---
 title: "💰Crypto and the Future of Digital Currency"
+tags:
+- tech-journey
+- learning
+- adaptation
+- curiosity
+- reflection
+- identity
+
 slug: "crypto-and-the-future-of-digital-currency"
 date: "2025-08-24"
 category: "tech-demystified"

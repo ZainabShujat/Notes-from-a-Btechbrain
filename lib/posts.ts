@@ -9,13 +9,19 @@ export type PostMeta = {
   title: string;
   slug: string;
   date: string;
-created_at: string;
+  created_at: string;
   category: string;
   subcategory?: string;
   excerpt?: string;
   banner?: string;
   content?: string; // ⭐ For full-content search
   theme?: string;
+  tags?: string[];
+  cluster?: string;
+pathway?: string;
+importance?: number;
+related?: string[];
+mapDescription?: string;
 };
 
 
@@ -62,6 +68,9 @@ console.log(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
       content: post.content || "",
       subcategory: post.subcategory || "",
       theme: post.theme || "",
+      tags: Array.isArray(post.tags)
+  ? post.tags
+  : JSON.parse(post.tags || "[]"),
     })
   );
 

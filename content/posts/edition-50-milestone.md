@@ -1,5 +1,16 @@
 ---
 title: "FROM LOADING… TO RUNNING"
+tags:
+- milestones
+- personal-growth
+- change
+- reflection
+- creativity
+- self-expression
+- visibility
+- adaptation
+- learning
+- career
 slug: "edition-50-milestone"
 date: "2025-12-05"
 category: "milestone-stories-and-miscellaneous"

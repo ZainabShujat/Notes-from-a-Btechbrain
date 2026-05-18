@@ -5,6 +5,13 @@ date: "2025-06-19"
 category: "world-watch"
 excerpt: "A short, urgent read on rising regional tensions, drone warfare, and what these escalations mean for our economy, tech careers, and daily life."
 banner: "/assets/banners/ww3.webp"
+tags:
+- reflection
+- tech-journey
+- career
+- milestones
+- change
+- adaptation
 ---
 
 Hey, it’s Thursday, and this isn’t your usual newsletter schedule — but some conversations can’t wait. Especially when the world is inching towards flashpoints that make us wonder: are we teetering on the brink of global conflict?

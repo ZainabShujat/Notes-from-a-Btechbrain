@@ -5,6 +5,16 @@ date: "2025-06-06"
 category: "friday-insights"
 excerpt: "Some semesters feel chaotic, others feel confusing — and sometimes the plans that fall apart are the ones that push us into the growth we never expected."
 banner: "/assets/banners/friday-insights.webp"
+tags:
+- adaptation
+- personal-growth
+- reflection
+- healing
+- milestones
+- identity
+- burnout
+- systems
+- storytelling
 ---
 
 Some semesters feel like chaos.  

@@ -1,5 +1,13 @@
 ---
 title: "Looking Smart vs Being Curious"
+tags:
+- curiosity
+- learning
+- reflection
+- identity
+- storytelling
+- personal-growth
+- self-discovery
 slug: "looking-smart-vs-being-curious"
 date: "2025-11-16"
 category: "girlhood-and-stem-experiences"

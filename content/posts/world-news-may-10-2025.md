@@ -5,6 +5,11 @@ date: "2025-05-10"
 category: "world-watch"
 excerpt: "A weekly roundup: drone warfare escalations, diplomatic moves for Ukraine, U.S.–China trade talks, climate alarms, and more."
 banner: "/assets/banners/worldwatch.webp"
+tags:
+- geopolitics
+- climate-change
+- global-markets
+- technology
 ---
 
 As global events continue to unfold rapidly, staying informed has become more crucial than ever. This edition brings you essential developments from around the world, highlighting events that shape our collective future.

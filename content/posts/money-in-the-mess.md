@@ -1,5 +1,14 @@
 ---
 title: "💸Money in the Mess"
+tags:
+- student-life
+- personal-growth
+- reflection
+- adaptation
+- learning
+- systems
+- storytelling
+- identity
 slug: "money-in-the-mess"
 date: "2025-10-05"
 category: "financial-month"

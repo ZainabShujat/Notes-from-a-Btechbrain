@@ -1,5 +1,14 @@
 ---
 title: "🧴 What Gen Z Got Wrong About Self-Love"
+tags:
+- personal-growth
+- self-discovery
+- reflection
+- mental-health
+- healing
+- resilience
+- learning
+- adaptation
 slug: "july-crisis-self-love"
 date: "2025-07-05"
 category: "july-crisis"

@@ -1,5 +1,15 @@
 ---
 title: "Girlhood in Defense Mode"
+tags:
+    - identity
+    - resilience
+    - reflection
+    - adaptation
+    - personal-growth
+    - systems
+    - vulnerability
+    - empathy
+    - relationship
 slug: "girlhood-in-defense-mode"
 date: "2025-11-02"
 category: "girlhood-and-stem-experiences"

@@ -1,5 +1,12 @@
 ---
 title: "Tech Pulse #5 — May 25, 2025"
+tags:
+- tech-journey
+- learning
+- milestones
+- change
+- adaptation
+- career
 slug: "tech-pulse-5"
 date: "2025-05-25"
 category: "tech-pulse"

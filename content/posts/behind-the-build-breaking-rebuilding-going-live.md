@@ -5,6 +5,14 @@ date: "2025-12-21"
 category: "behind-the-scenes"
 excerpt: "The sprint, the crash, the pivot, and the moment the site finally became a living archive."
 banner: "/assets/banners/behind-build-3.webp"
+tags:
+- tech-journey
+- learning
+- adaptation
+- reflection
+- systems
+- milestones
+- storytelling
 ---
 
 **Behind the Scenes — Part 3 (Days 7–9)**  

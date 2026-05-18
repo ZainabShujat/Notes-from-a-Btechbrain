@@ -50,6 +50,7 @@ export default async function IWYSubcategoryPage({ params }: { params: Promise<{
             created_at={p.created_at}
             category={p.category}
             banner={p.banner}
+            tags={p.tags}
           />
         ))}
       </div>

@@ -1,5 +1,16 @@
 ---
 title: "What I’m Afraid You’ll See If I Stop"
+tags:
+- reflection
+- vulnerability
+- identity
+- personal-growth
+- adaptation
+- resilience
+- systems
+- relationship
+- storytelling
+- milestones
 slug: post-milestone
 date: "2025-12-10"
 category: "milestone-stories-and-miscellaneous"

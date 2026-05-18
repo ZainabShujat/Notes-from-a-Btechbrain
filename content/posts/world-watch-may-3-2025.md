@@ -5,6 +5,11 @@ date: "2025-05-03"
 category: "world-watch"
 excerpt: "Key global updates this week — from India–Pakistan tensions to heatwaves, IMF forecasts, and shifts in diplomacy."
 banner: "/assets/banners/worldwatch.webp"
+tags:
+- geopolitics
+- diplomacy
+- climate-change
+- global-markets
 ---
 
 Key global updates that Indians should absolutely stay tuned to.

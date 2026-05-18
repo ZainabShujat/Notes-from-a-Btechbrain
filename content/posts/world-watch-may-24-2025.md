@@ -5,6 +5,16 @@ date: "2025-05-24"
 category: "world-watch"
 excerpt: "From Modi’s Gulf outreach and India’s stock market milestone to TikTok’s U.S. troubles, Europe’s heat crisis, and major football updates — here’s what shaped the week."
 banner: "/assets/banners/worldwatch.webp"
+tags:
+- geopolitics
+- energy-security
+- economic-growth
+- digital-policy
+- climate-change
+- sports-culture
+- global-markets
+- diplomacy
+- technology-regulation
 ---
 
 In this week’s edition of World Watch, we dive into global events that have ripple effects on India — from economic shifts and foreign policy to sports moments making headlines.

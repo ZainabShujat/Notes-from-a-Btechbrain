@@ -9,6 +9,12 @@ interface ReaderHistory {
   post_title: string;
   title: string;
   slug: string;
+  tags?: string[];
+  cluster?: string;
+pathway?: string;
+importance?: number;
+related?: string[];
+mapDescription?: string;
   progress: number;
   last_read_at: string;
   banner?: string;

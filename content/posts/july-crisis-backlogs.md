@@ -1,5 +1,14 @@
 ---
 title: "Backlogs, Burnout & Building Anyway ❤‍🩹"
+tags:
+- student-life
+- personal-growth
+- resilience
+- burnout
+- reflection
+- adaptation
+- identity
+- systems
 slug: "july-crisis-backlogs"
 date: "2025-07-19"
 category: "july-crisis"

@@ -6,10 +6,13 @@ import type { PostMeta } from "../../lib/posts";
 
 type Props = {
   posts: PostMeta[];
+  initialTag?: string;
 };
 
-export default function ArticleSearch({ posts }: Props) {
-  const [searchQuery, setSearchQuery] = useState("");
+export default function ArticleSearch({ posts,
+  initialTag = "",
+ }: Props) {
+  const [searchQuery, setSearchQuery] = useState(initialTag);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest" | "alphabetical" | "relevance">("newest");
   const [currentPage, setCurrentPage] = useState(1);
@@ -54,7 +57,8 @@ export default function ArticleSearch({ posts }: Props) {
           post.title.toLowerCase().includes(query) ||
           post.excerpt?.toLowerCase().includes(query) ||
           post.category.toLowerCase().includes(query) ||
-          post.content?.toLowerCase().includes(query)
+          post.content?.toLowerCase().includes(query) ||
+          (post.tags || []).some((tag) => tag.toLowerCase().includes(query))  
         );
       });
     }
@@ -194,6 +198,7 @@ export default function ArticleSearch({ posts }: Props) {
                 created_at={post.created_at}
                 category={post.category}
                 banner={post.banner}
+                tags={post.tags}
               />
             ))}
           </div>

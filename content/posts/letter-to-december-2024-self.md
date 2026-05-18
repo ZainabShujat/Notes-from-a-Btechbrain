@@ -1,5 +1,14 @@
 ---
 title: "To the Girl I Was Last December"
+tags:
+- personal-growth
+- healing
+- reflection
+- storytelling
+- resilience
+- adaptation
+- milestones
+- identity
 slug: "letter-to-december-2024-self"
 date: "2025-12-30"
 category: "milestone-stories-and-miscellaneous"

@@ -5,8 +5,15 @@ date: "2025-06-07"
 category: "world-watch"
 excerpt: "Trade talks, geopolitical tensions, humanitarian updates, India's global role, climate observances, and historic sports moments — here’s what shaped the week."
 banner: "/assets/banners/worldwatch.webp"
----
-
+tags:
+- geopolitics
+- diplomacy
+- humanitarian-crisis
+- economic-policy
+- climate-change
+- sports-culture
+- global-markets
+- india
 ---
 
 # 📰 Major World Affairs
