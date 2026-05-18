@@ -7,6 +7,7 @@ import Image from "@tiptap/extension-image";
 import { useState } from "react";
 import { supabase } from "../../../lib/supabase";
 import BackButton from "../../components/BackButton";
+import { ALL_TAGS } from "../../lib/tags";
 
 import type { User } from "@supabase/supabase-js";
 import { useEffect } from "react";
