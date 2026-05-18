@@ -1,4 +1,3 @@
-
 import BrainMap from "./BrainMap";
 import { generateMapData } from "../../lib/generateMapData";
 
@@ -6,9 +5,8 @@ export default async function MapPage() {
   const clusters = await generateMapData();
 
   return (
-    <main className="h-[calc(100svh-92px)] overflow-hidden bg-[#050816] text-white md:h-[calc(100svh-104px)]">
+    <main className="min-h-screen bg-[#050816] text-white overflow-hidden">
       <BrainMap clusters={clusters} />
     </main>
   );
 }
-
