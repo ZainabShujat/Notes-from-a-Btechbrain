@@ -470,152 +470,127 @@ fy: y + Math.cos(Date.now() * 0.0003 + index) * 6,
         }}
 
         nodeCanvasObject={(
-          node: any,
-          ctx,
-          globalScale
-        ) => {
+  node: any,
+  ctx,
+  globalScale
+) => {
 
-          const label =
-            node.label;
-            const isHovered =
-  hoveredNode?.id === node.id;
+  const label =
+    node.label;
 
-if (isHovered) {
+  const isHovered =
+    hoveredArticle === node.id;
 
-  const paddingX = 10;
-  const paddingY = 6;
+  // FONT SIZE
 
-  ctx.font = `${
-    Math.max(12 / globalScale, 12)
-  }px Inter`;
+  const fontSize =
+    node.type === "core"
+      ? (isMobile ? 10 : 16)
 
-  const textWidth =
-    ctx.measureText(label).width;
+      : node.type === "tag"
+      ? (isMobile ? 6 : 10)
 
-  const boxWidth =
-    textWidth + paddingX * 2;
+      : (
+          isHovered
+            ? (isMobile ? 10 : 14)
+            : (isMobile ? 3 : 5)
+        );
 
-  const boxHeight =
-    28 / globalScale;
+  // NODE SIZE
 
-  ctx.fillStyle =
-    "rgba(25,25,35,0.92)";
+  const radius =
+    node.type === "article"
+      ? (
+          isHovered
+            ? node.val * 2
+            : node.val
+        )
+      : node.val;
 
-  ctx.strokeStyle =
-    "rgba(255,255,255,0.12)";
-
-  ctx.lineWidth =
-    1 / globalScale;
+  // NODE CIRCLE
 
   ctx.beginPath();
 
-  ctx.roundRect(
-    node.x! - boxWidth / 2,
-    node.y! - 42 / globalScale,
-    boxWidth,
-    boxHeight,
-    8 / globalScale
+  ctx.arc(
+    node.x,
+    node.y,
+    radius,
+    0,
+    2 * Math.PI,
+    false
   );
 
+  // GLOW
+
+  ctx.shadowBlur =
+    node.type === "core"
+      ? 35
+
+      : node.type === "tag"
+      ? 24
+
+      : (
+          isHovered
+            ? 32
+            : 10
+        );
+
+  ctx.shadowColor =
+    node.glow ||
+    node.color;
+
+  ctx.fillStyle =
+    node.color;
+
   ctx.fill();
-  ctx.stroke();
 
-  ctx.fillStyle = "#ffffff";
+  ctx.shadowBlur = 0;
 
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
+  // LABELS
+
+  ctx.font =
+    `${
+      node.type === "core" ||
+      node.type === "tag"
+        ? "bold "
+        : ""
+    }${fontSize}px Inter`;
+
+  ctx.textAlign =
+    "center";
+
+  ctx.textBaseline =
+    "middle";
+
+  ctx.fillStyle =
+    "white";
+
+  // FADE NON-HOVERED ARTICLES
+
+  if (
+    node.type === "article" &&
+    hoveredArticle &&
+    !isHovered
+  ) {
+    ctx.globalAlpha = 0.25;
+  } else {
+    ctx.globalAlpha = 1;
+  }
 
   ctx.fillText(
     label,
-    node.x!,
-    node.y! - 28 / globalScale
+    node.x,
+    node.y +
+      radius +
+      (
+        node.type === "article"
+          ? (isHovered ? 16 : 10)
+          : 16
+      )
   );
-}
 
-          const fontSize =
-            node.type === "core"
-              ? isMobile ? 9 : 14
-              : node.type === "tag"
-              ? isMobile ? 5 : 8
-              : isMobile ? 3 : 5;
-
-          ctx.beginPath();
-
-          ctx.arc(
-            node.x,
-            node.y,
-            node.val,
-            0,
-            2 * Math.PI,
-            false
-          );
-
-          // GLOW
-
-          ctx.shadowBlur =
-            node.type === "core"
-              ? 30
-              : node.type === "tag"
-              ? 22
-              : 10;
-
-          ctx.shadowColor =
-            node.glow ||
-            node.color;
-
-          ctx.fillStyle =
-            node.color;
-
-          ctx.fill();
-
-          ctx.shadowBlur = 0;
-
-          // LABELS
-
-          ctx.font =
-            `${fontSize}px Inter`;
-
-          ctx.textAlign =
-            "center";
-
-          ctx.textBaseline =
-            "middle";
-
-          ctx.fillStyle =
-            "white";
-
-          if (
-            node.type === "core"
-          ) {
-            ctx.font =
-              `bold ${
-                isMobile ? 10 : 16
-              }px Inter`;
-          }
-
-          if (
-            node.type === "tag"
-          ) {
-            ctx.font =
-              `bold ${
-                isMobile ? 6 : 10
-              }px Inter`;
-          }
-
-          ctx.fillText(
-            label,
-            node.x,
-            node.y +
-              node.val +
-              (node.type === "article"
-                ? 10
-                : 16)
-          );
-        }}
-
-        linkCanvasObjectMode={() =>
-          "after"
-        }
+  ctx.globalAlpha = 1;
+}}
 
         linkCanvasObject={(
           link: any,
