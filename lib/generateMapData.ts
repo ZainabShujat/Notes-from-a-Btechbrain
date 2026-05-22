@@ -24,6 +24,7 @@ export type GraphNode = {
   articles: {
     title: string;
     slug: string;
+    tags?: string[];
   }[];
 };
 
@@ -77,6 +78,7 @@ export async function generateMapData() {
     {
       title: string;
       slug: string;
+      tags?: string[];
     }[]
   >();
 
@@ -109,6 +111,7 @@ export async function generateMapData() {
         ?.push({
           title: post.title,
           slug: post.slug,
+          tags: post.tags || [],
         });
 
       if (

@@ -1,275 +1,677 @@
 "use client";
 
-import {
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 
-import {
-  AnimatePresence,
-  motion,
-} from "framer-motion";
 
-import MapNode from "./MapNode";
+const ForceGraph2D = dynamic(
+  () => import("react-force-graph-2d"),
+  { ssr: false }
+);
 
-import type { GraphNode } from "../../lib/generateMapData";
-
-type Props = {
-  clusters: GraphNode[];
+type Article = {
+  title: string;
+  slug: string;
+  tags?: string[];
 };
 
-type PositionedNode = {
-  node: GraphNode;
-  x: number;
-  y: number;
+type Cluster = {
+  id: string;
+  label: string;
+  count: number;
+  color?: {
+    base: string;
+    glow: string;
+  };
+  articles?: Article[];
+};
+
+type Props = {
+  clusters: Cluster[];
 };
 
 export default function BrainMap({
   clusters,
 }: Props) {
-  const [opened, setOpened] =
-    useState<string | null>(null);
 
-  const [systemOpen, setSystemOpen] =
-    useState(false);
+  const fgRef = useRef<any>(null);
 
   const [viewport, setViewport] =
     useState({
-      width: 1280,
+      width: 1400,
       height: 900,
     });
 
+  const [mapExpanded, setMapExpanded] =
+    useState(false);
+
+  const [expandedTag, setExpandedTag] =
+    useState<string | null>(null);
+
+  const [hoveredArticle, setHoveredArticle] =
+    useState<string | null>(null);
+    const [visibleTags, setVisibleTags] =
+  useState<string[]>([]);
+
   useEffect(() => {
-    const update = () => {
+
+    const resize = () => {
       setViewport({
         width: window.innerWidth,
         height: window.innerHeight,
       });
     };
 
-    update();
-    window.addEventListener("resize", update);
+    resize();
+
+    window.addEventListener(
+      "resize",
+      resize
+    );
 
     return () =>
-      window.removeEventListener("resize", update);
+      window.removeEventListener(
+        "resize",
+        resize
+      );
+
   }, []);
 
-  const isMobile = viewport.width < 768;
-  const navOffset = isMobile ? 92 : 104;
+  const isMobile =
+    viewport.width < 768;
 
-  const stageHeight = Math.max(
-    viewport.height - navOffset,
-    isMobile ? 560 : 660
-  );
+  const stageHeight = isMobile
+    ? viewport.height * 0.82
+    : viewport.height * 0.9;
 
-  const stageWidth = viewport.width;
+  const graph = useMemo(() => {
 
-  const baseScale =
-    viewport.width < 480
-      ? 0.46
-      : viewport.width < 768
-      ? 0.62
-      : viewport.width < 1024
-      ? 0.82
-      : 1;
+    const nodes: any[] = [];
+    const links: any[] = [];
 
-  const sunSize =
-    viewport.width < 480
-      ? 130
-      : viewport.width < 768
-      ? 168
-      : viewport.width < 1024
-      ? 210
-      : 250;
+    // CORE
 
-  const centerX = stageWidth / 2;
-  const centerY = stageHeight / 2;
-
-  const maxOrbit = Math.min(
-    stageWidth * (isMobile ? 0.33 : 0.35),
-    stageHeight * (isMobile ? 0.32 : 0.36)
-  );
-
-  const getPlanetSize = (node: GraphNode) => {
-    if (node.tier === "large") {
-      return viewport.width < 768 ? 134 : 176;
-    }
-
-    if (node.tier === "medium") {
-      return viewport.width < 768 ? 112 : 148;
-    }
-
-    return viewport.width < 768 ? 88 : 122;
-  };
-
-  const getOrbitRadius = (node: GraphNode) => {
-    const spacing = node.tier === "large" ? 1 : node.tier === "medium" ? 0.78 : 0.56;
-
-    return maxOrbit * spacing;
-  };
-
-  const positionedNodes = useMemo(() => {
-    const visible = clusters.slice(0, 10);
-
-    return visible.map((node, index) => {
-      const angleOffset = isMobile ? -Math.PI / 2 : -Math.PI / 2.3;
-      const angle = angleOffset + (index / visible.length) * Math.PI * 2;
-      const orbit = getOrbitRadius(node);
-
-      return {
-        node,
-        x: centerX + Math.cos(angle) * orbit,
-        y: centerY + Math.sin(angle) * orbit,
-      };
+    nodes.push({
+      id: "core",
+      label: "BTech Brain",
+      type: "core",
+      val: isMobile ? 18 : 30,
+      fx: 0,
+      fy: 0,
+      color: "#fbbf24",
+      glow: "#fde68a",
     });
-  }, [clusters, centerX, centerY, isMobile, maxOrbit]);
 
-  const focusedNode: PositionedNode | null =
-    opened === null
-      ? null
-      : positionedNodes.find((item) => item.node.id === opened) || null;
+    // INITIAL STATE
+
+    if (!mapExpanded) {
+      return { nodes, links };
+    }
+    
+
+    const visible = clusters.slice(
+      0,
+      isMobile ? 12 : 18
+    );
+
+    // TAGS
+
+    visible.forEach(
+      (tag, index) => {
+
+        const angle =
+          (index / visible.length) *
+          Math.PI * 2;
+
+        const articleCount =
+          tag.articles?.length || 1;
+
+        const distance =
+          (isMobile ? 145 : 270) +
+          articleCount *
+            (isMobile ? 3 : 5);
+
+        const x =
+          Math.cos(angle) *
+          distance;
+
+        const y =
+          Math.sin(angle) *
+          distance;
+
+        nodes.push({
+          id: tag.id,
+          label: `#${tag.label}`,
+          type: "tag",
+          val: Math.max(
+            isMobile ? 5 : 8,
+            articleCount * 1.4
+          ),
+          fx: x + Math.sin(Date.now() * 0.0003 + index) * 6,
+fy: y + Math.cos(Date.now() * 0.0003 + index) * 6,
+          color:
+            tag.color?.base ||
+            "#7c3aed",
+          glow:
+            tag.color?.glow ||
+            "#c4b5fd",
+        });
+
+        // ONLY TO CORE
+
+        links.push({
+          source: "core",
+          target: tag.id,
+          value: 0.45,
+        });
+      }
+    );
+
+    // EXPANDED TAG
+
+    if (expandedTag) {
+
+      const active =
+        visible.find(
+          (x) =>
+            x.id === expandedTag
+        );
+
+      if (active) {
+
+        const parent =
+          nodes.find(
+            (x) =>
+              x.id === active.id
+          );
+
+        const articles =
+          active.articles?.slice(
+            0,
+            isMobile ? 7 : 12
+          ) || [];
+
+        articles.forEach(
+          (article, idx) => {
+
+            const angle =
+              (idx / articles.length) *
+              Math.PI * 2;
+
+            const radius =
+              isMobile
+                ? 105
+                : 165;
+
+            const ax =
+              parent.fx +
+              Math.cos(angle) *
+                radius;
+
+            const ay =
+              parent.fy +
+              Math.sin(angle) *
+                radius;
+
+            const articleId =
+              `article-${article.slug}`;
+
+            nodes.push({
+              id: articleId,
+              label:
+                article.title.length >
+                (isMobile ? 18 : 28)
+                  ? article.title.slice(
+                      0,
+                      isMobile ? 18 : 28
+                    ) + "..."
+                  : article.title,
+              slug: article.slug,
+              type: "article",
+              val: isMobile ? 2 : 3,
+              fx: ax,
+              fy: ay,
+              color: "#67e8f9",
+              glow: "#a5f3fc",
+            });
+
+            // ARTICLE TO TAG
+
+            links.push({
+              source: active.id,
+              target: articleId,
+              value: 0.8,
+            });
+
+            // ONLY SHOW CONNECTIONS
+            // WHEN HOVERED
+
+            visible.forEach(
+              (otherTag) => {
+
+                if (
+                  otherTag.id ===
+                  active.id
+                ) return;
+
+                const hasTag =
+                  article.tags?.some(
+                    (t) =>
+                      t
+                        .toLowerCase()
+                        .trim() ===
+                      otherTag.id
+                  );
+
+                if (
+                  hasTag &&
+                  hoveredArticle === articleId
+                ) {
+
+                  links.push({
+                    source: articleId,
+                    target: otherTag.id,
+                    value: 0.4,
+                    dashed: true,
+                  });
+
+                }
+              }
+            );
+          }
+        );
+      }
+    }
+
+    return {
+      nodes,
+      links,
+    };
+
+  }, [
+    clusters,
+    expandedTag,
+    mapExpanded,
+    hoveredArticle,
+    isMobile,
+  ]);
 
   return (
-    <section
-      className="relative overflow-hidden bg-[#050816]"
-      style={{ height: stageHeight }}
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.16),transparent_72%)]" />
 
-      <div className="pointer-events-none absolute top-3 left-1/2 z-10 w-full max-w-4xl -translate-x-1/2 px-4 text-center md:top-4">
-        <h1 className="text-[clamp(2.2rem,8vw,5.6rem)] font-black leading-[0.9] bg-linear-to-r from-fuchsia-300 to-purple-500 bg-clip-text text-transparent">
+    <div
+      className="relative w-full overflow-hidden"
+      style={{
+        height: stageHeight,
+        background:
+          "radial-gradient(circle at center, rgba(76,29,149,0.32) 0%, rgba(2,6,23,1) 72%)",
+      }}
+    >
+
+      {/* TITLE */}
+
+      <div className="absolute top-10 left-1/2 z-20 -translate-x-1/2 text-center px-4">
+
+        <h1 className="text-5xl md:text-7xl font-black text-violet-300 tracking-tight">
           Brain Map
         </h1>
 
-        <p className="mx-auto mt-2 max-w-xl text-xs text-zinc-400 md:mt-3 md:text-base">
-          Explore recurring ideas, emotional pathways, learning arcs, and
-          connected constellations across the site.
+        <p className="mt-3 text-sm md:text-lg text-zinc-400 max-w-xl">
+          Explore recurring ideas and connected constellations.
         </p>
+
       </div>
 
-      <motion.div
-        animate={{
-          scale: opened ? Math.max(1, baseScale * 1.18) : baseScale,
-          x: opened && focusedNode ? stageWidth / 2 - focusedNode.x * baseScale : 0,
-          y: opened && focusedNode ? stageHeight / 2 - focusedNode.y * baseScale : 0,
-        }}
-        transition={{
-          duration: 0.8,
-          ease: "easeInOut",
-        }}
-        className="relative h-full w-full"
-      >
-        <div
-          className="absolute z-10"
-          style={{
-            left: centerX,
-            top: centerY,
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          <MapNode
-            title="Notes From a BTech Brain"
-            type="sun"
-            size={sunSize}
-            active={systemOpen}
-            onClick={() => {
-              setSystemOpen((prev) => !prev);
-              setOpened(null);
-            }}
-          />
+      {/* HELP */}
+
+      <div className="absolute bottom-5 left-5 z-20 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md px-4 py-3 text-white shadow-2xl">
+
+        <p className="text-xs md:text-sm text-zinc-300 leading-relaxed">
+          Drag to pan
+          <br />
+          Scroll or pinch to zoom
+          <br />
+          Click nodes to explore
+        </p>
+
+      </div>
+
+      {/* HINTS */}
+
+      {!mapExpanded && (
+
+        <div className="absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-[140px] rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md px-4 py-3 text-center text-white shadow-2xl animate-pulse">
+
+          <p className="text-sm md:text-base text-zinc-200">
+            ✦ Click the core to reveal major thought constellations
+          </p>
+
         </div>
+      )}
 
-        <AnimatePresence>
-          {systemOpen &&
-            positionedNodes.map((item, index) => {
-              const isActive = opened === item.node.id;
-              const isDimmed = opened !== null && !isActive;
+      {mapExpanded && !expandedTag && (
 
-              return (
-                <motion.div
-                  key={item.node.id}
-                  initial={{
-                    opacity: 0,
-                    scale: 0,
-                    x: centerX,
-                    y: centerY,
-                  }}
-                  animate={{
-                    opacity: isDimmed ? 0.2 : 1,
-                    scale: isActive ? 1.08 : 1,
-                    x: item.x,
-                    y: item.y,
-                  }}
-                  exit={{
-                    opacity: 0,
-                    scale: 0,
-                  }}
-                  transition={{
-                    duration: 0.7,
-                    delay: index * 0.04,
-                    type: "spring",
-                  }}
-                  className="absolute z-20"
-                >
-                  <MapNode
-                    title={`#${item.node.label}`}
-                    type="planet"
-                    color={item.node.color}
-                    size={getPlanetSize(item.node)}
-                    active={isActive}
-                    onClick={() =>
-                      setOpened(
-                        isActive ? null : item.node.id
-                      )
-                    }
-                  />
+        <div className="absolute left-1/2 top-1/2 z-30 translate-x-[80px] -translate-y-[220px] md:translate-x-[180px] md:-translate-y-[260px] rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md px-4 py-3 text-white shadow-2xl">
 
-                  <AnimatePresence>
-                    {isActive &&
-                      item.node.articles
-                        .slice(0, isMobile ? 5 : 8)
-                        .map((article, moonIndex) => {
-                          const moonAngle = (moonIndex / 8) * Math.PI * 2;
-                          const moonRadius = isMobile ? 118 : 168;
+          <p className="text-xs md:text-sm text-zinc-200 max-w-[220px] leading-relaxed">
+            ✦ Click a constellation to reveal connected articles
+          </p>
 
-                          return (
-                            <motion.a
-                              key={article.slug}
-                              href={`/post/${article.slug}`}
-                              initial={{
-                                opacity: 0,
-                                scale: 0,
-                              }}
-                              animate={{
-                                opacity: 1,
-                                scale: 1,
-                                x: Math.cos(moonAngle) * moonRadius,
-                                y: Math.sin(moonAngle) * moonRadius,
-                              }}
-                              exit={{
-                                opacity: 0,
-                                scale: 0,
-                              }}
-                              transition={{
-                                delay: moonIndex * 0.04,
-                              }}
-                              className="absolute left-1/2 top-1/2 z-30 pointer-events-auto"
-                            >
-                              <MapNode
-                                title={article.title}
-                                type="moon"
-                                size={isMobile ? 62 : 78}
-                              />
-                            </motion.a>
-                          );
-                        })}
-                  </AnimatePresence>
-                </motion.div>
+        </div>
+      )}
+
+      {expandedTag && (
+
+        <div className="absolute bottom-6 left-1/2 z-30 -translate-x-1/2 rounded-2xl border border-red-500/20 bg-black/50 backdrop-blur-md px-4 py-3 text-white shadow-[0_0_40px_rgba(255,0,0,0.15)]">
+
+          <p className="text-xs md:text-sm text-zinc-200 text-center leading-relaxed">
+            ✦ Hover articles to reveal shared thought pathways
+          </p>
+
+        </div>
+      )}
+
+      {/* GRAPH */}
+
+      <ForceGraph2D
+
+        ref={fgRef}
+
+        graphData={graph}
+
+        width={viewport.width}
+
+        height={stageHeight}
+
+        backgroundColor="transparent"
+
+        enableNodeDrag={false}
+
+        enablePanInteraction={true}
+
+        enableZoomInteraction={true}
+
+        minZoom={0.35}
+
+        maxZoom={8}
+
+        cooldownTicks={120}
+
+        onNodeHover={(node: any) => {
+
+          if (
+            node?.type === "article"
+          ) {
+            setHoveredArticle(node.id);
+          } else {
+            setHoveredArticle(null);
+          }
+        }}
+
+        onNodeClick={(node: any) => {
+
+          // CORE
+
+          if (
+            node.id === "core"
+          ) {
+
+            setExpandedTag(null);
+
+            setHoveredArticle(null);
+
+            setMapExpanded(
+              (prev) => !prev
+            );
+
+            return;
+          }
+
+          // TAG
+
+          if (
+            node.type === "tag"
+          ) {
+
+            // COLLAPSE
+
+            if (
+              expandedTag === node.id
+            ) {
+
+              setExpandedTag(null);
+
+              setHoveredArticle(null);
+
+              return;
+            }
+
+            // EXPAND
+
+            setExpandedTag(node.id);
+
+            setHoveredArticle(null);
+
+            return;
+          }
+
+          // ARTICLE
+
+          if (
+            node.type === "article"
+          ) {
+
+            window.location.href =
+              `/post/${node.slug}`;
+          }
+        }}
+
+        nodeCanvasObject={(
+          node: any,
+          ctx,
+          globalScale
+        ) => {
+
+          const label =
+            node.label;
+
+          const fontSize =
+            node.type === "core"
+              ? isMobile ? 9 : 14
+              : node.type === "tag"
+              ? isMobile ? 5 : 8
+              : isMobile ? 3 : 5;
+
+          ctx.beginPath();
+
+          ctx.arc(
+            node.x,
+            node.y,
+            node.val,
+            0,
+            2 * Math.PI,
+            false
+          );
+
+          // GLOW
+
+          ctx.shadowBlur =
+            node.type === "core"
+              ? 30
+              : node.type === "tag"
+              ? 22
+              : 10;
+
+          ctx.shadowColor =
+            node.glow ||
+            node.color;
+
+          ctx.fillStyle =
+            node.color;
+
+          ctx.fill();
+
+          ctx.shadowBlur = 0;
+
+          // LABELS
+
+          ctx.font =
+            `${fontSize}px Inter`;
+
+          ctx.textAlign =
+            "center";
+
+          ctx.textBaseline =
+            "middle";
+
+          ctx.fillStyle =
+            "white";
+
+          if (
+            node.type === "core"
+          ) {
+            ctx.font =
+              `bold ${
+                isMobile ? 10 : 16
+              }px Inter`;
+          }
+
+          if (
+            node.type === "tag"
+          ) {
+            ctx.font =
+              `bold ${
+                isMobile ? 6 : 10
+              }px Inter`;
+          }
+
+          ctx.fillText(
+            label,
+            node.x,
+            node.y +
+              node.val +
+              (node.type === "article"
+                ? 10
+                : 16)
+          );
+        }}
+
+        linkCanvasObjectMode={() =>
+          "after"
+        }
+
+        linkCanvasObject={(
+          link: any,
+          ctx
+        ) => {
+
+          const start =
+            link.source;
+
+          const end =
+            link.target;
+
+          if (
+            typeof start !== "object" ||
+            typeof end !== "object"
+          ) {
+            return;
+          }
+
+          const dx =
+            end.x - start.x;
+
+          const dy =
+            end.y - start.y;
+
+          ctx.beginPath();
+
+          ctx.moveTo(
+            start.x,
+            start.y
+          );
+
+          ctx.lineTo(
+            end.x,
+            end.y
+          );
+
+          // RED SIGNAL LINKS
+
+          if (link.dashed) {
+
+            ctx.strokeStyle =
+              "rgba(255,40,40,0.95)";
+
+            ctx.lineWidth = 1.4;
+
+            ctx.shadowBlur = 18;
+
+            ctx.shadowColor =
+              "rgba(255,0,0,1)";
+
+            ctx.stroke();
+
+            // PARTICLES
+
+            const time =
+              Date.now() * 0.0025;
+
+            const packetCount = 3;
+
+            for (
+              let i = 0;
+              i < packetCount;
+              i++
+            ) {
+
+              const t =
+                (
+                  (time + i * 0.33) % 1
+                );
+
+              const px =
+                start.x + dx * t;
+
+              const py =
+                start.y + dy * t;
+
+              ctx.beginPath();
+
+              ctx.arc(
+                px,
+                py,
+                2.2,
+                0,
+                Math.PI * 2
               );
-            })}
-        </AnimatePresence>
-      </motion.div>
-    </section>
+
+              ctx.fillStyle =
+                "rgba(255,120,120,1)";
+
+              ctx.shadowBlur = 20;
+
+              ctx.shadowColor =
+                "rgba(255,80,80,1)";
+
+              ctx.fill();
+            }
+
+          } else {
+
+            // NORMAL LINKS
+
+            ctx.strokeStyle =
+              "rgba(255,255,255,0.14)";
+
+            ctx.lineWidth =
+              link.value || 0.5;
+
+            ctx.shadowBlur = 0;
+
+            ctx.stroke();
+          }
+        }}
+      />
+    </div>
   );
 }
