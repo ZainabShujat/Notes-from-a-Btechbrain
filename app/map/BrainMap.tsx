@@ -52,6 +52,10 @@ export default function BrainMap({
     useState<string | null>(null);
     const [visibleTags, setVisibleTags] =
   useState<string[]>([]);
+  const [hoveredNode, setHoveredNode] =
+  useState<any>(null);
+
+  
 
   useEffect(() => {
 
@@ -473,6 +477,60 @@ fy: y + Math.cos(Date.now() * 0.0003 + index) * 6,
 
           const label =
             node.label;
+            const isHovered =
+  hoveredNode?.id === node.id;
+
+if (isHovered) {
+
+  const paddingX = 10;
+  const paddingY = 6;
+
+  ctx.font = `${
+    Math.max(12 / globalScale, 12)
+  }px Inter`;
+
+  const textWidth =
+    ctx.measureText(label).width;
+
+  const boxWidth =
+    textWidth + paddingX * 2;
+
+  const boxHeight =
+    28 / globalScale;
+
+  ctx.fillStyle =
+    "rgba(25,25,35,0.92)";
+
+  ctx.strokeStyle =
+    "rgba(255,255,255,0.12)";
+
+  ctx.lineWidth =
+    1 / globalScale;
+
+  ctx.beginPath();
+
+  ctx.roundRect(
+    node.x! - boxWidth / 2,
+    node.y! - 42 / globalScale,
+    boxWidth,
+    boxHeight,
+    8 / globalScale
+  );
+
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = "#ffffff";
+
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
+  ctx.fillText(
+    label,
+    node.x!,
+    node.y! - 28 / globalScale
+  );
+}
 
           const fontSize =
             node.type === "core"
