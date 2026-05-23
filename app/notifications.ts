@@ -4,6 +4,25 @@
 
 const notifications = [
   {
+    id: 26,
+    date: "2026-05-23",
+    title: "Brain Map System Added",
+    message: `Introducing the Brain Map — an interactive, force-directed "food web" visualization of the site's ideas and categories.<br><br>
+This first release focuses on making connections visible and navigable: nodes represent topic clusters, links show shared tags, and articles can be expanded in-place for quick context. The visual is client-only and tuned for responsive screens so the map adapts across desktop and mobile.<br><br>
+Key features in this release:<ul style="margin: 0.5em 0 0.5em 1.5em; padding: 0;">
+<li>Force-directed food-web layout (entangled, organic clusters rather than radial rings)</li>
+<li>Click-to-focus navigation — clicking a node recenters the view and reveals details (no scroll/pinch zoom by default)</li>
+<li>Article expansion: open cluster nodes to reveal individual article nodes and quick metadata</li>
+<li>Performance & SSR safety: client-only dynamic import for the force graph and d3-force integration</li>
+<li>Interaction safeguards: wheel events captured to prevent accidental scroll-zoom, and node dragging disabled for a stable browse experience</li>
+<li>TypeScript and data fixes: adjusted typings and data generation for predictable node layout</li>
+</ul>
+Notes: This is v1 of the Brain Map — visuals and force parameters will iterate to make the web feel more organic and readable. If you have feedback on labels, overlap, or expansion behavior, please share and we'll refine it in the next release.`,
+    version: "v1.0.0",
+    color: "#06b6d4", // cyan
+  },
+  
+  {
     id: 25,
     date: "2026-05-10",
     title: "Custom CMS & Dynamic Publishing System",
