@@ -123,3 +123,5 @@ And sometimes, those coincidences spark ideas that grow into full projects, new 
 
 2025 may be a square.  
 But 2026… might be the year I try to solve it.
+
+p.s. 25 of May, 2026: [Sum of Cubes:The Partridge Puzzle](https://github.com/ZainabShujat/Sum-of-Cubes/wiki)
