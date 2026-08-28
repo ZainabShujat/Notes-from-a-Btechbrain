@@ -72,13 +72,12 @@ if (fs.existsSync(filePath)) {
   const related = getRelatedPosts(data, allPosts)
   .slice(0, 3);
 
-console.log(related);
   return (
-    <main className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-10 bg-zinc-900 text-white rounded-2xl shadow-xl">
+    <main className="max-w-4xl mx-auto my-10 px-4 sm:px-6 md:px-8 py-10 bg-surface-1 border border-hairline backdrop-blur-md text-ink-2 rounded-lg shadow-card">
       {/* Track this post as read for the current session */}
       <PostReadTrackerWrapper slug={slug} postId={data?.id || slug} />
-      <h1 className="text-3xl md:text-4xl font-bold text-yellow-500 dark:text-slate-100">{data.title}</h1>
-      <div className="flex items-center gap-4 mt-2 text-yellow-600 dark:text-slate-300">
+      <h1 className="text-3xl md:text-4xl font-bold text-highlight">{data.title}</h1>
+      <div className="flex items-center gap-4 mt-2 text-ink-3">
         <span>{new Date(
   data.date || data.created_at
 ).toLocaleDateString()}</span>
@@ -110,14 +109,14 @@ console.log(related);
       />
 
       {/* Divider for clarity */}
-      <hr className="my-12 border-t-2 border-purple-200 dark:border-purple-700" />
+      <hr className="my-12 border-t border-hairline" />
       
 
       {/* Related articles section - truly outside the article */}
 
       {related.length > 0 && (
         <section className="w-full py-12">
-          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-4 text-purple-700 dark:text-purple-300 flex items-center gap-4">
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-ink-1 flex items-center gap-4">
             <span role="img" aria-label="Related">🔗</span> Related Articles
           </h2>
           <br /> {/* Extra spacing before the grid */}

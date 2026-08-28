@@ -1,25 +1,87 @@
 @import "tailwindcss";
 
-/* =========================
-   ROOT THEME VARIABLES
-========================= */
+/* =========================================================
+   DESIGN TOKENS  —  Notes From a BTech Brain
+   Tailwind v4 is CSS-first: everything declared inside
+   @theme becomes a real utility (bg-base, text-ink-2,
+   border-hairline, rounded-lg, shadow-card ...).
+   Components should never write a raw hex value again.
+   ========================================================= */
 
-:root {
+@theme {
+  /* ---- Type -------------------------------------------------
+     --font-sans feeds Tailwind's default font stack, so setting
+     it here makes Inter the site font everywhere without a
+     single font-family declaration in component code.          */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  color-scheme: light;
-  --background: #ffffff;
-  --foreground: #18181b;
-  --heading: #18181b;
-  --muted: #6b7280;
+  /* ---- Ground: the night ------------------------------------
+     Base is the hero video's own black, so the video, the map
+     and every page finally sit on the same colour.             */
+  --color-base: #05031a;
+  --color-raised: #0d0b22;
+  --color-sunken: #141033;
 
-  --text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  /* ---- Surfaces: the glass ----------------------------------
+     Borrowed from the Brain Map HUD, which is the most resolved
+     surface treatment already in the codebase.                 */
+  --color-surface-1: rgb(255 255 255 / 5%);
+  --color-surface-2: rgb(255 255 255 / 9%);
+  --color-surface-3: rgb(255 255 255 / 13%);
+  --color-hairline: rgb(255 255 255 / 14%);
+  --color-hairline-strong: rgb(255 255 255 / 24%);
 
-  --bg-image: url('/assets/banners/bg-main.webp');
+  /* ---- Ink: violet-biased neutrals --------------------------
+     Replaces the slate / zinc / gray mixture that currently
+     appears on the same screen.                                */
+  --color-ink-1: #f5f3ff;
+  --color-ink-2: #c9c2e4;
+  --color-ink-3: #948cb5;
+
+  /* ---- Accent & highlight -----------------------------------
+     Violet is the only interactive colour. Amber is reserved
+     for identity moments — never links, never body copy.       */
+  --color-accent: #a855f7;
+  --color-accent-strong: #9333ea;
+  --color-accent-soft: #c4b5fd;
+  --color-accent-muted: rgb(168 85 247 / 16%);
+  --color-highlight: #facc15;
+
+  /* ---- Radii ------------------------------------------------
+     One scale. xl/2xl are pinned alongside lg so legacy markup
+     that already uses them stays monotonic with the new scale. */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-pill: 999px;
+
+  /* ---- Elevation --------------------------------------------
+     Three, replacing nine ad-hoc box-shadows.                  */
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.35), 0 12px 32px -18px rgb(0 0 0 / 0.75);
+  --shadow-lift: 0 2px 6px rgb(0 0 0 / 0.4), 0 22px 48px -22px rgb(0 0 0 / 0.85);
+  --shadow-glow: 0 0 0 1px rgb(168 85 247 / 0.28), 0 0 34px -6px rgb(168 85 247 / 0.45);
+
+  /* ---- Spacing ----------------------------------------------
+     v4 derives the whole scale from one step, so 4 / 8 / 12 /
+     16 / 24 / 32 / 48 / 64 / 96 already exist as p-1 … p-24.   */
+  --spacing: 0.25rem;
 }
 
-/* =========================
-   GLOBAL BODY
-========================= */
+/* =========================================================
+   GROUND
+   One dark ground for the entire public site, applied once.
+   Painted on a fixed pseudo-element rather than with
+   background-attachment: fixed, which causes repaint jank on
+   iOS. Pages no longer bring their own background.
+   ========================================================= */
+
+html {
+  color-scheme: dark;
+  background-color: var(--color-base);
+}
 
 html,
 body {
@@ -27,42 +89,93 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  background-image: var(--bg-image);
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  text-shadow: var(--text-shadow);
+  position: relative;
+  background-color: var(--color-base);
+  color: var(--color-ink-2);
 }
 
-/* =========================
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("/assets/banners/galaxy-bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.18;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(120% 85% at 50% -15%, rgb(109 40 217 / 0.32), transparent 62%),
+    radial-gradient(90% 60% at 88% 12%, rgb(168 85 247 / 0.14), transparent 58%),
+    radial-gradient(80% 55% at 8% 88%, rgb(30 27 75 / 0.5), transparent 60%);
+}
+
+/* =========================================================
    TYPOGRAPHY BASE
-========================= */
+   The global text-shadow and the white-link rule that used to
+   live here are gone: they were written for the dark hero and
+   broke every light surface on the site.
+   ========================================================= */
 
 @layer base {
   h1,
   h2,
   h3,
   h4,
-  h5 {
-    color: var(--heading);
-    text-shadow: var(--text-shadow);
+  h5,
+  h6 {
+    color: var(--color-ink-1);
+    text-wrap: balance;
   }
 
-  a,
-  .link {
-    color: #fff;
-    text-shadow: var(--text-shadow);
+  a {
+    color: inherit;
   }
 
-  /* =========================
-     BLOG CONTENT
-  ========================= */
+  ::selection {
+    background: var(--color-accent-muted);
+    color: var(--color-ink-1);
+  }
+}
 
+/* Visible keyboard focus everywhere, not just on the one
+   element that happened to declare a ring. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   BLOG CONTENT
+   Article body styling still lives here rather than in the
+   typography plugin — the plugin is deliberately not enabled
+   until the article page is redesigned (Step 5), so that
+   activating `prose` is a controlled change rather than a
+   side effect of this pass. Colours are now tokens.
+   ========================================================= */
+
+@layer base {
   .blog-content p,
   .blog-content li,
   .blog-content small,
@@ -71,15 +184,14 @@ body {
   .blog-content ul,
   .blog-content ol,
   .blog-content blockquote {
-    color: #f3f4f6 !important;
-    text-shadow: none !important;
+    color: var(--color-ink-2) !important;
 
     margin-bottom: 2.1em;
     line-height: 1.8;
   }
 
   .blog-content h1 {
-    color: #ffffff !important;
+    color: var(--color-ink-1) !important;
     font-weight: 900 !important;
     font-size: 2.2rem !important;
 
@@ -91,7 +203,7 @@ body {
   }
 
   .blog-content h2 {
-    color: #ffffff !important;
+    color: var(--color-ink-1) !important;
     font-weight: 800 !important;
     font-size: 1.5rem !important;
 
@@ -103,7 +215,7 @@ body {
   }
 
   .blog-content h3 {
-    color: #f8fafc !important;
+    color: var(--color-ink-1) !important;
     font-weight: 700 !important;
     font-size: 1.2rem !important;
 
@@ -114,7 +226,7 @@ body {
   }
 
   .blog-content h4 {
-    color: #f8fafc !important;
+    color: var(--color-ink-1) !important;
     font-weight: 700 !important;
     font-size: 1.05rem !important;
 
@@ -126,7 +238,7 @@ body {
 
   .blog-content h5,
   .blog-content h6 {
-    color: #e5e7eb !important;
+    color: var(--color-ink-2) !important;
     font-weight: 600 !important;
     font-size: 1rem !important;
 
@@ -136,6 +248,12 @@ body {
     line-height: 1.2;
   }
 
+  .blog-content a {
+    color: var(--color-accent-soft);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
   .blog-content ul,
   .blog-content ol {
     padding-left: 1.7em;
@@ -143,11 +261,11 @@ body {
   }
 
   .blog-content blockquote {
-    border-left: 4px solid #6d28d9;
+    border-left: 4px solid var(--color-accent);
 
     padding-left: 1.5em;
 
-    color: #d1d5db !important;
+    color: var(--color-ink-3) !important;
 
     font-style: italic;
 
@@ -156,9 +274,11 @@ body {
   }
 }
 
-/* =========================
+/* =========================================================
    PROSEMIRROR EDITOR
-========================= */
+   Untouched in this pass beyond swapping literals for tokens;
+   the editor is scheduled for the Studio pass.
+   ========================================================= */
 
 .ProseMirror ul {
   list-style-type: disc;
@@ -171,7 +291,7 @@ body {
 }
 
 .ProseMirror h1 {
-  color: white;
+  color: var(--color-ink-1);
   font-size: 2rem;
   font-weight: bold;
 
@@ -180,7 +300,7 @@ body {
 }
 
 .ProseMirror h2 {
-  color: white;
+  color: var(--color-ink-1);
   font-size: 1.6rem;
   font-weight: bold;
 
@@ -189,7 +309,7 @@ body {
 }
 
 .ProseMirror h3 {
-  color: white;
+  color: var(--color-ink-1);
   font-size: 1.3rem;
   font-weight: bold;
 
@@ -205,11 +325,11 @@ body {
 
 .ProseMirror p,
 .ProseMirror li {
-  color: white;
+  color: var(--color-ink-1);
 }
 
 .ProseMirror p.is-editor-empty:first-child::before {
-  color: #71717a;
+  color: var(--color-ink-3);
 
   content: attr(data-placeholder);
 

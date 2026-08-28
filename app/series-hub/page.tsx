@@ -1,4 +1,6 @@
 import Link from "next/link";
+import PageHeader from "../components/ui/PageHeader";
+import Panel from "../components/ui/Panel";
 
 const seriesList = [
   {
@@ -33,34 +35,36 @@ const seriesList = [
 
 export default function SeriesHubPage() {
   return (
-    <main className="w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-12 text-white">
-      <h1 className="text-5xl font-extrabold mb-10 text-white">Series Hub</h1>
-      <p className="mb-12 text-xl text-white/90 max-w-3xl">
-        Explore the different universes of this blog. Each series is a journey–find the one that speaks to you, or sample them all.
-      </p>
-      <div className="space-y-16">
+    <main className="w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-16 md:py-24">
+      <PageHeader
+        eyebrow="Series"
+        title="Series Hub"
+        description="Explore the different universes of this blog. Each series is a journey–find the one that speaks to you, or sample them all."
+      />
+
+      <div className="flex flex-col gap-6">
         {seriesList.map((series) => (
-          <section key={series.title} className="w-full">
-            <h2 className="text-3xl font-extrabold text-white mb-3 w-full wrap-break-word">{series.title}</h2>
-            <p className="text-lg text-white/90 mb-4 w-full max-w-4xl">{series.description}</p>
+          <Panel key={series.title} padding="lg" className="w-full">
+            <h2 className="text-2xl md:text-3xl font-bold text-ink-1 mb-3 w-full wrap-break-word">{series.title}</h2>
+            <p className="text-base md:text-lg text-ink-2 mb-4 w-full max-w-4xl">{series.description}</p>
             <Link
               href={`/category/${series.category}`}
-              className="inline-block text-blue-200 underline font-semibold hover:text-blue-100 text-lg mb-2"
+              className="inline-block text-accent-soft underline underline-offset-2 font-semibold hover:text-ink-1 transition-colors text-base mb-2"
             >
               View all posts →
             </Link>
             {series.recommended && (
               <div className="mt-2">
-                <span className="text-xs text-white/70 mr-1">Recommended starting piece:</span>
+                <span className="text-xs text-ink-3 mr-1">Recommended starting piece:</span>
                 <Link
                   href={`/post/${series.recommended.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`}
-                  className="text-blue-200 underline hover:text-blue-100 text-base font-semibold"
+                  className="text-accent-soft underline underline-offset-2 hover:text-ink-1 transition-colors text-base font-semibold"
                 >
                   {series.recommended}
                 </Link>
               </div>
             )}
-          </section>
+          </Panel>
         ))}
       </div>
     </main>

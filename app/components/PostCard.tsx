@@ -28,9 +28,6 @@ interface PostCardProps extends Props {
 }
 
 export default function PostCard({ title, slug, excerpt, date, category, banner, featured, small, created_at }: PostCardProps) {
-  console.log("DATE:", date)
-  console.log("CREATED:", created_at)
-  
   let style: React.CSSProperties = {};
 
   if (featured) {
@@ -44,7 +41,7 @@ export default function PostCard({ title, slug, excerpt, date, category, banner,
 
   return (
     <article
-      className={`relative rounded-2xl overflow-hidden shadow border border-purple-100 dark:border-purple-700 flex flex-col justify-end w-full min-w-0 bg-black group transition-transform duration-200 will-change-transform ${featured ? "featured-postcard" : "aspect-[1/1]"}`}
+      className={`relative rounded-lg overflow-hidden shadow-card border border-hairline flex flex-col justify-end w-full min-w-0 bg-sunken group transition-[transform,box-shadow,border-color] duration-200 will-change-transform hover:-translate-y-1 hover:shadow-lift hover:border-hairline-strong ${featured ? "featured-postcard" : "aspect-[1/1]"}`}
       style={style}
       tabIndex={0}
     >
@@ -62,8 +59,7 @@ export default function PostCard({ title, slug, excerpt, date, category, banner,
       {/* Category pill in top-left, more translucent */}
       {category && (
         <span
-          className="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-purple-200/10 text-purple-100/50 text-[11px] font-normal tracking-wide z-20 backdrop-blur-sm border border-purple-100/5"
-          style={{ maxWidth: '70%', border: '1px solid #eee2', letterSpacing: '0.02em', background: 'rgba(168,85,247,0.07)' }}
+          className="absolute top-3 left-3 max-w-[70%] truncate px-2 py-0.5 rounded-pill bg-accent-muted text-accent-soft text-[11px] font-medium tracking-wide z-20 backdrop-blur-sm border border-hairline"
         >
           {category}
         </span>
@@ -79,19 +75,19 @@ export default function PostCard({ title, slug, excerpt, date, category, banner,
             <Link href={`/post/${slug}`}>{title}</Link>
           </h3>
           {!small && excerpt && (
-            <p className="text-slate-100 text-xs mb-1 max-w-full drop-shadow-md">
+            <p className="text-ink-2 text-xs mb-1 max-w-full drop-shadow-md">
               {excerpt}
             </p>
           )}
-          <div className="flex items-center justify-between text-slate-200/90 text-xs mt-2">
+          <div className="flex items-center justify-between text-ink-2 text-xs mt-2">
             {!small && (date || created_at) && (
-  <span className="text-[11px] text-slate-200/80 font-normal">
+  <span className="text-[11px] text-ink-3 font-normal">
     {new Date(date || created_at!).toLocaleDateString()}
   </span>
 )}
             <Link
               href={`/post/${slug}`}
-              className={`inline-block px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-400 to-purple-600 text-white font-medium text-xs shadow transition-all duration-200 group-hover:shadow-[0_0_12px_rgba(168,85,247,0.3)] group-hover:-translate-y-[1px] focus:outline-none focus:ring-2 focus:ring-purple-300 ${small ? 'text-xs px-2 py-1' : ''}`}
+              className={`inline-block px-3 py-1.5 rounded-pill bg-accent text-white font-medium text-xs shadow-card transition-[transform,background-color,box-shadow] duration-200 hover:bg-accent-strong group-hover:shadow-glow group-hover:-translate-y-px ${small ? 'text-xs px-2 py-1' : ''}`}
             >
               Dive in <span aria-hidden>→</span>
             </Link>
@@ -99,22 +95,6 @@ export default function PostCard({ title, slug, excerpt, date, category, banner,
         </div>
       </div>
 
-      {/* Card hover animation: lift */}
-      <style jsx>{`
-        .group:hover, .group:focus {
-          transform: translateY(-4px);
-        }
-        .featured-postcard {
-          min-width: 340px !important;
-          max-width: 600px !important;
-          min-height: 400px !important;
-          max-height: 400px !important;
-        }
-        /* Increase spacing between cards globally */
-        :global(.grid), :global(.gap-8) {
-          gap: 28px !important;
-        }
-      `}</style>
     </article>
   );
 }

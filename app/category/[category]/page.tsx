@@ -1,5 +1,6 @@
 import { getCombinedPosts, PostMeta } from "../../../lib/posts";
 import PostCard from "../../components/PostCard";
+import PageHeader from "../../components/ui/PageHeader";
 
 type Props = {
   params: Promise<{ category: string }>; // <- params is a Promise in this runtime
@@ -15,13 +16,15 @@ export default async function CategoryPage({ params }: Props) {
   );
 
   return (
-    <main className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-10">
-      <h1 className="text-3xl font-bold capitalize text-slate-200">
-        {category.replace(/-/g, " ")}
-      </h1>
+    <main className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-16 md:py-24">
+      <PageHeader
+        eyebrow="Category"
+        title={<span className="capitalize">{category.replace(/-/g, " ")}</span>}
+        description={`${filtered.length} post${filtered.length === 1 ? "" : "s"}`}
+      />
 
       {filtered.length === 0 && (
-        <p className="mt-4 text-slate-200">No posts in this category yet.</p>
+        <p className="mt-4 text-ink-3">No posts in this category yet.</p>
       )}
 
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">

@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import notifications from "../notifications";
+import Button from "./ui/Button";
+import PageHeader from "./ui/PageHeader";
 
 const PAGE_SIZE = 7;
 
@@ -20,44 +22,50 @@ export default function NotificationsTab() {
   const currentNotifications = notifications.slice(startIdx, endIdx);
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-slate-900 rounded-lg shadow-lg mt-8">
-      <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-slate-100">Site Updates & Notifications</h2>
+    <main className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-16 md:py-24">
+      <PageHeader
+        eyebrow="Changelog"
+        title="Updates"
+        description="What has changed on the site, newest first."
+      />
       {/* Version color legend removed as requested */}
-      <ul className="space-y-4">
+      <ul className="flex flex-col gap-4 list-none p-0 m-0">
         {currentNotifications.map((note) => (
           <li
             key={note.id}
-            className="pl-4 py-2 bg-slate-50 dark:bg-slate-800 rounded"
+            className="pl-4 py-3 pr-4 bg-surface-1 border border-hairline rounded-md backdrop-blur-md"
             style={{ borderLeft: `6px solid ${note.color}` }}
           >
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs text-slate-500 dark:text-slate-400">{note.date}</span>
+              <span className="text-xs text-ink-3">{note.date}</span>
               <span className="text-xs font-semibold" style={{ color: note.color }}>{note.version}</span>
             </div>
-            <div className="font-semibold text-slate-900 dark:text-slate-100">{note.title}</div>
-            <div className="text-slate-700 dark:text-slate-200" dangerouslySetInnerHTML={{ __html: note.message }} />
+            <div className="font-semibold text-ink-1">{note.title}</div>
+            <div className="text-ink-2" dangerouslySetInnerHTML={{ __html: note.message }} />
           </li>
         ))}
       </ul>
       <div className="flex justify-between items-center mt-6">
-        <button
-          className="px-3 py-1 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 disabled:opacity-50"
+        <Button
+          variant="secondary"
+          size="sm"
           onClick={() => setPage((p) => Math.max(1, p - 1))}
           disabled={page === 1}
         >
           Previous
-        </button>
-        <span className="text-sm text-slate-600 dark:text-slate-300">
+        </Button>
+        <span className="text-sm text-ink-3">
           Page {page} of {totalPages}
         </span>
-        <button
-          className="px-3 py-1 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 disabled:opacity-50"
+        <Button
+          variant="secondary"
+          size="sm"
           onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
           disabled={page === totalPages}
         >
           Next
-        </button>
+        </Button>
       </div>
-    </div>
+    </main>
   );
 }

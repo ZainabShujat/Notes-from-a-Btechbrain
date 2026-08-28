@@ -17,12 +17,12 @@ export default function StartHereBanner() {
   };
   if (!dismissed) {
     return (
-      <div className="bg-purple-100 border border-purple-300 text-purple-900 px-4 py-3 flex items-center justify-between rounded mb-6 max-w-2xl mx-auto mt-6 shadow">
+      <div className="bg-surface-1 border border-hairline backdrop-blur-md text-ink-2 px-4 py-3 flex items-center justify-between rounded-md mb-6 max-w-2xl mx-auto mt-6 shadow-card">
         <div>
-          <span className="font-semibold">If you don’t know where to start, here’s a guide:</span>
-          <Link href="/start-here" className="ml-2 underline text-purple-700 font-medium hover:text-purple-900">Start Here</Link>
+          <span className="font-semibold text-ink-1">If you don’t know where to start, here’s a guide:</span>
+          <Link href="/start-here" className="ml-2 underline underline-offset-2 text-accent-soft font-medium hover:text-ink-1 transition-colors">Start Here</Link>
         </div>
-        <button onClick={handleDismiss} aria-label="Dismiss banner" className="ml-4 text-purple-700 hover:text-purple-900 text-xl font-bold">×</button>
+        <button onClick={handleDismiss} aria-label="Dismiss banner" className="ml-4 text-ink-3 hover:text-ink-1 transition-colors text-xl font-bold">×</button>
       </div>
     );
   }

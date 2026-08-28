@@ -16,7 +16,7 @@ export default async function Home() {
   )
   .slice(0, 3);
   return (
-    <main className="bg-linear-to-br from-violet-900 to-zinc-950 text-white">
+    <main className="text-ink-2">
       
       {/* Hero */}
       <StartHereBannerWrapper />
@@ -29,11 +29,11 @@ export default async function Home() {
 
       {/* This Month's Series */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-10">
-        <h2 className="text-center text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-2">
-          📅 This Month’s <span className="text-purple-300">Series</span>
+        <h2 className="text-center text-3xl md:text-4xl font-bold tracking-tight text-ink-1 mb-2">
+          📅 This Month’s <span className="text-accent-soft">Series</span>
         </h2>
 
-        <p className="text-center text-zinc-400 text-lg md:text-xl mb-8">
+        <p className="text-center text-ink-3 text-lg md:text-xl mb-8">
           Current featured explorations and themed writing.
         </p>
 
@@ -51,68 +51,68 @@ export default async function Home() {
 
       {/* Start Here Preview */}
       <section className="mx-auto max-w-3xl px-4 sm:px-6 md:px-8 py-8">
-        <div className="rounded-2xl bg-purple-900/70 backdrop-blur-md shadow-lg p-6 md:p-8 border border-purple-700/40">
+        <div className="rounded-lg bg-surface-1 backdrop-blur-md shadow-card p-6 md:p-8 border border-hairline">
           
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 flex items-center gap-2">
+          <h3 className="text-2xl md:text-3xl font-bold text-ink-1 mb-3 flex items-center gap-2">
             ⭐ What’s Inside{" "}
-            <span className="text-yellow-300">Start Here</span>
+            <span className="text-highlight">Start Here</span>
           </h3>
 
-          <p className="text-zinc-200 mb-4 text-base md:text-lg">
+          <p className="text-ink-2 mb-4 text-base md:text-lg">
             The <span className="font-semibold">Start Here</span> guide helps
             you find your way in. Pick a starting point based on your mood or
             what you’re curious about:
           </p>
 
-          <ul className="list-disc pl-6 space-y-2 text-zinc-300 text-base md:text-lg mb-4">
+          <ul className="list-disc pl-6 space-y-2 text-ink-2 text-base md:text-lg mb-4">
             <li>
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-ink-1">
                 🧩 Feeling curious?
               </span>{" "}
               — Mind-bending puzzles and playful logic
             </li>
 
             <li>
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-ink-1">
                 🧭 Feeling lost or questioning everything?
               </span>{" "}
               — Honest stories about internships, burnout, and finding your way
             </li>
 
             <li>
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-ink-1">
                 👀 Need to feel understood?
               </span>{" "}
               — Reflections on identity, safety, and being seen
             </li>
 
             <li>
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-ink-1">
                 🌱 Want a fresh start?
               </span>{" "}
               — Processing chaos and finding clarity
             </li>
 
             <li>
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-ink-1">
                 🔨 Building or rebuilding?
               </span>{" "}
               — Growth, setbacks, and small wins
             </li>
 
             <li>
-              <span className="font-semibold text-white">
+              <span className="font-semibold text-ink-1">
                 🤖 Curious about tech & the future?
               </span>{" "}
               — Demystifying crypto and digital change
             </li>
           </ul>
 
-          <p className="text-zinc-400 text-sm">
+          <p className="text-ink-3 text-sm">
             Find the post that fits you best or just explore.{" "}
             <Link
               href="/start-here"
-              className="underline text-yellow-300 hover:text-yellow-200 transition-colors"
+              className="underline underline-offset-2 text-accent-soft hover:text-ink-1 transition-colors"
             >
               See all starting points →
             </Link>
@@ -123,17 +123,17 @@ export default async function Home() {
       {/* Categories */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-12">
 
-        <h2 className="text-center text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-2">
-          ✨ Browse by <span className="text-purple-300">topic</span>
+        <h2 className="text-center text-3xl md:text-4xl font-bold tracking-tight text-ink-1 mb-2">
+          ✨ Browse by <span className="text-accent-soft">topic</span>
         </h2>
 
-        <p className="text-center text-zinc-400 mt-1 text-lg md:text-xl font-medium mb-8">
+        <p className="text-center text-ink-3 mt-1 text-lg md:text-xl font-medium mb-8">
           Different angles: tech, world events, and personal growth.
         </p>
 
         {/* Ongoing */}
         <div className="mt-8">
-          <h3 className="text-center text-xl md:text-2xl font-bold mb-5 text-zinc-100">
+          <h3 className="text-center text-xl md:text-2xl font-semibold mb-5 text-ink-1">
             Ongoing
           </h3>
 
@@ -170,7 +170,7 @@ export default async function Home() {
 
         {/* Monthly Themes */}
         <div className="mt-12">
-          <h3 className="text-center text-xl md:text-2xl font-bold mb-5 text-zinc-100">
+          <h3 className="text-center text-xl md:text-2xl font-semibold mb-5 text-ink-1">
             Monthly Themes
           </h3>
 
@@ -210,7 +210,7 @@ export default async function Home() {
 
         {/* Retired */}
         <div className="mt-12">
-          <h3 className="text-center text-xl md:text-2xl font-bold mb-5 text-zinc-400">
+          <h3 className="text-center text-xl md:text-2xl font-semibold mb-5 text-ink-3">
             Retired Categories
           </h3>
 
@@ -253,13 +253,13 @@ export default async function Home() {
       >
         <div className="flex items-center justify-between mb-4">
 
-          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">
-            🗂️ Recent <span className="text-purple-300">Posts</span>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-ink-1">
+            🗂️ Recent <span className="text-accent-soft">Posts</span>
           </h2>
 
           <Link
             href="/all-posts"
-            className="text-purple-400 underline text-base md:text-lg font-semibold hover:text-purple-300 transition-colors"
+            className="text-accent-soft underline underline-offset-2 text-base md:text-lg font-semibold hover:text-ink-1 transition-colors"
             prefetch={false}
           >
             See all
@@ -269,11 +269,11 @@ export default async function Home() {
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
 
           {posts.length === 0 && (
-            <p className="text-zinc-500">
+            <p className="text-ink-3">
               No posts yet. Create one in{" "}
               <Link
                 href="/write/new-post"
-                className="underline text-purple-400"
+                className="underline underline-offset-2 text-accent-soft"
               >
                 the editor
               </Link>

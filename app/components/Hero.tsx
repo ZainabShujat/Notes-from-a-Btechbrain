@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import Button from "./ui/Button";
 
 export default function Hero() {
   const videos = [
@@ -24,13 +24,13 @@ export default function Hero() {
         onEnded={() =>
           setCurrentVideo((prev) => (prev + 1) % videos.length)
         }
-        className="absolute inset-0 w-full h-full object-cover bg-[#05031a]"
+        className="absolute inset-0 w-full h-full object-cover bg-base"
       >
         <source src={videos[currentVideo]} type="video/mp4" />
       </video>
 
       {/* OVERLAY */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#05031a]/20 via-[#1a1440]/25 to-[#1a1440]/60 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-base/20 via-sunken/30 to-base/80 pointer-events-none" />
 
       {/* CONTENT */}
       <div className="relative z-10 min-h-[80vh] md:min-h-[95vh] px-4">
@@ -39,17 +39,17 @@ export default function Hero() {
         <div className="text-center pt-12 md:pt-20">
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight">
             <span className="text-white">Notes From a </span>
-            <span className="text-yellow-400 font-extrabold">
+            <span className="text-highlight font-extrabold">
               BTech Brain
             </span>
           </h1>
 
-          <p className="mt-6 max-w-3xl mx-auto text-base sm:text-lg md:text-2xl text-white/90">
+          <p className="mt-6 max-w-3xl mx-auto text-base sm:text-lg md:text-2xl text-ink-1/90">
             For when you're thinking too much...
             and still don't have answers
           </p>
 
-          <div className="mt-4 text-sm md:text-base text-white/70 tracking-wide">
+          <div className="mt-4 text-sm md:text-base text-ink-2 tracking-wide">
             106 Editions • 15+ Series • Since April 2025
           </div>
         </div>
@@ -57,26 +57,32 @@ export default function Hero() {
         {/* BUTTONS */}
         <div className="absolute bottom-12 md:bottom-20 left-1/2 -translate-x-1/2 flex flex-col sm:flex-row gap-4 justify-center items-center w-full px-4">
 
-          <Link
+          <Button
             href="/browse"
-            className="flex items-center gap-3 px-8 md:px-16 py-3 w-full sm:min-w-[260px] sm:w-auto justify-center rounded-full bg-[#a21caf]/80 hover:bg-[#c026d3]/90 text-white font-semibold text-lg shadow-lg transition"
+            variant="pill-accent"
+            size="lg"
+            className="w-full sm:w-auto sm:min-w-[260px]"
           >
             🔎 Explore Topics
-          </Link>
+          </Button>
 
-          <Link
+          <Button
             href="/series-hub"
-            className="flex items-center gap-3 px-8 md:px-16 py-3 w-full sm:min-w-[260px] sm:w-auto justify-center rounded-full bg-[#312e81]/80 hover:bg-[#3730a3]/90 text-white font-semibold text-lg shadow-lg transition"
+            variant="pill"
+            size="lg"
+            className="w-full sm:w-auto sm:min-w-[260px]"
           >
             📖 Past Series
-          </Link>
+          </Button>
 
-          <Link
+          <Button
             href="/themes"
-            className="flex items-center gap-3 px-8 md:px-16 py-3 w-full sm:min-w-[260px] sm:w-auto justify-center rounded-full bg-[#be185d]/80 hover:bg-[#e11d48]/90 text-white font-semibold text-lg shadow-lg transition"
+            variant="pill"
+            size="lg"
+            className="w-full sm:w-auto sm:min-w-[260px]"
           >
             📅 Monthly Themes
-          </Link>
+          </Button>
 
         </div>
       </div>

@@ -24,11 +24,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="light">
+    <html lang="en" className={inter.variable}>
       {/* ✅ GOOGLE ANALYTICS SCRIPT */}
       <head>
-        <meta name="color-scheme" content="light" />
-        </head>
+        <meta name="color-scheme" content="dark" />
+        <meta name="theme-color" content="#05031a" />
+      </head>
       <Script
         async
         src="https://www.googletagmanager.com/gtag/js?id=G-FWR505Z901"
@@ -47,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
       <body
         suppressHydrationWarning
-        className={`${inter.variable} antialiased`}
+        className="antialiased text-ink-2"
       >
         <ThemeLoader />
         <NavWithCommunity />
