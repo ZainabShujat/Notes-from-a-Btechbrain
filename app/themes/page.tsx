@@ -1,4 +1,6 @@
-import Link from "next/link";
+import Button from "../components/ui/Button";
+import Card from "../components/ui/Card";
+import PageHeader from "../components/ui/PageHeader";
 
 const themes = [
   {
@@ -6,76 +8,67 @@ const themes = [
     desc: "A mini-series on student struggles.",
     href: "/category/july-crisis",
     icon: "📅",
-    color: "text-red-700",
-    border: "border-red-400",
+    dot: "bg-red-400",
   },
   {
     title: "Tech Demystified",
     desc: "Simplifying complex tech topics.",
     href: "/category/tech-demystified",
     icon: "⚙️",
-    color: "text-cyan-700",
-    border: "border-cyan-400",
+    dot: "bg-cyan-400",
   },
   {
     title: "Financial Month",
     desc: "Student stories on finance.",
     href: "/category/financial-month",
     icon: "💸",
-    color: "text-green-700",
-    border: "border-green-400",
+    dot: "bg-green-400",
   },
   {
     title: "Childhood Arc",
     desc: "A documentation of the vivid experiences of a girl in STEM.",
     href: "/category/girlhood-and-stem-experiences",
     icon: "🧒",
-    color: "text-pink-700",
-    border: "border-pink-400",
+    dot: "bg-pink-400",
   },
 ];
 
 export default function ThemesPage() {
   return (
-    <main
-      className="relative min-h-screen w-full flex flex-col items-center justify-start px-4 py-12"
-      style={{
-        backgroundImage: "url(/assets/banners/galaxy-bg.webp)",
-        backgroundSize: "cover",
-        backgroundPosition: "center top",
-        backgroundRepeat: "no-repeat",
-        filter: "brightness(1.1) saturate(1.2)",
-      }}
-    >
-      <div className="absolute inset-0 bg-white/60 pointer-events-none select-none" style={{mixBlendMode: 'lighten'}} />
-      <div className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center">
-        <div className="flex flex-col items-center mb-8">
-          <span className="text-3xl mb-2">📅</span>
-          <h1 className="text-3xl md:text-4xl font-bold mb-1 text-slate-900">Themes</h1>
-          <p className="text-center text-slate-700 text-lg">Explore a concept</p>
-          <Link
-            href="/series-hub"
-            className="mt-4 inline-block px-5 py-2 rounded-full bg-purple-100 text-purple-700 font-semibold shadow hover:bg-purple-200 transition"
-          >
+    <main className="mx-auto w-full max-w-5xl px-4 sm:px-6 md:px-8 py-16 md:py-24">
+      <PageHeader
+        eyebrow="Monthly"
+        title="Themes"
+        description="Explore a concept."
+        align="center"
+        actions={
+          <Button href="/series-hub" variant="secondary" size="md">
             View All Series →
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-          {themes.map((theme) => (
-            <Link
-              key={theme.title}
-              href={theme.href}
-              className={`relative block rounded-2xl p-6 bg-white/30 border-2 ${theme.border} shadow-lg backdrop-blur-md hover:bg-white/50 transition group`}
-              style={{ boxShadow: "0 4px 32px 0 rgba(80, 0, 120, 0.10)" }}
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-2xl md:text-3xl drop-shadow-lg">{theme.icon}</span>
-                <span className={`text-xl md:text-2xl font-semibold ${theme.color}`}>{theme.title}</span>
-              </div>
-              <div className="text-slate-700 text-base md:text-lg opacity-90">{theme.desc}</div>
-            </Link>
-          ))}
-        </div>
+          </Button>
+        }
+      />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+        {themes.map((theme) => (
+          <Card key={theme.title} href={theme.href} className="h-full">
+            <div className="flex items-center gap-3 mb-2">
+              <span aria-hidden="true" className="text-2xl md:text-3xl">
+                {theme.icon}
+              </span>
+
+              <span className="text-xl md:text-2xl font-semibold text-ink-1">
+                {theme.title}
+              </span>
+
+              <span
+                aria-hidden="true"
+                className={`ml-auto h-2.5 w-2.5 shrink-0 rounded-pill ${theme.dot}`}
+              />
+            </div>
+
+            <p className="text-ink-2 text-base md:text-lg m-0">{theme.desc}</p>
+          </Card>
+        ))}
       </div>
     </main>
   );

@@ -1,5 +1,6 @@
 import { getCombinedPosts } from "../../lib/posts";
 import ArticleSearch from "../components/ArticleSearch";
+import PageHeader from "../components/ui/PageHeader";
 
 export const metadata = {
   title: "All Posts | Notes Brain",
@@ -17,16 +18,12 @@ export default async function AllPostsPage({
   const selectedTag = params?.tag || "";
 
   return (
-    <main className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-12 text-slate-900 bg-white">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">
-          All Posts
-        </h1>
-
-        <p className="text-slate-700">
-          Search through {allPosts.length} posts by title, keywords, category, or full content
-        </p>
-      </div>
+    <main className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-16 md:py-24">
+      <PageHeader
+        eyebrow="The archive"
+        title="All Posts"
+        description={`Search through ${allPosts.length} posts by title, keywords, category, or full content.`}
+      />
 
       <ArticleSearch
         posts={allPosts}

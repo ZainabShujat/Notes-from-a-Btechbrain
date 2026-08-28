@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import Card from '../../components/ui/Card';
+import PageHeader from '../../components/ui/PageHeader';
 
 const subcategories = [
   {
@@ -35,22 +37,19 @@ const subcategories = [
 
 export default function IWYCategoryPage() {
   return (
-    <main className="max-w-3xl mx-auto py-12 px-4">
-      <h1 className="text-3xl font-bold mb-6 text-center">I Wonder Why</h1>
-      <div className="text-center mb-2">
-        <span className="block text-base italic text-gray-400 dark:text-slate-300/80">Essays about thinking, noticing, and learning slowly.</span>
-      </div>
-      <p className="mb-10 text-center text-lg text-gray-400 dark:text-slate-300/80">Explore by subcategory:</p>
+    <main className="max-w-3xl mx-auto py-16 md:py-24 px-4">
+      <PageHeader
+        eyebrow="Retired series"
+        title="I Wonder Why"
+        description="Essays about thinking, noticing, and learning slowly. Explore by subcategory:"
+        align="center"
+      />
       <div className="grid gap-6 md:grid-cols-2">
         {subcategories.map((sub) => (
-          <Link
-            key={sub.key}
-            href={`/category/i-wonder-why/${sub.key}`}
-            className="block border rounded-lg p-6 hover:shadow-lg transition bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100"
-          >
-            <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-slate-100">{sub.title}</h2>
-            <p className="text-gray-500 dark:text-slate-300">{sub.description}</p>
-          </Link>
+          <Card key={sub.key} href={`/category/i-wonder-why/${sub.key}`} className="h-full">
+            <h2 className="text-xl font-semibold mb-2 text-ink-1">{sub.title}</h2>
+            <p className="text-ink-2 m-0">{sub.description}</p>
+          </Card>
         ))}
       </div>
     </main>

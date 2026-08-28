@@ -1,16 +1,18 @@
 "use client";
 import { useRouter } from "next/navigation";
+import Button from "./ui/Button";
 
 export default function BackButton({ className = "" }: { className?: string }) {
   const router = useRouter();
+
   return (
-    <button
-      type="button"
+    <Button
+      variant="secondary"
+      size="md"
       onClick={() => router.back()}
-      className={`inline-flex items-center gap-2 px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium transition ${className}`}
+      className={className}
     >
-      {/* You can use an icon here if you want */}
       ← Back
-    </button>
+    </Button>
   );
 }

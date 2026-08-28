@@ -116,11 +116,11 @@ export default function ArticleSearch({ posts,
   return (
     <div>
       {/* Filters Section */}
-      <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+      <div className="bg-surface-1 border border-hairline rounded-lg backdrop-blur-md shadow-card p-5 md:p-6 mb-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Search Input */}
           <div className="md:col-span-3">
-            <label htmlFor="search" className="block text-sm font-medium text-slate-700 mb-2">
+            <label htmlFor="search" className="block text-sm font-medium text-ink-2 mb-2">
               Search Articles
             </label>
             <input
@@ -129,20 +129,20 @@ export default function ArticleSearch({ posts,
               placeholder="Search by title, keywords, category, or content..."
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-2.5 rounded-md bg-surface-2 border border-hairline text-ink-1 placeholder:text-ink-3 outline-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent hover:border-hairline-strong"
             />
           </div>
 
           {/* Category Filter */}
           <div>
-            <label htmlFor="category" className="block text-sm font-medium text-slate-700 mb-2">
+            <label htmlFor="category" className="block text-sm font-medium text-ink-2 mb-2">
               Category
             </label>
             <select
               id="category"
               value={selectedCategory}
               onChange={(e) => handleCategoryChange(e.target.value)}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none bg-white"
+              className="w-full px-4 py-2.5 rounded-md bg-surface-2 border border-hairline text-ink-1 placeholder:text-ink-3 outline-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent hover:border-hairline-strong [&>option]:bg-raised [&>option]:text-ink-1"
             >
               {categories.map((cat) => (
                 <option key={cat} value={cat}>
@@ -154,14 +154,14 @@ export default function ArticleSearch({ posts,
 
           {/* Sort Order */}
           <div>
-            <label htmlFor="sort" className="block text-sm font-medium text-slate-700 mb-2">
+            <label htmlFor="sort" className="block text-sm font-medium text-ink-2 mb-2">
               Sort By
             </label>
             <select
               id="sort"
               value={sortOrder}
               onChange={(e) => handleSortChange(e.target.value as "newest" | "oldest" | "alphabetical" | "relevance")}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none bg-white"
+              className="w-full px-4 py-2.5 rounded-md bg-surface-2 border border-hairline text-ink-1 placeholder:text-ink-3 outline-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent hover:border-hairline-strong [&>option]:bg-raised [&>option]:text-ink-1"
             >
               <option value="newest">Newest First</option>
               <option value="oldest">Oldest First</option>
@@ -172,8 +172,8 @@ export default function ArticleSearch({ posts,
 
           {/* Results Count */}
           <div className="flex items-end">
-            <p className="text-sm text-slate-600">
-              Showing <span className="font-semibold text-purple-600">{filteredAndSortedPosts.length}</span> article{filteredAndSortedPosts.length !== 1 ? "s" : ""}
+            <p className="text-sm text-ink-3">
+              Showing <span className="font-semibold text-accent-soft">{filteredAndSortedPosts.length}</span> article{filteredAndSortedPosts.length !== 1 ? "s" : ""}
             </p>
           </div>
         </div>
@@ -182,8 +182,8 @@ export default function ArticleSearch({ posts,
       {/* Results Grid */}
       {paginatedPosts.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-slate-600 text-lg">No articles found matching your criteria.</p>
-          <p className="text-slate-500 text-sm mt-2">Try adjusting your search or filters.</p>
+          <p className="text-ink-1 text-lg">No articles found matching your criteria.</p>
+          <p className="text-ink-3 text-sm mt-2">Try adjusting your search or filters.</p>
         </div>
       ) : (
         <>
@@ -209,7 +209,7 @@ export default function ArticleSearch({ posts,
               <button
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
-                className="px-4 py-2 border border-slate-300 rounded-lg hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-4 py-2 rounded-md border border-hairline bg-surface-2 text-ink-1 transition-colors hover:bg-surface-3 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Previous
               </button>
@@ -219,10 +219,10 @@ export default function ArticleSearch({ posts,
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={`px-4 py-2 rounded-lg transition-colors ${
+                    className={`px-4 py-2 rounded-md transition-colors ${
                       currentPage === page
-                        ? "bg-purple-600 text-white"
-                        : "border border-slate-300 hover:bg-slate-50"
+                        ? "bg-accent text-white"
+                        : "border border-hairline bg-surface-1 text-ink-2 hover:bg-surface-2 hover:text-ink-1"
                     }`}
                   >
                     {page}
@@ -233,7 +233,7 @@ export default function ArticleSearch({ posts,
               <button
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 border border-slate-300 rounded-lg hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-4 py-2 rounded-md border border-hairline bg-surface-2 text-ink-1 transition-colors hover:bg-surface-3 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Next
               </button>

@@ -25,19 +25,19 @@ export default async function IWYSubcategoryPage({ params }: { params: Promise<{
   );
 
   return (
-    <main className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-10">
+    <main className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-16 md:py-24">
       <a
         href="/category/i-wonder-why"
-        className="inline-block mb-6 text-blue-600 hover:underline text-sm"
+        className="inline-block mb-6 text-accent-soft hover:text-ink-1 transition-colors underline underline-offset-2 text-sm"
         aria-label="Back to I Wonder Why"
       >
         ← Back to I Wonder Why
       </a>
-      <h1 className="text-3xl font-bold capitalize text-center mb-8">
+      <h1 className="text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.1] tracking-tight text-ink-1 capitalize text-center mb-8">
         {subcategoryName}
       </h1>
       {filtered.length === 0 && (
-        <p className="mt-4 text-slate-600 text-center">No posts in this subcategory yet.</p>
+        <p className="mt-4 text-ink-3 text-center">No posts in this subcategory yet.</p>
       )}
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
         {filtered.map((p: PostMeta) => (
