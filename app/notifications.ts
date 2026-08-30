@@ -4,6 +4,54 @@
 
 const notifications = [
   {
+    id: 32,
+    date: "2026-08-30",
+    title: "Custom 404 Page Added",
+    message: "Replaced the default Next.js error page with a custom 404 'Not Found' experience that fits the site's aesthetic and helps guide lost wanderers back to the main worlds.",
+    version: "v1.1.0",
+    color: "#ec4899", // pink
+  },
+  {
+    id: 31,
+    date: "2026-08-30",
+    title: "Wonder Page Overhaul: Daily Feed",
+    message: "The Wonder page has been completely redesigned from a static grid into a chronological Daily Feed timeline (similar to X/Twitter). It now supports individual thought routing, likes, and copy-to-clipboard sharing.",
+    version: "v1.1.0",
+    color: "#06b6d4", // cyan
+  },
+  {
+    id: 30,
+    date: "2026-08-30",
+    title: "Dynamic Open Graph Images",
+    message: "Implemented a dynamic image generation API using Next.js ImageResponse. Now, when you share a Wonder thought on social media or iMessage, it automatically generates a beautiful custom card featuring the post text.",
+    version: "v1.1.0",
+    color: "#eab308", // yellow
+  },
+  {
+    id: 29,
+    date: "2026-08-30",
+    title: "CSS Theme Engine Refactor",
+    message: "Completely refactored the Tailwind v4 integration to use a robust CSS-first variable architecture. Light and Dark modes now toggle flawlessly across all UI components and nested elements.",
+    version: "v1.1.0",
+    color: "#8b5cf6", // violet
+  },
+  {
+    id: 28,
+    date: "2026-08-30",
+    title: "Games Hub Integrated",
+    message: "Consolidated interactive projects like Suika Lite and Ant Smasher into a dedicated, fully playable Games page within the site architecture. Iframes are now properly configured for embedded play.",
+    version: "v1.1.0",
+    color: "#f43f5e", // rose
+  },
+  {
+    id: 27,
+    date: "2026-08-30",
+    title: "Site Architecture Cleanup",
+    message: "Streamlined the universe. Removed the legacy 'Builds' page to simplify the 5-world navigation structure, added a direct Portfolio link, and temporarily removed the Subscriptions UI while backend logic is being rebuilt.",
+    version: "v1.1.0",
+    color: "#64748b", // slate
+  },
+  {
     id: 26,
     date: "2026-05-23",
     title: "Brain Map System Added",

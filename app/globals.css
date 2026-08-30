@@ -363,3 +363,18 @@ body::after {
 
   pointer-events: none;
 }
+
+/* =========================================================
+   404 — the stray node drifts, gently, and only if the
+   viewer hasn't asked for reduced motion.
+   ========================================================= */
+
+.stray {
+  animation: stray-drift 6s ease-in-out infinite;
+  transform-origin: 278px 122px;
+}
+
+@keyframes stray-drift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(6px, -5px); }
+}
