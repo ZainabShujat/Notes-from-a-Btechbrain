@@ -3,7 +3,7 @@ import { OBSERVATIONS } from "./data";
 import PageHeader from "../components/ui/PageHeader";
 import { pageMetadata } from "../../lib/seo";
 import FeedItem from "./FeedItem";
-
+import WonderFeed from "./WonderFeed";
 export const metadata = pageMetadata({
   title: "Wonder",
   description:
@@ -32,11 +32,7 @@ export default function WonderPage() {
           patterns nobody talks about, and the quiet absurdity of digital life.
         </p>
 
-        <div className="flex flex-col border-t border-hairline mt-8">
-          {OBSERVATIONS.map((obs) => (
-            <FeedItem key={obs.id} obs={obs} />
-          ))}
-        </div>
+        <WonderFeed observations={OBSERVATIONS} />
       </section>
 
       {/* Brain Map section */}
