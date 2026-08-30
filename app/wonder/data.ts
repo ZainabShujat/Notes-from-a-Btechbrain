@@ -7,6 +7,12 @@ export type Observation = {
 
 export const OBSERVATIONS: Observation[] = [
   {
+    id: "blinking-cursor",
+    title: "The cursor knows when you're thinking",
+    body: "A blinking text cursor is doing almost nothing, yet we rarely notice how much it changes a blank screen. Without it, an empty text box feels unfinished; with it, the same emptiness feels like an invitation. One tiny animation quietly tells your brain: something is waiting to become a thought.",
+    date: "2026-08-30",
+  },
+  {
     id: "notification-anxiety",
     title: "Notification Anxiety Is a Design Choice",
     body: "Every red badge on your phone is someone's product decision to make you feel behind. The number isn't urgent. The colour is.",
