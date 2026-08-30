@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { getObservationById, OBSERVATIONS } from "../data";
 import FeedItem from "../FeedItem";
 import BackButton from "../../components/BackButton";
-import { absoluteUrl } from "../../../lib/seo";
+import { absoluteUrl, SITE_URL } from "../../../lib/seo";
 import type { Metadata } from "next";
 
 type PageProps = {
@@ -17,9 +17,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Not found" };
   }
 
-  const url = `${absoluteUrl("")}/wonder/${id}`;
+  const url = `${SITE_URL}/wonder/${id}`;
   // Use our new dynamic OG route
-  const ogImage = `${absoluteUrl("")}/api/og/wonder?id=${id}`;
+  const ogImage = `${SITE_URL}/api/og/wonder?id=${id}`;
 
   return {
     title: `${obs.title} — Wonder`,

@@ -145,69 +145,34 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Dynamic Content Surface */}
-      <section className="mx-auto max-w-4xl px-4 sm:px-6 md:px-8 pb-24 md:pb-32">
-        <div className="border-t border-hairline pt-16">
-          <h2 className="text-xl md:text-2xl font-bold text-ink-1 mb-8">Currently Exploring</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Featured Note */}
-            {latestNote && (
-              <Link 
-                href={`/post/${latestNote.slug}`}
-                className="group flex flex-col justify-between rounded-xl border border-hairline bg-surface-1 p-6 transition-all hover:border-hairline-strong hover:bg-surface-2 hover:-translate-y-0.5 hover:shadow-lift"
-              >
-                <div>
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-xs font-semibold uppercase tracking-widest text-accent-soft">Recent Note</span>
-                    <span className="w-1 h-1 rounded-full bg-hairline-strong"></span>
-                    <span className="text-xs text-ink-3">
-                      {new Date(latestNote.date || latestNote.created_at).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-bold text-ink-1 group-hover:text-accent-soft transition-colors line-clamp-2 leading-snug">
-                    {latestNote.title}
-                  </h3>
-                  {latestNote.excerpt && (
-                    <p className="mt-3 text-sm text-ink-2 line-clamp-3 leading-relaxed">
-                      {latestNote.excerpt}
-                    </p>
-                  )}
-                </div>
-                <div className="mt-6 flex items-center text-xs font-semibold text-ink-3 group-hover:text-accent-soft transition-colors">
-                  Read full note →
-                </div>
-              </Link>
-            )}
+      {/* Featured Wonder */}
+      {latestWonder && (
+        <section className="mx-auto max-w-2xl px-4 sm:px-6 md:px-8 pb-16 md:pb-24 text-center">
+          <p className="text-xs font-bold uppercase tracking-widest text-ink-3 mb-4">
+            Something worth wandering into
+          </p>
+          <Link href={`/wonder/${latestWonder.id}`} className="group block">
+            <h3 className="text-xl md:text-2xl font-bold text-ink-1 group-hover:text-accent-soft transition-colors leading-snug mb-3">
+              {latestWonder.title}
+            </h3>
+            <p className="text-sm md:text-base text-ink-2 leading-relaxed mb-4 line-clamp-2 max-w-lg mx-auto">
+              {latestWonder.body}
+            </p>
+            <span className="text-sm font-medium text-ink-3 group-hover:text-accent-soft transition-colors">
+              Read →
+            </span>
+          </Link>
+        </section>
+      )}
 
-            {/* Featured Wonder */}
-            {latestWonder && (
-              <Link 
-                href={`/wonder/${latestWonder.id}`}
-                className="group flex flex-col justify-between rounded-xl border border-hairline bg-surface-1 p-6 transition-all hover:border-hairline-strong hover:bg-surface-2 hover:-translate-y-0.5 hover:shadow-lift"
-              >
-                <div>
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-xs font-semibold uppercase tracking-widest text-accent-soft">Wonder</span>
-                    <span className="w-1 h-1 rounded-full bg-hairline-strong"></span>
-                    <span className="text-xs text-ink-3">
-                      {new Date(latestWonder.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-bold text-ink-1 group-hover:text-accent-soft transition-colors leading-snug">
-                    {latestWonder.title}
-                  </h3>
-                  <p className="mt-3 text-sm text-ink-2 line-clamp-3 leading-relaxed">
-                    {latestWonder.body}
-                  </p>
-                </div>
-                <div className="mt-6 flex items-center text-xs font-semibold text-ink-3 group-hover:text-accent-soft transition-colors">
-                  View thought →
-                </div>
-              </Link>
-            )}
-          </div>
-        </div>
+      {/* Helpful links below */}
+      <section className="mx-auto max-w-4xl px-4 sm:px-6 md:px-8 pb-24 md:pb-32 flex flex-col items-center justify-center gap-6 text-sm text-ink-3">
+        <Link href="/map" className="hover:text-ink-1 hover:underline underline-offset-4 transition-colors">
+          The Brain Map →
+        </Link>
+        <Link href="/start-here" className="hover:text-ink-1 hover:underline underline-offset-4 transition-colors">
+          Not sure where to begin? Start Here →
+        </Link>
       </section>
 
     </main>

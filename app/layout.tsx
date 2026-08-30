@@ -11,7 +11,7 @@ import {
   DEFAULT_OG_IMAGE,
 } from "../lib/seo";
 import Nav from "./components/Nav";
-
+import UpdatesWidget from "./components/UpdatesWidget";
 import Footer from "./components/Footer";
 
 const inter = Inter({
@@ -100,6 +100,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <Nav />
         {children}
+        <UpdatesWidget />
         <Footer />
       </body>
     </html>

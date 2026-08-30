@@ -22,12 +22,7 @@ export default function NotificationsTab() {
   const currentNotifications = notifications.slice(startIdx, endIdx);
 
   return (
-    <main className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 py-16 md:py-24">
-      <PageHeader
-        eyebrow="Changelog"
-        title="Updates"
-        description="What has changed on the site, newest first."
-      />
+    <div className="w-full">
       {/* Version color legend removed as requested */}
       <ul className="flex flex-col gap-4 list-none p-0 m-0">
         {currentNotifications.map((note) => (
@@ -66,6 +61,6 @@ export default function NotificationsTab() {
           Next
         </Button>
       </div>
-    </main>
+    </div>
   );
 }

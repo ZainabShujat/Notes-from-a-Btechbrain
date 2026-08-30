@@ -16,6 +16,13 @@ export default function WorkPage() {
         title="The Work We Do"
         description="Not career advice. Career exploration. What do these professions actually look like — the systems, the trade-offs, the people?"
       />
+      {/* LinkedIn Notice */}
+      <div className="mb-12 rounded-xl bg-surface-2 border border-hairline p-5 text-ink-2 flex items-start gap-4">
+        <span className="text-xl">✨</span>
+        <p className="text-sm md:text-base leading-relaxed">
+          <strong className="text-ink-1">Note:</strong> The editions outlined below are currently being published as a series on my LinkedIn. They will be archived and fully readable right here shortly!
+        </p>
+      </div>
 
       {/* Phase 1: Worlds of Work */}
       <section className="mb-16">

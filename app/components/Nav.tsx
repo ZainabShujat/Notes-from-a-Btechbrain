@@ -16,9 +16,7 @@ const PRIMARY = [
   { href: "/books", label: "Books", icon: "📖" },
 ];
 
-/** Quiet secondary link. */
 const SECONDARY = [
-  { href: "/start-here", label: "Start Here", icon: "✨" },
   { href: "/about", label: "About", icon: "👋" },
 ];
 

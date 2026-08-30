@@ -47,10 +47,10 @@ export default function AboutPage() {
             </span>
           </Link>
           <Link
-            href="/builds"
+            href="/games"
             className="block rounded-lg bg-surface-1 border border-hairline px-5 py-3 hover:bg-surface-2 transition-colors"
           >
-            <span className="font-semibold text-ink-1">🔨 Builds</span>
+            <span className="font-semibold text-ink-1">🎮 Games</span>
             <span className="text-ink-3 text-sm ml-2">
               — Things I&apos;ve made and what I learned
             </span>
