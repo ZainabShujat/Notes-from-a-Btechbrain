@@ -43,7 +43,7 @@ export default function WonderPage() {
       <section className="mb-16">
         <Link
           href="/map"
-          className="group flex items-center gap-5 rounded-xl border border-hairline bg-surface-1/50 backdrop-blur-sm px-6 py-6 md:px-8 md:py-8 transition-all duration-300 hover:bg-surface-2 hover:border-hairline-strong hover:shadow-lift hover:-translate-y-0.5"
+          className="group flex items-center gap-5 rounded-xl border border-hairline bg-surface-1 backdrop-blur-sm px-6 py-6 md:px-8 md:py-8 transition-all duration-300 hover:bg-surface-2 hover:border-hairline-strong hover:shadow-lift hover:-translate-y-0.5"
         >
           <div className="flex flex-col items-center justify-center shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-xl bg-violet-500/10 border border-violet-500/20">
             <span className="text-3xl md:text-4xl" aria-hidden="true">
@@ -82,7 +82,7 @@ export default function WonderPage() {
       <section className="mb-16">
         <Link
           href="/category/i-wonder-why"
-          className="group flex items-center gap-5 rounded-xl border border-hairline bg-surface-1/50 backdrop-blur-sm px-6 py-6 md:px-8 md:py-8 transition-all duration-300 hover:bg-surface-2 hover:border-hairline-strong hover:shadow-lift hover:-translate-y-0.5"
+          className="group flex items-center gap-5 rounded-xl border border-hairline bg-surface-1 backdrop-blur-sm px-6 py-6 md:px-8 md:py-8 transition-all duration-300 hover:bg-surface-2 hover:border-hairline-strong hover:shadow-lift hover:-translate-y-0.5"
         >
           <div className="flex flex-col items-center justify-center shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-xl bg-violet-500/10 border border-violet-500/20">
             <span className="text-3xl md:text-4xl" aria-hidden="true">

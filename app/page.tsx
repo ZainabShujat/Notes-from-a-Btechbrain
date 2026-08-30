@@ -1,65 +1,50 @@
 import Link from "next/link";
+import { getCombinedPosts } from "../lib/posts";
+import { OBSERVATIONS } from "./wonder/data";
 
 const WORLDS = [
   {
     href: "/notes",
-    verb: "I write",
+    verb: "READ",
     label: "Notes",
     description: "Essays, explorations, reflections, and questions about everything.",
     icon: "✍️",
   },
   {
-    href: "/games",
-    verb: "I play",
-    label: "Games",
-    description: "Browser games I've built. Play them right here.",
-    icon: "🎮",
-  },
-  {
     href: "/work",
-    verb: "I explore work",
+    verb: "EXPLORE",
     label: "The Work We Do",
     description: "What careers actually look like from the inside.",
     icon: "🌍",
   },
   {
     href: "/wonder",
-    verb: "I wonder",
+    verb: "WONDER",
     label: "Wonder",
     description: "Strange connections, curiosity maps, and things the internet does.",
     icon: "🌀",
   },
   {
+    href: "/games",
+    verb: "BUILD",
+    label: "Games",
+    description: "Browser games I've built. Play them right here.",
+    icon: "🎮",
+  },
+  {
     href: "/books",
-    verb: "I'm writing",
+    verb: "GO DEEPER",
     label: "Books",
     description: "Long-form work, currently being handwritten.",
     icon: "📖",
   },
 ];
 
-const THOUGHTS = [
-  "Why do some careers become prestige symbols while others don't?",
-  "How does an AI interview agent actually work under the hood?",
-  "Why do humans find patterns in everything — even noise?",
-  "What happens when you stop waiting to find your purpose?",
-  "Why does debugging at 2 AM feel like therapy?",
-  "What if the internet is the weirdest thing humans have ever built?",
-  "Why does time feel faster the older you get?",
-  "What do fractals, galaxies, and shells have in common?",
-];
-
-function getRotatingThought(): string {
-  // Rotate daily based on day-of-year
-  const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
-  const diff = now.getTime() - start.getTime();
-  const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
-  return THOUGHTS[dayOfYear % THOUGHTS.length];
-}
-
-export default function Home() {
-  const thought = getRotatingThought();
+export default async function Home() {
+  // Fetch latest interesting things
+  const posts = await getCombinedPosts();
+  const latestNote = posts[0];
+  const latestWonder = OBSERVATIONS[0];
 
   return (
     <main className="text-ink-2">
@@ -86,20 +71,16 @@ export default function Home() {
             A place to explore things I don&apos;t understand yet.
           </p>
 
-          {/* Rotating thought */}
-          <div className="mt-12 md:mt-16 rounded-xl border border-hairline bg-surface-1 backdrop-blur-md px-6 py-5 max-w-lg">
-            <p className="text-xs uppercase tracking-[0.2em] text-ink-2 font-semibold mb-2">
-              Today I&apos;m thinking about
-            </p>
-            <p className="text-base md:text-lg text-ink-1 leading-relaxed italic">
-              &ldquo;{thought}&rdquo;
+          {/* Core Prompt */}
+          <div className="mt-16 md:mt-24">
+            <p className="text-sm md:text-base uppercase tracking-[0.2em] text-ink-1 font-bold">
+              What are you curious about?
             </p>
           </div>
         </div>
 
         {/* Scroll hint */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-ink-2 animate-pulse">
-          <span className="text-xs tracking-widest uppercase">Explore</span>
           <svg
             className="w-4 h-4"
             fill="none"
@@ -118,13 +99,13 @@ export default function Home() {
       </section>
 
       {/* Five Worlds */}
-      <section className="mx-auto max-w-4xl px-4 sm:px-6 md:px-8 py-16 md:py-24">
+      <section className="mx-auto max-w-4xl px-4 sm:px-6 md:px-8 pb-16 md:pb-24">
         <div className="flex flex-col gap-4">
           {WORLDS.map((world) => (
             <Link
               key={world.href}
               href={world.href}
-              className="group flex items-start gap-4 md:gap-6 rounded-xl border border-hairline bg-surface-1/50 backdrop-blur-sm px-5 py-5 md:px-7 md:py-6 transition-all duration-300 hover:bg-surface-2 hover:border-hairline-strong hover:shadow-lift hover:-translate-y-0.5"
+              className="group flex items-start gap-4 md:gap-6 rounded-xl border border-hairline bg-surface-1 backdrop-blur-sm px-5 py-5 md:px-7 md:py-6 transition-all duration-300 hover:bg-surface-2 hover:border-hairline-strong hover:shadow-lift hover:-translate-y-0.5"
             >
               <span
                 className="text-2xl md:text-3xl mt-0.5 shrink-0"
@@ -163,6 +144,72 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* Dynamic Content Surface */}
+      <section className="mx-auto max-w-4xl px-4 sm:px-6 md:px-8 pb-24 md:pb-32">
+        <div className="border-t border-hairline pt-16">
+          <h2 className="text-xl md:text-2xl font-bold text-ink-1 mb-8">Currently Exploring</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Featured Note */}
+            {latestNote && (
+              <Link 
+                href={`/post/${latestNote.slug}`}
+                className="group flex flex-col justify-between rounded-xl border border-hairline bg-surface-1 p-6 transition-all hover:border-hairline-strong hover:bg-surface-2 hover:-translate-y-0.5 hover:shadow-lift"
+              >
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-accent-soft">Recent Note</span>
+                    <span className="w-1 h-1 rounded-full bg-hairline-strong"></span>
+                    <span className="text-xs text-ink-3">
+                      {new Date(latestNote.date || latestNote.created_at).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold text-ink-1 group-hover:text-accent-soft transition-colors line-clamp-2 leading-snug">
+                    {latestNote.title}
+                  </h3>
+                  {latestNote.excerpt && (
+                    <p className="mt-3 text-sm text-ink-2 line-clamp-3 leading-relaxed">
+                      {latestNote.excerpt}
+                    </p>
+                  )}
+                </div>
+                <div className="mt-6 flex items-center text-xs font-semibold text-ink-3 group-hover:text-accent-soft transition-colors">
+                  Read full note →
+                </div>
+              </Link>
+            )}
+
+            {/* Featured Wonder */}
+            {latestWonder && (
+              <Link 
+                href={`/wonder/${latestWonder.id}`}
+                className="group flex flex-col justify-between rounded-xl border border-hairline bg-surface-1 p-6 transition-all hover:border-hairline-strong hover:bg-surface-2 hover:-translate-y-0.5 hover:shadow-lift"
+              >
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-accent-soft">Wonder</span>
+                    <span className="w-1 h-1 rounded-full bg-hairline-strong"></span>
+                    <span className="text-xs text-ink-3">
+                      {new Date(latestWonder.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold text-ink-1 group-hover:text-accent-soft transition-colors leading-snug">
+                    {latestWonder.title}
+                  </h3>
+                  <p className="mt-3 text-sm text-ink-2 line-clamp-3 leading-relaxed">
+                    {latestWonder.body}
+                  </p>
+                </div>
+                <div className="mt-6 flex items-center text-xs font-semibold text-ink-3 group-hover:text-accent-soft transition-colors">
+                  View thought →
+                </div>
+              </Link>
+            )}
+          </div>
+        </div>
+      </section>
+
     </main>
   );
 }

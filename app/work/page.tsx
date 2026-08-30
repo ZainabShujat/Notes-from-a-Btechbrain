@@ -22,7 +22,7 @@ export default function WorkPage() {
         <h2 className="text-2xl md:text-3xl font-bold text-ink-1 mb-6">Phase 1: Worlds of Work</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {DOMAINS.map((domain) => (
-            <div key={domain.id} className="rounded-xl border border-hairline bg-surface-1/50 backdrop-blur-sm p-5 hover:bg-surface-2 transition-colors">
+            <div key={domain.id} className="rounded-xl border border-hairline bg-surface-1 backdrop-blur-sm p-5 hover:bg-surface-2 transition-colors">
               <h3 className="font-semibold text-ink-1 mb-2">{domain.name}</h3>
               <p className="text-sm text-ink-2 leading-relaxed">
                 {domain.examples.join(", ")}

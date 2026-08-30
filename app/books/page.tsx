@@ -18,7 +18,7 @@ export default function BooksPage() {
       />
 
       {/* Book I */}
-      <article className="mt-8 rounded-xl border border-hairline bg-surface-1/50 backdrop-blur-sm p-6 md:p-10">
+      <article className="mt-8 rounded-xl border border-hairline bg-surface-1 backdrop-blur-sm p-6 md:p-10">
         <div className="flex items-center gap-3 mb-6">
           <span className="rounded-md bg-accent-muted px-3 py-1 text-xs font-semibold text-accent-soft tracking-wide uppercase">
             Book I

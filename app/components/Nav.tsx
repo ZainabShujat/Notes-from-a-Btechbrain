@@ -81,7 +81,7 @@ export default function Nav() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full border-b border-hairline bg-base/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 w-full border-b border-hairline bg-background/80 backdrop-blur-xl">
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-3 flex items-center justify-between gap-4">
           {/* Wordmark */}
           <Link

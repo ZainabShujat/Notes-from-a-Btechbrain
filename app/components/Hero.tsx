@@ -24,7 +24,7 @@ export default function Hero() {
         onEnded={() =>
           setCurrentVideo((prev) => (prev + 1) % videos.length)
         }
-        className="absolute inset-0 w-full h-full object-cover bg-base"
+        className="absolute inset-0 w-full h-full object-cover bg-background"
       >
         <source src={videos[currentVideo]} type="video/mp4" />
       </video>
