@@ -1,6 +1,14 @@
 import Link from 'next/link';
 import Card from '../../components/ui/Card';
 import PageHeader from '../../components/ui/PageHeader';
+import { pageMetadata } from '../../../lib/seo';
+
+export const metadata = pageMetadata({
+  title: 'I Wonder Why',
+  description:
+    'Essays about thinking, noticing, and learning slowly — language, memory, math, dreams, and being human.',
+  path: '/category/i-wonder-why',
+});
 
 const subcategories = [
   {

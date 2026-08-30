@@ -3,10 +3,16 @@ import { Inter } from "next/font/google";
 import Script from "next/script"; // <-- ADD THIS
 import "./globals.css";
 
+import {
+  SITE_NAME,
+  SITE_URL,
+  SITE_DESCRIPTION,
+  AUTHOR_NAME,
+  DEFAULT_OG_IMAGE,
+} from "../lib/seo";
 import Nav from "./components/Nav";
-import NavWithCommunity from "./components/NavWithCommunityClient";
+
 import Footer from "./components/Footer";
-import ThemeLoader from "./components/ThemeLoader";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -14,8 +20,50 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Notes From a BTech Brain",
-  description: "Insights on tech, world events, and personal growth — by a BTech student.",
+  // metadataBase lets every relative image/canonical below resolve absolutely.
+  metadataBase: new URL(SITE_URL),
+
+  title: {
+    // Pages set only their own name; the brand is appended here, once.
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
+  },
+
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: AUTHOR_NAME, url: "https://zainabshujat.dev/" }],
+  creator: AUTHOR_NAME,
+  publisher: AUTHOR_NAME,
+
+  alternates: {
+    canonical: "/",
+    types: {
+      "application/rss+xml": [{ url: "/rss.xml", title: `${SITE_NAME} — RSS` }],
+    },
+  },
+
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    locale: "en_US",
+    images: [{ url: DEFAULT_OG_IMAGE, alt: SITE_NAME }],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
 };
 
 
@@ -50,8 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         suppressHydrationWarning
         className="antialiased text-ink-2"
       >
-        <ThemeLoader />
-        <NavWithCommunity />
+        <Nav />
         {children}
         <Footer />
       </body>

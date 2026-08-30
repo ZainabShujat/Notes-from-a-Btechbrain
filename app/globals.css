@@ -9,48 +9,28 @@
    ========================================================= */
 
 @theme {
-  /* ---- Type -------------------------------------------------
-     --font-sans feeds Tailwind's default font stack, so setting
-     it here makes Inter the site font everywhere without a
-     single font-family declaration in component code.          */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  /* ---- Ground: the night ------------------------------------
-     Base is the hero video's own black, so the video, the map
-     and every page finally sit on the same colour.             */
-  --color-base: #05031a;
-  --color-raised: #0d0b22;
-  --color-sunken: #141033;
+  --color-base: var(--theme-base);
+  --color-raised: var(--theme-raised);
+  --color-sunken: var(--theme-sunken);
+  --color-surface-1: var(--theme-surface-1);
+  --color-surface-2: var(--theme-surface-2);
+  --color-surface-3: var(--theme-surface-3);
+  --color-hairline: var(--theme-hairline);
+  --color-hairline-strong: var(--theme-hairline-strong);
+  
+  --color-ink-1: var(--theme-ink-1);
+  --color-ink-2: var(--theme-ink-2);
+  --color-ink-3: var(--theme-ink-3);
+  
+  --color-accent: var(--theme-accent);
+  --color-accent-strong: var(--theme-accent-strong);
+  --color-accent-soft: var(--theme-accent-soft);
+  --color-accent-muted: var(--theme-accent-muted);
+  --color-highlight: var(--theme-highlight);
+  --color-on-accent: var(--theme-on-accent);
 
-  /* ---- Surfaces: the glass ----------------------------------
-     Borrowed from the Brain Map HUD, which is the most resolved
-     surface treatment already in the codebase.                 */
-  --color-surface-1: rgb(255 255 255 / 5%);
-  --color-surface-2: rgb(255 255 255 / 9%);
-  --color-surface-3: rgb(255 255 255 / 13%);
-  --color-hairline: rgb(255 255 255 / 14%);
-  --color-hairline-strong: rgb(255 255 255 / 24%);
-
-  /* ---- Ink: violet-biased neutrals --------------------------
-     Replaces the slate / zinc / gray mixture that currently
-     appears on the same screen.                                */
-  --color-ink-1: #f5f3ff;
-  --color-ink-2: #c9c2e4;
-  --color-ink-3: #948cb5;
-
-  /* ---- Accent & highlight -----------------------------------
-     Violet is the only interactive colour. Amber is reserved
-     for identity moments — never links, never body copy.       */
-  --color-accent: #a855f7;
-  --color-accent-strong: #9333ea;
-  --color-accent-soft: #c4b5fd;
-  --color-accent-muted: rgb(168 85 247 / 16%);
-  --color-highlight: #facc15;
-
-  /* ---- Radii ------------------------------------------------
-     One scale. xl/2xl are pinned alongside lg so legacy markup
-     that already uses them stays monotonic with the new scale. */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
@@ -58,25 +38,41 @@
   --radius-2xl: 24px;
   --radius-pill: 999px;
 
-  /* ---- Elevation --------------------------------------------
-     Three, replacing nine ad-hoc box-shadows.                  */
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.35), 0 12px 32px -18px rgb(0 0 0 / 0.75);
   --shadow-lift: 0 2px 6px rgb(0 0 0 / 0.4), 0 22px 48px -22px rgb(0 0 0 / 0.85);
   --shadow-glow: 0 0 0 1px rgb(168 85 247 / 0.28), 0 0 34px -6px rgb(168 85 247 / 0.45);
 
-  /* ---- Spacing ----------------------------------------------
-     v4 derives the whole scale from one step, so 4 / 8 / 12 /
-     16 / 24 / 32 / 48 / 64 / 96 already exist as p-1 … p-24.   */
   --spacing: 0.25rem;
 }
 
-/* =========================================================
-   GROUND
-   One dark ground for the entire public site, applied once.
-   Painted on a fixed pseudo-element rather than with
-   background-attachment: fixed, which causes repaint jank on
-   iOS. Pages no longer bring their own background.
-   ========================================================= */
+:root {
+  --theme-base: #05031a;
+  --theme-raised: #0d0b22;
+  --theme-sunken: #141033;
+  --theme-surface-1: rgb(255 255 255 / 5%);
+  --theme-surface-2: rgb(255 255 255 / 9%);
+  --theme-surface-3: rgb(255 255 255 / 13%);
+  --theme-hairline: rgb(255 255 255 / 14%);
+  --theme-hairline-strong: rgb(255 255 255 / 24%);
+  
+  --theme-ink-1: #f5f3ff;
+  --theme-ink-2: #c9c2e4;
+  --theme-ink-3: #948cb5;
+  
+  --theme-accent: #a855f7;
+  --theme-accent-strong: #9333ea;
+  --theme-accent-soft: #c4b5fd;
+  --theme-accent-muted: rgb(168 85 247 / 16%);
+  --theme-highlight: #facc15;
+  --theme-on-accent: #ffffff;
+
+  --ground-texture: url("/assets/banners/galaxy-bg.webp");
+  --ground-texture-opacity: 0.18;
+  --ground-glow:
+    radial-gradient(120% 85% at 50% -15%, rgb(109 40 217 / 0.32), transparent 62%),
+    radial-gradient(90% 60% at 88% 12%, rgb(168 85 247 / 0.14), transparent 58%),
+    radial-gradient(80% 55% at 8% 88%, rgb(30 27 75 / 0.5), transparent 60%);
+}
 
 html {
   color-scheme: dark;
@@ -100,11 +96,11 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: url("/assets/banners/galaxy-bg.webp");
+  background-image: var(--ground-texture);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.18;
+  opacity: var(--ground-texture-opacity);
 }
 
 body::after {
@@ -113,10 +109,39 @@ body::after {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image:
-    radial-gradient(120% 85% at 50% -15%, rgb(109 40 217 / 0.32), transparent 62%),
-    radial-gradient(90% 60% at 88% 12%, rgb(168 85 247 / 0.14), transparent 58%),
-    radial-gradient(80% 55% at 8% 88%, rgb(30 27 75 / 0.5), transparent 60%);
+  background-image: var(--ground-glow);
+}
+
+/* Light mode overrides */
+.light {
+  color-scheme: light;
+  
+  --theme-base: #f8fafc;
+  --theme-raised: #ffffff;
+  --theme-sunken: #f1f5f9;
+  --theme-surface-1: rgb(0 0 0 / 4%);
+  --theme-surface-2: rgb(0 0 0 / 8%);
+  --theme-surface-3: rgb(0 0 0 / 12%);
+  --theme-hairline: rgb(0 0 0 / 8%);
+  --theme-hairline-strong: rgb(0 0 0 / 16%);
+  
+  --theme-ink-1: #0f172a;
+  --theme-ink-2: #334155;
+  --theme-ink-3: #64748b;
+  
+  --theme-accent: #7e22ce;
+  --theme-accent-strong: #6b21a8;
+  --theme-accent-soft: #9333ea;
+  --theme-accent-muted: rgb(126 34 206 / 10%);
+  --theme-highlight: #d97706;
+  --theme-on-accent: #ffffff;
+}
+
+.light body::before {
+  opacity: 0.05;
+}
+.light body::after {
+  opacity: 0.3;
 }
 
 /* =========================================================

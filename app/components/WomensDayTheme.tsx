@@ -1,11 +1,13 @@
 /**
  * INTERNATIONAL WOMEN'S DAY THEME
  * 
- * 💜 TO CONTROL THIS THEME:
+ *  TO CONTROL THIS THEME:
  * Edit app/components/theme-config.ts and set womensDay to true/false
  */
 
 'use client';
+
+import ThemeGlyph from "./ThemeGlyph";
 
 
 export default function WomensDayTheme() {
@@ -14,15 +16,15 @@ export default function WomensDayTheme() {
       {/* Banner */}
       <div className="womens-banner">
         <div className="banner-content">
-          <span className="icon">💜</span>
+          <span className="icon"><ThemeGlyph name="bloom" /></span>
           <span className="banner-text">International Women's Day — Celebrate strength, resilience, and empowerment</span>
-          <span className="icon">✨</span>
+          <span className="icon"><ThemeGlyph name="bloom" /></span>
         </div>
       </div>
 
       {/* Floating Empowerment Symbols */}
       <div className="empowerment-particles" aria-hidden="true">
-        {['💜', '✨', '🌸', '👑', '💪'].map((symbol, i) => (
+        {['bloom', 'spark', 'star', 'bloom', 'spark'].map((symbol, i) => (
           <div
             key={i}
             className="empower-symbol"
@@ -31,12 +33,49 @@ export default function WomensDayTheme() {
               animationDelay: `${i * 0.8}s`,
             }}
           >
-            {symbol}
+            <ThemeGlyph name={symbol} />
           </div>
         ))}
       </div>
 
       <style jsx global>{`
+        /* ============================================================
+           COMPLETE COLOUR SCHEME
+           Every surface, border, heading and control on the site reads
+           from these tokens, so overriding them here repaints the whole
+           site — including pages written after this theme.
+           ============================================================ */
+        :root[data-theme="womensDay"] {
+          color-scheme: light;
+
+          --color-base: #f3e5f5;
+          --color-raised: #ffffff;
+          --color-sunken: #e6d0ea;
+
+          --color-surface-1: rgb(15 23 42 / 4%);
+          --color-surface-2: rgb(15 23 42 / 7%);
+          --color-surface-3: rgb(15 23 42 / 11%);
+          --color-hairline: rgb(15 23 42 / 14%);
+          --color-hairline-strong: rgb(15 23 42 / 26%);
+
+          --color-ink-1: #111827;
+          --color-ink-2: #374151;
+          --color-ink-3: #6b7280;
+
+          --color-accent: #8e24aa;
+          --color-accent-strong: #6a1b9a;
+          --color-accent-soft: #6a1b9a;
+          --color-accent-muted: rgb(171 71 188 / 16%);
+          --color-highlight: #ab47bc;
+          --color-on-accent: #ffffff;
+
+          --ground-texture: none;
+          --ground-texture-opacity: 0;
+          --ground-glow:
+            radial-gradient(120% 85% at 50% -15%, rgb(171 71 188 / 0.28), transparent 62%),
+            radial-gradient(90% 60% at 88% 12%, rgb(142 36 170 / 0.20), transparent 58%);
+        }
+
         body {
           background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 50%, #ce93d8 100%) !important;
           background-attachment: fixed;

@@ -1,11 +1,13 @@
 /**
  * FATHER'S DAY THEME
  * 
- * 👔 TO CONTROL THIS THEME:
+ *  TO CONTROL THIS THEME:
  * Edit app/components/theme-config.ts and set fathersDay to true/false
  */
 
 'use client';
+
+import ThemeGlyph from "./ThemeGlyph";
 
 
 export default function FathersDayTheme() {
@@ -13,9 +15,9 @@ export default function FathersDayTheme() {
     <>
       <div className="fathers-banner">
         <div className="banner-content">
-          <span className="icon">👔</span>
+          <span className="icon"><ThemeGlyph name="ribbon" /></span>
           <span className="banner-text">Happy Father's Day — Honoring strength, guidance, and unconditional love</span>
-          <span className="icon">🎖️</span>
+          <span className="icon"><ThemeGlyph name="ribbon" /></span>
         </div>
       </div>
 
@@ -34,6 +36,43 @@ export default function FathersDayTheme() {
       </div>
 
       <style jsx global>{`
+        /* ============================================================
+           COMPLETE COLOUR SCHEME
+           Every surface, border, heading and control on the site reads
+           from these tokens, so overriding them here repaints the whole
+           site — including pages written after this theme.
+           ============================================================ */
+        :root[data-theme="fathersDay"] {
+          color-scheme: dark;
+
+          --color-base: #1c262b;
+          --color-raised: #263238;
+          --color-sunken: #151d21;
+
+          --color-surface-1: rgb(255 255 255 / 5%);
+          --color-surface-2: rgb(255 255 255 / 9%);
+          --color-surface-3: rgb(255 255 255 / 13%);
+          --color-hairline: rgb(255 255 255 / 14%);
+          --color-hairline-strong: rgb(255 255 255 / 26%);
+
+          --color-ink-1: #f8fafc;
+          --color-ink-2: #cbd5e1;
+          --color-ink-3: #94a3b8;
+
+          --color-accent: #78909c;
+          --color-accent-strong: #607d8b;
+          --color-accent-soft: #cfd8dc;
+          --color-accent-muted: rgb(96 125 139 / 16%);
+          --color-highlight: #cfd8dc;
+          --color-on-accent: #0b0b12;
+
+          --ground-texture: none;
+          --ground-texture-opacity: 0;
+          --ground-glow:
+            radial-gradient(120% 85% at 50% -15%, rgb(96 125 139 / 0.28), transparent 62%),
+            radial-gradient(90% 60% at 88% 12%, rgb(69 90 100 / 0.20), transparent 58%);
+        }
+
         body {
           background: linear-gradient(135deg, #263238 0%, #37474f 50%, #546e7a 100%) !important;
           background-attachment: fixed;

@@ -1,64 +1,90 @@
 // This file generates a proper XML sitemap for search engines like Google.
 import { NextResponse } from 'next/server';
 import { getCombinedPosts, PostMeta } from '../../lib/posts';
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+import { SITE_URL } from '../../lib/seo';
 
+// Rebuilt at most once an hour rather than on every crawler hit.
+export const revalidate = 3600;
 
 export async function GET() {
-  const baseUrl = 'https://btechbrain.zainabshujat.dev';
+  const baseUrl = SITE_URL;
 
   let posts: PostMeta[] = [];
   try {
     posts = await getCombinedPosts();
-  } catch (error) {
+  } catch {
     posts = [];
   }
 
+  // Public pages only — the studio (/admin, /write, /community) is
+  // deliberately absent and carries noindex metadata as well.
   const staticPages = [
     '',
-    'browse',
-    'about',
     'start-here',
+    'browse',
+    'all-posts',
     'series-hub',
-    'admin',
-    'community',
-    'write/new-post',
     'themes',
+    'map',
+    'about',
     'notifications',
   ];
 
-  const categories = [
-    'friday-insights',
-    'world-watch',
-    'tech-pulse',
-    'july-crisis',
-    'science-vs-sci-fi',
-    'tech-demystified',
-    'financial-month',
-    'milestone-stories-and-miscellaneous',
-    'girlhood-and-stem-experiences',
-    'behind-the-scenes',
-    'curiosity-series',
+  // Derived from the posts themselves so the sitemap can't drift out of
+  // sync with what the site actually publishes.
+  const categories = Array.from(
+    new Set(
+      posts
+        .map((p) => (p.category || '').trim().toLowerCase())
+        .filter(Boolean)
+    )
+  ).sort();
+
+  const iWonderWhySubcategories = [
+    'language-thought-inner-experience',
+    'memory-time-mind',
+    'curiosity-patterns-being-human',
+    'math-structure-quiet-beauty',
+    'code-work-learning-hard-way',
+    'dreams-imagination-inner-narratives',
   ];
 
   function xmlEscape(str: string) {
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;');
   }
 
-  let urls = [
-    ...staticPages.map((page) =>
-      `<url><loc>${baseUrl}/${page}</loc></url>`
+  const urls = [
+    ...staticPages.map(
+      (page) =>
+        `<url><loc>${baseUrl}${page ? `/${page}` : '/'}</loc></url>`
     ),
-    ...categories.map((cat) =>
-      `<url><loc>${baseUrl}/category/${cat}</loc></url>`
+
+    ...categories.map(
+      (cat) => `<url><loc>${baseUrl}/category/${xmlEscape(cat)}</loc></url>`
     ),
-    ...posts.map((post) =>
-      `<url><loc>${baseUrl}/post/${xmlEscape(post.slug)}</loc><lastmod>${post.date ? new Date(post.date).toISOString() : new Date().toISOString()}</lastmod></url>`
+
+    ...iWonderWhySubcategories.map(
+      (sub) =>
+        `<url><loc>${baseUrl}/category/i-wonder-why/${xmlEscape(sub)}</loc></url>`
     ),
+
+    ...posts.map((post) => {
+      const when = post.date || post.created_at;
+      const lastmod = when
+        ? new Date(when).toISOString()
+        : new Date().toISOString();
+
+      return `<url><loc>${baseUrl}/post/${xmlEscape(post.slug)}</loc><lastmod>${lastmod}</lastmod></url>`;
+    }),
   ];
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n` +
+  const xml =
+    `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
     urls.join('\n') +
     `\n</urlset>`;
@@ -66,6 +92,7 @@ export async function GET() {
   return new NextResponse(xml, {
     headers: {
       'Content-Type': 'application/xml',
+      'Cache-Control': 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400',
     },
   });
 }

@@ -1,17 +1,24 @@
+import Link from "next/link";
 import PageHeader from "../components/ui/PageHeader";
+import { pageMetadata } from "../../lib/seo";
+
+export const metadata = pageMetadata({
+  title: "About",
+  description:
+    "The intellectual home of Zainab Shujat — a place where writing, building, career exploration, and curiosity all live together.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
     <main className="max-w-3xl mx-auto px-4 sm:px-6 md:px-8 py-16 md:py-24">
       <div>
-        <PageHeader
-          eyebrow="About"
-          title="About Notes From a B Tech Brain"
-        />
+        <PageHeader eyebrow="About" title="About Notes From a B Tech Brain" />
 
         <p className="text-lg text-ink-2 leading-relaxed mb-4">
-          Notes From a B Tech Brain is a digital thinking space built at the
-          intersection of engineering, curiosity, creativity, and becoming.
+          Notes From a B Tech Brain is an intellectual home — a place where
+          writing, building, career exploration, and curiosity all live
+          together.
         </p>
 
         <p className="text-lg text-ink-2 leading-relaxed mb-4">
@@ -21,107 +28,102 @@ export default function AboutPage() {
         </p>
 
         <p className="text-lg text-ink-2 leading-relaxed mb-6">
-          Some pieces explore technology and engineering. Others explore
-          identity, ambition, burnout, uncertainty, learning, or the strange
-          emotional side of growing up in the digital age.
+          It is not a blog. It is not a portfolio. It is a place for curious
+          people figuring things out.
         </p>
 
         <h2 className="text-2xl font-semibold mt-12 mb-4 text-ink-1">
-          What This Space Is
+          What You&apos;ll Find Here
+        </h2>
+
+        <div className="space-y-3 mb-8">
+          <Link
+            href="/notes"
+            className="block rounded-lg bg-surface-1 border border-hairline px-5 py-3 hover:bg-surface-2 transition-colors"
+          >
+            <span className="font-semibold text-ink-1">✍️ Notes</span>
+            <span className="text-ink-3 text-sm ml-2">
+              — Essays, explorations, and reflections
+            </span>
+          </Link>
+          <Link
+            href="/builds"
+            className="block rounded-lg bg-surface-1 border border-hairline px-5 py-3 hover:bg-surface-2 transition-colors"
+          >
+            <span className="font-semibold text-ink-1">🔨 Builds</span>
+            <span className="text-ink-3 text-sm ml-2">
+              — Things I&apos;ve made and what I learned
+            </span>
+          </Link>
+          <Link
+            href="/work"
+            className="block rounded-lg bg-surface-1 border border-hairline px-5 py-3 hover:bg-surface-2 transition-colors"
+          >
+            <span className="font-semibold text-ink-1">
+              🌍 Worlds of Work
+            </span>
+            <span className="text-ink-3 text-sm ml-2">
+              — Career exploration from the inside
+            </span>
+          </Link>
+          <Link
+            href="/wonder"
+            className="block rounded-lg bg-surface-1 border border-hairline px-5 py-3 hover:bg-surface-2 transition-colors"
+          >
+            <span className="font-semibold text-ink-1">🌀 Wonder</span>
+            <span className="text-ink-3 text-sm ml-2">
+              — Strange connections and internet observations
+            </span>
+          </Link>
+          <Link
+            href="/books"
+            className="block rounded-lg bg-surface-1 border border-hairline px-5 py-3 hover:bg-surface-2 transition-colors"
+          >
+            <span className="font-semibold text-ink-1">📖 Books</span>
+            <span className="text-ink-3 text-sm ml-2">
+              — Long-form writing in progress
+            </span>
+          </Link>
+        </div>
+
+        {/* Origin video — demoted hero */}
+        <h2 className="text-2xl font-semibold mt-12 mb-4 text-ink-1">
+          Where It Started
+        </h2>
+
+        <div className="rounded-xl overflow-hidden border border-hairline mb-6">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full aspect-video object-cover"
+          >
+            <source src="/videos/brain-hero-1.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <p className="text-lg text-ink-2 leading-relaxed mb-6">
+          From a static blog to a structured content system to a CMS to a
+          platform — and now into a world. Nine versions deep, every
+          redesign reflects a different stage of learning.
+        </p>
+
+        <h2 className="text-2xl font-semibold mt-12 mb-4 text-ink-1">
+          The Builder
         </h2>
 
         <p className="text-lg text-ink-2 leading-relaxed mb-4">
-          This is not a polished productivity blog. It is not a perfect
-          technical publication either.
-        </p>
-
-        <ul className="list-disc pl-6 space-y-2 text-ink-2 text-lg mb-4">
-          <li>curiosity meets confusion</li>
-          <li>logic meets emotion</li>
-          <li>and growth happens in public</li>
-        </ul>
-
-        <p className="text-lg text-ink-2 leading-relaxed mb-6">
-          It’s a space for thinking in public.
-          <br />
-          A place where engineering, creativity, identity, ambition,
-          uncertainty, and experimentation are all allowed to exist together.
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-12 mb-4 text-ink-1">
-          What You’ll Find Here
-        </h2>
-
-        <ul className="list-disc pl-6 space-y-2 text-ink-2 text-lg mb-6">
-          <li>
-            Curiosity Series → puzzles, rabbit holes, and strange questions
-          </li>
-          <li>
-            Science vs. Sci-fi → where imagination meets real technology
-          </li>
-          <li>
-            Tech Demystified → difficult ideas explained simply
-          </li>
-          <li>
-            Behind the Scenes → honest documentation of building publicly
-          </li>
-          <li>
-            Girlhood Arc Series → reflections on identity, STEM, and growth
-          </li>
-          <li>
-            Monthly Themes → curated explorations around evolving ideas
-          </li>
-        </ul>
-
-        <h2 className="text-2xl font-semibold mt-12 mb-4 text-ink-1">
-          Why This Exists
-        </h2>
-
-        <p className="text-lg text-ink-2 leading-relaxed mb-6">
-          Because learning is rarely linear.
-          <br />
-          Because curiosity deserves space outside exams and algorithms.
-          <br />
-          Because there should be room online for people who are both
-          analytical and emotional, ambitious and uncertain, technical and
-          creative at the same time.
-          <br />
-          <br />
-          This site exists as documentation:
-          not of perfection,
-          but of progression.
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-12 mb-4 text-ink-1">
-          The Philosophy
-        </h2>
-
-        <p className="text-lg text-ink-2 leading-relaxed mb-6">
-          Build things.
-          <br />
-          Question things.
-          <br />
-          Explain things.
-          <br />
-          Feel things.
-          <br />
-          Repeat.
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-12 mb-4 text-ink-1">
-          The Builder Behind It
-        </h2>
-
-        <p className="text-lg text-ink-2 leading-relaxed mb-4">
-          The site is created and maintained by{" "}
-          <span className="font-semibold text-ink-1">Zainab Shujat</span>, a CSE AI/ML
-          student exploring technology, writing, systems, storytelling, and
-          digital experiences through both code and reflection.
+          Created and maintained by{" "}
+          <span className="font-semibold text-ink-1">Zainab Shujat</span>, a
+          CSE AI/ML student exploring technology, writing, systems,
+          storytelling, and digital experiences through both code and
+          reflection.
         </p>
 
         <p className="text-lg text-ink-2 leading-relaxed mb-6">
-          Everything here, from the writing system to the evolving platform
-          itself, is being built and refined in public.
+          Everything here — from the writing to the platform itself — is
+          being built and refined in public.
         </p>
 
         <h2 className="text-2xl font-semibold mt-12 mb-4 text-ink-1">
@@ -135,39 +137,33 @@ export default function AboutPage() {
 
           <ul className="list-disc pl-6 space-y-2 text-ink-2 text-lg">
             <li>
-              <span className="font-semibold text-ink-1">v0.1</span> → Static blog
-              beginnings
+              <span className="font-semibold text-ink-1">v0.1</span> → Static
+              blog beginnings
             </li>
-
             <li>
-              <span className="font-semibold text-ink-1">v0.3</span> → Structured content
-              systems
+              <span className="font-semibold text-ink-1">v0.3</span> →
+              Structured content systems
             </li>
-
             <li>
-              <span className="font-semibold text-ink-1">v0.5</span> → Navigation & UX
-              redesigns
+              <span className="font-semibold text-ink-1">v0.5</span> →
+              Navigation &amp; UX redesigns
             </li>
-
             <li>
-              <span className="font-semibold text-ink-1">v0.7</span> → Engagement features
-              & interaction
+              <span className="font-semibold text-ink-1">v0.7</span> →
+              Engagement features &amp; interaction
             </li>
-
             <li>
-              <span className="font-semibold text-ink-1">v0.9</span> → Backend publishing &
-              platform shift
+              <span className="font-semibold text-ink-1">v0.9</span> → Backend
+              publishing &amp; platform shift
+            </li>
+            <li>
+              <span className="font-semibold text-highlight">v1.0</span> → The
+              world
             </li>
           </ul>
 
           <p className="text-ink-2 text-lg mt-4">
-            Every redesign, feature, article, and experiment reflects a
-            different stage of learning.
-            <br />
             The platform grows alongside the person building it.
-            <br />
-            <br />
-            And it’s still becoming.
           </p>
         </div>
 
@@ -176,7 +172,7 @@ export default function AboutPage() {
         </h2>
 
         <p className="text-lg text-ink-2 leading-relaxed mb-6">
-          If you want to see what I’m building beyond writing:
+          If you want to see what I&apos;m building beyond writing:
           <br />
           <span role="img" aria-label="point right">
             👉
@@ -192,17 +188,17 @@ export default function AboutPage() {
         </p>
 
         <h2 className="text-2xl font-semibold mt-12 mb-4 text-ink-1">
-          Let’s Connect
+          Let&apos;s Connect
         </h2>
 
         <p className="text-lg text-ink-2 leading-relaxed">
           If something here resonates,
           <br />
-          or you’re building something of your own—
+          or you&apos;re building something of your own —
           <br />
-          Let’s talk.
+          Let&apos;s talk.
           <br />
-          I’m always up for real conversations.
+          I&apos;m always up for real conversations.
         </p>
       </div>
     </main>

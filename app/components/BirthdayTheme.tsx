@@ -1,7 +1,7 @@
 /**
  * BIRTHDAY THEME (Turning 20)
  * 
- * 🌌 TO CONTROL THIS THEME:
+ *  TO CONTROL THIS THEME:
  * Edit app/components/theme-config.ts and set birthday to true/false
  */
 
@@ -13,9 +13,9 @@ export default function BirthdayTheme() {
     <>
       <div className="birthday-banner">
         <div className="banner-content">
-          <span className="constellation">✨</span>
+          <span className="constellation"></span>
           <span className="banner-text">Celebrating the Admin's 20th Birthday!</span>
-          <span className="constellation">✨</span>
+          <span className="constellation"></span>
         </div>
       </div>
 
@@ -83,6 +83,43 @@ export default function BirthdayTheme() {
       </div>
 
       <style jsx global>{`
+        /* ============================================================
+           COMPLETE COLOUR SCHEME
+           Every surface, border, heading and control on the site reads
+           from these tokens, so overriding them here repaints the whole
+           site — including pages written after this theme.
+           ============================================================ */
+        :root[data-theme="birthday"] {
+          color-scheme: dark;
+
+          --color-base: #12142b;
+          --color-raised: #1a1f3a;
+          --color-sunken: #0d0f22;
+
+          --color-surface-1: rgb(255 255 255 / 5%);
+          --color-surface-2: rgb(255 255 255 / 9%);
+          --color-surface-3: rgb(255 255 255 / 13%);
+          --color-hairline: rgb(255 255 255 / 14%);
+          --color-hairline-strong: rgb(255 255 255 / 26%);
+
+          --color-ink-1: #f8fafc;
+          --color-ink-2: #cbd5e1;
+          --color-ink-3: #94a3b8;
+
+          --color-accent: #ffd700;
+          --color-accent-strong: #e6c200;
+          --color-accent-soft: #ffe27a;
+          --color-accent-muted: rgb(255 215 0 / 16%);
+          --color-highlight: #c0c0c0;
+          --color-on-accent: #0b0b12;
+
+          --ground-texture: none;
+          --ground-texture-opacity: 0;
+          --ground-glow:
+            radial-gradient(120% 85% at 50% -15%, rgb(255 215 0 / 0.28), transparent 62%),
+            radial-gradient(90% 60% at 88% 12%, rgb(192 192 192 / 0.20), transparent 58%);
+        }
+
 
         body {
           background: linear-gradient(135deg, #0a1128 0%, #1a1f3a 30%, #2d1b4e 60%, #1a1f3a 100%) !important;

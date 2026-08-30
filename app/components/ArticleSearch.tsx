@@ -187,7 +187,7 @@ export default function ArticleSearch({ posts,
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {paginatedPosts.map((post) => (
               <PostCard
                 key={post.slug}

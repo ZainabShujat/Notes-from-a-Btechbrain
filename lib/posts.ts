@@ -119,4 +119,29 @@ export function getLatestPerCategory(posts: Array<any>) {
   return Array.from(seen.values());
 }
 
+/**
+ * Load a single post by slug, from markdown first and Supabase second —
+ * the same order the article route has always used.
+ *
+ * Shared by the page and by generateMetadata so the two can never
+ * describe different posts.
+ */
+export async function getPostBySlug(slug: string): Promise<PostMeta | null> {
+  const filePath = path.join(postsDir, `${slug}.md`);
 
+  if (fs.existsSync(filePath)) {
+    const raw = fs.readFileSync(filePath, "utf8");
+    const parsed = matter(raw);
+    return { ...(parsed.data as PostMeta), content: parsed.content };
+  }
+
+  const { data, error } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+
+  if (error || !data) return null;
+
+  return data as PostMeta;
+}

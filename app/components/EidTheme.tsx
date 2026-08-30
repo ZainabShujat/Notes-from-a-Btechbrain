@@ -1,7 +1,7 @@
 /**
  * EID THEME COMPONENT
  * 
- * 🌙 TO CONTROL THIS THEME:
+ *  TO CONTROL THIS THEME:
  * Edit app/components/theme-config.ts and set eid to true/false
  */
 
@@ -14,9 +14,9 @@ export default function EidTheme() {
       {/* Elegant Banner */}
       <div className="eid-banner">
         <div className="banner-content">
-          <span className="crescent">☪</span>
+          <span className="crescent"></span>
           <span className="banner-text">Eid Mubarak — May peace and blessings be upon you</span>
-          <span className="ornament">✦</span>
+          <span className="ornament"></span>
         </div>
       </div>
 
@@ -51,6 +51,43 @@ export default function EidTheme() {
       </div>
 
       <style jsx global>{`
+        /* ============================================================
+           COMPLETE COLOUR SCHEME
+           Every surface, border, heading and control on the site reads
+           from these tokens, so overriding them here repaints the whole
+           site — including pages written after this theme.
+           ============================================================ */
+        :root[data-theme="eid"] {
+          color-scheme: light;
+
+          --color-base: #f5e6d3;
+          --color-raised: #ffffff;
+          --color-sunken: #e8d7b8;
+
+          --color-surface-1: rgb(15 23 42 / 4%);
+          --color-surface-2: rgb(15 23 42 / 7%);
+          --color-surface-3: rgb(15 23 42 / 11%);
+          --color-hairline: rgb(15 23 42 / 14%);
+          --color-hairline-strong: rgb(15 23 42 / 26%);
+
+          --color-ink-1: #111827;
+          --color-ink-2: #374151;
+          --color-ink-3: #6b7280;
+
+          --color-accent: #3a7d9a;
+          --color-accent-strong: #2c6076;
+          --color-accent-soft: #2c6076;
+          --color-accent-muted: rgb(212 175 55 / 16%);
+          --color-highlight: #d4af37;
+          --color-on-accent: #ffffff;
+
+          --ground-texture: none;
+          --ground-texture-opacity: 0;
+          --ground-glow:
+            radial-gradient(120% 85% at 50% -15%, rgb(212 175 55 / 0.28), transparent 62%),
+            radial-gradient(90% 60% at 88% 12%, rgb(58 125 154 / 0.20), transparent 58%);
+        }
+
         /* Elegant Eid theme */
         body {
           background: linear-gradient(135deg, #0a192f 0%, #1e3a5f 30%, #2c5f7c 70%, #3a7d9a 100%) !important;

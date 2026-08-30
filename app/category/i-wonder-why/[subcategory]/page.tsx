@@ -39,7 +39,7 @@ export default async function IWYSubcategoryPage({ params }: { params: Promise<{
       {filtered.length === 0 && (
         <p className="mt-4 text-ink-3 text-center">No posts in this subcategory yet.</p>
       )}
-      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {filtered.map((p: PostMeta) => (
           <PostCard
             key={p.slug}

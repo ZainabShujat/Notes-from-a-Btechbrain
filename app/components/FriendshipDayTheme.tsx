@@ -1,11 +1,13 @@
 /**
  * FRIENDSHIP DAY THEME
  * 
- * 🤝 TO CONTROL THIS THEME:
+ *  TO CONTROL THIS THEME:
  * Edit app/components/theme-config.ts and set friendshipDay to true/false
  */
 
 'use client';
+
+import ThemeGlyph from "./ThemeGlyph";
 
 
 export default function FriendshipDayTheme() {
@@ -13,14 +15,14 @@ export default function FriendshipDayTheme() {
     <>
       <div className="friendship-banner">
         <div className="banner-content">
-          <span className="icon">🤝</span>
+          <span className="icon"><ThemeGlyph name="heart" /></span>
           <span className="banner-text">Happy Friendship Day — Celebrating the bonds that make life beautiful</span>
-          <span className="icon">✨</span>
+          <span className="icon"><ThemeGlyph name="heart" /></span>
         </div>
       </div>
 
       <div className="hearts-particles" aria-hidden="true">
-        {['💛', '💙', '💚', '🧡', '💜'].map((heart, i) => (
+        {['heart', 'spark', 'star', 'heart', 'spark'].map((heart, i) => (
           <div
             key={i}
             className="heart"
@@ -29,12 +31,49 @@ export default function FriendshipDayTheme() {
               animationDelay: `${i * 0.6}s`,
             }}
           >
-            {heart}
+            <ThemeGlyph name={heart} />
           </div>
         ))}
       </div>
 
       <style jsx global>{`
+        /* ============================================================
+           COMPLETE COLOUR SCHEME
+           Every surface, border, heading and control on the site reads
+           from these tokens, so overriding them here repaints the whole
+           site — including pages written after this theme.
+           ============================================================ */
+        :root[data-theme="friendshipDay"] {
+          color-scheme: dark;
+
+          --color-base: #0f3350;
+          --color-raised: #19547b;
+          --color-sunken: #0a2438;
+
+          --color-surface-1: rgb(255 255 255 / 5%);
+          --color-surface-2: rgb(255 255 255 / 9%);
+          --color-surface-3: rgb(255 255 255 / 13%);
+          --color-hairline: rgb(255 255 255 / 14%);
+          --color-hairline-strong: rgb(255 255 255 / 26%);
+
+          --color-ink-1: #f8fafc;
+          --color-ink-2: #cbd5e1;
+          --color-ink-3: #94a3b8;
+
+          --color-accent: #ffd89b;
+          --color-accent-strong: #f0c072;
+          --color-accent-soft: #ffe4b8;
+          --color-accent-muted: rgb(255 216 155 / 16%);
+          --color-highlight: #ffd89b;
+          --color-on-accent: #0b0b12;
+
+          --ground-texture: none;
+          --ground-texture-opacity: 0;
+          --ground-glow:
+            radial-gradient(120% 85% at 50% -15%, rgb(255 216 155 / 0.28), transparent 62%),
+            radial-gradient(90% 60% at 88% 12%, rgb(25 84 123 / 0.20), transparent 58%);
+        }
+
         body {
           background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%) !important;
           background-attachment: fixed;

@@ -1,11 +1,13 @@
 /**
  * DOCTORS DAY / HEALTHCARE THEME
  * 
- * 🩺 TO CONTROL THIS THEME:
+ *  TO CONTROL THIS THEME:
  * Edit app/components/theme-config.ts and set doctorsDay to true/false
  */
 
 'use client';
+
+import ThemeGlyph from "./ThemeGlyph";
 
 
 export default function DoctorsDayTheme() {
@@ -14,15 +16,15 @@ export default function DoctorsDayTheme() {
       {/* Banner */}
       <div className="doctors-banner">
         <div className="banner-content">
-          <span className="icon">🩺</span>
+          <span className="icon"><ThemeGlyph name="cross" /></span>
           <span className="banner-text">Doctors Day — Honoring those who heal and care</span>
-          <span className="icon">❤️</span>
+          <span className="icon"><ThemeGlyph name="cross" /></span>
         </div>
       </div>
 
       {/* Floating Medical Symbols */}
       <div className="medical-particles" aria-hidden="true" style={{ opacity: 0.18 }}>
-        {['❤️', '💊', '🩺', '⚕️', '+'].map((symbol, i) => (
+        {['cross', 'drop', 'heart', 'cross', 'drop'].map((symbol, i) => (
           <div
             key={i}
             className="medical-symbol"
@@ -33,12 +35,49 @@ export default function DoctorsDayTheme() {
               animationDuration: `${5 + Math.random() * 3}s`,
             }}
           >
-            {symbol}
+            <ThemeGlyph name={symbol} />
           </div>
         ))}
       </div>
 
       <style jsx global>{`
+        /* ============================================================
+           COMPLETE COLOUR SCHEME
+           Every surface, border, heading and control on the site reads
+           from these tokens, so overriding them here repaints the whole
+           site — including pages written after this theme.
+           ============================================================ */
+        :root[data-theme="doctorsDay"] {
+          color-scheme: light;
+
+          --color-base: #e3f2fd;
+          --color-raised: #ffffff;
+          --color-sunken: #bbdefb;
+
+          --color-surface-1: rgb(15 23 42 / 4%);
+          --color-surface-2: rgb(15 23 42 / 7%);
+          --color-surface-3: rgb(15 23 42 / 11%);
+          --color-hairline: rgb(15 23 42 / 14%);
+          --color-hairline-strong: rgb(15 23 42 / 26%);
+
+          --color-ink-1: #111827;
+          --color-ink-2: #374151;
+          --color-ink-3: #6b7280;
+
+          --color-accent: #1976d2;
+          --color-accent-strong: #125aa0;
+          --color-accent-soft: #0d47a1;
+          --color-accent-muted: rgb(144 202 249 / 16%);
+          --color-highlight: #1565c0;
+          --color-on-accent: #ffffff;
+
+          --ground-texture: none;
+          --ground-texture-opacity: 0;
+          --ground-glow:
+            radial-gradient(120% 85% at 50% -15%, rgb(144 202 249 / 0.28), transparent 62%),
+            radial-gradient(90% 60% at 88% 12%, rgb(187 222 251 / 0.20), transparent 58%);
+        }
+
         body {
           background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #90caf9 100%) !important;
           background-attachment: fixed;

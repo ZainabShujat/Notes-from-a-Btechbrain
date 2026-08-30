@@ -1,11 +1,13 @@
 /**
  * SIBLINGS DAY THEME
  * 
- * 👫 TO CONTROL THIS THEME:
+ *  TO CONTROL THIS THEME:
  * Edit app/components/theme-config.ts and set siblingsDay to true/false
  */
 
 'use client';
+
+import ThemeGlyph from "./ThemeGlyph";
 
 
 export default function SiblingsDayTheme() {
@@ -13,9 +15,9 @@ export default function SiblingsDayTheme() {
     <>
       <div className="siblings-banner">
         <div className="banner-content">
-          <span className="icon">👫</span>
+          <span className="icon"><ThemeGlyph name="balloon" /></span>
           <span className="banner-text">Happy Siblings Day — Partners in crime, friends for life</span>
-          <span className="icon">🎈</span>
+          <span className="icon"><ThemeGlyph name="balloon" /></span>
         </div>
       </div>
 
@@ -35,6 +37,43 @@ export default function SiblingsDayTheme() {
       </div>
 
       <style jsx global>{`
+        /* ============================================================
+           COMPLETE COLOUR SCHEME
+           Every surface, border, heading and control on the site reads
+           from these tokens, so overriding them here repaints the whole
+           site — including pages written after this theme.
+           ============================================================ */
+        :root[data-theme="siblingsDay"] {
+          color-scheme: light;
+
+          --color-base: #fff9e6;
+          --color-raised: #ffffff;
+          --color-sunken: #ffeec2;
+
+          --color-surface-1: rgb(15 23 42 / 4%);
+          --color-surface-2: rgb(15 23 42 / 7%);
+          --color-surface-3: rgb(15 23 42 / 11%);
+          --color-hairline: rgb(15 23 42 / 14%);
+          --color-hairline-strong: rgb(15 23 42 / 26%);
+
+          --color-ink-1: #111827;
+          --color-ink-2: #374151;
+          --color-ink-3: #6b7280;
+
+          --color-accent: #e05555;
+          --color-accent-strong: #c14444;
+          --color-accent-soft: #c14444;
+          --color-accent-muted: rgb(255 230 109 / 16%);
+          --color-highlight: #4ecdc4;
+          --color-on-accent: #ffffff;
+
+          --ground-texture: none;
+          --ground-texture-opacity: 0;
+          --ground-glow:
+            radial-gradient(120% 85% at 50% -15%, rgb(255 230 109 / 0.28), transparent 62%),
+            radial-gradient(90% 60% at 88% 12%, rgb(78 205 196 / 0.20), transparent 58%);
+        }
+
         body {
           background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 50%, #ffd9b3 100%) !important;
           background-attachment: fixed;

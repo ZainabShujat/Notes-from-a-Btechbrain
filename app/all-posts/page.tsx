@@ -1,11 +1,14 @@
 import { getCombinedPosts } from "../../lib/posts";
 import ArticleSearch from "../components/ArticleSearch";
 import PageHeader from "../components/ui/PageHeader";
+import { pageMetadata } from "../../lib/seo";
 
-export const metadata = {
-  title: "All Posts | Notes Brain",
-  description: "Search and explore all posts",
-};
+export const metadata = pageMetadata({
+  title: "All Posts",
+  description:
+    "Search and explore every article — by title, keyword, category, or full text.",
+  path: "/all-posts",
+});
 
 export default async function AllPostsPage({
   searchParams,

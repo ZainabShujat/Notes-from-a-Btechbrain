@@ -40,8 +40,11 @@ const DOT: Record<string, string> = {
 export default function CategoryCard({ color, title, desc, href }: Props) {
   const dot = (color && DOT[color]) || "bg-accent";
 
+  // `CategoryCard` is a styling hook the seasonal theme components target.
+  // Do not remove it without migrating app/components/*Theme.tsx.
+
   return (
-    <Card href={href} padding="sm" className="h-full">
+      <Card href={href} padding="sm" className="CategoryCard h-full">
       <div className="flex items-start gap-3">
         <span
           aria-hidden="true"

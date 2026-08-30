@@ -1,11 +1,13 @@
 /**
  * MOTHER'S DAY THEME
  * 
- * 🌹 TO CONTROL THIS THEME:
+ *  TO CONTROL THIS THEME:
  * Edit app/components/theme-config.ts and set mothersDay to true/false
  */
 
 'use client';
+
+import ThemeGlyph from "./ThemeGlyph";
 
 
 export default function MothersDayTheme() {
@@ -13,14 +15,14 @@ export default function MothersDayTheme() {
     <>
       <div className="mothers-banner">
         <div className="banner-content">
-          <span className="icon">🌹</span>
+          <span className="icon"><ThemeGlyph name="bloom" /></span>
           <span className="banner-text">Happy Mother's Day — Celebrating the hearts that nurture and inspire</span>
-          <span className="icon">💐</span>
+          <span className="icon"><ThemeGlyph name="bloom" /></span>
         </div>
       </div>
 
       <div className="flowers-particles" aria-hidden="true">
-        {['🌸', '🌺', '🌻', '🌷', '🌹', '💐', '🏵️'].map((flower, i) => (
+        {['bloom', 'leaf', 'heart', 'bloom', 'leaf', 'heart', 'bloom'].map((flower, i) => (
           <div
             key={i}
             className="flower"
@@ -30,12 +32,49 @@ export default function MothersDayTheme() {
               animationDuration: `${6 + Math.random() * 3}s`,
             }}
           >
-            {flower}
+            <ThemeGlyph name={flower} />
           </div>
         ))}
       </div>
 
       <style jsx global>{`
+        /* ============================================================
+           COMPLETE COLOUR SCHEME
+           Every surface, border, heading and control on the site reads
+           from these tokens, so overriding them here repaints the whole
+           site — including pages written after this theme.
+           ============================================================ */
+        :root[data-theme="mothersDay"] {
+          color-scheme: light;
+
+          --color-base: #fce4ec;
+          --color-raised: #ffffff;
+          --color-sunken: #f8bbd0;
+
+          --color-surface-1: rgb(15 23 42 / 4%);
+          --color-surface-2: rgb(15 23 42 / 7%);
+          --color-surface-3: rgb(15 23 42 / 11%);
+          --color-hairline: rgb(15 23 42 / 14%);
+          --color-hairline-strong: rgb(15 23 42 / 26%);
+
+          --color-ink-1: #111827;
+          --color-ink-2: #374151;
+          --color-ink-3: #6b7280;
+
+          --color-accent: #c2185b;
+          --color-accent-strong: #9c134a;
+          --color-accent-soft: #9c134a;
+          --color-accent-muted: rgb(244 143 177 / 16%);
+          --color-highlight: #ec407a;
+          --color-on-accent: #ffffff;
+
+          --ground-texture: none;
+          --ground-texture-opacity: 0;
+          --ground-glow:
+            radial-gradient(120% 85% at 50% -15%, rgb(244 143 177 / 0.28), transparent 62%),
+            radial-gradient(90% 60% at 88% 12%, rgb(236 64 122 / 0.20), transparent 58%);
+        }
+
         body {
           background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%) !important;
           background-attachment: fixed;

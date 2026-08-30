@@ -10,7 +10,14 @@ import BackButton from "../../components/BackButton";
 import ViewCounter from "../../components/ViewCounter";
 import LikeButton from "../../components/LikeButton";
 import PostCard from "../../components/PostCard";
-import { getCombinedPosts } from "../../../lib/posts";
+import { getCombinedPosts, getPostBySlug } from "../../../lib/posts";
+import {
+  SITE_NAME,
+  SITE_URL,
+  AUTHOR_NAME,
+  absoluteUrl,
+} from "../../../lib/seo";
+import type { Metadata } from "next";
 import { supabase } from "../../../lib/supabase";
 // Client wrapper for PostReadTracker (must be imported after all Node.js/server imports)
 import PostReadTrackerWrapper from "../../components/PostReadTrackerWrapper";
@@ -19,6 +26,58 @@ import { getRelatedPosts } from "../../../lib/map";
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
+
+function plainExcerpt(text: string | undefined, fallback: string) {
+  if (!text) return fallback;
+  const stripped = text.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  if (!stripped) return fallback;
+  return stripped.length > 160 ? `${stripped.slice(0, 157)}…` : stripped;
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+
+  if (!post) {
+    return { title: "Post not found", robots: { index: false, follow: false } };
+  }
+
+  const url = `${SITE_URL}/post/${slug}`;
+  const description = plainExcerpt(
+    post.excerpt || post.content,
+    `${post.title} — an article on ${SITE_NAME}.`
+  );
+  const image = absoluteUrl(post.banner);
+  const published = post.date || post.created_at;
+
+  return {
+    title: post.title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      siteName: SITE_NAME,
+      title: post.title,
+      description,
+      url,
+      images: [{ url: image, alt: post.title }],
+      publishedTime: published
+        ? new Date(published).toISOString()
+        : undefined,
+      authors: [AUTHOR_NAME],
+      section: post.category,
+      tags: post.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description,
+      images: [image],
+    },
+  };
+}
 
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
@@ -74,6 +133,69 @@ if (fs.existsSync(filePath)) {
 
   return (
     <main className="max-w-4xl mx-auto my-10 px-4 sm:px-6 md:px-8 py-10 bg-surface-1 border border-hairline backdrop-blur-md text-ink-2 rounded-lg shadow-card">
+      {/* Structured data — lets Google show this as a rich result
+          rather than a plain link. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: data.title,
+            image: [absoluteUrl(data.banner)],
+            datePublished: data.date || data.created_at
+              ? new Date(data.date || data.created_at).toISOString()
+              : undefined,
+            dateModified: data.updated_at
+              ? new Date(data.updated_at).toISOString()
+              : data.date || data.created_at
+                ? new Date(data.date || data.created_at).toISOString()
+                : undefined,
+            author: {
+              "@type": "Person",
+              name: AUTHOR_NAME,
+              url: "https://zainabshujat.dev/",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: SITE_NAME,
+              logo: {
+                "@type": "ImageObject",
+                url: absoluteUrl("/thumbnail.png"),
+              },
+            },
+            mainEntityOfPage: `${SITE_URL}/post/${slug}`,
+            articleSection: data.category,
+            keywords: Array.isArray(data.tags) ? data.tags.join(", ") : undefined,
+          }),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: data.category || "Posts",
+                item: `${SITE_URL}/category/${data.category || ""}`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: data.title,
+                item: `${SITE_URL}/post/${slug}`,
+              },
+            ],
+          }),
+        }}
+      />
+
       {/* Track this post as read for the current session */}
       <PostReadTrackerWrapper slug={slug} postId={data?.id || slug} />
       <h1 className="text-3xl md:text-4xl font-bold text-highlight">{data.title}</h1>
@@ -110,7 +232,6 @@ if (fs.existsSync(filePath)) {
 
       {/* Divider for clarity */}
       <hr className="my-12 border-t border-hairline" />
-      
 
       {/* Related articles section - truly outside the article */}
 

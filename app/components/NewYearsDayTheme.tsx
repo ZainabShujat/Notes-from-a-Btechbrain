@@ -1,11 +1,13 @@
 /**
  * NEW YEAR'S DAY THEME
  * 
- * 🎊 TO CONTROL THIS THEME:
+ *  TO CONTROL THIS THEME:
  * Edit app/components/theme-config.ts and set newYearsDay to true/false
  */
 
 'use client';
+
+import ThemeGlyph from "./ThemeGlyph";
 
 
 export default function NewYearsDayTheme() {
@@ -13,14 +15,14 @@ export default function NewYearsDayTheme() {
     <>
       <div className="newyear-banner">
         <div className="banner-content">
-          <span className="icon">🎊</span>
+          <span className="icon"><ThemeGlyph name="burst" /></span>
           <span className="banner-text">Happy New Year — New beginnings, endless possibilities!</span>
-          <span className="icon">🎉</span>
+          <span className="icon"><ThemeGlyph name="burst" /></span>
         </div>
       </div>
 
       <div className="fireworks-particles" aria-hidden="true">
-        {['✨', '🎆', '🎇', '⭐', '💫'].map((spark, i) => (
+        {['burst', 'star', 'spark', 'burst', 'star'].map((spark, i) => (
           <div
             key={i}
             className="firework"
@@ -30,12 +32,49 @@ export default function NewYearsDayTheme() {
               animationDelay: `${Math.random() * 2}s`,
             }}
           >
-            {spark}
+            <ThemeGlyph name={spark} />
           </div>
         ))}
       </div>
 
       <style jsx global>{`
+        /* ============================================================
+           COMPLETE COLOUR SCHEME
+           Every surface, border, heading and control on the site reads
+           from these tokens, so overriding them here repaints the whole
+           site — including pages written after this theme.
+           ============================================================ */
+        :root[data-theme="newYearsDay"] {
+          color-scheme: dark;
+
+          --color-base: #10121f;
+          --color-raised: #1a1d33;
+          --color-sunken: #0a0c16;
+
+          --color-surface-1: rgb(255 255 255 / 5%);
+          --color-surface-2: rgb(255 255 255 / 9%);
+          --color-surface-3: rgb(255 255 255 / 13%);
+          --color-hairline: rgb(255 255 255 / 14%);
+          --color-hairline-strong: rgb(255 255 255 / 26%);
+
+          --color-ink-1: #f8fafc;
+          --color-ink-2: #cbd5e1;
+          --color-ink-3: #94a3b8;
+
+          --color-accent: #ffd700;
+          --color-accent-strong: #e6c200;
+          --color-accent-soft: #ffe66d;
+          --color-accent-muted: rgb(255 215 0 / 16%);
+          --color-highlight: #4ecdc4;
+          --color-on-accent: #0b0b12;
+
+          --ground-texture: none;
+          --ground-texture-opacity: 0;
+          --ground-glow:
+            radial-gradient(120% 85% at 50% -15%, rgb(255 215 0 / 0.28), transparent 62%),
+            radial-gradient(90% 60% at 88% 12%, rgb(255 107 107 / 0.20), transparent 58%);
+        }
+
         body {
           background: radial-gradient(circle at center, #1a1a2e 0%, #0f0f1e 100%) !important;
           background-attachment: fixed;

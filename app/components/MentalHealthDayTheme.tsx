@@ -1,11 +1,13 @@
 /**
  * MENTAL HEALTH DAY THEME
  * 
- * 🧠 TO CONTROL THIS THEME:
+ *  TO CONTROL THIS THEME:
  * Edit app/components/theme-config.ts and set mentalHealthDay to true/false
  */
 
 'use client';
+
+import ThemeGlyph from "./ThemeGlyph";
 
 
 export default function MentalHealthDayTheme() {
@@ -14,9 +16,9 @@ export default function MentalHealthDayTheme() {
       {/* Banner */}
       <div className="mental-health-banner">
         <div className="banner-content">
-          <span className="icon">🧠</span>
+          <span className="icon"><ThemeGlyph name="bloom" /></span>
           <span className="banner-text">Mental Health Matters — You are not alone. Your feelings are valid.</span>
-          <span className="icon">💚</span>
+          <span className="icon"><ThemeGlyph name="bloom" /></span>
         </div>
       </div>
 
@@ -28,6 +30,43 @@ export default function MentalHealthDayTheme() {
       </div>
 
       <style jsx global>{`
+        /* ============================================================
+           COMPLETE COLOUR SCHEME
+           Every surface, border, heading and control on the site reads
+           from these tokens, so overriding them here repaints the whole
+           site — including pages written after this theme.
+           ============================================================ */
+        :root[data-theme="mentalHealthDay"] {
+          color-scheme: light;
+
+          --color-base: #e8f5e9;
+          --color-raised: #ffffff;
+          --color-sunken: #d3ead5;
+
+          --color-surface-1: rgb(15 23 42 / 4%);
+          --color-surface-2: rgb(15 23 42 / 7%);
+          --color-surface-3: rgb(15 23 42 / 11%);
+          --color-hairline: rgb(15 23 42 / 14%);
+          --color-hairline-strong: rgb(15 23 42 / 26%);
+
+          --color-ink-1: #111827;
+          --color-ink-2: #374151;
+          --color-ink-3: #6b7280;
+
+          --color-accent: #2e7d32;
+          --color-accent-strong: #215d24;
+          --color-accent-soft: #215d24;
+          --color-accent-muted: rgb(129 199 132 / 16%);
+          --color-highlight: #66bb6a;
+          --color-on-accent: #ffffff;
+
+          --ground-texture: none;
+          --ground-texture-opacity: 0;
+          --ground-glow:
+            radial-gradient(120% 85% at 50% -15%, rgb(129 199 132 / 0.28), transparent 62%),
+            radial-gradient(90% 60% at 88% 12%, rgb(102 187 106 / 0.20), transparent 58%);
+        }
+
         body {
           background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%) !important;
           background-attachment: fixed;

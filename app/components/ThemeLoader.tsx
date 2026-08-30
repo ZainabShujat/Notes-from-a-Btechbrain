@@ -6,6 +6,7 @@ import { supabase } from "../../lib/supabase";
 const themeComponents: Record<string, any> = {
   winter: dynamic(() => import("../components/WinterTheme"), { ssr: false }),
   // ...existing code...
+  eid: dynamic(() => import("../components/EidTheme"), { ssr: false }),
   birthday: dynamic(() => import("../components/BirthdayTheme"), { ssr: false }),
   engineersDay: dynamic(() => import("../components/EngineersDayTheme"), { ssr: false }),
   doctorsDay: dynamic(() => import("../components/DoctorsDayTheme"), { ssr: false }),
@@ -42,6 +43,21 @@ export default function ThemeLoader() {
     interval = setInterval(fetchTheme, 2000); // Poll every 2 seconds
     return () => clearInterval(interval);
   }, []);
+
+  // Stamp the active theme on <html> so theme stylesheets can target
+  // :root[data-theme="winter"] — higher specificity than the :root block
+  // Tailwind emits, so a theme's token overrides always win the cascade.
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (theme) {
+      root.setAttribute("data-theme", theme);
+    } else {
+      root.removeAttribute("data-theme");
+    }
+
+    return () => root.removeAttribute("data-theme");
+  }, [theme]);
   if (!theme) return null;
   const Comp = themeComponents[theme];
   if (!Comp) {

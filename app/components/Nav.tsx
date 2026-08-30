@@ -5,28 +5,53 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cx } from "./ui/cx";
 
-interface NavProps {
-  communityEnabled?: boolean;
-}
 
-/** The five public destinations. */
+
+/** The five worlds. */
 const PRIMARY = [
-  { href: "/", label: "Home", icon: "🏠" },
-  { href: "/start-here", label: "Start Here", icon: "✨" },
-  { href: "/browse", label: "Explore", icon: "🧭" },
-  { href: "/all-posts", label: "All Posts", icon: "📚" },
-  { href: "/map", label: "Brain Map", icon: "🗺️" },
+  { href: "/notes", label: "Notes", icon: "✍️" },
+  { href: "/games", label: "Games", icon: "🎮" },
+  { href: "/work", label: "The Work We Do", icon: "🌍" },
+  { href: "/wonder", label: "Wonder", icon: "🌀" },
+  { href: "/books", label: "Books", icon: "📖" },
 ];
 
-/** Supporting destinations — present, but not competing with the five. */
+/** Quiet secondary link. */
 const SECONDARY = [
-  { href: "/about", label: "About", icon: "📖" },
-  { href: "/notifications", label: "Updates", icon: "🔔" },
+  { href: "/start-here", label: "Start Here", icon: "✨" },
+  { href: "/about", label: "About", icon: "👋" },
 ];
 
-export default function Nav({ communityEnabled }: NavProps) {
+export default function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const [isLight, setIsLight] = useState(false);
+
+  // Initialize theme from local storage or system preference
+  useEffect(() => {
+    const root = document.documentElement;
+    const stored = localStorage.getItem("theme");
+    if (stored === "light") {
+      setIsLight(true);
+      root.classList.add("light");
+    } else {
+      setIsLight(false);
+      root.classList.remove("light");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const root = document.documentElement;
+    if (isLight) {
+      root.classList.remove("light");
+      localStorage.setItem("theme", "dark");
+      setIsLight(false);
+    } else {
+      root.classList.add("light");
+      localStorage.setItem("theme", "light");
+      setIsLight(true);
+    }
+  };
 
   // Close the drawer whenever the route changes.
   useEffect(() => {
@@ -117,6 +142,14 @@ export default function Nav({ communityEnabled }: NavProps) {
                 {item.label}
               </Link>
             ))}
+
+            <button
+              onClick={toggleTheme}
+              className="ml-2 p-2 rounded-md text-ink-3 hover:text-ink-1 hover:bg-surface-1 transition-colors"
+              aria-label="Toggle theme"
+            >
+              {isLight ? "🌙" : "☀️"}
+            </button>
           </div>
 
           {/* Menu button — below tablet */}
@@ -262,17 +295,6 @@ export default function Nav({ communityEnabled }: NavProps) {
               </Link>
             ))}
 
-            {communityEnabled && (
-              <Link
-                href="/community"
-                className="block py-3 px-4 rounded-md text-base text-ink-2 hover:bg-surface-1 hover:text-ink-1 transition-colors"
-              >
-                <span aria-hidden="true" className="mr-2">
-                  💬
-                </span>
-                Community
-              </Link>
-            )}
           </div>
         </div>
       </div>
