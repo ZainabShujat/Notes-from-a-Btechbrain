@@ -21,13 +21,22 @@ export async function GET() {
   const staticPages = [
     '',
     'start-here',
-    'browse',
+    'editions',
+    'notes',
+    'notes/btech',
+    'notes/gate',
+    'notes/pyqs',
+    'notes/quizzes',
+    'notes/labs',
+    'notes/cheat-sheets',
+    'notes/quick-revision',
+    'notes/formulas',
+    'notes/courses',
+    'notes/videos',
+    'notes/books',
     'all-posts',
-    'series-hub',
-    'themes',
     'map',
     'about',
-    'notifications',
   ];
 
   // Derived from the posts themselves so the sitemap can't drift out of

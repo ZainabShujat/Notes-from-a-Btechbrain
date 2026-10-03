@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cx } from "./ui/cx";
+import NotesDropdown from "./NotesDropdown";
 
 
 
-/** The five worlds. */
-const PRIMARY = [
-  { href: "/notes", label: "Notes", icon: "✍️" },
+/** The six worlds — Notes is handled specially via NotesDropdown. */
+const PRIMARY_LINKS = [
+  { href: "/editions", label: "Editions", icon: "✍️" },
+  // Notes is rendered as the dropdown, not a plain link
   { href: "/games", label: "Games", icon: "🎮" },
   { href: "/work", label: "The Work We Do", icon: "🌍" },
   { href: "/wonder", label: "Wonder", icon: "🌀" },
@@ -20,8 +22,38 @@ const SECONDARY = [
   { href: "/about", label: "About", icon: "👋" },
 ];
 
+/** Mobile-only Notes sub-items: Subject Notebooks as primary objects. */
+const NOTES_MOBILE_SECTIONS = [
+  {
+    title: "The Notebooks",
+    items: [
+      { label: "Operating Systems", href: "/notes/operating-systems" },
+      { label: "DBMS", href: "/notes/dbms" },
+      { label: "Computer Networks", href: "/notes/computer-networks" },
+      { label: "Computer Organization", href: "/notes/computer-organization" },
+      { label: "Theory of Computation", href: "/notes/theory-of-computation" },
+      { label: "Programming in C", href: "/notes/programming-in-c" },
+      { label: "Discrete Mathematics", href: "/notes/discrete-mathematics" },
+      { label: "Data Structures", href: "/notes/data-structures" },
+      { label: "Algorithms", href: "/notes/algorithms" },
+      { label: "Compiler Design", href: "/notes/compiler-design" },
+      { label: "Digital Logic", href: "/notes/digital-logic" },
+    ],
+  },
+  {
+    title: "Cross-Notebook Tools",
+    items: [
+      { label: "Interactive Labs", href: "/notes/labs" },
+      { label: "Verified PYQs", href: "/notes/pyqs" },
+      { label: "Cheat Sheets", href: "/notes/cheat-sheets" },
+      { label: "10-Min Revision", href: "/notes/quick-revision" },
+    ],
+  },
+];
+
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const [notesExpanded, setNotesExpanded] = useState(false);
   const pathname = usePathname();
   const [isLight, setIsLight] = useState(false);
 
@@ -29,23 +61,22 @@ export default function Nav() {
   useEffect(() => {
     const root = document.documentElement;
     const stored = localStorage.getItem("theme");
-    if (stored === "light") {
-      setIsLight(true);
-      root.classList.add("light");
-    } else {
-      setIsLight(false);
-      root.classList.remove("light");
-    }
+    const light = stored === "light";
+    setIsLight(light);
+    root.classList.toggle("light", light);
+    root.classList.toggle("dark", !light);
   }, []);
 
   const toggleTheme = () => {
     const root = document.documentElement;
     if (isLight) {
       root.classList.remove("light");
+      root.classList.add("dark");
       localStorage.setItem("theme", "dark");
       setIsLight(false);
     } else {
       root.classList.add("light");
+      root.classList.remove("dark");
       localStorage.setItem("theme", "light");
       setIsLight(true);
     }
@@ -54,6 +85,7 @@ export default function Nav() {
   // Close the drawer whenever the route changes.
   useEffect(() => {
     setOpen(false);
+    setNotesExpanded(false);
   }, [pathname]);
 
   // Lock body scroll and close on Escape while the drawer is open.
@@ -76,6 +108,8 @@ export default function Nav() {
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  const isNotesActive = pathname.startsWith("/notes");
 
   return (
     <>
@@ -106,7 +140,27 @@ export default function Nav() {
 
           {/* Primary — tablet and up */}
           <div className="hidden md:flex items-center gap-1 mx-auto">
-            {PRIMARY.map((item) => (
+            {/* Editions link */}
+            <Link
+              href="/editions"
+              aria-current={isActive("/editions") ? "page" : undefined}
+              className={cx(
+                "px-3 py-2 rounded-md text-sm font-semibold transition-colors",
+                isActive("/editions")
+                  ? "bg-surface-2 text-ink-1"
+                  : "text-ink-2 hover:text-ink-1 hover:bg-surface-1"
+              )}
+            >
+              Editions
+            </Link>
+
+            {/* Notes dropdown */}
+            <NotesDropdown />
+
+            {/* Rest of primary links */}
+            {PRIMARY_LINKS.filter(
+              (item) => item.href !== "/editions"
+            ).map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -251,7 +305,100 @@ export default function Nav() {
               Explore
             </p>
 
-            {PRIMARY.map((item) => (
+            {/* Editions */}
+            <Link
+              href="/editions"
+              aria-current={isActive("/editions") ? "page" : undefined}
+              className={cx(
+                "block py-3 px-4 rounded-md font-semibold text-base transition-colors",
+                isActive("/editions")
+                  ? "bg-surface-2 text-ink-1"
+                  : "text-ink-1 hover:bg-surface-1"
+              )}
+            >
+              <span aria-hidden="true" className="mr-2">
+                ✍️
+              </span>
+              Editions
+            </Link>
+
+            {/* Notes with expandable sub-menu */}
+            <div>
+              <button
+                type="button"
+                onClick={() => setNotesExpanded((v) => !v)}
+                className={cx(
+                  "w-full flex items-center justify-between py-3 px-4 rounded-md font-semibold text-base transition-colors",
+                  isNotesActive
+                    ? "bg-surface-2 text-ink-1"
+                    : "text-ink-1 hover:bg-surface-1"
+                )}
+              >
+                <span>
+                  <span aria-hidden="true" className="mr-2">
+                    📚
+                  </span>
+                  Notes
+                </span>
+                <svg
+                  className={cx(
+                    "w-4 h-4 text-ink-3 transition-transform duration-200",
+                    notesExpanded && "rotate-180"
+                  )}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              {/* Expandable sub-menu */}
+              <div
+                className={cx(
+                  "overflow-hidden transition-all duration-200",
+                  notesExpanded ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+                )}
+              >
+                <div className="pl-6 pr-2 pt-1 pb-2 flex flex-col gap-1">
+                  {/* Explore all notes link */}
+                  <Link
+                    href="/notes"
+                    className="block py-2 px-3 rounded-md text-sm font-semibold text-accent-soft hover:bg-surface-1 transition-colors"
+                  >
+                    Explore All Notes →
+                  </Link>
+
+                  {NOTES_MOBILE_SECTIONS.map((section) => (
+                    <div key={section.title} className="mt-2">
+                      <p className="px-3 text-[10px] uppercase tracking-[0.2em] text-ink-3 font-bold mb-1">
+                        {section.title}
+                      </p>
+                      {section.items.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="block py-2 px-3 rounded-md text-sm text-ink-2 hover:text-ink-1 hover:bg-surface-1 transition-colors"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Other primary links */}
+            {PRIMARY_LINKS.filter(
+              (item) => item.href !== "/editions"
+            ).map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -292,6 +439,17 @@ export default function Nav() {
                 {item.label}
               </Link>
             ))}
+
+            {/* Theme toggle in mobile drawer */}
+            <button
+              onClick={toggleTheme}
+              className="mt-4 flex items-center gap-3 py-3 px-4 rounded-md text-base text-ink-2 hover:bg-surface-1 hover:text-ink-1 transition-colors"
+            >
+              <span aria-hidden="true">
+                {isLight ? "🌙" : "☀️"}
+              </span>
+              {isLight ? "Dark mode" : "Light mode"}
+            </button>
 
           </div>
         </div>

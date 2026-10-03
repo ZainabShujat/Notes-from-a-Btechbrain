@@ -72,11 +72,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       {/* ✅ GOOGLE ANALYTICS SCRIPT */}
       <head>
         <meta name="color-scheme" content="dark" />
         <meta name="theme-color" content="#05031a" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => {
+              const saved = localStorage.getItem("theme");
+              const light = saved === "light";
+              document.documentElement.classList.toggle("light", light);
+              document.documentElement.classList.toggle("dark", !light);
+            })();`,
+          }}
+        />
       </head>
       <Script
         async

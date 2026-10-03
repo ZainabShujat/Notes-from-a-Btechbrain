@@ -38,12 +38,21 @@ export default function AboutPage() {
 
         <div className="space-y-3 mb-8">
           <Link
+            href="/editions"
+            className="block rounded-lg bg-surface-1 border border-hairline px-5 py-3 hover:bg-surface-2 transition-colors"
+          >
+            <span className="font-semibold text-ink-1">✍️ Editions</span>
+            <span className="text-ink-3 text-sm ml-2">
+              — Essays, explorations, and reflections
+            </span>
+          </Link>
+          <Link
             href="/notes"
             className="block rounded-lg bg-surface-1 border border-hairline px-5 py-3 hover:bg-surface-2 transition-colors"
           >
-            <span className="font-semibold text-ink-1">✍️ Notes</span>
+            <span className="font-semibold text-ink-1">📚 Notes</span>
             <span className="text-ink-3 text-sm ml-2">
-              — Essays, explorations, and reflections
+              — Structured study material for B.Tech &amp; GATE CS
             </span>
           </Link>
           <Link
