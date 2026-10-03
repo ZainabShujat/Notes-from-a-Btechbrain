@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { SubjectNotebookData } from "../../../lib/notebooks/types";
 import NotebookPage from "./NotebookPage";
+import NotebookSpiralBinding from "./NotebookSpiralBinding";
 
 export default function NotebookFlipController({
   notebook,
@@ -87,29 +88,28 @@ export default function NotebookFlipController({
   return (
     <div
       ref={containerRef}
-      className="flex flex-col h-full max-h-[85vh] w-full max-w-4xl mx-auto select-none"
+      className="flex flex-col h-full w-full select-none overflow-hidden bg-[#faf8f5] text-[#1c1917]"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* ── TOP CONTROL BAR ── */}
-      <div className="flex items-center justify-between pb-3 mb-3 border-b border-hairline px-2 text-ink-3">
-        <div className="flex items-center gap-2">
-          <span className="font-mono text-xs font-bold text-accent uppercase tracking-wider">
-            {notebook.code} &middot; OPEN NOTEBOOK
+      {/* ── FIXED TOP BAR (NEVER OVERLAPPED) ── */}
+      <div className="shrink-0 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-[#e5ded0] bg-[#faf8f5] z-20">
+        <div className="flex items-center gap-2 truncate">
+          <span className="font-mono text-[11px] font-bold text-[#7c3aed] uppercase tracking-wider bg-violet-500/10 px-2 py-0.5 rounded">
+            {notebook.code}
           </span>
-          <span className="text-hairline">|</span>
-          <span className="text-xs font-mono text-ink-2 truncate max-w-[200px] sm:max-w-none">
+          <span className="text-[#d6cfbe]">|</span>
+          <span className="text-xs font-mono font-semibold text-[#1c1917] truncate">
             {notebook.title}
           </span>
         </div>
 
-        <div className="flex items-center gap-3">
-          {/* Transition link to full subject hub */}
+        <div className="flex items-center gap-2 sm:gap-4 shrink-0">
           <Link
             href={`/notes/${notebook.slug}`}
-            className="hidden sm:inline-flex items-center gap-1 text-xs font-mono font-semibold text-accent hover:underline cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-1 text-xs font-mono font-semibold text-[#7c3aed] hover:underline"
           >
-            <span>Enter Full Subject Hub</span>
+            <span>Subject Hub</span>
             <span>&rarr;</span>
           </Link>
 
@@ -117,7 +117,7 @@ export default function NotebookFlipController({
             <button
               type="button"
               onClick={onClose}
-              className="p-1 rounded text-ink-3 hover:text-ink-1 hover:bg-surface-2 text-xs font-mono cursor-pointer transition-colors"
+              className="px-2.5 py-1 rounded text-xs font-mono font-bold text-[#57534e] hover:text-[#1c1917] hover:bg-black/5 transition-colors border border-[#d6cfbe] cursor-pointer"
               aria-label="Close Notebook"
             >
               ✕ Close
@@ -126,49 +126,31 @@ export default function NotebookFlipController({
         </div>
       </div>
 
-      {/* ── 3D NOTEBOOK STAGE WITH PAGE-FLIP ── */}
-      <div className="relative flex-1 min-h-0 notebook-perspective flex items-center justify-center p-2 sm:p-4">
-        {/* Physical Left Binding Seam Simulation on Desktop */}
-        <div
-          className="relative w-full h-full max-w-2xl notebook-3d-preserve transition-transform duration-300"
-          style={{
-            transform:
-              isFlipping && flipDirection === "next"
-                ? "rotateY(-4deg)"
-                : isFlipping && flipDirection === "prev"
-                ? "rotateY(4deg)"
-                : "none",
-          }}
-        >
-          {/* Active Physical Page Sheet */}
-          <div
-            className={`w-full h-full notebook-3d-preserve transition-all duration-300 ${
-              isFlipping && flipDirection === "next"
-                ? "notebook-origin-left -rotate-y-12 opacity-80"
-                : isFlipping && flipDirection === "prev"
-                ? "notebook-origin-right rotate-y-12 opacity-80"
-                : ""
-            }`}
-          >
-            {activePageData ? (
-              <NotebookPage
-                page={activePageData}
-                subjectTitle={notebook.title}
-                totalPages={totalPages}
-              />
-            ) : null}
-          </div>
+      {/* ── SCROLLABLE READING PAGE AREA WITH PHYSICAL SPIRAL BINDING ── */}
+      <div className="flex-1 min-h-0 w-full overflow-hidden flex relative z-10 bg-[#faf8f5]">
+        {/* Physical Spiral Binding Rings on Left */}
+        <NotebookSpiralBinding />
+
+        {/* The Actual Page Sheet */}
+        <div className="flex-1 min-h-0 h-full overflow-hidden flex flex-col pl-7 sm:pl-9 pr-1">
+          {activePageData ? (
+            <NotebookPage
+              page={activePageData}
+              subjectTitle={notebook.title}
+              totalPages={totalPages}
+            />
+          ) : null}
         </div>
       </div>
 
       {/* ── BOTTOM PAGE NAVIGATION CONTROLS ── */}
-      <div className="pt-3 mt-2 border-t border-hairline px-2 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div className="shrink-0 pt-3 mt-1 border-t border-[#e2d9cc] px-2 flex flex-col sm:flex-row items-center justify-between gap-3">
         {/* Previous Button */}
         <button
           type="button"
           onClick={handlePrev}
           disabled={currentPage === 0 || isFlipping}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-hairline bg-surface-1 hover:bg-surface-2 text-xs font-mono font-semibold text-ink-2 hover:text-ink-1 disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer w-full sm:w-auto justify-center"
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-[#d6cfbe] bg-white/70 hover:bg-white text-xs font-mono font-semibold text-[#1c1917] disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer w-full sm:w-auto justify-center shadow-xs"
         >
           <span>&larr;</span>
           <span>Previous Page</span>
@@ -183,14 +165,14 @@ export default function NotebookFlipController({
               onClick={() => setCurrentPage(idx)}
               className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
                 currentPage === idx
-                  ? "bg-accent w-4"
-                  : "bg-surface-3 hover:bg-ink-3"
+                  ? "bg-[#7c3aed] w-4"
+                  : "bg-[#d6cfbe] hover:bg-[#78716c]"
               }`}
               aria-label={`Jump to page ${idx + 1}`}
             />
           ))}
-          <span className="font-mono text-xs text-ink-3 ml-2">
-            {currentPage + 1} of {totalPages}
+          <span className="font-mono text-xs text-[#78716c] ml-2 font-medium">
+            Page {currentPage + 1} of {totalPages}
           </span>
         </div>
 
@@ -199,7 +181,7 @@ export default function NotebookFlipController({
           type="button"
           onClick={handleNext}
           disabled={currentPage === totalPages - 1 || isFlipping}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-accent/40 bg-accent/10 hover:bg-accent/20 text-xs font-mono font-bold text-accent disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer w-full sm:w-auto justify-center"
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md border border-[#7c3aed]/40 bg-[#7c3aed] text-white hover:bg-[#6d28d9] text-xs font-mono font-bold disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer w-full sm:w-auto justify-center shadow-xs"
         >
           <span>Next Page</span>
           <span>&rarr;</span>

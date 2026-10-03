@@ -80,7 +80,7 @@ export default async function SubjectNotebookPage({
         </h1>
         <p className="mt-5 text-lg leading-relaxed">
           Some working drafts exist, but this notebook is not complete or fully verified yet.
-          The available material should not be treated as a finished course.
+          The available material should not be treated as a finished notebook.
         </p>
         <Link
           href="/notes/operating-systems"

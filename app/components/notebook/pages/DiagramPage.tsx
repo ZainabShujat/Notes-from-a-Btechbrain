@@ -2,16 +2,16 @@ import { DiagramPageContent } from "../../../../lib/notebooks/types";
 
 export default function DiagramPage({ content }: { content: DiagramPageContent }) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 pt-1">
       {/* Header */}
       <div>
         {content.subheading && (
-          <span className="text-[10px] font-mono uppercase tracking-widest text-ink-3 block mb-1">
+          <span className="text-[10px] font-mono uppercase tracking-widest text-[#78716c] block mb-1">
             {content.subheading}
           </span>
         )}
-        <h3 className="font-handwriting text-2xl sm:text-3xl font-bold text-ink-1 leading-tight">
-          <span className="bg-violet-500/10 dark:bg-violet-500/20 px-2 py-0.5 rounded-[3px]">
+        <h3 className="font-handwriting text-2xl sm:text-3xl font-bold text-[#1e1b4b] leading-tight">
+          <span className="bg-violet-500/10 px-2 py-0.5 rounded-[3px]">
             {content.heading}
           </span>
         </h3>
@@ -19,28 +19,28 @@ export default function DiagramPage({ content }: { content: DiagramPageContent }
 
       {/* Handwritten Annotation */}
       {content.handwrittenNote && (
-        <p className="font-handwriting text-base sm:text-lg text-accent font-semibold leading-snug">
+        <p className="font-handwriting text-base sm:text-lg text-[#7c3aed] font-semibold leading-snug">
           {content.handwrittenNote}
         </p>
       )}
 
       {/* SVG Diagram Canvas (Carefully Drawn Student Notes Aesthetics) */}
-      <div className="rounded-xl border border-dashed border-hairline/80 bg-surface-1/20 p-3 sm:p-4 overflow-hidden">
+      <div className="rounded-xl border border-dashed border-[#d6cfbe] bg-white/60 p-3 sm:p-4 overflow-hidden">
         {renderDiagramSvg(content.customKey)}
       </div>
 
       {content.caption && (
-        <p className="text-[11px] font-mono text-ink-3 text-center">
+        <p className="text-[11px] font-mono text-[#78716c] text-center">
           {content.caption}
         </p>
       )}
 
       {/* Accompanying Notes */}
       {content.notes && content.notes.length > 0 && (
-        <ul className="space-y-1.5 pt-1 text-xs text-ink-2">
+        <ul className="space-y-1.5 pt-1 text-xs text-[#374151]">
           {content.notes.map((n, i) => (
             <li key={i} className="flex items-start gap-2">
-              <span className="text-accent font-bold text-xs mt-0.5">&bull;</span>
+              <span className="text-[#7c3aed] font-bold text-xs mt-0.5">&bull;</span>
               <span>{n}</span>
             </li>
           ))}

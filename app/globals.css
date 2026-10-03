@@ -70,16 +70,16 @@
   --theme-highlight: #facc15;
   --theme-on-accent: #ffffff;
 
-  /* Subtle engineering notebook paper tokens (Dark mode) */
-  --notebook-sheet-bg: #0e0d20;
-  --notebook-dot: rgba(168, 85, 247, 0.08);
-  --notebook-line: rgba(168, 85, 247, 0.09);
-  --notebook-margin: rgba(168, 85, 247, 0.22);
-  --notebook-highlight: rgba(250, 204, 21, 0.16);
-  --notebook-pencil: #948cb5;
-  --notebook-binding: #52546a;
-  --notebook-binding-highlight: #74778d;
-  --notebook-binding-shadow: rgba(0, 0, 0, 0.42);
+  /* Physical engineering notebook paper tokens (Consistent creamy ivory across dark & light) */
+  --notebook-sheet-bg: #faf7f2;
+  --notebook-dot: rgba(30, 27, 75, 0.08);
+  --notebook-line: rgba(30, 27, 75, 0.09);
+  --notebook-margin: rgba(124, 58, 237, 0.28);
+  --notebook-highlight: rgba(250, 204, 21, 0.35);
+  --notebook-pencil: #57534e;
+  --notebook-binding: #475569;
+  --notebook-binding-highlight: #94a3b8;
+  --notebook-binding-shadow: rgba(0, 0, 0, 0.25);
 
   --ground-texture: url("/assets/banners/galaxy-bg.webp");
   --ground-texture-opacity: 0.18;
@@ -687,16 +687,18 @@ body::after {
   );
 }
 
-/* Notebook paper sheet styling */
+/* Notebook paper sheet styling - Always tactile creamy paper in all views */
 .notebook-sheet {
   position: relative;
-  background-color: var(--theme-raised);
-  background-image: radial-gradient(circle, var(--notebook-dot) 1px, transparent 1px);
+  background-color: #faf8f5 !important;
+  color: #1c1917 !important;
+  background-image: radial-gradient(circle, rgba(30, 27, 75, 0.07) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
 .light .notebook-sheet {
-  background-color: #faf8f5;
+  background-color: #faf8f5 !important;
+  color: #1c1917 !important;
 }
 
 /* Notebook paper stack edge simulation */

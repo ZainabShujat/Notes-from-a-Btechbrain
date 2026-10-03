@@ -19,37 +19,41 @@ export default function NotebookPage({
 }) {
   return (
     <article
-      className="relative w-full h-full min-h-[460px] sm:min-h-[520px] rounded-lg border border-hairline/80 notebook-sheet text-ink-2 p-5 sm:p-7 flex flex-col justify-between overflow-hidden shadow-xs select-text"
+      className="relative flex flex-col h-full w-full overflow-hidden bg-[#faf8f5] text-[#1c1917] px-4 sm:px-6 py-2 select-text"
+      style={{
+        backgroundImage: "radial-gradient(circle, rgba(30, 27, 75, 0.07) 1.1px, transparent 1.1px)",
+        backgroundSize: "22px 22px",
+      }}
       aria-label={`${subjectTitle} - Page ${page.pageNumber}: ${page.title}`}
     >
-      {/* Very faint notebook margin line on left */}
+      {/* Classic vertical red/pink notebook margin line */}
       <div
-        className="absolute top-0 bottom-0 left-6 sm:left-8 w-px bg-violet-500/15 pointer-events-none"
+        className="absolute top-0 bottom-0 left-3 sm:left-4 w-px bg-rose-400/35 pointer-events-none"
         aria-hidden="true"
       />
 
-      {/* ── TOP RUNNING HEADER ── */}
-      <header className="relative z-10 pb-3 mb-3 border-b border-dashed border-hairline/70 flex items-center justify-between text-[11px] font-mono text-ink-3">
-        <div className="flex items-center gap-2 truncate max-w-[70%]">
-          <span className="font-handwriting text-base text-accent font-bold">
+      {/* ── TOP RUNNING FOLIO (ACADEMIC NOTEBOOK HEADER) ── */}
+      <header className="shrink-0 pb-2 mb-2 border-b border-dashed border-[#1c1917]/15 flex items-center justify-between text-[11px] font-mono text-[#57534e]">
+        <div className="flex items-center gap-2 truncate max-w-[75%] pl-4 sm:pl-5">
+          <span className="font-handwriting text-base text-[#7c3aed] font-bold">
             ✎ {subjectTitle}
           </span>
           {page.tag && (
             <>
               <span className="opacity-40">&middot;</span>
-              <span className="uppercase tracking-wider text-[10px] text-ink-2 truncate">
+              <span className="uppercase tracking-wider text-[10px] text-[#44403c] font-medium truncate">
                 {page.tag}
               </span>
             </>
           )}
         </div>
-        <span className="font-mono text-xs font-semibold text-ink-1 shrink-0">
+        <span className="font-mono text-xs font-semibold text-[#1c1917] shrink-0">
           Page {page.pageNumber} / {totalPages}
         </span>
       </header>
 
-      {/* ── MAIN BODY CONTENT (MODULAR BY PAGE TYPE) ── */}
-      <div className="relative z-10 flex-1 overflow-y-auto pr-1">
+      {/* ── MAIN BODY CONTENT (SMOOTH INTERNAL SCROLL, PROPER INK PADDING) ── */}
+      <div className="flex-1 min-h-0 overflow-y-auto pl-4 sm:pl-5 pr-2 pb-6 pt-1 text-[#1c1917]">
         {page.type === "concept" && (
           <ConceptPage content={page.content as any} />
         )}

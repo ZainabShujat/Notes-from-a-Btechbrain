@@ -11,7 +11,7 @@ export const DBMS_COURSE: CourseMeta = {
   tagline:
     "Master database internals: from relational algebra and SQL optimization to B+ tree index arithmetic, normalization, and ACID transaction schedules.",
   description:
-    "A rigorous, comprehensive course in Database Management Systems designed for B.Tech semester excellence and top-percentile GATE CS preparation. Features interactive precedence graph checkers, B+ tree calculators, schema normalization solvers, and step-by-step verified GATE PYQ derivations.",
+    "A rigorous, comprehensive Database Management Systems notebook designed for B.Tech semester excellence and top-percentile GATE CS preparation. Features interactive precedence graph checkers, B+ tree calculators, schema normalization solvers, and step-by-step verified GATE PYQ derivations.",
   level: "Undergraduate / GATE CS",
   estimatedHours: 42,
   prerequisites: [

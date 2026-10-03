@@ -2,16 +2,16 @@ import { ConceptPageContent } from "../../../../lib/notebooks/types";
 
 export default function ConceptPage({ content }: { content: ConceptPageContent }) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 pt-1">
       {/* Page Header */}
       <div>
         {content.subheading && (
-          <span className="text-[10px] font-mono uppercase tracking-widest text-ink-3 block mb-1">
+          <span className="text-[10px] font-mono uppercase tracking-widest text-[#78716c] block mb-1">
             {content.subheading}
           </span>
         )}
-        <h3 className="font-handwriting text-2xl sm:text-3xl font-bold text-ink-1 leading-tight">
-          <span className="bg-violet-500/10 dark:bg-violet-500/20 px-2 py-0.5 rounded-[3px]">
+        <h3 className="font-handwriting text-2xl sm:text-3xl font-bold text-[#1e1b4b] leading-tight">
+          <span className="bg-violet-500/10 px-2 py-0.5 rounded-[3px]">
             {content.heading}
           </span>
         </h3>
@@ -19,15 +19,15 @@ export default function ConceptPage({ content }: { content: ConceptPageContent }
 
       {/* Handwritten Student Observation / Annotation */}
       {content.handwrittenNote && (
-        <div className="py-1 px-2.5 rounded bg-accent/5 border-l-2 border-accent/60">
-          <p className="font-handwriting text-base sm:text-lg text-accent font-semibold leading-snug">
+        <div className="py-1.5 px-3 rounded bg-violet-500/10 border-l-2 border-[#7c3aed]">
+          <p className="font-handwriting text-base sm:text-lg text-[#7c3aed] font-semibold leading-snug">
             {content.handwrittenNote}
           </p>
         </div>
       )}
 
       {/* Primary Reading Paragraphs */}
-      <div className="space-y-3 text-xs sm:text-sm text-ink-2 leading-relaxed font-sans">
+      <div className="space-y-3 text-xs sm:text-sm text-[#374151] leading-relaxed font-sans">
         {content.paragraphs.map((p, i) => (
           <p key={i}>{p}</p>
         ))}
@@ -35,10 +35,10 @@ export default function ConceptPage({ content }: { content: ConceptPageContent }
 
       {/* Key Bullets */}
       {content.bullets && content.bullets.length > 0 && (
-        <ul className="space-y-1.5 pt-1 text-xs sm:text-sm text-ink-2">
+        <ul className="space-y-1.5 pt-1 text-xs sm:text-sm text-[#374151]">
           {content.bullets.map((b, i) => (
             <li key={i} className="flex items-start gap-2">
-              <span className="text-accent font-bold text-xs mt-0.5">&bull;</span>
+              <span className="text-[#7c3aed] font-bold text-xs mt-0.5">&bull;</span>
               <span>{b}</span>
             </li>
           ))}
@@ -50,14 +50,14 @@ export default function ConceptPage({ content }: { content: ConceptPageContent }
         <div
           className={`p-3.5 rounded-lg border text-xs sm:text-sm ${
             content.callout.kind === "trap"
-              ? "border-amber-500/40 bg-amber-500/5 text-ink-2"
-              : "border-accent/40 bg-accent/5 text-ink-2"
+              ? "border-amber-400 bg-amber-50 text-[#78350f]"
+              : "border-violet-300 bg-violet-50/70 text-[#4c1d95]"
           }`}
         >
           <div className="flex items-center gap-1.5 mb-1">
             <span
               className={`font-handwriting text-base font-bold ${
-                content.callout.kind === "trap" ? "text-amber-500" : "text-accent"
+                content.callout.kind === "trap" ? "text-amber-700" : "text-[#7c3aed]"
               }`}
             >
               {content.callout.kind === "trap"
@@ -66,7 +66,7 @@ export default function ConceptPage({ content }: { content: ConceptPageContent }
                 ? "✎ ★ remember for exam:"
                 : "✎ core intuition:"}
             </span>
-            <span className="text-[10px] font-mono uppercase font-bold text-ink-3">
+            <span className="text-[10px] font-mono uppercase font-bold text-[#57534e]">
               {content.callout.title}
             </span>
           </div>
@@ -76,8 +76,8 @@ export default function ConceptPage({ content }: { content: ConceptPageContent }
 
       {/* Key Takeaway */}
       {content.keyTakeaway && (
-        <div className="pt-2 border-t border-hairline/60">
-          <p className="font-handwriting text-base text-accent font-semibold">
+        <div className="pt-2 border-t border-[#1c1917]/10">
+          <p className="font-handwriting text-base text-[#7c3aed] font-semibold">
             ✎ Takeaway: {content.keyTakeaway}
           </p>
         </div>

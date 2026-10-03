@@ -10,7 +10,7 @@ export const OPERATING_SYSTEMS_COURSE: CourseMeta = {
   badge: "Complete B.Tech & GATE CS Curriculum",
   tagline: "Understand the invisible machinery behind every program you run.",
   description:
-    "A first-principles, student-facing Operating Systems course covering core undergraduate concepts and GATE-oriented practice. Learn dual-mode protection, process synchronization, CPU scheduling, deadlock safety, paging and TLBs, demand paging, file systems, and disk scheduling through explanations, models, laboratories, and clearly labelled exam practice.",
+    "A first-principles, student-facing Operating Systems notebook covering core undergraduate concepts and GATE-oriented practice. Learn dual-mode protection, process synchronization, CPU scheduling, deadlock safety, paging and TLBs, demand paging, file systems, and disk scheduling through explanations, models, laboratories, and clearly labelled exam practice.",
   prerequisites: [
     "C Programming fundamentals (pointers, structs, memory addresses)",
     "Computer Architecture basics (CPU registers, Program Counter, ALU, RAM)",
