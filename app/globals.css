@@ -624,6 +624,17 @@ body::after {
   background: linear-gradient(120deg, rgb(250 204 21 / 0.14), rgb(250 204 21 / 0.05));
 }
 
+@media (max-width: 767px) {
+  .zoomable-visual svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .zoomable-visual > div:first-child {
+    max-width: 100%;
+  }
+}
+
 .light .highlighter-violet {
   background: linear-gradient(120deg, rgba(192, 132, 252, 0.3) 0%, rgba(192, 132, 252, 0.15) 100%);
 }

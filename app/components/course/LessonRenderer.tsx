@@ -18,6 +18,7 @@ import GateLens from "./GateLens";
 import QuickRevision from "./QuickRevision";
 import ResourcesAndSources from "./ResourcesAndSources";
 import StickyNote from "./StickyNote";
+import ZoomableVisual from "./ZoomableVisual";
 
 export default function LessonRenderer({
   lesson,
@@ -191,24 +192,26 @@ function SectionBlock({
             </h3>
           )}
 
-          {preset ? (
-            <LiveDiagramDrawer presetKey={preset} />
-          ) : (
-            <div className="overflow-hidden p-2 sm:p-4">
-              {section.diagramType === "process-pcb" && <PcbDiagram />}
-              {section.svgContent && (
-                <div
-                  className="w-full overflow-x-auto flex justify-center"
-                  dangerouslySetInnerHTML={{ __html: section.svgContent }}
-                />
-              )}
-              {section.diagramType !== "process-pcb" && !section.svgContent && section.asciiArt && (
-                <pre className="font-mono text-xs sm:text-sm text-ink-1 leading-relaxed overflow-x-auto p-4 bg-surface-1/40 rounded border border-dashed border-hairline whitespace-pre">
-                  {section.asciiArt}
-                </pre>
-              )}
-            </div>
-          )}
+          <ZoomableVisual label="Expand diagram">
+            {preset ? (
+              <LiveDiagramDrawer presetKey={preset} />
+            ) : (
+              <div className="min-w-0 max-w-full overflow-hidden p-2 sm:p-4">
+                {section.diagramType === "process-pcb" && <PcbDiagram />}
+                {section.svgContent && (
+                  <div
+                    className="flex w-full max-w-full justify-center overflow-hidden"
+                    dangerouslySetInnerHTML={{ __html: section.svgContent }}
+                  />
+                )}
+                {section.diagramType !== "process-pcb" && !section.svgContent && section.asciiArt && (
+                  <pre className="max-w-full overflow-hidden whitespace-pre-wrap break-words rounded border border-dashed border-hairline bg-surface-1/40 p-4 font-mono text-xs leading-relaxed text-ink-1 sm:text-sm">
+                    {section.asciiArt}
+                  </pre>
+                )}
+              </div>
+            )}
+          </ZoomableVisual>
 
           <figcaption className="mt-2 text-xs text-ink-3 font-mono text-center">
             {section.caption}
@@ -239,7 +242,7 @@ function SectionBlock({
             </p>
           )}
 
-          <div>
+          <ZoomableVisual label="Expand interactive visual">
             {section.interactive.kind === "flow-visualizer" && (
               <InteractiveFlowVisualizer config={section.interactive.config} />
             )}
@@ -281,7 +284,7 @@ function SectionBlock({
                 }
               />
             )}
-          </div>
+          </ZoomableVisual>
         </section>
       );
 
@@ -334,11 +337,13 @@ function SectionBlock({
 
           {/* Hand-Drawn Gantt Chart / SVG if provided */}
           {section.svgContent && (
-            <div className="my-4 py-2 border-y border-dashed border-hairline/60 overflow-x-auto flex justify-center">
-              <div
-                className="w-full max-w-xl"
-                dangerouslySetInnerHTML={{ __html: section.svgContent }}
-              />
+            <div className="my-4 flex justify-center overflow-hidden border-y border-dashed border-hairline/60 py-2">
+              <ZoomableVisual label="Expand worked-example diagram">
+                <div
+                  className="w-full max-w-xl"
+                  dangerouslySetInnerHTML={{ __html: section.svgContent }}
+                />
+              </ZoomableVisual>
             </div>
           )}
 
