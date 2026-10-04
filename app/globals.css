@@ -1,4 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Kalam:wght@400;700&display=swap");
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* =========================================================
    DESIGN TOKENS  —  Notes From a BTech Brain
@@ -10,6 +13,7 @@
 
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-handwriting: 'Caveat', 'Kalam', cursive;
 
   --color-background: var(--theme-base);
   --color-raised: var(--theme-raised);
@@ -66,6 +70,17 @@
   --theme-highlight: #facc15;
   --theme-on-accent: #ffffff;
 
+  /* Physical engineering notebook paper tokens (Consistent creamy ivory across dark & light) */
+  --notebook-sheet-bg: #faf7f2;
+  --notebook-dot: rgba(30, 27, 75, 0.08);
+  --notebook-line: rgba(30, 27, 75, 0.09);
+  --notebook-margin: rgba(124, 58, 237, 0.28);
+  --notebook-highlight: rgba(250, 204, 21, 0.35);
+  --notebook-pencil: #57534e;
+  --notebook-binding: #475569;
+  --notebook-binding-highlight: #94a3b8;
+  --notebook-binding-shadow: rgba(0, 0, 0, 0.25);
+
   --ground-texture: url("/assets/banners/galaxy-bg.webp");
   --ground-texture-opacity: 0.18;
   --ground-glow:
@@ -77,6 +92,7 @@
 html {
   color-scheme: dark;
   background-color: var(--color-background);
+  overflow-x: clip;
 }
 
 html,
@@ -88,6 +104,7 @@ body {
   position: relative;
   background-color: var(--color-background);
   color: var(--color-ink-2);
+  overflow-x: clip;
 }
 
 body::before {
@@ -135,6 +152,17 @@ body::after {
   --theme-accent-muted: rgb(126 34 206 / 10%);
   --theme-highlight: #d97706;
   --theme-on-accent: #ffffff;
+
+  /* Subtle engineering notebook paper tokens (Light mode) */
+  --notebook-sheet-bg: #faf7f2;
+  --notebook-dot: rgba(100, 116, 139, 0.08);
+  --notebook-line: rgba(100, 116, 139, 0.09);
+  --notebook-margin: rgba(225, 29, 72, 0.16);
+  --notebook-highlight: rgba(245, 158, 11, 0.2);
+  --notebook-pencil: #64748b;
+  --notebook-binding: #8b919a;
+  --notebook-binding-highlight: #d6d9dd;
+  --notebook-binding-shadow: rgba(0, 0, 0, 0.24);
 }
 
 .light body::before {
@@ -378,3 +406,927 @@ body::after {
   0%, 100% { transform: translate(0, 0); }
   50% { transform: translate(6px, -5px); }
 }
+
+/* =========================================================
+   HOMEPAGE HERO — LIVING EDITORIAL THINKING SPACE
+   Subtle, independent organic drifts for the 4 concepts,
+   thinking path, notebook artifacts, and scroll invitation.
+   GPU-friendly (transform/opacity only).
+   ========================================================= */
+
+@keyframes hero-path-drift {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(6px, -4px);
+    opacity: 1;
+  }
+}
+
+@keyframes hero-orbit-understand {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes hero-orbit-interact {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-6px);
+  }
+}
+
+@keyframes hero-orbit-practice {
+  0%, 100% {
+    transform: scale(0.98);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+}
+
+@keyframes hero-orbit-revise {
+  0%, 100% {
+    transform: translateY(0) rotate(-0.8deg);
+  }
+  50% {
+    transform: translateY(4px) rotate(1.2deg);
+  }
+}
+
+@keyframes hero-artifact-float-1 {
+  0%, 100% {
+    transform: translateY(0) rotate(-2.5deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(-1.5deg);
+  }
+}
+
+@keyframes hero-artifact-float-2 {
+  0%, 100% {
+    transform: translateY(0) rotate(1.8deg);
+  }
+  50% {
+    transform: translateY(5px) rotate(2.4deg);
+  }
+}
+
+@keyframes hero-artifact-float-3 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-4px, -3px);
+  }
+}
+
+@keyframes hero-arrow-drift {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+.hero-thinking-path {
+  animation: hero-path-drift 22s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+.hero-orbit-understand {
+  animation: hero-orbit-understand 9s ease-in-out infinite;
+}
+
+.hero-orbit-interact {
+  animation: hero-orbit-interact 11.2s ease-in-out infinite;
+}
+
+.hero-orbit-practice {
+  animation: hero-orbit-practice 12.8s ease-in-out infinite;
+}
+
+.hero-orbit-revise {
+  animation: hero-orbit-revise 10.5s ease-in-out infinite;
+}
+
+.hero-artifact-1 {
+  animation: hero-artifact-float-1 8.8s ease-in-out infinite;
+}
+
+.hero-artifact-2 {
+  animation: hero-artifact-float-2 10.6s ease-in-out infinite;
+}
+
+.hero-artifact-3 {
+  animation: hero-artifact-float-3 9.4s ease-in-out infinite;
+}
+
+.hero-arrow-drift {
+  animation: hero-arrow-drift 2.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-thinking-path,
+  .hero-orbit-understand,
+  .hero-orbit-interact,
+  .hero-orbit-practice,
+  .hero-orbit-revise,
+  .hero-artifact-1,
+  .hero-artifact-2,
+  .hero-artifact-3,
+  .hero-arrow-drift {
+    animation: none !important;
+  }
+}
+
+/* =========================================================
+   STUDENT NOTEBOOK VISUAL LANGUAGE
+   "Formal technical publication + A student's actual notebook"
+   ========================================================= */
+
+.font-handwriting {
+  font-family: 'Caveat', 'Kalam', cursive;
+  letter-spacing: 0.015em;
+}
+
+/* Very subtle dotted notebook paper grid for note reading canvas */
+.notebook-paper-canvas {
+  position: relative;
+  background-image: radial-gradient(circle, var(--notebook-dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Subtle faded left margin line like an engineering notebook page */
+.notebook-page-margin {
+  position: relative;
+}
+@media (min-width: 768px) {
+  .notebook-page-margin::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 2rem;
+    width: 1px;
+    background: var(--notebook-margin);
+    pointer-events: none;
+    opacity: 0.7;
+  }
+}
+
+/* Pencil-drawn callout card */
+.notebook-callout-card {
+  position: relative;
+  border-radius: 12px;
+  border-width: 1.5px;
+  transition: border-color 0.2s ease;
+}
+
+/* =========================================================
+   AUTHENTIC STUDENT INLINE TEXT HIGHLIGHTER SYSTEM
+   Translucent marker strokes BEHIND the text (not pills/badges/boxes).
+   Uses box-decoration-break: clone so it wraps naturally across lines on narrow screens.
+   Organic slightly uneven marker bounds with soft ink translucency.
+   
+   Color semantics:
+   - yellow = core definition / fact
+   - pink   = important distinction / common trap
+   - green  = intuition / connection
+   - purple = key terminology / structural concept
+   ========================================================= */
+
+.student-highlight,
+mark.student-highlight {
+  display: inline;
+  color: inherit !important;
+  background-color: transparent;
+  padding: 0.12em 0.28em;
+  margin: 0 -0.05em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  border-radius: 2px 4px 3px 2px;
+  position: relative;
+  font-weight: inherit;
+}
+
+/* Yellow: Core definitions & foundational facts */
+.highlight-yellow,
+.student-highlight.highlight-yellow,
+mark.highlighter-yellow {
+  background: linear-gradient(
+    104deg,
+    rgba(253, 224, 71, 0.42) 0%,
+    rgba(250, 204, 21, 0.48) 55%,
+    rgba(253, 224, 71, 0.38) 100%
+  );
+}
+.dark .highlight-yellow,
+.dark .student-highlight.highlight-yellow,
+.dark mark.highlighter-yellow {
+  background: linear-gradient(
+    104deg,
+    rgba(234, 179, 8, 0.38) 0%,
+    rgba(250, 204, 21, 0.44) 55%,
+    rgba(234, 179, 8, 0.34) 100%
+  );
+}
+
+/* Pink: Important distinctions, caveats & common traps */
+.highlight-pink,
+.student-highlight.highlight-pink,
+mark.highlighter-pink {
+  background: linear-gradient(
+    102deg,
+    rgba(244, 114, 182, 0.38) 0%,
+    rgba(251, 113, 133, 0.44) 60%,
+    rgba(244, 114, 182, 0.34) 100%
+  );
+}
+.dark .highlight-pink,
+.dark .student-highlight.highlight-pink,
+.dark mark.highlighter-pink {
+  background: linear-gradient(
+    102deg,
+    rgba(244, 114, 182, 0.34) 0%,
+    rgba(251, 113, 133, 0.40) 60%,
+    rgba(244, 114, 182, 0.30) 100%
+  );
+}
+
+/* Green: Intuitions, connections & architectural reasoning */
+.highlight-green,
+.student-highlight.highlight-green,
+mark.highlighter-green {
+  background: linear-gradient(
+    105deg,
+    rgba(110, 231, 183, 0.40) 0%,
+    rgba(52, 211, 153, 0.44) 50%,
+    rgba(110, 231, 183, 0.36) 100%
+  );
+}
+.dark .highlight-green,
+.dark .student-highlight.highlight-green,
+.dark mark.highlighter-green {
+  background: linear-gradient(
+    105deg,
+    rgba(52, 211, 153, 0.34) 0%,
+    rgba(16, 185, 129, 0.38) 50%,
+    rgba(52, 211, 153, 0.30) 100%
+  );
+}
+
+/* Purple: Key terminology & structural concepts */
+.highlight-purple,
+.student-highlight.highlight-purple,
+mark.highlighter-purple,
+mark.highlighter-violet {
+  background: linear-gradient(
+    103deg,
+    rgba(216, 180, 254, 0.42) 0%,
+    rgba(192, 132, 252, 0.46) 55%,
+    rgba(216, 180, 254, 0.36) 100%
+  );
+}
+.dark .highlight-purple,
+.dark .student-highlight.highlight-purple,
+.dark mark.highlighter-purple,
+.dark mark.highlighter-violet {
+  background: linear-gradient(
+    103deg,
+    rgba(192, 132, 252, 0.35) 0%,
+    rgba(168, 85, 247, 0.40) 55%,
+    rgba(192, 132, 252, 0.30) 100%
+  );
+}
+
+/* Backward compatibility aliases */
+.highlighter-yellow {
+  background-color: rgba(254, 240, 138, 0.45);
+  padding: 0.12em 0.35em;
+  border-radius: 2px;
+}
+.highlighter-violet {
+  background-color: rgba(233, 213, 255, 0.45);
+  padding: 0.12em 0.35em;
+  border-radius: 2px;
+}
+
+/* Student-facing scan cues used by the Operating Systems notebook cards. */
+.notebook-highlight-green {
+  background: linear-gradient(120deg, rgb(16 185 129 / 0.14), rgb(16 185 129 / 0.05));
+  border-left-color: #10b981;
+}
+
+.notebook-highlight-yellow {
+  background: linear-gradient(120deg, rgb(250 204 21 / 0.14), rgb(250 204 21 / 0.05));
+}
+
+@media (max-width: 767px) {
+  .zoomable-visual svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .zoomable-visual > div:first-child {
+    max-width: 100%;
+  }
+}
+
+/* =========================================================
+   NOTEBOOK 3D TRANSFORM & PAGE-FLIP SYSTEM
+   Clean, tactile engineering student notebook CSS
+   ========================================================= */
+
+.notebook-perspective {
+  perspective: 1600px;
+  perspective-origin: center center;
+}
+
+.notebook-3d-preserve {
+  transform-style: preserve-3d;
+}
+
+.notebook-backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.notebook-origin-left {
+  transform-origin: left center;
+}
+
+.notebook-origin-right {
+  transform-origin: right center;
+}
+
+/* Spine binding gradient with stitch simulation */
+.notebook-spine-binding {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(255, 255, 255, 0.08) 25%,
+    rgba(0, 0, 0, 0.12) 55%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+}
+
+.light .notebook-spine-binding {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.22) 0%,
+    rgba(255, 255, 255, 0.6) 25%,
+    rgba(0, 0, 0, 0.08) 55%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+}
+
+/* Notebook paper sheet styling - Always tactile creamy paper in all views */
+.notebook-sheet {
+  position: relative;
+  background-color: #faf8f5 !important;
+  color: #1c1917 !important;
+  background-image: radial-gradient(circle, rgba(30, 27, 75, 0.07) 1px, transparent 1px);
+  background-size: 20px 20px;
+  --color-ink-1: #1e1b4b;
+  --color-ink-2: #334155;
+  --color-ink-3: #64748b;
+}
+
+.notebook-sheet h1,
+.notebook-sheet h2,
+.notebook-sheet h3,
+.notebook-sheet h4,
+.notebook-sheet h5,
+.notebook-sheet h6,
+.notebook-sheet .font-handwriting {
+  color: #1e1b4b !important;
+}
+
+.notebook-sheet p,
+.notebook-sheet li {
+  color: #334155 !important;
+}
+
+.notebook-sheet strong,
+.notebook-sheet b,
+.notebook-sheet .text-ink-1 {
+  color: #1e1b4b !important;
+}
+
+.notebook-sheet .text-ink-2 {
+  color: #334155 !important;
+}
+
+.notebook-sheet .text-ink-3 {
+  color: #64748b !important;
+}
+
+.light .notebook-sheet {
+  background-color: #faf8f5 !important;
+  color: #1c1917 !important;
+}
+
+/* Notebook paper stack edge simulation */
+.notebook-edge-stack {
+  box-shadow:
+    1px 0 0 0 var(--color-hairline),
+    2px 1px 0 0 var(--color-hairline),
+    3px 2px 0 0 var(--color-hairline),
+    4px 3px 0 0 var(--color-hairline),
+    5px 4px 0 0 var(--color-hairline),
+    6px 5px 12px -2px rgba(0, 0, 0, 0.5);
+}
+
+.light .notebook-edge-stack {
+  box-shadow:
+    1px 0 0 0 rgba(0, 0, 0, 0.08),
+    2px 1px 0 0 rgba(0, 0, 0, 0.06),
+    3px 2px 0 0 rgba(0, 0, 0, 0.05),
+    4px 3px 0 0 rgba(0, 0, 0, 0.04),
+    5px 4px 0 0 rgba(0, 0, 0, 0.03),
+    6px 5px 14px -3px rgba(0, 0, 0, 0.15);
+}
+
+/* Notebook reading page (The Page IS the UI) */
+.notebook-reading-page {
+  position: relative;
+  background-color: var(--notebook-sheet-bg);
+  background-image: radial-gradient(circle, var(--notebook-dot) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  color: #1c1917 !important;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 12px 36px -8px rgba(0, 0, 0, 0.45),
+    0 0 0 1px var(--color-hairline);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  /* Local design tokens: on physical creamy paper, ink must ALWAYS be crisp dark charcoal/violet */
+  --color-ink-1: #1e1b4b;
+  --color-ink-2: #334155;
+  --color-ink-3: #64748b;
+  --color-hairline: rgba(30, 27, 75, 0.12);
+  --color-hairline-strong: rgba(30, 27, 75, 0.22);
+}
+
+.notebook-reading-page h1,
+.notebook-reading-page h2,
+.notebook-reading-page h3,
+.notebook-reading-page h4,
+.notebook-reading-page h5,
+.notebook-reading-page h6,
+.notebook-reading-page .font-handwriting {
+  color: #1e1b4b !important;
+}
+
+.notebook-reading-page p,
+.notebook-reading-page li,
+.notebook-reading-page span,
+.notebook-reading-page div {
+  color: inherit;
+}
+
+.notebook-reading-page p,
+.notebook-reading-page li,
+.notebook-reading-page .text-ink-2 {
+  color: #334155 !important;
+}
+
+.notebook-reading-page strong,
+.notebook-reading-page b,
+.notebook-reading-page .text-ink-1 {
+  color: #1e1b4b !important;
+}
+
+.notebook-reading-page .text-ink-3 {
+  color: #64748b !important;
+}
+
+/* Ensure callout cards maintain readable text on creamy paper regardless of theme */
+.notebook-reading-page [class*="bg-violet-500"]:not(.student-highlight),
+.notebook-reading-page [class*="bg-purple-500"]:not(.student-highlight) {
+  background-color: rgba(124, 58, 237, 0.12) !important;
+  color: #1e1b4b !important;
+}
+
+.notebook-reading-page [class*="bg-yellow-"]:not(.student-highlight),
+.notebook-reading-page [class*="bg-amber-"]:not(.student-highlight) {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+  color: #78350f !important;
+}
+
+.notebook-reading-page [class*="bg-emerald-"]:not(.student-highlight),
+.notebook-reading-page [class*="bg-green-"]:not(.student-highlight) {
+  background-color: rgba(16, 185, 129, 0.14) !important;
+  color: #064e3b !important;
+}
+
+/* Translucent inline student marker strokes on creamy reading sheets */
+.notebook-reading-page .student-highlight,
+.notebook-reading-page mark {
+  color: inherit !important;
+  font-weight: inherit;
+}
+.notebook-reading-page .highlight-yellow,
+.notebook-reading-page mark.highlighter-yellow {
+  background: linear-gradient(104deg, rgba(253, 224, 71, 0.45) 0%, rgba(250, 204, 21, 0.52) 55%, rgba(253, 224, 71, 0.40) 100%) !important;
+}
+.notebook-reading-page .highlight-pink,
+.notebook-reading-page mark.highlighter-pink {
+  background: linear-gradient(102deg, rgba(244, 114, 182, 0.40) 0%, rgba(251, 113, 133, 0.46) 60%, rgba(244, 114, 182, 0.35) 100%) !important;
+}
+.notebook-reading-page .highlight-green,
+.notebook-reading-page mark.highlighter-green {
+  background: linear-gradient(105deg, rgba(110, 231, 183, 0.42) 0%, rgba(52, 211, 153, 0.46) 50%, rgba(110, 231, 183, 0.38) 100%) !important;
+}
+.notebook-reading-page .highlight-purple,
+.notebook-reading-page mark.highlighter-purple,
+.notebook-reading-page mark.highlighter-violet {
+  background: linear-gradient(103deg, rgba(216, 180, 254, 0.44) 0%, rgba(192, 132, 252, 0.48) 55%, rgba(216, 180, 254, 0.38) 100%) !important;
+}
+
+.notebook-reading-page pre,
+.notebook-reading-page code {
+  color: #1e1b4b !important;
+}
+
+.light .notebook-reading-page {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 14px 40px -10px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.07);
+}
+
+/* Authentic vertical margin rule in notebook page */
+.notebook-vertical-margin-rule {
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .notebook-vertical-margin-rule::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 48px;
+    width: 1px;
+    background-color: var(--notebook-margin);
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+/* Notebook handwritten underline */
+.handwritten-underline {
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+}
+
+/* Notebook marginalia brackets */
+.marginalia-bracket {
+  position: relative;
+  border-left: 2px solid var(--color-accent);
+  padding-left: 1.25rem;
+  margin: 1.75rem 0;
+}
+
+.marginalia-bracket::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 2px;
+  background-color: var(--color-accent);
+}
+
+.marginalia-bracket::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 14px;
+  height: 2px;
+  background-color: var(--color-accent);
+}
+
+/* Pencil dotted rule */
+.pencil-divider {
+  border-bottom: 1px dashed var(--color-hairline);
+  opacity: 0.8;
+}
+
+/* =========================================================
+   OCTAGON / CHAMFERED CORNER SHAPES (SITEWIDE)
+   Transforms all rounded UI elements (divs, buttons, cards, tags,
+   containers, dialogs) into sharp chamfered octagons with cut corners,
+   while preserving modals, diagrams, canvas, and svg nodes.
+   ========================================================= */
+.shape-octagon,
+:where([class*="rounded"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.zoomable-modal-content):not(.zoomable-modal-content *):not(.fixed):not([role="dialog"]):not([role="dialog"] *):not(path):not(circle):not(rect):not(polygon):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *)) {
+  clip-path: polygon(
+    8px 0%,
+    calc(100% - 8px) 0%,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    8px 100%,
+    0% calc(100% - 8px),
+    0% 8px
+  ) !important;
+  border-radius: 0 !important;
+}
+
+.shape-octagon-sm,
+:where([class*="rounded-sm"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *)),
+:where([class*="rounded-\[3px\]"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *)),
+:where([class*="rounded-\[4px\]"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *)),
+:where([class*="rounded-\[5px\]"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *)),
+:where([class*="rounded-\[6px\]"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *)) {
+  clip-path: polygon(
+    4px 0%,
+    calc(100% - 4px) 0%,
+    100% 4px,
+    100% calc(100% - 4px),
+    calc(100% - 4px) 100%,
+    4px 100%,
+    0% calc(100% - 8px),
+    0% 4px
+  ) !important;
+  border-radius: 0 !important;
+}
+
+.shape-octagon-lg,
+:where([class*="rounded-xl"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"]):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *)),
+:where([class*="rounded-2xl"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"]):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *)),
+:where([class*="rounded-3xl"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"]):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *)),
+:where([class*="rounded-full"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"]):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine *):not(.notebook-page-stack *)) {
+  clip-path: polygon(
+    12px 0%,
+    calc(100% - 12px) 0%,
+    100% 12px,
+    100% calc(100% - 12px),
+    calc(100% - 12px) 100%,
+    12px 100%,
+    0% calc(100% - 12px),
+    0% 12px
+  ) !important;
+  border-radius: 0 !important;
+}
+
+/* =========================================================
+   POPUP OCTAGON SHAPES (CLIPPED CORNER GEOMETRY)
+   Applies true chamfered clipped corners to popups, glossary cards,
+   and modal surfaces with seamless drop-shadow integration.
+   ========================================================= */
+.popup-octagon {
+  clip-path: polygon(
+    14px 0%,
+    calc(100% - 14px) 0%,
+    100% 14px,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    14px 100%,
+    0% calc(100% - 14px),
+    0% 14px
+  ) !important;
+  border-radius: 0 !important;
+}
+
+.popup-octagon-sm {
+  clip-path: polygon(
+    10px 0%,
+    calc(100% - 10px) 0%,
+    100% 10px,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    10px 100%,
+    0% calc(100% - 10px),
+    0% 10px
+  ) !important;
+  border-radius: 0 !important;
+}
+
+.popup-octagon-lg {
+  clip-path: polygon(
+    20px 0%,
+    calc(100% - 20px) 0%,
+    100% 20px,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0% calc(100% - 20px),
+    0% 20px
+  ) !important;
+  border-radius: 0 !important;
+}
+
+/* Ensure diagrams, SVG nodes, flowcharts, modals, canvas and physical notebook objects retain exact geometries */
+svg,
+svg *,
+.studio-canvas,
+.studio-canvas *,
+.diagram-canvas,
+.diagram-canvas *,
+.zoomable-modal-content,
+.zoomable-modal-content *,
+.notebook-card,
+.notebook-card *,
+.notebook-preview,
+.notebook-preview *,
+.notebook-physical-cover,
+.notebook-physical-cover *,
+.notebook-interior-peek,
+.notebook-interior-peek *,
+.notebook-spine,
+.notebook-spine *,
+.notebook-page-stack,
+.notebook-page-stack *,
+.notebook-shelf,
+.notebook-shelf *,
+.dont-feel-dumb-term {
+  clip-path: none !important;
+}
+
+/* Restore exact natural card corner radii for notebooks */
+.notebook-card,
+.notebook-preview,
+.notebook-physical-cover,
+.notebook-interior-peek {
+  border-top-right-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+}
+
+.notebook-spine {
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+}
+
+/* =========================================================
+   "DON'T FEEL DUMB" GLOSSARY INTERACTIVE TERMS
+   Subtle dotted underline with friendly hover indicator
+   Accessible on mobile via touch tap
+   ========================================================= */
+.dont-feel-dumb-term {
+  border-bottom: 1.5px dotted #7c3aed;
+  text-decoration: none;
+  cursor: help;
+  transition: all 0.15s ease-in-out;
+  padding-bottom: 1px;
+  position: relative;
+  font-weight: inherit;
+  color: inherit;
+}
+
+.dont-feel-dumb-term:hover,
+.dont-feel-dumb-term:focus-visible {
+  border-bottom-style: solid;
+  border-bottom-color: #8b5cf6;
+  background-color: rgba(124, 58, 237, 0.08);
+  border-radius: 2px;
+}
+
+/* Dark mode adjustments */
+.dark .dont-feel-dumb-term {
+  border-bottom-color: #a78bfa;
+}
+
+.dark .dont-feel-dumb-term:hover,
+.dark .dont-feel-dumb-term:focus-visible {
+  background-color: rgba(167, 139, 250, 0.14);
+}
+
+/* Harmonize Live Exam Drawing Studio inside student notebook paper */
+.live-exam-studio {
+  background-color: #faf7f2 !important;
+  color: #1e1b4b !important;
+  border-color: #d6cfbe !important;
+}
+
+.live-exam-studio .studio-top-bar {
+  background-color: #f5f0e6 !important;
+  border-color: #e5ded0 !important;
+  color: #1e1b4b !important;
+}
+
+.live-exam-studio .studio-canvas {
+  background-color: #fdfcf9 !important;
+  color: #1e1b4b !important;
+}
+
+.live-exam-studio text,
+.live-exam-studio svg text {
+  fill: #1e1b4b !important;
+}
+
+.live-exam-studio select {
+  background-color: #ffffff !important;
+  color: #1e1b4b !important;
+  border-color: #d6cfbe !important;
+}
+
+/* Default notebook viewport scaling (~85% scale) on desktop screens */
+@media (min-width: 1024px) {
+  .notebook-viewport-scaled {
+    zoom: 0.85;
+  }
+  .notebook-viewport-scaled.notebook-expanded {
+    zoom: 1;
+  }
+}
+
+/* Increased font size when sidebar is collapsed */
+.notebook-expanded {
+  font-size: 1.08rem;
+}
+.notebook-expanded .text-\[clamp\(1rem\,1\.1vw\,1\.125rem\)\] {
+  font-size: clamp(1.125rem, 1.25vw, 1.25rem) !important;
+  line-height: 1.85 !important;
+}
+.notebook-expanded .max-w-\[72ch\] {
+  max-width: 85ch !important;
+}
+.notebook-expanded .max-w-\[68ch\] {
+  max-width: 80ch !important;
+}
+
+/* Diagram Viewport Fit vs Original Size Mode */
+.diagram-fit-enabled {
+  max-width: 100% !important;
+}
+
+/* In Fit Screen mode, scale the studio and canvas proportionally so the diagram fits the viewport height without disappearing */
+.diagram-fit-enabled .live-exam-studio {
+  width: 100%;
+}
+
+.diagram-fit-enabled .studio-canvas {
+  padding: 0.5rem 1rem !important;
+}
+
+.diagram-fit-enabled .studio-canvas > div {
+  min-height: 180px !important;
+  max-height: 40vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.diagram-fit-enabled svg {
+  max-width: 100% !important;
+  max-height: 38vh !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Fullscreen modal: Shows the FULL unconstrained diagram and studio, fitted cleanly into viewport */
+.zoomable-modal-content {
+  width: 100%;
+  max-width: 100%;
+}
+
+.zoomable-modal-content .live-exam-studio {
+  width: 100%;
+  margin: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.zoomable-modal-content .studio-top-bar {
+  padding: 0.75rem 1rem !important;
+}
+
+.zoomable-modal-content .studio-canvas {
+  padding: 1rem !important;
+  overflow: visible !important;
+}
+
+.zoomable-modal-content .studio-canvas > div {
+  min-height: auto !important;
+  width: 100%;
+}
+
+.zoomable-modal-content svg {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+
+
+

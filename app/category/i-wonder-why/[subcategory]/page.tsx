@@ -2,6 +2,9 @@ import { getCombinedPosts, PostMeta } from '../../../../lib/posts';
 import PostCard from '../../../components/PostCard';
 import { notFound } from 'next/navigation';
 
+import { pageMetadata, SITE_NAME } from '../../../../lib/seo';
+import type { Metadata } from 'next';
+
 const subcategoryMap = {
   'language-thought-inner-experience': 'Language, Thought & Inner Experience',
   'memory-time-mind': 'Memory, Time & the Mind',
@@ -10,6 +13,21 @@ const subcategoryMap = {
   'code-work-learning-hard-way': 'Code, Work & Learning the Hard Way',
   'dreams-imagination-inner-narratives': 'Dreams, Imagination & Inner Narratives',
 };
+
+export async function generateMetadata({ params }: { params: Promise<{ subcategory: string }> }): Promise<Metadata> {
+  const { subcategory } = await params;
+  const name = subcategoryMap[subcategory as keyof typeof subcategoryMap];
+
+  if (!name) {
+    return { title: 'Not Found', robots: { index: false } };
+  }
+
+  return pageMetadata({
+    title: `${name} · I Wonder Why`,
+    description: `Essays and reflections exploring ${name} on ${SITE_NAME}.`,
+    path: `/category/i-wonder-why/${subcategory}`,
+  });
+}
 
 export default async function IWYSubcategoryPage({ params }: { params: Promise<{ subcategory: string }> }) {
   const { subcategory } = await params;

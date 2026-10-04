@@ -2,14 +2,34 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import notifications from "../notifications";
 
 export default function UpdatesWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const widgetRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const isNotesPage = pathname.startsWith("/notes");
 
   // Get the 3 most recent updates
   const recentUpdates = notifications.slice(0, 3);
+
+  // Listen for custom trigger event so any bell icon on any page can toggle this widget
+  useEffect(() => {
+    function handleToggleUpdates() {
+      setIsOpen((prev) => !prev);
+    }
+    function handleOpenUpdates() {
+      setIsOpen(true);
+    }
+
+    window.addEventListener("toggle-updates", handleToggleUpdates);
+    window.addEventListener("open-updates", handleOpenUpdates);
+    return () => {
+      window.removeEventListener("toggle-updates", handleToggleUpdates);
+      window.removeEventListener("open-updates", handleOpenUpdates);
+    };
+  }, []);
 
   // Close when clicking outside
   useEffect(() => {
@@ -28,10 +48,16 @@ export default function UpdatesWidget() {
   }, [isOpen]);
 
   return (
-    <div ref={widgetRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <div ref={widgetRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-auto">
       {/* Popup Window */}
       {isOpen && (
-        <div className="mb-4 w-[320px] sm:w-[380px] max-w-[calc(100vw-3rem)] overflow-hidden rounded-xl border border-hairline bg-surface-1/95 backdrop-blur-xl shadow-lift transform origin-bottom-right transition-all duration-300">
+        <div
+          className="mb-4 w-[320px] sm:w-[380px] max-w-[calc(100vw-3rem)] transform origin-bottom-right transition-all duration-300"
+          style={{
+            filter: "drop-shadow(0 18px 30px rgba(0, 0, 0, 0.35)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15))",
+          }}
+        >
+          <div className="popup-octagon-lg overflow-hidden border border-hairline-strong bg-raised shadow-2xl">
           <div className="flex items-center justify-between border-b border-hairline px-5 py-4 bg-surface-2">
             <div className="flex flex-col">
               <h3 className="font-bold text-ink-1 flex items-center gap-2">
@@ -87,27 +113,30 @@ export default function UpdatesWidget() {
               </svg>
             </Link>
           </div>
+          </div>
         </div>
       )}
 
-      {/* Floating Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="group flex h-14 w-14 items-center justify-center rounded-full bg-accent text-on-accent shadow-lift transition-transform hover:scale-105 active:scale-95"
-        aria-label="Toggle site updates"
-      >
-        {isOpen ? (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        ) : (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-        )}
-      </button>
+      {/* Floating Button (shown on other pages, hidden on notes pages where universal header/toolbar bell icons exist) */}
+      {!isNotesPage && (
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="group flex h-14 w-14 items-center justify-center rounded-full bg-accent text-on-accent shadow-lift transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+          aria-label="Toggle site updates"
+        >
+          {isOpen ? (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+          )}
+        </button>
+      )}
     </div>
   );
 }

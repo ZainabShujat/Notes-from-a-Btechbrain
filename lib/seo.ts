@@ -5,13 +5,13 @@ import type { Metadata } from "next";
  * The brand string appears in every page title, so it lives here rather
  * than being retyped ("Notes Brain", "Notes From a B Tech Brain", …).
  */
-export const SITE_NAME = "Notes From a BTech Brain";
+export const SITE_NAME = "Notes From A B.Tech Brain";
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://btechbrain.zainabshujat.dev";
 
 export const SITE_DESCRIPTION =
-  "An intellectual home exploring writing, building, careers, curiosity, and the chaos of figuring things out — by Zainab Shujat.";
+  "A student-built educational and editorial space covering B.Tech Computer Science, GATE preparation, interactive student notes, technical explainers, projects, and curiosity-driven writing.";
 
 export const AUTHOR_NAME = "Zainab Shujat";
 

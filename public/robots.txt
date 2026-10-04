@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
 
+# Private, admin, editor, and API endpoints
+Disallow: /admin
+Disallow: /admin/
+Disallow: /write
+Disallow: /write/
+Disallow: /api/
+
 Sitemap: https://btechbrain.zainabshujat.dev/sitemap.xml

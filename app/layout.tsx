@@ -59,6 +59,10 @@ export const metadata: Metadata = {
     images: [DEFAULT_OG_IMAGE],
   },
 
+  icons: {
+    icon: "/favicon.ico",
+  },
+
   robots: {
     index: true,
     follow: true,
@@ -72,11 +76,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       {/* ✅ GOOGLE ANALYTICS SCRIPT */}
       <head>
         <meta name="color-scheme" content="dark" />
         <meta name="theme-color" content="#05031a" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => {
+              const saved = localStorage.getItem("theme");
+              const light = saved === "light";
+              document.documentElement.classList.toggle("light", light);
+              document.documentElement.classList.toggle("dark", !light);
+            })();`,
+          }}
+        />
       </head>
       <Script
         async
@@ -98,6 +112,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         suppressHydrationWarning
         className="antialiased text-ink-2"
       >
+        {/* Structured Data: WebSite & Author schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: SITE_NAME,
+              url: SITE_URL,
+              description: SITE_DESCRIPTION,
+              author: {
+                "@type": "Person",
+                name: AUTHOR_NAME,
+                url: "https://zainabshujat.dev/",
+              },
+            }),
+          }}
+        />
         <Nav />
         {children}
         <UpdatesWidget />
