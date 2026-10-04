@@ -89,12 +89,9 @@ ${visualAnchor ? `\n## Visual Reference\n\`\`\`\n${visualAnchor}\n\`\`\`` : ""}
       role="dialog"
       aria-modal="true"
       aria-labelledby="cheatsheet-title"
-      style={{
-        filter: "drop-shadow(0 25px 35px rgba(0, 0, 0, 0.45))",
-      }}
     >
       <div
-        className="relative w-full max-w-3xl max-h-[90vh] flex flex-col bg-raised text-ink-1 popup-octagon-lg border border-hairline-strong shadow-2xl overflow-hidden font-sans"
+        className="relative w-full max-w-3xl max-h-[90vh] flex flex-col bg-raised text-ink-1 rounded-2xl border border-hairline-strong shadow-2xl overflow-hidden font-sans"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}

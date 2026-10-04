@@ -22,7 +22,6 @@ export default function DontFeelDumbProvider({
   const [activePopup, setActivePopup] = useState<TermPopupState | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -68,50 +67,16 @@ export default function DontFeelDumbProvider({
     };
   }, [activePopup, closePopup]);
 
-  // Delegated event listeners for hover and click on document or container
+  // Delegated event listener for click on glossary triggers
   useEffect(() => {
     const root = containerRef.current;
     if (!root) return;
-
-    const handleMouseOver = (e: MouseEvent) => {
-      if (isMobile) return; // on mobile, interaction is tap-based
-      const trigger = (e.target as HTMLElement)?.closest("[data-glossary-term]") as HTMLElement | null;
-      if (!trigger) return;
-
-      if (hideTimeoutRef.current) {
-        clearTimeout(hideTimeoutRef.current);
-        hideTimeoutRef.current = null;
-      }
-
-      const termKey = trigger.getAttribute("data-glossary-term")?.toLowerCase();
-      if (!termKey) return;
-      const termData = GLOSSARY_MAP[termKey];
-      if (!termData) return;
-
-      const rect = trigger.getBoundingClientRect();
-      setActivePopup({
-        term: termData,
-        matchedText: trigger.textContent || termData.term,
-        triggerRect: rect,
-      });
-    };
-
-    const handleMouseOut = (e: MouseEvent) => {
-      if (isMobile) return;
-      const trigger = (e.target as HTMLElement)?.closest("[data-glossary-term]");
-      if (!trigger) return;
-
-      // Small grace period so user can move mouse into popup if needed
-      hideTimeoutRef.current = setTimeout(() => {
-        closePopup();
-      }, 180);
-    };
 
     const handleClick = (e: MouseEvent) => {
       const trigger = (e.target as HTMLElement)?.closest("[data-glossary-term]") as HTMLElement | null;
       if (!trigger) return;
 
-      // On mobile or touch devices (or intentional click on desktop), toggle popup
+      // On click, toggle popup
       e.preventDefault();
       e.stopPropagation();
 
@@ -133,16 +98,12 @@ export default function DontFeelDumbProvider({
       });
     };
 
-    root.addEventListener("mouseover", handleMouseOver);
-    root.addEventListener("mouseout", handleMouseOut);
     root.addEventListener("click", handleClick);
 
     return () => {
-      root.removeEventListener("mouseover", handleMouseOver);
-      root.removeEventListener("mouseout", handleMouseOut);
       root.removeEventListener("click", handleClick);
     };
-  }, [isMobile, closePopup]);
+  }, [closePopup]);
 
   return (
     <div ref={containerRef} className="dont-feel-dumb-scope contents">
@@ -154,19 +115,6 @@ export default function DontFeelDumbProvider({
           popup={activePopup}
           isMobile={isMobile}
           onClose={closePopup}
-          onMouseEnter={() => {
-            if (hideTimeoutRef.current) {
-              clearTimeout(hideTimeoutRef.current);
-              hideTimeoutRef.current = null;
-            }
-          }}
-          onMouseLeave={() => {
-            if (!isMobile) {
-              hideTimeoutRef.current = setTimeout(() => {
-                closePopup();
-              }, 180);
-            }
-          }}
         />
       )}
     </div>
@@ -238,7 +186,7 @@ function DontFeelDumbModal({
         aria-labelledby="dont-feel-dumb-title"
       >
         <div
-          className="dont-feel-dumb-popup popup-octagon w-full max-w-sm border border-[#d6cfbe] dark:border-[#3f3f46] bg-[#fbf9f4] dark:bg-[#18181b] text-[#1c1917] dark:text-[#f4f4f5] shadow-2xl p-5 relative overflow-hidden"
+          className="dont-feel-dumb-popup rounded-2xl w-full max-w-sm border border-[#d6cfbe] dark:border-[#3f3f46] bg-[#fbf9f4] dark:bg-[#18181b] text-[#1c1917] dark:text-[#f4f4f5] shadow-2xl p-5 relative overflow-hidden"
           style={{
             backgroundImage: "radial-gradient(circle, rgba(124, 58, 237, 0.05) 1px, transparent 1px)",
             backgroundSize: "12px 12px",
@@ -313,20 +261,17 @@ function DontFeelDumbModal({
     );
   }
 
-  // ── DESKTOP VIEW: SMART FLOATING TOOLTIP / CARD (OCTAGON CLIPPED CORNERS) ──
+  // ── DESKTOP VIEW: SMART FLOATING TOOLTIP / CARD ──
   return createPortal(
     <div
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
       className="fixed z-50 pointer-events-auto transition-all duration-150 animate-fadeIn"
       style={{
         top: `${coords.top}px`,
         left: `${coords.left}px`,
-        filter: "drop-shadow(0 14px 24px rgba(0, 0, 0, 0.28)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12))",
       }}
     >
       <div
-        className="dont-feel-dumb-popup popup-octagon w-[342px] border border-[#d6cfbe] dark:border-[#3f3f46] bg-[#fbf9f4]/98 dark:bg-[#18181b]/98 backdrop-blur-md text-[#1c1917] dark:text-[#f4f4f5] p-4.5"
+        className="dont-feel-dumb-popup rounded-xl shadow-2xl border border-[#d6cfbe] dark:border-[#3f3f46] bg-[#fbf9f4]/98 dark:bg-[#18181b]/98 backdrop-blur-md text-[#1c1917] dark:text-[#f4f4f5] p-4.5"
         style={{
           backgroundImage: "radial-gradient(circle, rgba(124, 58, 237, 0.05) 1px, transparent 1px)",
           backgroundSize: "12px 12px",
