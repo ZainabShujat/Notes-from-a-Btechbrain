@@ -1,10 +1,11 @@
 # 🧠 Notes From a B Tech Brain  
-**A student-built digital magazine exploring technology, world events, and personal growth – from a B.Tech student’s perspective.**
+**A student-built digital magazine and technical engineering archive exploring computer science, systems engineering, personal growth, and technology.**
 
-## 📈 Analytics & SEO
-- **Google Analytics:** Integrated for real-time traffic, engagement, and audience insights.
-- **Google Search Console:** Connected for search performance monitoring and site health.
-- **Dynamic Open Graph (OG) Images:** Next.js Edge-rendered custom social cards for every post and feed item.
+[![Next.js 16](https://img.shields.io/badge/Next.js-16.1.1-black?logo=next.js)](https://nextjs.org/)
+[![React 19](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-38bdf8?logo=tailwindcss)](https://tailwindcss.com/)
+[![Status](https://img.shields.io/badge/Release-v1.2.0-purple)](#-current-status-october-2026)
 
 ---
 
@@ -12,139 +13,121 @@
 
 **Live at:** [https://btechbrain.zainabshujat.dev/](https://btechbrain.zainabshujat.dev/)
 
-*Notes From a B Tech Brain* is a living digital magazine that has evolved from a simple newsletter into a fully-functional platform featuring **50+ published articles** across a structured "5 Worlds" architecture. What started as three weekly newsletter streams has grown into a comprehensive student publication.
+*Notes From a B Tech Brain* is a living digital magazine and technical learning ecosystem designed from a student's perspective. It bridges editorial storytelling with deep, rigorous engineering scholarship. What began as a personal newsletter has expanded into a complete publication platform featuring **50+ essays** alongside an in-depth **academic engineering notebook library** built for B.Tech CS coursework and GATE preparation.
 
-The platform is structured into 5 Core Worlds:
-- **✍️ Notes** – Essays, explorations, and reflections
-- **🌍 Worlds of Work** – Career exploration from the inside
-- **🌀 Wonder** – A Daily Feed timeline of strange internet connections and observations
-- **📖 Books** – Long-form writing in progress
-- **🎮 Games** – Interactive logic and physics games
-
----
-
-## 💡 What This Project Does
-
-A fully-functional Next.js platform that:
-- Serves as a **digital archive** of 50+ published articles
-- Features an interactive **Brain Map** (force-directed graph) linking recurring ideas
-- Runs a custom chronological **Daily Feed** timeline with likes and shareability
-- Implements **responsive design** optimized for all device sizes
-- Provides flawless **Light & Dark mode** toggling using CSS-first variable architecture
-- Deployed continuously via **Vercel** with custom domain and analytics
+### The Core Worlds:
+- **✍️ Editions** – Essays, editorial reflections, and technical deep-dives
+- **📓 The Notebooks (`/notes`)** – Peer-researched, curriculum-mapped CS notebooks (Operating Systems, DBMS, Networks, COA, etc.)
+- **🌍 The Work We Do** – Industry analysis, systems design, and engineering practices from the inside
+- **🌀 Wonder** – A chronological micro-observation timeline exploring strange internet artifacts and human-computer interactions
+- **📖 Books** – Reading notes and long-form literature guides
+- **🎮 Games** – Interactive logic and physics minigames built for interactive breaks
 
 ---
 
-## ⚙️ Current Stack
+## 🚀 What's New in v1.2.0 (October 2026)
+
+### 1. 📓 Student Engineering Notebooks (`/notes`)
+- **Realistic Physical Skeuomorphic Design**: Visual notebooks featuring ring bindings, margin rule lines, realistic paper textures, bookmark ribbons, and interactive peek dialogs.
+- **GATE CS 2027 Syllabus Alignment**: Mapped directly against core engineering curricula with verified numerical problems, standard textbook references, and PYQs.
+- **Dedicated Subtopic Cheat Sheets**: Every lesson contains a rapid-revision modal summarizing the core principle, must-remember invariants, exam traps, and printable markdown summaries.
+- **"Don't Feel Dumb" In-Context Glossary**: Interactive terminology system throughout lesson prose providing 1-sentence explanations and everyday analogies.
+- **Chamfered Octagon Popups**: Distinctive clipped-corner octagon geometry (`clip-path`) styled across definition cards, cheat sheets, and site update dialogs.
+
+### 2. ⚡ Interactive CS Laboratory Simulators
+- **Comprehensive CPU Scheduling Simulator**: Live Gantt chart, timeline execution, and metrics (waiting time, turnaround time, response time) for:
+  - FCFS (First-Come, First-Served)
+  - SJF (Shortest Job First - Non-preemptive)
+  - SRTF (Shortest Remaining Time First - Preemptive)
+  - Non-Preemptive Priority Scheduling
+  - Preemptive Priority Scheduling
+  - Round Robin (with configurable time quantum $q$)
+- **Banker's Algorithm & Deadlock Avoidance**: Interactive allocation/max/available resource matrix with dynamic request evaluation and safe sequence computation.
+- **Relational DBMS Analyzers**: Serializability conflict-graph visualizer and BCNF/3NF normalization step-by-step validator.
+- **Virtual Memory & Page Replacement**: Interactive FIFO, LRU, and Optimal page replacement comparison tables with Belady's anomaly illustrations.
+
+---
+
+## ⚙️ Technical Architecture & Stack
 
 | Layer | Technology | Purpose |
-|-------|-------------|----------|
-| **Framework** | Next.js 16 (App Router) | React-based framework with server components |
-| **Frontend** | React 19 + TypeScript | Modern component-based architecture |
-| **Styling** | Tailwind CSS v4 | Utility-first responsive design system |
-| **Content** | Markdown + gray-matter | File-based content with frontmatter parsing |
-| **Visualization**| d3-force & framer-motion | Interactive visual graphs and smooth animations |
-| **Typography** | @tailwindcss/typography | Enhanced prose styling for article content |
-| **Hosting** | Vercel | Continuous deployment, CDN, and custom domain |
+|-------|------------|---------|
+| **Framework** | Next.js 16 (App Router + Turbopack) | Server Components, static generation (`SSG`), and Edge API routes |
+| **Language** | TypeScript 5 | End-to-end type safety across lesson data, schemas, and components |
+| **Frontend UI** | React 19 | Client interactivity, portals, and custom modal architectures |
+| **Styling** | Tailwind CSS v4 + Vanilla CSS | Raw CSS variables, dynamic color themes, and custom polygon `clip-path` geometry |
+| **Visualizations** | d3-force, SVG & HTML5 Canvas | Brain Map graph and real-time execution simulators |
+| **Typography** | Editorial Serif & Handwriting Fonts | Editorial layout combining Caveat, serif headlines, and monospace code blocks |
+| **Search & SEO** | JSON-LD, Sitemap generator, OpenGraph Edge | Comprehensive search engine indexing and social cards |
+| **Hosting** | Vercel | Global edge CDN, automated CI/CD pipeline |
 
 ---
 
-## 🚀 Current Status (August 2026)
+## 🛠️ Key Architectural Highlights
 
-* ✅ **v1.1.0 Live**: Fully migrated to the 5 Worlds architecture
-* ✅ Dynamic Open Graph (OG) Image generation using Next.js Edge runtime
-* ✅ Interactive **Brain Map** visualizing idea constellations
-* ✅ **Wonder** section completely overhauled into an X-style timeline feed
-* ✅ Games Hub integrated with embedded interactive iframe projects
-* ✅ CSS Theme Engine refactored for flawless Dark/Light mode integration
-* ✅ Orphaned legacy routes and structures (Builds, Community, old Admin) cleaned up
+### 📐 Clipped Octagon Design System
+```css
+/* Chamfered Octagonal Popup Geometry */
+.popup-octagon {
+  clip-path: polygon(
+    14px 0%, calc(100% - 14px) 0%,
+    100% 14px, 100% calc(100% - 14px),
+    calc(100% - 14px) 100%, 14px 100%,
+    0% calc(100% - 14px), 0% 14px
+  );
+}
+```
+All floating popups (glossary cards, rapid revision sheets, and dev updates) utilize clean polygon chamfering paired with outer `filter: drop-shadow(...)` wrappers for depth.
 
----
-
-## 📊 Content Statistics
-
-- **Total Articles:** 50+  
-- **Active Worlds:** 5 
-- **Latest Milestone:** v1.1.0 Released (August 2026)  
-- **Content Types:** Personal essays, tech explainers, daily micro-observations, interactive maps
-- **Engagement:** Views and likes are integrated via Supabase.
-
----
-
-## 🛠️ Key Features
-
-- **Brain Map Visualization:**
-  - A client-side, interactive, force-directed graph built with d3-force that maps out the underlying connections between articles, tags, and overarching themes.
-
-- **Wonder Daily Feed:**
-  - A chronological, scrollable timeline for micro-observations. Complete with individual routing, persistent liking, and quick-share copy links.
-
-- **Dynamic Open Graph Generation:**
-  - Automatic rendering of social media preview cards that match the site's dark mode aesthetic, generated on the fly when sharing links on iMessage, Twitter, or LinkedIn.
-
-- **CSS Theme Engine:**
-  - Robust dark/light mode toggling utilizing Tailwind v4 and raw CSS variables, ensuring 0 flicker and seamless transitions across all complex UI layers.
-
-- **Games Hub:**
-  - Fully playable embedded web games seamlessly integrated into the site layout for an interactive break from reading.
-
-- **Visible Views & Likes:**
-  - Each post displays real-time view and like counts via a Supabase backend.
-
-- **Category-Based Navigation:**  
-  Clean dynamic routes (`/post/[slug]`, `/category/[category]`, `/wonder/[id]`).
+### 🔔 Universal Notification & Updates System
+- Universal bell button in top header bar with live notification pulse.
+- Global event-driven architecture (`toggle-updates`) allowing any component across the site to trigger updates.
+- Smart route sensitivity: floating bells auto-hide on reading screens (`/notes/*`) to preserve an uncluttered manuscript reading experience.
 
 ---
 
-## 🔮 Future Enhancements
+## 📦 Getting Started Locally
 
-- **Subscriptions Backend:**  
-  Rebuilding the newsletter subscriber infrastructure using Supabase and Resend.
-- **Reading Time Estimates:**  
-  Automatic calculation of article reading time.  
-- **Tag System Expansion:**  
-  Tying the frontend tag filters directly into the Brain Map node structures.
+### Prerequisites
+- Node.js `v20+` or `v24+`
+- npm `v10+`
 
----
+### Installation
+```bash
+# 1. Clone the repository
+git clone https://github.com/ZainabShujat/Btech-blog.git
+cd notes-brain
 
-## 🧭 Long-Term Vision
+# 2. Install dependencies
+npm install
 
-The project will evolve into a personal storytelling and tech-magazine ecosystem that:  
-- Blends writing, design, and engineering.  
-- Demonstrates how a student can build a media brand from scratch.  
-- Eventually becomes a **portfolio piece**, a **blog**, and a **living resume** – all in one.
+# 3. Start local development server
+npm run dev
+```
+
+Visit [http://localhost:3000](http://localhost:3000) to view the application.
+
+### Validation & Production Build
+```bash
+# Run TypeScript compilation check
+npx tsc --noEmit
+
+# Run Next.js production build
+npm run build
+```
 
 ---
 
 ## 👩‍💻 Author
 
 **Zainab Shujat**  
+- Website: [https://zainabshujat.dev/](https://zainabshujat.dev/)  
+- Publication: [https://btechbrain.zainabshujat.dev/](https://btechbrain.zainabshujat.dev/)  
+
 > *"Frontend taught me how to create. Backend taught me how to sustain.  
-This project is where both sides of my brain finally meet."*
+> This project is where both sides of my brain meet."*
 
 ---
 
-## 🗓️ Development Journey
-
-| Phase | Goal | Status |
-|-------|------|--------|
-| **Phase 1-4** | Initial frontend, markdown processing, 50+ articles | ✅ Completed |
-| **Phase 5-8** | Production deployment, SEO, Theme controls, Categories | ✅ Completed |
-| **Phase 9** | Supabase views/likes and initial database connection | ✅ Completed |
-| **Phase 10** | Brain Map force-graph visualization | ✅ Completed |
-| **Phase 11** | Site Architecture simplification (5 Worlds) | ✅ Completed |
-| **Phase 12** | Wonder Timeline, OG Images, Games Hub | ✅ Completed |
-| **Phase 13** | Newsletter subscriptions rebuilt | 🔜 Next Up |
-
----
-
-## 🎓 Technical Learnings
-
-This project demonstrates:
-- **Next.js 16 App Router** patterns with server and client components
-- **TypeScript** for type-safe React development
-- **Tailwind CSS v4** utility-first styling approach
-- **Next.js ImageResponse (Edge)** for dynamic OG card generation
-- **d3-force integration** with React for data visualization
-- **Markdown processing** with gray-matter and remark
-- **Continuous deployment** workflows with Vercel
+## 📄 License
+This project is open-source under the [MIT License](LICENSE).
