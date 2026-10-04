@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { GateLensSection } from "../../../lib/courses/types";
+import { formatMarkdownInline } from "./LessonRenderer";
 
 export default function GateLens({ section }: { section: GateLensSection }) {
   const [openPYQs, setOpenPYQs] = useState<Record<string, boolean>>({});
@@ -30,7 +31,12 @@ export default function GateLens({ section }: { section: GateLensSection }) {
         <span className="font-mono text-[10px] uppercase tracking-widest text-accent font-bold block mb-0.5">
           EXAM WEIGHTAGE &amp; FOCUS:
         </span>
-        <p className="leading-relaxed text-ink-1">{section.weightageSummary}</p>
+        <p
+          className="leading-relaxed text-ink-1"
+          dangerouslySetInnerHTML={{
+            __html: formatMarkdownInline(section.weightageSummary),
+          }}
+        />
       </div>
 
       {/* Two-Column Pattern & Trap Marginalia */}
@@ -44,7 +50,12 @@ export default function GateLens({ section }: { section: GateLensSection }) {
             {section.commonPatterns.map((pat, idx) => (
               <li key={idx} className="flex items-start gap-2">
                 <span className="text-accent font-mono text-xs mt-0.5">&bull;</span>
-                <span className="leading-relaxed">{pat}</span>
+                <span
+                  className="leading-relaxed"
+                  dangerouslySetInnerHTML={{
+                    __html: formatMarkdownInline(pat),
+                  }}
+                />
               </li>
             ))}
           </ul>
@@ -59,7 +70,12 @@ export default function GateLens({ section }: { section: GateLensSection }) {
             {section.commonTraps.map((trap, idx) => (
               <li key={idx} className="flex items-start gap-2">
                 <span className="text-accent font-mono text-xs mt-0.5">&bull;</span>
-                <span className="leading-relaxed">{trap.replace(/^⚠\s*/, "")}</span>
+                <span
+                  className="leading-relaxed"
+                  dangerouslySetInnerHTML={{
+                    __html: formatMarkdownInline(trap.replace(/^⚠\s*/, "")),
+                  }}
+                />
               </li>
             ))}
           </ul>
@@ -106,7 +122,7 @@ export default function GateLens({ section }: { section: GateLensSection }) {
                     {pyq.options.map((opt, oIdx) => (
                       <div
                         key={oIdx}
-                        className="py-1.5 px-2.5 rounded border border-hairline/60 bg-surface-1/50 text-ink-2"
+                        className="py-1.5 px-2.5 border border-hairline/60 bg-surface-1/50 text-ink-2 shape-octagon-sm"
                       >
                         {opt}
                       </div>
@@ -117,7 +133,7 @@ export default function GateLens({ section }: { section: GateLensSection }) {
                 <button
                   type="button"
                   onClick={() => togglePYQ(pyq.id)}
-                  className="inline-flex items-center gap-1.5 text-xs font-mono text-accent hover:underline cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface-2 border border-hairline text-xs font-mono text-accent hover:bg-surface-3 cursor-pointer shape-octagon-sm"
                 >
                   <span>{isOpen ? "Hide Detailed Derivation ▲" : "Reveal Student Derivation ▼"}</span>
                 </button>
@@ -135,14 +151,22 @@ export default function GateLens({ section }: { section: GateLensSection }) {
                       <span className="font-handwriting text-base font-bold text-accent block">
                         ✎ Step-by-Step Derivation:
                       </span>
-                      <p className="text-xs text-ink-2 whitespace-pre-line leading-relaxed">
-                        {pyq.detailedSolution}
-                      </p>
+                      <p
+                        className="text-xs text-ink-2 whitespace-pre-line leading-relaxed"
+                        dangerouslySetInnerHTML={{
+                          __html: formatMarkdownInline(pyq.detailedSolution),
+                        }}
+                      />
                     </div>
 
                     {pyq.keyFormulaOrConcept && (
                       <div className="text-xs text-ink-3 font-mono pt-2 border-t border-dashed border-hairline/60">
-                        <strong className="text-ink-1">Core Rule:</strong> {pyq.keyFormulaOrConcept}
+                        <strong className="text-ink-1">Core Rule:</strong>{" "}
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: formatMarkdownInline(pyq.keyFormulaOrConcept),
+                          }}
+                        />
                       </div>
                     )}
                   </div>

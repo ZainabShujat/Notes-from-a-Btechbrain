@@ -178,11 +178,11 @@ export default function InteractiveSerializabilityChecker({
         {/* Verdict Badge */}
         <div>
           {hasCycle ? (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs font-mono font-bold">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs font-mono font-bold shape-octagon-sm">
               <span>● Non-Serializable (Cycle Detected)</span>
             </div>
           ) : (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold shape-octagon-sm">
               <span>● Conflict Serializable</span>
             </div>
           )}
@@ -201,7 +201,7 @@ export default function InteractiveSerializabilityChecker({
                 key={idx}
                 type="button"
                 onClick={() => loadPreset(idx)}
-                className={`text-left p-3 rounded-lg border text-xs transition-all ${
+                className={`text-left p-3 border text-xs transition-all shape-octagon-sm ${
                   activePreset === idx
                     ? "border-accent bg-accent/10 text-ink-1"
                     : "border-hairline bg-surface-2/60 text-ink-2 hover:border-hairline-strong hover:text-ink-1"

@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { SubjectNotebookData } from "../../../lib/notebooks/types";
 import { getSubjectGlimpse } from "../../../lib/notebooks/glimpse";
 import NotebookSpiralBinding from "./NotebookSpiralBinding";
+import DontFeelDumbProvider from "../course/DontFeelDumbProvider";
+import { highlightGlossaryTerms } from "../../../lib/courses/glossary";
 
 interface NotebookModalViewerProps {
   notebook: SubjectNotebookData;
@@ -20,13 +23,27 @@ export default function NotebookModalViewer({
   const [currentCard, setCurrentCard] = useState(initialCardIndex);
   const [direction, setDirection] = useState<"next" | "prev" | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Prevent background scrolling while preview modal is open
   useEffect(() => {
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+    const originalOverscroll = document.body.style.overscrollBehavior;
+
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overscrollBehavior = "none";
+
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = originalBodyOverflow;
+      document.documentElement.style.overflow = originalHtmlOverflow;
+      document.body.style.overscrollBehavior = originalOverscroll;
     };
   }, []);
 
@@ -119,9 +136,11 @@ export default function NotebookModalViewer({
     "Open Notebook",
   ];
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in-0 duration-200"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in-0 duration-200"
       role="dialog"
       aria-modal="true"
       aria-label={`${notebook.title} Notebook Glimpse`}
@@ -134,21 +153,22 @@ export default function NotebookModalViewer({
       />
 
       {/* ── THE PHYSICAL NOTEBOOK OBJECT (SPIRAL + PAGES MOVE AS ONE) ── */}
-      <div
-        ref={containerRef}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        className="relative z-10 w-full max-w-[660px] h-[92vh] max-h-[560px] sm:h-[540px] flex flex-col rounded-r-2xl rounded-l-md border border-[#d6cfbe] bg-[#faf8f5] shadow-[0_24px_64px_-12px_rgba(0,0,0,0.65),0_0_0_1px_rgba(0,0,0,0.08)] overflow-hidden select-none animate-in zoom-in-95 duration-200"
-        style={{
-          boxShadow:
-            "0 20px 50px -10px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,0,0,0.1), inset -2px 0 6px rgba(0,0,0,0.03)",
-        }}
-      >
+      <DontFeelDumbProvider>
+        <div
+          ref={containerRef}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="relative z-10 w-full max-w-[660px] h-[92vh] max-h-[560px] sm:h-[540px] flex flex-col rounded-r-2xl rounded-l-md border border-[#d6cfbe] bg-[#faf8f5] shadow-[0_24px_64px_-12px_rgba(0,0,0,0.65),0_0_0_1px_rgba(0,0,0,0.08)] overflow-hidden select-none animate-in zoom-in-95 duration-200"
+          style={{
+            boxShadow:
+              "0 20px 50px -10px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,0,0,0.1), inset -2px 0 6px rgba(0,0,0,0.03)",
+          }}
+        >
         {/* Subtle physical notebook top header bar */}
         <div className="shrink-0 flex items-center justify-between px-3 sm:px-5 py-2.5 border-b border-[#e5ded0] bg-[#f5f0e6]/70 z-20">
           <div className="flex items-center gap-2 min-w-0">
             <span
-              className="font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow-xs text-white"
+              className="font-mono text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 shadow-xs text-white shape-octagon-sm"
               style={{ backgroundColor: glimpse.accentHex }}
             >
               {glimpse.subjectCode}
@@ -166,7 +186,7 @@ export default function NotebookModalViewer({
             {glimpse.isBuilt && (
               <Link
                 href={`/notes/${glimpse.slug}`}
-                className="hidden sm:inline-flex items-center gap-1 text-xs font-mono font-bold text-[#7c3aed] hover:underline px-2 py-1 rounded hover:bg-black/5"
+                className="hidden sm:inline-flex items-center gap-1 text-xs font-mono font-bold text-[#7c3aed] hover:underline px-2.5 py-1 hover:bg-black/5 shape-octagon-sm"
               >
                 <span>Subject Hub</span>
                 <span>&rarr;</span>
@@ -176,7 +196,7 @@ export default function NotebookModalViewer({
             <button
               type="button"
               onClick={onClose}
-              className="px-2 py-0.5 rounded text-xs font-mono font-bold text-[#57534e] hover:text-[#1c1917] hover:bg-black/8 transition-colors border border-[#d6cfbe] cursor-pointer"
+              className="px-2.5 py-1 text-xs font-mono font-bold text-[#57534e] hover:text-[#1c1917] hover:bg-black/8 transition-colors border border-[#d6cfbe] cursor-pointer shape-octagon-sm"
               aria-label="Close Notebook Preview"
             >
               ✕ Close
@@ -231,7 +251,7 @@ export default function NotebookModalViewer({
                     </div>
 
                     <p className="text-xs sm:text-[13px] text-[#44403c] italic mb-3 font-serif leading-snug">
-                      "{glimpse.tagline}"
+                      &ldquo;{glimpse.tagline}&rdquo;
                     </p>
                   </div>
 
@@ -254,9 +274,12 @@ export default function NotebookModalViewer({
                               </span>
                             )}
                           </div>
-                          <p className="text-[11px] sm:text-xs font-sans leading-relaxed line-clamp-2">
-                            {snippet.body}
-                          </p>
+                          <p
+                            className="text-[11px] sm:text-xs font-sans leading-relaxed line-clamp-2"
+                            dangerouslySetInnerHTML={{
+                              __html: highlightGlossaryTerms(snippet.body),
+                            }}
+                          />
                           {snippet.handwrittenAnnotation && (
                             <p className="font-handwriting text-xs sm:text-sm mt-0.5 font-bold tracking-wide opacity-95">
                               {snippet.handwrittenAnnotation}
@@ -275,7 +298,7 @@ export default function NotebookModalViewer({
                         ✎ Standard references currently being audited &amp; verified.
                       </p>
                       <p className="text-xs text-[#57534e] max-w-md leading-relaxed mb-3">
-                        We don't publish simulated or incomplete summaries. Complete verified formulas, numerical derivations, and interactive labs are queued for release.
+                        We don&apos;t publish simulated or incomplete summaries. Complete verified formulas, numerical derivations, and interactive labs are queued for release.
                       </p>
                       {glimpse.draftSyllabus && glimpse.draftSyllabus.length > 0 && (
                         <div className="w-full text-left bg-white/70 p-2.5 rounded border border-[#e5ded0]">
@@ -400,9 +423,12 @@ export default function NotebookModalViewer({
                             {glimpse.anchor.mainFormula}
                           </div>
                         )}
-                        <p className="text-xs sm:text-[13px] text-[#44403c] font-sans max-w-md leading-relaxed">
-                          {glimpse.anchor.takeaway}
-                        </p>
+                        <p
+                          className="text-xs sm:text-[13px] text-[#44403c] font-sans max-w-md leading-relaxed"
+                          dangerouslySetInnerHTML={{
+                            __html: highlightGlossaryTerms(glimpse.anchor.takeaway || ""),
+                          }}
+                        />
                       </div>
                     )}
 
@@ -452,11 +478,17 @@ export default function NotebookModalViewer({
                   {glimpse.labElement ? (
                     <div className="flex-1 min-h-0 flex flex-col justify-around rounded-xl border border-dashed border-[#d6cfbe] bg-[#faf8f5] p-3 shadow-2xs my-1">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="font-mono text-xs font-bold text-[#1c1917]">
-                          {glimpse.labElement.badge}
-                        </span>
-                        <span className="text-[10px] font-mono bg-violet-500/10 text-[#7c3aed] px-2 py-0.5 rounded font-bold">
-                          Interactive Studio
+                        <div className="flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-violet-600 animate-ping" />
+                          <span className="font-mono text-xs font-bold text-[#1c1917]">
+                            {glimpse.labElement.badge}
+                          </span>
+                        </div>
+                        <span className="inline-flex items-center gap-1 text-[10px] font-mono bg-violet-500/15 text-[#7c3aed] px-2 py-0.5 rounded font-bold border border-violet-500/20">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-3 h-3">
+                            <polygon points="5 3 19 12 5 21 5 3" fill="currentColor" fillOpacity="0.3" />
+                          </svg>
+                          Live Simulator
                         </span>
                       </div>
 
@@ -547,35 +579,52 @@ export default function NotebookModalViewer({
                   {/* Quantitative Subject Snapshot */}
                   <div className="flex-1 min-h-0 flex flex-col justify-around rounded-xl border border-dashed border-[#d6cfbe] bg-white/80 p-4 shadow-2xs my-1">
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
-                      <div className="p-2.5 rounded-lg bg-[#faf8f5] border border-[#e5ded0]">
-                        <span className="font-mono text-xl sm:text-2xl font-bold text-[#1c1917] block">
+                      <div className="p-2.5 rounded-lg bg-[#faf8f5] border border-[#e5ded0] flex flex-col items-center">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-[#78716c] mb-1 opacity-70">
+                          <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                          <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                          <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                          <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                        </svg>
+                        <span className="font-mono text-xl sm:text-2xl font-bold text-[#1c1917] block leading-none">
                           {glimpse.stats.modulesCount}
                         </span>
-                        <span className="text-[10px] font-mono uppercase text-[#78716c]">
+                        <span className="text-[10px] font-mono uppercase text-[#78716c] mt-1">
                           Modules
                         </span>
                       </div>
-                      <div className="p-2.5 rounded-lg bg-[#faf8f5] border border-[#e5ded0]">
-                        <span className="font-mono text-xl sm:text-2xl font-bold text-[#7c3aed] block">
+                      <div className="p-2.5 rounded-lg bg-[#faf8f5] border border-[#e5ded0] flex flex-col items-center">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-[#7c3aed] mb-1 opacity-70">
+                          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                        </svg>
+                        <span className="font-mono text-xl sm:text-2xl font-bold text-[#7c3aed] block leading-none">
                           {glimpse.stats.lessonsCount}
                         </span>
-                        <span className="text-[10px] font-mono uppercase text-[#78716c]">
+                        <span className="text-[10px] font-mono uppercase text-[#78716c] mt-1">
                           Full Lessons
                         </span>
                       </div>
-                      <div className="p-2.5 rounded-lg bg-[#faf8f5] border border-[#e5ded0]">
-                        <span className="font-mono text-xl sm:text-2xl font-bold text-[#10b981] block">
+                      <div className="p-2.5 rounded-lg bg-[#faf8f5] border border-[#e5ded0] flex flex-col items-center">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-[#10b981] mb-1 opacity-70">
+                          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" fillOpacity="0.2" />
+                        </svg>
+                        <span className="font-mono text-xl sm:text-2xl font-bold text-[#10b981] block leading-none">
                           {glimpse.stats.labsCount}
                         </span>
-                        <span className="text-[10px] font-mono uppercase text-[#78716c]">
+                        <span className="text-[10px] font-mono uppercase text-[#78716c] mt-1">
                           Interactive Labs
                         </span>
                       </div>
-                      <div className="p-2.5 rounded-lg bg-[#faf8f5] border border-[#e5ded0]">
-                        <span className="font-mono text-xl sm:text-2xl font-bold text-[#f59e0b] block">
+                      <div className="p-2.5 rounded-lg bg-[#faf8f5] border border-[#e5ded0] flex flex-col items-center">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-[#f59e0b] mb-1 opacity-70">
+                          <circle cx="12" cy="12" r="10" />
+                          <path d="m9 12 2 2 4-4" />
+                        </svg>
+                        <span className="font-mono text-xl sm:text-2xl font-bold text-[#f59e0b] block leading-none">
                           {glimpse.stats.pyqsCount > 0 ? glimpse.stats.pyqsCount : "Compulsory"}
                         </span>
-                        <span className="text-[10px] font-mono uppercase text-[#78716c]">
+                        <span className="text-[10px] font-mono uppercase text-[#78716c] mt-1">
                           GATE PYQs
                         </span>
                       </div>
@@ -590,7 +639,7 @@ export default function NotebookModalViewer({
                       {glimpse.isBuilt ? (
                         <Link
                           href={`/notes/${glimpse.slug}`}
-                          className="w-full sm:w-auto px-7 py-3 rounded-xl font-mono text-sm font-bold text-white shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.99] transition-all inline-flex items-center justify-center gap-2 cursor-pointer"
+                          className="w-full sm:w-auto px-7 py-3 font-mono text-sm font-bold text-white shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.99] transition-all inline-flex items-center justify-center gap-2 cursor-pointer shape-octagon-sm"
                           style={{
                             backgroundColor: glimpse.accentHex || "#7c3aed",
                           }}
@@ -599,7 +648,7 @@ export default function NotebookModalViewer({
                           <span>&rarr;</span>
                         </Link>
                       ) : (
-                        <div className="p-3 rounded-lg bg-amber-50 border border-amber-300 text-amber-900 text-xs font-mono text-center">
+                        <div className="p-3 bg-amber-50 border border-amber-300 text-amber-900 text-xs font-mono text-center shape-octagon-sm">
                           🔒 Curriculum in preparation. Follow syllabus roadmap updates.
                         </div>
                       )}
@@ -617,7 +666,7 @@ export default function NotebookModalViewer({
                     <button
                       type="button"
                       onClick={() => setCurrentCard(0)}
-                      className="text-[#7c3aed] font-bold hover:underline cursor-pointer"
+                      className="px-3 py-1 bg-[#7c3aed]/10 border border-[#7c3aed]/30 text-[#7c3aed] font-mono text-xs font-bold hover:bg-[#7c3aed]/20 cursor-pointer shape-octagon-sm"
                     >
                       Restart Glimpse ↺
                     </button>
@@ -634,7 +683,7 @@ export default function NotebookModalViewer({
             type="button"
             onClick={handlePrev}
             disabled={currentCard === 0 || isAnimating}
-            className="inline-flex items-center gap-1 px-3 py-1 rounded border border-[#d6cfbe] bg-white/80 hover:bg-white text-xs font-mono font-semibold text-[#1c1917] disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer shadow-2xs"
+            className="inline-flex items-center gap-1 px-3 py-1 border border-[#d6cfbe] bg-white/80 hover:bg-white text-xs font-mono font-semibold text-[#1c1917] disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer shadow-2xs shape-octagon-sm"
           >
             <span>&larr;</span>
             <span className="hidden sm:inline">Flip Back</span>
@@ -657,7 +706,7 @@ export default function NotebookModalViewer({
                     }, 200);
                   }
                 }}
-                className={`transition-all cursor-pointer font-mono text-[10px] px-2 py-0.5 rounded-full ${
+                className={`transition-all cursor-pointer font-mono text-[10px] px-2.5 py-0.5 shape-octagon-sm ${
                   currentCard === idx
                     ? "bg-[#7c3aed] text-white font-bold shadow-2xs"
                     : "bg-[#e5ded0] text-[#57534e] hover:bg-[#d6cfbe]"
@@ -674,13 +723,15 @@ export default function NotebookModalViewer({
             type="button"
             onClick={handleNext}
             disabled={currentCard === 3 || isAnimating}
-            className="inline-flex items-center gap-1 px-3 py-1 rounded border border-[#d6cfbe] bg-white/80 hover:bg-white text-xs font-mono font-semibold text-[#1c1917] disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer shadow-2xs"
+            className="inline-flex items-center gap-1 px-3 py-1 border border-[#d6cfbe] bg-white/80 hover:bg-white text-xs font-mono font-semibold text-[#1c1917] disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer shadow-2xs shape-octagon-sm"
           >
             <span className="hidden sm:inline">Flip Forward</span>
             <span>&rarr;</span>
           </button>
         </div>
       </div>
-    </div>
+      </DontFeelDumbProvider>
+    </div>,
+    document.body
   );
 }

@@ -19,6 +19,9 @@ import QuickRevision from "./QuickRevision";
 import ResourcesAndSources from "./ResourcesAndSources";
 import StickyNote from "./StickyNote";
 import ZoomableVisual from "./ZoomableVisual";
+import DedicatedCheatSheetModal from "./DedicatedCheatSheetModal";
+import { highlightGlossaryTerms } from "../../../lib/courses/glossary";
+import { useState } from "react";
 
 export default function LessonRenderer({
   lesson,
@@ -29,34 +32,50 @@ export default function LessonRenderer({
   moduleTitle?: string;
   subjectSlug?: string;
 }) {
+  const [isCheatSheetOpen, setIsCheatSheetOpen] = useState(false);
+
   return (
     <article className="w-full">
       {/* =========================================================
           LESSON HEADER (Student Engineering Notebook Folio)
           ========================================================= */}
       <header className="pb-6 mb-8 border-b border-dashed border-hairline/80">
-        {/* Module stamp and read time with restrained yellow highlighter pill */}
-        <div className="flex flex-wrap items-center gap-x-2 text-[11px] font-mono text-ink-3 mb-3 tracking-widest uppercase">
-          <span className="font-semibold text-ink-2">
-            {moduleTitle ? moduleTitle.replace(/^Module \d+:\s*/i, "").toUpperCase() : "OPERATING SYSTEMS"}
-          </span>
-          <span className="opacity-40">&mdash;</span>
-          <span>~{lesson.estimatedMinutes} MIN READ</span>
-          {lesson.hasGATE && (
-            <>
-              <span className="opacity-40">&middot;</span>
-              <span className="bg-[#fef08a] dark:bg-[#facc15] text-[#713f12] dark:text-[#422006] px-2 py-0.5 rounded-[3px] text-[10px] font-bold tracking-wider font-mono">
-                GATE CS LENS
-              </span>
-            </>
-          )}
+        {/* Module stamp, read time, GATE badge, and Dedicated Cheat Sheet trigger */}
+        <div className="flex flex-wrap items-center justify-between gap-y-2 mb-3">
+          <div className="flex flex-wrap items-center gap-x-2 text-[11px] font-mono text-ink-3 tracking-widest uppercase">
+            <span className="font-semibold text-ink-2">
+              {moduleTitle ? moduleTitle.replace(/^Module \d+:\s*/i, "").toUpperCase() : "OPERATING SYSTEMS"}
+            </span>
+            <span className="opacity-40">&mdash;</span>
+            <span>~{lesson.estimatedMinutes} MIN READ</span>
+            {lesson.hasGATE && (
+              <>
+                <span className="opacity-40">&middot;</span>
+                <span className="bg-[#fef08a] dark:bg-[#facc15] text-[#713f12] dark:text-[#422006] px-2 py-0.5 rounded-[3px] text-[10px] font-bold tracking-wider font-mono">
+                  GATE CS LENS
+                </span>
+              </>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setIsCheatSheetOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-semibold bg-accent/10 hover:bg-accent/20 text-accent border border-accent/30 hover:border-accent/50 shadow-sm transition-all"
+            title={`Open dedicated cheatsheet for ${lesson.title}`}
+          >
+            <span>📑</span>
+            <span>Topic Cheat Sheet</span>
+          </button>
         </div>
 
-        {/* Student Notebook Handwritten Heading with Violet Ink Highlighter */}
         <h1 className="font-handwriting text-[clamp(2rem,4vw,2.75rem)] font-bold text-ink-1 tracking-normal leading-[1.15] mb-3 break-words">
-          <span className="bg-violet-500/10 dark:bg-violet-500/20 px-2 py-0.5 rounded-[4px]">
-            {lesson.title}
-          </span>
+          <span
+            className="bg-violet-500/10 dark:bg-violet-500/20 px-2 py-0.5 rounded-[4px]"
+            dangerouslySetInnerHTML={{
+              __html: formatMarkdownInline(lesson.title),
+            }}
+          />
         </h1>
 
         {/* Serif Subtitle */}
@@ -80,10 +99,18 @@ export default function LessonRenderer({
               index={idx}
               modNum={modNum}
               subjectSlug={subjectSlug}
+              onOpenCheatSheet={() => setIsCheatSheetOpen(true)}
             />
           );
         })}
       </div>
+
+      {/* In-lesson Dedicated Cheat Sheet Modal */}
+      <DedicatedCheatSheetModal
+        lesson={lesson}
+        isOpen={isCheatSheetOpen}
+        onClose={() => setIsCheatSheetOpen(false)}
+      />
     </article>
   );
 }
@@ -93,11 +120,13 @@ function SectionBlock({
   index,
   modNum = "1",
   subjectSlug,
+  onOpenCheatSheet,
 }: {
   section: LessonSection;
   index: number;
   modNum?: string;
   subjectSlug?: string;
+  onOpenCheatSheet?: () => void;
 }) {
   const sectionId = section.id || `section-${index}`;
   const sectionNumber = `${index + 1}.`;
@@ -112,9 +141,12 @@ function SectionBlock({
                 <span className="font-mono text-accent text-lg sm:text-xl font-bold shrink-0">
                   {sectionNumber}
                 </span>
-                <span className="bg-violet-500/10 dark:bg-violet-500/15 px-2 py-0.5 rounded-[3px]">
-                  {section.heading.replace(/^\d+\.\s*/, "")}
-                </span>
+                <span
+                  className="bg-violet-500/10 dark:bg-violet-500/15 px-2 py-0.5 rounded-[3px]"
+                  dangerouslySetInnerHTML={{
+                    __html: formatMarkdownInline(section.heading.replace(/^\d+\.\s*/, "")),
+                  }}
+                />
               </h2>
               <span className="hidden sm:inline font-mono text-[10px] text-ink-3 uppercase tracking-widest opacity-60">
                 § {modNum}.{sectionNumber}
@@ -143,7 +175,11 @@ function SectionBlock({
                 rotation={section.callout.kind === "trap" ? "1deg" : "-1deg"}
                 tone={section.callout.kind === "trap" ? "pink" : "yellow"}
               >
-                {section.callout.message}
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: formatMarkdownInline(section.callout.message),
+                  }}
+                />
               </StickyNote>
             ) : (
               <div className={`my-7 marginalia-bracket text-ink-1 relative font-sans pl-4 ${section.callout.kind === "mental-model" ? "notebook-highlight-green" : "notebook-highlight-yellow"}`}>
@@ -159,9 +195,12 @@ function SectionBlock({
                     </span>
                   )}
                 </div>
-                <p className="text-[15px] sm:text-base text-ink-2 leading-relaxed font-sans">
-                  {section.callout.message}
-                </p>
+                <p
+                  className="text-[15px] sm:text-base text-ink-2 leading-relaxed font-sans"
+                  dangerouslySetInnerHTML={{
+                    __html: formatMarkdownInline(section.callout.message),
+                  }}
+                />
               </div>
             )
           )}
@@ -297,9 +336,12 @@ function SectionBlock({
               WORKED NUMERICAL &middot; STUDENT DERIVATION
             </span>
             {section.examTakeaway && (
-              <span className="font-handwriting text-base text-accent font-semibold">
-                ✎ Key Takeaway: {section.examTakeaway}
-              </span>
+              <span
+                className="font-handwriting text-base text-accent font-semibold"
+                dangerouslySetInnerHTML={{
+                  __html: `✎ Key Takeaway: ${formatMarkdownInline(section.examTakeaway)}`,
+                }}
+              />
             )}
           </div>
 
@@ -314,7 +356,11 @@ function SectionBlock({
             <span className="font-mono text-xs font-bold text-ink-3 uppercase block mb-1">
               Problem Statement:
             </span>
-            {section.problemStatement}
+            <div
+              dangerouslySetInnerHTML={{
+                __html: formatMarkdownInline(section.problemStatement),
+              }}
+            />
           </div>
 
           {/* Given Data Ledger */}
@@ -337,13 +383,11 @@ function SectionBlock({
 
           {/* Hand-Drawn Gantt Chart / SVG if provided */}
           {section.svgContent && (
-            <div className="my-4 flex justify-center overflow-hidden border-y border-dashed border-hairline/60 py-2">
-              <ZoomableVisual label="Expand worked-example diagram">
-                <div
-                  className="w-full max-w-xl"
-                  dangerouslySetInnerHTML={{ __html: section.svgContent }}
-                />
-              </ZoomableVisual>
+            <div className="my-4 flex justify-center overflow-x-auto border-y border-dashed border-hairline/60 py-2">
+              <div
+                className="w-full max-w-xl"
+                dangerouslySetInnerHTML={{ __html: section.svgContent }}
+              />
             </div>
           )}
 
@@ -354,18 +398,24 @@ function SectionBlock({
                 <span className="font-handwriting text-lg sm:text-xl font-bold text-accent block">
                   Step {st.stepNumber}: {st.title}
                 </span>
-                <p className="text-xs sm:text-sm text-ink-2 leading-relaxed font-sans whitespace-pre-line">
-                  {st.description}
-                </p>
+                <p
+                  className="text-xs sm:text-sm text-ink-2 leading-relaxed font-sans whitespace-pre-line"
+                  dangerouslySetInnerHTML={{
+                    __html: formatMarkdownInline(st.description),
+                  }}
+                />
                 {st.formula && (
                   <div className="font-mono text-xs text-ink-1 bg-surface-1/40 px-3 py-1.5 rounded border border-dashed border-hairline/80 my-1 inline-block">
                     {st.formula}
                   </div>
                 )}
                 {st.intermediateResult && (
-                  <span className="font-handwriting text-sm sm:text-base text-accent block mt-0.5">
-                    ↳ Result: {st.intermediateResult}
-                  </span>
+                  <span
+                    className="font-handwriting text-sm sm:text-base text-accent block mt-0.5"
+                    dangerouslySetInnerHTML={{
+                      __html: `↳ Result: ${formatMarkdownInline(st.intermediateResult)}`,
+                    }}
+                  />
                 )}
               </div>
             ))}
@@ -376,9 +426,12 @@ function SectionBlock({
             <span className="font-handwriting text-lg font-bold text-ink-1">
               Final Answer:
             </span>
-            <span className="highlighter-yellow text-sm sm:text-base font-bold text-ink-1 font-mono px-2.5 py-0.5 self-start sm:self-auto">
-              {section.finalAnswer}
-            </span>
+            <span
+              className="highlighter-yellow text-sm sm:text-base font-bold text-ink-1 font-mono px-2.5 py-0.5 self-start sm:self-auto"
+              dangerouslySetInnerHTML={{
+                __html: formatMarkdownInline(section.finalAnswer),
+              }}
+            />
           </div>
         </section>
       );
@@ -392,9 +445,12 @@ function SectionBlock({
             </h3>
           )}
           {section.leadParagraph && (
-            <p className="text-sm text-ink-2 leading-relaxed max-w-[70ch]">
-              {section.leadParagraph}
-            </p>
+            <p
+              className="text-sm text-ink-2 leading-relaxed max-w-[70ch]"
+              dangerouslySetInnerHTML={{
+                __html: formatMarkdownInline(section.leadParagraph),
+              }}
+            />
           )}
 
           <div className="overflow-x-auto rounded border border-hairline bg-surface-1/40">
@@ -409,9 +465,21 @@ function SectionBlock({
               <tbody className="divide-y divide-hairline text-ink-2 font-sans">
                 {section.criteria.map((c, cIdx) => (
                   <tr key={cIdx} className="hover:bg-surface-2/20">
-                    <td className="py-3 px-4 font-mono font-medium text-ink-1 text-xs">{c.feature ?? c.criterion}</td>
-                    <td className="py-3 px-4 leading-relaxed">{c.first ?? c.values?.[0]}</td>
-                    <td className="py-3 px-4 leading-relaxed">{c.second ?? c.values?.[1]}</td>
+                    <td className="py-3 px-4 font-mono font-medium text-ink-1 text-xs">
+                      {c.feature ?? c.criterion}
+                    </td>
+                    <td
+                      className="py-3 px-4 leading-relaxed"
+                      dangerouslySetInnerHTML={{
+                        __html: formatMarkdownInline(c.first ?? c.values?.[0] ?? ""),
+                      }}
+                    />
+                    <td
+                      className="py-3 px-4 leading-relaxed"
+                      dangerouslySetInnerHTML={{
+                        __html: formatMarkdownInline(c.second ?? c.values?.[1] ?? ""),
+                      }}
+                    />
                   </tr>
                 ))}
               </tbody>
@@ -419,10 +487,62 @@ function SectionBlock({
           </div>
 
           {section.summaryTakeaway && (
-            <p className="font-handwriting text-lg text-accent border-l-2 border-accent/60 pl-3 py-1 font-semibold">
-              ✎ Takeaway: {section.summaryTakeaway}
-            </p>
+            <p
+              className="font-handwriting text-lg text-accent border-l-2 border-accent/60 pl-3 py-1 font-semibold"
+              dangerouslySetInnerHTML={{
+                __html: `✎ Takeaway: ${formatMarkdownInline(section.summaryTakeaway)}`,
+              }}
+            />
           )}
+        </section>
+      );
+
+    case "misconceptions":
+      return (
+        <section id={sectionId} className="my-10 scroll-mt-24 space-y-4">
+          {section.heading && (
+            <div className="pb-2 mb-4 border-b border-dashed border-hairline/80 flex items-baseline justify-between gap-3">
+              <h2 className="font-handwriting text-2xl sm:text-3xl font-bold text-ink-1 tracking-tight flex items-baseline gap-2.5">
+                <span className="font-mono text-accent text-lg sm:text-xl font-bold shrink-0">
+                  {sectionNumber}
+                </span>
+                <span className="bg-amber-500/10 dark:bg-amber-500/15 text-amber-900 dark:text-amber-200 px-2 py-0.5 rounded-[3px]">
+                  {section.heading.replace(/^\d+\.\s*/, "")}
+                </span>
+              </h2>
+              <span className="hidden sm:inline font-mono text-[10px] text-ink-3 uppercase tracking-widest opacity-60">
+                § {modNum}.{sectionNumber}
+              </span>
+            </div>
+          )}
+
+          <div className="space-y-4">
+            {section.items.map((item, mIdx) => (
+              <div
+                key={mIdx}
+                className="p-4 sm:p-5 rounded-lg border border-dashed border-hairline bg-surface-1/40 space-y-2.5"
+              >
+                <div className="flex items-start gap-2 text-rose-600 dark:text-rose-400 font-sans text-sm font-semibold">
+                  <span className="shrink-0 font-mono text-xs uppercase px-1.5 py-0.5 rounded bg-rose-500/10 border border-rose-500/20">
+                    Myth
+                  </span>
+                  <span dangerouslySetInnerHTML={{ __html: formatMarkdownInline(item.commonMyth) }} />
+                </div>
+
+                <div className="flex items-start gap-2 text-emerald-600 dark:text-emerald-400 font-sans text-sm font-semibold">
+                  <span className="shrink-0 font-mono text-xs uppercase px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
+                    Reality
+                  </span>
+                  <span dangerouslySetInnerHTML={{ __html: formatMarkdownInline(item.reality) }} />
+                </div>
+
+                <p
+                  className="text-xs sm:text-sm text-ink-2 leading-relaxed font-sans pt-1 border-t border-hairline/60"
+                  dangerouslySetInnerHTML={{ __html: formatMarkdownInline(item.explanation) }}
+                />
+              </div>
+            ))}
+          </div>
         </section>
       );
 
@@ -447,7 +567,10 @@ function SectionBlock({
     case "quick-revision":
       return (
         <div id={sectionId} className="scroll-mt-24">
-          <QuickRevision section={section} />
+          <QuickRevision
+            section={section}
+            onOpenCheatSheet={onOpenCheatSheet}
+          />
         </div>
       );
 
@@ -464,8 +587,8 @@ function SectionBlock({
 }
 
 /** Helper to render simple inline bold, italic, math, highlights, and code cleanly */
-function formatMarkdownInline(text: string): string {
-  return text
+export function formatMarkdownInline(text: string): string {
+  const formatted = text
     .replace(/\\\{/g, "{")
     .replace(/\\\}/g, "}")
     .replace(/\\rightarrow/g, "→")
@@ -474,13 +597,28 @@ function formatMarkdownInline(text: string): string {
     .replace(/\\le/g, "≤")
     .replace(/\\times/g, "×")
     .replace(/\\%/g, "%")
-    .replace(/==(.*?)==/g, "<mark class='highlighter-yellow text-ink-1'>$1</mark>")
+    // Explicit color highlight markdown syntax: ==color:text==
+    .replace(/==pink:(.*?)==/g, "<mark class='student-highlight highlight-pink'>$1</mark>")
+    .replace(/==green:(.*?)==/g, "<mark class='student-highlight highlight-green'>$1</mark>")
+    .replace(/==purple:(.*?)==/g, "<mark class='student-highlight highlight-purple'>$1</mark>")
+    .replace(/==violet:(.*?)==/g, "<mark class='student-highlight highlight-purple'>$1</mark>")
+    .replace(/==yellow:(.*?)==/g, "<mark class='student-highlight highlight-yellow'>$1</mark>")
+    // Default highlight syntax: ==text== (yellow core fact/definition)
+    .replace(/==(.*?)==/g, "<mark class='student-highlight highlight-yellow'>$1</mark>")
+    // Support JSX-like tag in text data: <Highlight color="pink">...</Highlight>
+    .replace(/<Highlight\s+color=["']pink["']>(.*?)<\/Highlight>/g, "<mark class='student-highlight highlight-pink'>$1</mark>")
+    .replace(/<Highlight\s+color=["']green["']>(.*?)<\/Highlight>/g, "<mark class='student-highlight highlight-green'>$1</mark>")
+    .replace(/<Highlight\s+color=["']purple["']>(.*?)<\/Highlight>/g, "<mark class='student-highlight highlight-purple'>$1</mark>")
+    .replace(/<Highlight\s+color=["']violet["']>(.*?)<\/Highlight>/g, "<mark class='student-highlight highlight-purple'>$1</mark>")
+    .replace(/<Highlight(?:\s+color=["']yellow["'])?>(.*?)<\/Highlight>/g, "<mark class='student-highlight highlight-yellow'>$1</mark>")
     .replace(/~~(.*?)~~/g, "<span class='line-through opacity-60'>$1</span>")
     .replace(/\\text\{([^}]+)\}/g, "$1")
     .replace(/\$([^$]+)\$/g, "<span class='font-mono font-medium text-ink-1 text-[0.94em]'>$1</span>")
     .replace(/\*\*(.*?)\*\*/g, "<strong class='text-ink-1 font-semibold'>$1</strong>")
     .replace(/\*(.*?)\*/g, "<em>$1</em>")
     .replace(/`([^`]+)`/g, "<code class='font-mono text-[0.88em] px-1.5 py-0.5 rounded bg-surface-2 border border-hairline text-accent font-semibold'>$1</code>");
+
+  return highlightGlossaryTerms(formatted);
 }
 
 /** Theme-aware SVG Process Memory Layout Diagram with student handwritten notes */

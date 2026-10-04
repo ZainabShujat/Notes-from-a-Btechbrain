@@ -66,15 +66,15 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
               type: "explanation",
               heading: "1. The Principle of Layering & Architectural Separation",
               body: [
-                "Computer networks rely on modular layering to decompose massive communication complexity into independent functional abstractions. Each layer n provides specific services to layer (n+1) via a Service Access Point (SAP), while relying on the services of layer (n-1).",
-                "Protocols vs Services: A protocol is a set of formal rules governing peer-to-peer communication across hosts at the same layer. A service is a set of operations that a layer provides to the layer immediately above it through an interface.",
-                "Encapsulation & Decapsulation: As user data travels down the sender's protocol stack, each layer prepends a protocol-specific header (and occasionally an error-detecting trailer at Layer 2). The resulting packet is termed a Protocol Data Unit (PDU): Application Message -> Transport Segment/Datagram -> Network Datagram/Packet -> Data Link Frame -> Physical Raw Bits.",
+                "Computer networks rely on modular layering to decompose massive communication complexity into independent functional abstractions. Each layer n provides specific services to layer (n+1) via a ==purple:Service Access Point (SAP)==, while relying on the services of layer (n-1).",
+                "**Protocols vs Services:** A ==yellow:protocol is a set of formal rules governing peer-to-peer communication across hosts== at the same layer. A ==green:service is a set of operations that a layer provides to the layer immediately above it== through an interface.",
+                "**Encapsulation & Decapsulation:** As user data travels down the sender's protocol stack, each layer prepends a protocol-specific header (and occasionally an error-detecting trailer at Layer 2). The resulting packet is termed a ==purple:Protocol Data Unit (PDU)==: ==yellow:Application Message → Transport Segment/Datagram → Network Datagram/Packet → Data Link Frame → Physical Raw Bits==.",
               ],
               callout: {
                 kind: "gate-tip",
                 title: "GATE PDU Nomenclature Trap",
                 message:
-                  "GATE questions often test exact terminology: Application Layer produces 'Messages', Transport Layer produces 'Segments' (TCP) or 'User Datagrams' (UDP), Network Layer produces 'Packets/Datagrams', and Data Link Layer produces 'Frames'.",
+                  "GATE questions often test exact terminology: ==purple:Application Layer produces 'Messages'==, ==yellow:Transport Layer produces 'Segments' (TCP) or 'User Datagrams' (UDP)==, ==pink:Network Layer produces 'Packets/Datagrams'==, and ==green:Data Link Layer produces 'Frames'==.",
               },
             },
             {
@@ -86,31 +86,31 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
               criteria: [
                 {
                   criterion: "Layer 7 (Application)",
-                  values: ["User network interface (HTTP, SMTP, DNS, FTP)", "Merges OSI Session, Presentation & App into one"],
+                  values: ["==purple:User network interface== (HTTP, SMTP, DNS, FTP)", "==yellow:Merges OSI Session, Presentation & App into one== application layer"],
                 },
                 {
                   criterion: "Layer 6 (Presentation)",
-                  values: ["Data serialization, ASCII/EBCDIC, SSL/TLS encryption", "Handled directly inside user application libraries"],
+                  values: ["==green:Data serialization, ASCII/EBCDIC, SSL/TLS encryption== format conversion", "Handled directly inside user application libraries"],
                 },
                 {
                   criterion: "Layer 5 (Session)",
-                  values: ["Dialogue control, token management, synchronization", "Integrated into application or transport layer"],
+                  values: ["==pink:Dialogue control, token management, synchronization checkpoints==", "Integrated into application or transport layer"],
                 },
                 {
                   criterion: "Layer 4 (Transport)",
-                  values: ["End-to-end process-to-process delivery (TCP, UDP)", "End-to-end host communication with port addressing"],
+                  values: ["==yellow:End-to-end process-to-process delivery== (TCP, UDP with port numbers)", "End-to-end host communication with port addressing"],
                 },
                 {
                   criterion: "Layer 3 (Network)",
-                  values: ["Host-to-host routing, logical IP addressing", "Internet Protocol (IPv4/IPv6), ICMP, routing"],
+                  values: ["==yellow:Host-to-host routing, logical IP addressing== across networks", "Internet Protocol (IPv4/IPv6), ICMP, routing"],
                 },
                 {
                   criterion: "Layer 2 (Data Link)",
-                  values: ["Hop-to-hop framing, error detection, MAC access", "Network Interface / Data Link (Ethernet, Wi-Fi)"],
+                  values: ["==pink:Hop-to-hop node delivery, framing, CRC error detection, MAC access==", "Network Interface / Data Link (Ethernet, Wi-Fi)"],
                 },
                 {
                   criterion: "Layer 1 (Physical)",
-                  values: ["Raw bit transmission, voltages, cable standards", "Physical transmission medium (Copper, Fiber, Radio)"],
+                  values: ["==green:Raw bit transmission, signal voltages, cable pins==", "Physical transmission medium (Copper, Fiber, Radio)"],
                 },
               ],
             },

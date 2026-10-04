@@ -132,7 +132,7 @@ export default function InteractiveBankersAlgorithm({
           <button
             type="button"
             onClick={handleReset}
-            className="px-3 py-1.5 rounded-lg border border-hairline bg-surface-2 hover:bg-surface-3 text-xs font-mono text-ink-2 transition-colors cursor-pointer"
+            className="px-3 py-1.5 border border-hairline bg-surface-2 hover:bg-surface-3 text-xs font-mono text-ink-2 transition-colors cursor-pointer shape-octagon-sm"
           >
             Reset
           </button>
@@ -140,7 +140,7 @@ export default function InteractiveBankersAlgorithm({
             type="button"
             onClick={handleNext}
             disabled={isComplete}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+            className={`px-3.5 py-1.5 text-xs font-mono font-bold transition-all cursor-pointer shape-octagon-sm ${
               isComplete
                 ? "bg-surface-2 text-ink-3 cursor-not-allowed opacity-60"
                 : "bg-accent text-white hover:bg-accent/90 shadow-xs"

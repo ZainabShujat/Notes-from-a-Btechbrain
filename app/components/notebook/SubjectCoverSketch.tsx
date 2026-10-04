@@ -16,7 +16,7 @@ export default function SubjectCoverSketch({
         <svg
           viewBox="0 0 160 110"
           fill="none"
-          className="w-full max-w-[140px] h-auto mx-auto select-none opacity-85"
+          className="w-full max-w-[140px] h-auto mx-auto select-none opacity-90 group-hover:scale-105 transition-all duration-300"
           aria-hidden="true"
         >
           {/* Bottom Layer - Hardware */}

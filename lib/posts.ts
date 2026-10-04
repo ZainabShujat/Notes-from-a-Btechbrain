@@ -42,22 +42,21 @@ export async function getAllPosts(): Promise<PostMeta[]> {
   }
 }
 export async function getCombinedPosts(): Promise<PostMeta[]> {
-  console.log(process.env.NEXT_PUBLIC_SUPABASE_URL);
-console.log(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
   const markdownPosts = await getAllPosts();
 
-  const { data: supabasePosts, error } = await supabase
-    .from("posts")
-    .select("*")
-    .eq("published", true);
+  try {
+    const { data: supabasePosts, error } = await supabase
+      .from("posts")
+      .select("*")
+      .eq("published", true);
 
-  if (error) {
-    console.error("[getCombinedPosts] supabase failed:", error);
-    return markdownPosts;
-  }
+    if (error) {
+      console.error("[getCombinedPosts] supabase failed:", error);
+      return markdownPosts;
+    }
 
-  const normalizedSupabasePosts: PostMeta[] = (supabasePosts || []).map(
-    (post: any) => ({
+    const normalizedSupabasePosts: PostMeta[] = (supabasePosts || []).map(
+      (post: any) => ({
       title: post.title,
       slug: post.slug,
       date: post.date || "",
@@ -67,21 +66,32 @@ console.log(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
       banner: post.banner || "",
       content: post.content || "",
       subcategory: post.subcategory || "",
-      theme: post.theme || "",
-      tags: Array.isArray(post.tags)
-  ? post.tags
-  : JSON.parse(post.tags || "[]"),
+      tags: (() => {
+        if (Array.isArray(post.tags)) return post.tags;
+        if (typeof post.tags === "string") {
+          try {
+            return JSON.parse(post.tags);
+          } catch {
+            return [post.tags];
+          }
+        }
+        return [];
+      })(),
     })
   );
 
-  const combined = [...markdownPosts, ...normalizedSupabasePosts];
+    const combined = [...markdownPosts, ...normalizedSupabasePosts];
 
-  return combined.sort((a, b) => {
-    const dateA = new Date(a.date || a.created_at).getTime();
-    const dateB = new Date(b.date || b.created_at).getTime();
+    return combined.sort((a, b) => {
+      const timeA = new Date(a.date || a.created_at || 0).getTime() || 0;
+      const timeB = new Date(b.date || b.created_at || 0).getTime() || 0;
 
-    return dateB - dateA;
-  });
+      return timeB - timeA;
+    });
+  } catch (err) {
+    console.error("[getCombinedPosts] unexpected error:", err);
+    return markdownPosts;
+  }
 }
 // lib/posts.ts
 // Defensive getLatestPerCategory - handles missing category or categories array

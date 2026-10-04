@@ -3,12 +3,13 @@ import PageHeader from "../../components/ui/PageHeader";
 import { pageMetadata } from "../../../lib/seo";
 import { getAllCourses } from "../../../lib/courses";
 
-export const metadata = pageMetadata({
-  title: "Subject Notes Library",
-  description:
-    "Rigorous, authentic student study notes for B.Tech & GATE CS. Conceptual mental models, interactive simulators, verified PYQs, and rapid exam revision.",
-  path: "/notes/courses",
-});
+import { NOINDEX } from "../../../lib/seo";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Subject Notebooks Archive",
+  ...NOINDEX,
+};
 
 export default function CoursesPage() {
   const courses = getAllCourses();

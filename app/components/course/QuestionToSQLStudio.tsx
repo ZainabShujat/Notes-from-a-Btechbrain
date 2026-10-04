@@ -451,29 +451,29 @@ export default function QuestionToSQLStudio() {
   };
 
   return (
-    <div className="w-full my-10 rounded-lg border border-[#e2d9cc] dark:border-[#2e2a42] bg-[#fbf9f4] dark:bg-[#151624] shadow-sm overflow-hidden font-sans">
+    <div className="w-full my-10 border border-[#e2d9cc] bg-[#faf7f2] shadow-sm overflow-hidden font-sans shape-octagon">
       {/* ── TOP HEADER ── */}
-      <div className="p-4 sm:p-6 border-b border-[#e2d9cc] dark:border-[#2e2a42] bg-[#f5ede0]/60 dark:bg-[#1a1b2d]/70 flex flex-wrap items-center justify-between gap-4">
+      <div className="p-4 sm:p-6 border-b border-[#e2d9cc] bg-[#f5ede0]/60 flex flex-wrap items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded bg-violet-600 text-white font-mono text-[10px] font-bold uppercase tracking-wider">
+            <span className="px-2.5 py-1 bg-violet-700 text-white font-mono text-[10px] font-bold uppercase tracking-wider shape-octagon-sm">
               EXAM STUDIO
             </span>
-            <span className="font-mono text-xs text-ink-3">
+            <span className="font-mono text-xs text-[#64748b]">
               Question-to-SQL Systematic Translation Flow
             </span>
           </div>
-          <h3 className="font-handwriting text-2xl sm:text-3xl font-bold text-ink-1">
+          <h3 className="font-handwriting text-2xl sm:text-3xl font-bold text-[#1e1b4b]">
             Translating University Exam Questions into Production SQL
           </h3>
-          <p className="text-xs text-ink-2 max-w-[70ch]">
+          <p className="text-xs text-[#475569] max-w-[70ch]">
             In university exams, professors test your ability to decompose natural language problem statements into logical relational algebra pipelines. Follow this 5-step heuristic to never lose marks.
           </p>
         </div>
 
         {/* Problem Selector */}
         <div className="w-full sm:w-auto">
-          <label htmlFor="problem-picker" className="block text-[11px] font-mono text-ink-3 mb-1">
+          <label htmlFor="problem-picker" className="block text-[11px] font-mono text-[#64748b] mb-1">
             Select Exam Question:
           </label>
           <select
@@ -483,7 +483,7 @@ export default function QuestionToSQLStudio() {
               setSelectedProblemIndex(Number(e.target.value));
               setActiveStepTab(1);
             }}
-            className="w-full sm:w-auto px-3 py-1.5 rounded-md border border-[#d6cfbe] dark:border-[#38334f] bg-surface-1 text-ink-1 font-mono text-xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent"
+            className="w-full sm:w-auto px-3.5 py-2 border border-[#d6cfbe] bg-white text-[#1e1b4b] font-mono text-xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent shape-octagon-sm"
           >
             {EXAM_SQL_PROBLEMS.map((p, idx) => (
               <option key={p.id} value={idx}>
@@ -495,33 +495,33 @@ export default function QuestionToSQLStudio() {
       </div>
 
       {/* ── ACTIVE EXAM QUESTION BANNER ── */}
-      <div className="p-4 sm:p-5 bg-surface-1 border-b border-hairline/80 space-y-2">
+      <div className="p-4 sm:p-5 bg-white border-b border-[#e2d9cc] space-y-2">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="font-mono text-[11px] font-bold text-accent uppercase tracking-wider">
+          <span className="font-mono text-[11px] font-bold text-violet-700 uppercase tracking-wider">
             Exam Problem Statement
           </span>
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-amber-800 dark:text-amber-300 font-mono text-[10px] font-semibold">
+            <span className="px-2.5 py-1 bg-amber-500/15 border border-amber-500/30 text-amber-900 font-mono text-[10px] font-semibold shape-octagon-sm">
               {problem.universityFrequency}
             </span>
-            <span className="px-2 py-0.5 rounded bg-surface-2 text-ink-2 font-mono text-[10px]">
+            <span className="px-2.5 py-1 bg-[#f5ede0] border border-[#d6cfbe] text-[#334155] font-mono text-[10px] shape-octagon-sm">
               {problem.difficulty}
             </span>
           </div>
         </div>
-        <p className="font-serif italic text-base sm:text-lg text-ink-1 leading-relaxed pl-3 border-l-2 border-accent">
+        <p className="font-serif italic text-base sm:text-lg text-[#1e1b4b] leading-relaxed pl-3 border-l-2 border-violet-600">
           &ldquo;{problem.examQuestion}&rdquo;
         </p>
       </div>
 
       {/* ── STEP-BY-STEP TRANSLATION CONTROLLER ── */}
-      <div className="px-4 sm:px-6 py-3 border-b border-hairline bg-surface-1/50 flex flex-wrap items-center justify-between gap-3">
+      <div className="px-4 sm:px-6 py-3 border-b border-[#e2d9cc] bg-[#f5ede0]/40 flex flex-wrap items-center justify-between gap-3">
         {/* Navigation buttons */}
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={handleReset}
-            className="px-2.5 py-1.5 rounded border border-hairline hover:bg-surface-2 text-ink-2 font-mono text-xs flex items-center gap-1 cursor-pointer"
+            className="px-3 py-1.5 border border-[#d6cfbe] bg-white hover:bg-black/5 text-[#1e1b4b] font-mono text-xs flex items-center gap-1 cursor-pointer shape-octagon-sm"
           >
             <span>⏮</span>
             <span className="hidden sm:inline">Reset</span>
@@ -530,7 +530,7 @@ export default function QuestionToSQLStudio() {
             type="button"
             onClick={handlePrevStep}
             disabled={activeStepTab <= 1}
-            className="px-3 py-1.5 rounded border border-hairline hover:bg-surface-2 text-ink-2 disabled:opacity-40 font-mono text-xs flex items-center gap-1 cursor-pointer"
+            className="px-3 py-1.5 border border-[#d6cfbe] bg-white hover:bg-black/5 text-[#1e1b4b] disabled:opacity-40 font-mono text-xs flex items-center gap-1 cursor-pointer shape-octagon-sm"
           >
             <span>◀</span>
             <span>Prev Step</span>
@@ -539,7 +539,7 @@ export default function QuestionToSQLStudio() {
             type="button"
             onClick={handleNextStep}
             disabled={activeStepTab >= 5}
-            className="px-3 py-1.5 rounded bg-violet-600 hover:bg-violet-700 text-white font-mono text-xs font-bold flex items-center gap-1 cursor-pointer shadow-sm"
+            className="px-3.5 py-1.5 bg-violet-700 hover:bg-violet-800 text-white font-mono text-xs font-bold flex items-center gap-1 cursor-pointer shadow-sm shape-octagon-sm"
           >
             <span>Next Step</span>
             <span>▶</span>
@@ -559,12 +559,12 @@ export default function QuestionToSQLStudio() {
               key={s.num}
               type="button"
               onClick={() => setActiveStepTab(s.num)}
-              className={`px-3 py-1 rounded-full text-xs font-mono font-semibold transition-all cursor-pointer whitespace-nowrap ${
+              className={`px-3 py-1 text-xs font-mono font-semibold transition-all cursor-pointer whitespace-nowrap shape-octagon-sm ${
                 activeStepTab === s.num
-                  ? "bg-violet-600 text-white shadow-sm ring-2 ring-violet-300 dark:ring-violet-800"
+                  ? "bg-violet-700 text-white shadow-sm ring-1 ring-violet-400"
                   : activeStepTab > s.num
-                  ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30"
-                  : "bg-surface-2 text-ink-3 hover:text-ink-1"
+                  ? "bg-emerald-500/15 text-emerald-800 border border-emerald-500/30"
+                  : "bg-white border border-[#d6cfbe] text-[#475569] hover:text-[#1e1b4b]"
               }`}
             >
               {s.label}
@@ -821,10 +821,10 @@ export default function QuestionToSQLStudio() {
               key={item.tag}
               type="button"
               onClick={() => setActiveOrderClause(item.tag)}
-              className={`px-2.5 py-1 rounded text-[11px] font-bold transition-colors cursor-pointer ${
+              className={`px-3 py-1 text-[11px] font-bold transition-colors cursor-pointer shape-octagon-sm ${
                 activeOrderClause === item.tag
-                  ? "bg-accent text-white shadow-sm"
-                  : "bg-surface-2 text-ink-2 hover:bg-surface-1"
+                  ? "bg-violet-700 text-white shadow-sm"
+                  : "bg-white border border-[#d6cfbe] text-[#334155] hover:bg-[#f5ede0]"
               }`}
             >
               {item.tag}

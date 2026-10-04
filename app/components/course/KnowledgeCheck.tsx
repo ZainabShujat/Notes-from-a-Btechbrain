@@ -93,7 +93,7 @@ export default function KnowledgeCheck({
                         type="button"
                         onClick={() => handleSelectOption(q.id, opt.id)}
                         disabled={isRevealed}
-                        className={`w-full text-left p-3 rounded border text-xs sm:text-sm font-sans transition-colors flex items-start gap-3 cursor-pointer disabled:cursor-default ${btnStyle}`}
+                        className={`w-full text-left p-3 border text-xs sm:text-sm font-sans transition-colors flex items-start gap-3 cursor-pointer disabled:cursor-default shape-octagon-sm ${btnStyle}`}
                       >
                         <span className="font-mono text-xs mt-0.5 uppercase opacity-75 shrink-0">
                           [{opt.id}]
@@ -130,7 +130,7 @@ export default function KnowledgeCheck({
                           if (!isNaN(val)) handleNumericalSubmit(q.id, val);
                         }
                       }}
-                      className="px-3 py-1.5 rounded border border-hairline bg-surface-2 text-ink-1 text-sm font-mono w-48 focus:outline-none focus:border-accent"
+                      className="px-3 py-1.5 border border-hairline bg-surface-2 text-ink-1 text-sm font-mono w-48 focus:outline-none focus:border-accent shape-octagon-sm"
                     />
                     {q.unit && (
                       <span className="text-xs font-mono text-ink-3">
@@ -146,7 +146,7 @@ export default function KnowledgeCheck({
                           const val = parseFloat(input?.value);
                           if (!isNaN(val)) handleNumericalSubmit(q.id, val);
                         }}
-                        className="px-3.5 py-1.5 rounded bg-accent text-white text-xs font-mono font-semibold hover:bg-accent/90 transition-colors cursor-pointer"
+                        className="px-3.5 py-1.5 bg-accent text-white text-xs font-mono font-semibold hover:bg-accent/90 transition-colors cursor-pointer shape-octagon-sm"
                       >
                         Check Answer
                       </button>

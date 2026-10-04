@@ -1,13 +1,13 @@
 import PageHeader from "../components/ui/PageHeader";
 import NotificationsTab from "../components/NotificationsTab";
-import { pageMetadata } from "../../lib/seo";
+import { NOINDEX } from "../../lib/seo";
+import type { Metadata } from "next";
 import BackButton from "../components/BackButton";
 
-export const metadata = pageMetadata({
-  title: "Updates",
-  description: "A log of updates, changes, and versions of the site.",
-  path: "/notifications",
-});
+export const metadata: Metadata = {
+  title: "Site Updates & Changelog",
+  ...NOINDEX,
+};
 
 export default function NotificationsPage() {
   return (

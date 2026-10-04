@@ -16,30 +16,43 @@ export async function GET() {
     posts = [];
   }
 
-  // Public pages only — the studio (/admin, /write, /community) is
-  // deliberately absent and carries noindex metadata as well.
+  // Legitimate public pages only.
+  // Private/admin/write/api endpoints are strictly excluded.
   const staticPages = [
     '',
-    'start-here',
-    'editions',
     'notes',
-    'notes/btech',
-    'notes/gate',
-    'notes/pyqs',
-    'notes/quizzes',
-    'notes/labs',
-    'notes/cheat-sheets',
-    'notes/quick-revision',
-    'notes/formulas',
-    'notes/courses',
-    'notes/videos',
-    'notes/books',
+    'notes/operating-systems',
+    'editions',
+    'work',
+    'wonder',
+    'games',
+    'books',
+    'about',
+    'start-here',
     'all-posts',
     'map',
-    'about',
   ];
 
-  // Derived from the posts themselves so the sitemap can't drift out of
+  // Complete, verified lessons from the Operating Systems notebook
+  const completeLessonPages = [
+    'notes/operating-systems/why-operating-systems-exist',
+    'notes/operating-systems/dual-mode-and-system-calls',
+    'notes/operating-systems/what-is-a-process',
+    'notes/operating-systems/process-states-and-transitions',
+    'notes/operating-systems/context-switching',
+    'notes/operating-systems/inter-process-communication',
+    'notes/operating-systems/scheduling-basics',
+    'notes/operating-systems/fcfs-and-round-robin',
+    'notes/operating-systems/sjf-srtf-priority-scheduling',
+    'notes/operating-systems/critical-section-and-semaphores',
+    'notes/operating-systems/deadlock-principles-and-bankers',
+    'notes/operating-systems/paging-and-tlb',
+    'notes/operating-systems/page-replacement-algorithms',
+    'notes/operating-systems/file-allocation-and-inodes',
+    'notes/operating-systems/disk-scheduling-algorithms',
+  ];
+
+  // Derived from the posts themselves so the sitemap cannot drift out of
   // sync with what the site actually publishes.
   const categories = Array.from(
     new Set(
@@ -73,6 +86,11 @@ export async function GET() {
         `<url><loc>${baseUrl}${page ? `/${page}` : '/'}</loc></url>`
     ),
 
+    ...completeLessonPages.map(
+      (page) =>
+        `<url><loc>${baseUrl}/${xmlEscape(page)}</loc></url>`
+    ),
+
     ...categories.map(
       (cat) => `<url><loc>${baseUrl}/category/${xmlEscape(cat)}</loc></url>`
     ),
@@ -84,9 +102,13 @@ export async function GET() {
 
     ...posts.map((post) => {
       const when = post.date || post.created_at;
-      const lastmod = when
-        ? new Date(when).toISOString()
-        : new Date().toISOString();
+      let lastmod = new Date().toISOString();
+      if (when) {
+        const parsed = new Date(when);
+        if (!isNaN(parsed.getTime())) {
+          lastmod = parsed.toISOString();
+        }
+      }
 
       return `<url><loc>${baseUrl}/post/${xmlEscape(post.slug)}</loc><lastmod>${lastmod}</lastmod></url>`;
     }),

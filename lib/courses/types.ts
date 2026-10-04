@@ -67,7 +67,7 @@ export interface ProcessScheduleItem {
 export interface CPUSchedulerConfig {
   title: string;
   caption?: string;
-  defaultAlgorithm: "fcfs" | "round-robin" | "sjf";
+  defaultAlgorithm: "fcfs" | "sjf-nonpreemptive" | "sjf-preemptive" | "priority-nonpreemptive" | "priority-preemptive" | "round-robin" | "ljf" | "lrtf" | "hrrn";
   defaultQuantum?: number;
   sampleProcesses: ProcessScheduleItem[];
 }
@@ -381,6 +381,15 @@ export type LessonSection =
 
 // ─── Course & Module Structure ────────────────────────────────────────
 
+export interface LessonCheatSheet {
+  title?: string;
+  summaryRule: string;
+  keyFormulasAndRules: string[];
+  examPitfalls: string[];
+  highYieldTips?: string[];
+  visualAnchor?: string;
+}
+
 export interface LessonMeta {
   id: string;
   title: string;
@@ -391,6 +400,7 @@ export interface LessonMeta {
   hasInteractive: boolean;
   hasGATE: boolean;
   hasPractice: boolean;
+  cheatsheet?: LessonCheatSheet;
   sections: LessonSection[];
 }
 

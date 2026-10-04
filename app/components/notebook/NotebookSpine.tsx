@@ -11,7 +11,7 @@ export default function NotebookSpine({
 }) {
   return (
     <div
-      className="absolute top-0 bottom-0 left-0 w-5 sm:w-6 z-20 rounded-l-[4px] border-r border-black/20 flex flex-col justify-between items-center py-3.5 select-none pointer-events-none overflow-hidden"
+      className="notebook-spine absolute top-0 bottom-0 left-0 w-5 sm:w-6 z-20 rounded-l-[4px] border-r border-black/20 flex flex-col justify-between items-center py-3.5 select-none pointer-events-none overflow-hidden"
       style={{
         backgroundColor: accentHex,
         boxShadow: "inset -2px 0 4px rgba(0, 0, 0, 0.25), inset 1px 0 2px rgba(255, 255, 255, 0.2)",

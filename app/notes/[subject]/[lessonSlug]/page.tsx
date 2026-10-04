@@ -24,24 +24,50 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!data) {
     return {
       title: "Lesson Not Found",
-      robots: { index: false },
+      robots: { index: false, follow: false },
     };
   }
 
   const { lesson, course } = data;
+  const isComplete = course.slug === "operating-systems";
+
+  if (!isComplete) {
+    return {
+      title: `${lesson.title} · ${course.title}`,
+      description: lesson.tagline || `Student notes on ${lesson.title} in ${course.title}.`,
+      robots: { index: false, follow: true },
+    };
+  }
+
+  const pageTitle = `${lesson.title} · ${course.title}`;
+  const description =
+    lesson.tagline ||
+    `Interactive student notes on ${lesson.title} in ${course.title}. Part of B.Tech & GATE CS curriculum.`;
   const url = `${SITE_URL}/notes/${course.slug}/${lesson.slug}`;
+  const ogImage = absoluteUrl(null);
 
   return {
-    title: `${lesson.title} · ${course.title}`,
-    description: lesson.tagline,
+    title: pageTitle,
+    description,
     alternates: { canonical: url },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large" },
+    },
     openGraph: {
       type: "article",
       siteName: SITE_NAME,
-      title: `${lesson.title} | ${course.title} | ${SITE_NAME}`,
-      description: lesson.tagline,
+      title: pageTitle,
+      description,
       url,
-      images: [{ url: absoluteUrl(null), alt: lesson.title }],
+      images: [{ url: ogImage, alt: lesson.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -58,15 +84,85 @@ export default async function LessonPage({ params }: PageProps) {
   }
   const { prev, next } = getNextAndPrevLesson(course.slug, lesson.slug);
 
+  const lessonUrl = `${SITE_URL}/notes/${course.slug}/${lesson.slug}`;
+  const courseUrl = `${SITE_URL}/notes/${course.slug}`;
+
   return (
-    <CourseLayout
-      course={course}
-      currentModule={module}
-      currentLesson={lesson}
-      prevLesson={prev}
-      nextLesson={next}
-    >
-      <LessonRenderer lesson={lesson} moduleTitle={module.title} subjectSlug={course.subjectSlug} />
-    </CourseLayout>
+    <>
+      {/* Structured data: Article/LearningResource & BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "TechArticle",
+            headline: lesson.title,
+            description: lesson.tagline,
+            url: lessonUrl,
+            inLanguage: "en-US",
+            isPartOf: {
+              "@type": "Course",
+              name: course.title,
+              description: course.description,
+              url: courseUrl,
+            },
+            author: {
+              "@type": "Person",
+              name: "Zainab Shujat",
+              url: "https://zainabshujat.dev/",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: SITE_NAME,
+              url: SITE_URL,
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: SITE_URL,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Notes",
+                item: `${SITE_URL}/notes`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: course.title,
+                item: courseUrl,
+              },
+              {
+                "@type": "ListItem",
+                position: 4,
+                name: lesson.title,
+                item: lessonUrl,
+              },
+            ],
+          }),
+        }}
+      />
+      <CourseLayout
+        course={course}
+        currentModule={module}
+        currentLesson={lesson}
+        prevLesson={prev}
+        nextLesson={next}
+      >
+        <LessonRenderer lesson={lesson} moduleTitle={module.title} subjectSlug={course.subjectSlug} />
+      </CourseLayout>
+    </>
   );
 }

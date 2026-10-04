@@ -65,28 +65,28 @@ export const DBMS_COURSE: CourseMeta = {
               body: [
                 "Before database systems emerged in the late 1960s, organizations stored enterprise data directly in flat operating system files (CSV, fixed-width records, or custom binary structs). Every application had to implement its own parsing, locking, search indexing, and consistency checks.",
                 "Storing application data directly in OS files creates five fatal engineering bottlenecks:",
-                "1. Data Redundancy & Inconsistency: The same customer address was stored independently by billing, shipping, and customer support. Updating one file left the others stale, resulting in contradictory enterprise records.",
-                "2. Difficulty in Accessing Data: Writing an ad-hoc query (e.g., 'Find all customers in Pune who purchased over ₹50,000 in March') required writing and compiling a brand-new 200-line C program to parse the disk blocks sequentially.",
-                "3. Data Isolation & Format Brittleness: If an engineer changed a record's postal code field from 6 digits to alphanumeric, every compiled binary across the company that touched that file crashed.",
-                "4. Concurrency & Atomicity Failures: If two bank tellers debited account #4102 simultaneously, interleaved OS file writes caused Lost Updates. If power failed mid-write, partial records corrupted the filesystem.",
-                "5. Security & Integrity Enforcement: File systems offer coarse-grained read/write permissions at the whole-file level. They cannot enforce fine-grained rules like 'An intern can view employee names but not salary' or 'Balance must never drop below zero.'",
+                "1. ==pink:Data Redundancy & Inconsistency==: The same customer address was stored independently by billing, shipping, and customer support. Updating one file left the others stale, resulting in contradictory enterprise records.",
+                "2. Difficulty in Accessing Data: Writing an ad-hoc query required writing and compiling a brand-new 200-line C program to parse the disk blocks sequentially.",
+                "3. ==pink:Data Isolation & Format Brittleness==: If an engineer changed a record's postal code field from 6 digits to alphanumeric, every compiled binary across the company that touched that file crashed.",
+                "4. ==yellow:Concurrency & Atomicity Failures==: If two bank tellers debited account #4102 simultaneously, interleaved OS file writes caused ==pink:Lost Updates==. If power failed mid-write, partial records corrupted the filesystem.",
+                "5. ==purple:Security & Integrity Enforcement==: File systems offer coarse-grained read/write permissions at the whole-file level. They cannot enforce fine-grained rules like 'An intern can view employee names but not salary' or 'Balance must never drop below zero.'",
               ],
               callout: {
                 kind: "mental-model",
                 title: "Mental Model: Abstraction Over Physical Disk Blocks",
                 message:
-                  "Just as an Operating System abstracts raw CPU registers and disk tracks into processes and files, a DBMS abstracts raw disk pages and byte offsets into logical tables, relational constraints, and declarative query interfaces.",
+                  "Just as an Operating System abstracts raw CPU registers and disk tracks into processes and files, a DBMS abstracts raw disk pages and byte offsets into ==green:logical tables, relational constraints, and declarative query interfaces==.",
               },
             },
             {
               type: "explanation",
               heading: "2. The ANSI/SPARC Three-Schema Architecture",
               body: [
-                "The core engineering breakthrough that solved the file system dilemma was separating the user's perception of data from its physical layout on magnetic disks.",
+                "The core engineering breakthrough that solved the file system dilemma was ==yellow:separating the user's perception of data from its physical layout on magnetic disks==.",
                 "The ANSI/SPARC framework divides database systems into three distinct abstraction layers:",
-                "1. External Level (View Layer): Describes the subset of the database relevant to a specific user group while hiding the rest. A student sees their grades and tuition fees; a registrar sees academic standing; an administrator sees contact details. A single database supports many independent external views.",
-                "2. Conceptual Level (Logical Layer): Describes WHAT data is stored in the entire database and the relationships among them. This is the unified enterprise schema: tables, columns, data types, foreign keys, and integrity constraints. It completely hides physical storage details.",
-                "3. Internal Level (Physical Storage Layer): Describes HOW data is physically saved on persistent media: block formats, byte offsets, compression, record clustering, hashing, and B+ tree search indices.",
+                "1. **External Level (View Layer):** Describes the ==purple:subset of the database relevant to a specific user group== while hiding the rest. A student sees their grades and tuition fees; a registrar sees academic standing; an administrator sees contact details. A single database supports many independent external views.",
+                "2. **Conceptual Level (Logical Layer):** Describes ==yellow:WHAT data is stored in the entire database and the relationships among them==. This is the unified enterprise schema: tables, columns, data types, foreign keys, and integrity constraints. It completely hides physical storage details.",
+                "3. **Internal Level (Physical Storage Layer):** Describes ==purple:HOW data is physically saved on persistent media==: block formats, byte offsets, compression, record clustering, hashing, and ==green:B+ tree search indices==.",
               ],
             },
             {
@@ -129,27 +129,27 @@ export const DBMS_COURSE: CourseMeta = {
               criteria: [
                 {
                   feature: "Definition",
-                  first: "Capacity to modify the internal physical schema without altering the conceptual schema.",
-                  second: "Capacity to modify the conceptual logical schema without altering external views or apps.",
+                  first: "Capacity to ==yellow:modify the internal physical schema without altering the conceptual schema==.",
+                  second: "Capacity to ==yellow:modify the conceptual logical schema without altering external views== or apps.",
                 },
                 {
                   feature: "Typical Changes",
-                  first: "Adding a B+ Tree index, switching from HDD to NVMe SSD, changing block size, reorganizing file records.",
-                  second: "Adding a new attribute to a relation, splitting a table into two normalized tables, adding an entity.",
+                  first: "==green:Adding a B+ Tree index, switching from HDD to NVMe SSD, changing block size==, reorganizing file records.",
+                  second: "==purple:Adding a new attribute to a relation, splitting a table into two normalized tables==, adding an entity.",
                 },
                 {
                   feature: "Implementation Difficulty",
-                  first: "Relatively easy to provide. Modern DBMS engines handle this natively without breaking SQL.",
-                  second: "Much harder to achieve. Changing logical schemas often forces view definitions to be rewritten.",
+                  first: "==green:Relatively easy to provide==. Modern DBMS engines handle this natively without breaking SQL.",
+                  second: "==pink:Much harder to achieve==. Changing logical schemas often forces view definitions to be rewritten.",
                 },
                 {
                   feature: "Application Impact",
-                  first: "Zero changes to application code. Queries execute identically, just faster or slower.",
-                  second: "Existing applications remain unaffected if appropriate views are maintained over new tables.",
+                  first: "==green:Zero changes to application code==. Queries execute identically, just faster or slower.",
+                  second: "Existing applications remain unaffected if ==purple:appropriate views are maintained over new tables==.",
                 },
               ],
               summaryTakeaway:
-                "Physical independence shields developers from hardware and disk storage formats; logical independence shields business applications from evolving enterprise requirements.",
+                "==green:Physical independence shields developers from hardware and disk storage formats==; ==purple:logical independence shields business applications from evolving enterprise requirements==.",
             },
             {
               type: "practice",

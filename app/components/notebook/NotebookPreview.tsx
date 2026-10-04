@@ -25,10 +25,10 @@ export default function NotebookPreview({
   };
 
   return (
-    <div className="flex flex-col justify-between group">
+    <div className="flex flex-col justify-between group notebook-card">
       {/* ── 3D PHYSICAL NOTEBOOK CONTAINER ── */}
       <div
-        className="relative w-full min-h-[380px] sm:min-h-[420px] cursor-pointer rounded-r-[6px] rounded-l-[4px] outline-none select-none transition-transform duration-300"
+        className="notebook-preview relative w-full min-h-[380px] sm:min-h-[420px] cursor-pointer rounded-r-[6px] rounded-l-[4px] outline-none select-none transition-transform duration-300"
         style={{
           perspective: "1200px",
           transform: isHovered ? "translateY(-4px)" : "translateY(0)",
@@ -49,7 +49,7 @@ export default function NotebookPreview({
 
         {/* ── FRONT COVER (SWINGS OPEN ON 3D SPINE HINGE ON HOVER) ── */}
         <div
-          className="absolute inset-0 z-10 w-full h-full"
+          className="absolute inset-0 z-20 w-full h-full"
           style={{
             transformOrigin: "left center",
             transform: isHovered ? "rotateY(-36deg)" : "rotateY(0deg)",

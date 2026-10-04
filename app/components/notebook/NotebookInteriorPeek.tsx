@@ -20,7 +20,7 @@ export default function NotebookInteriorPeek({
 
   return (
     <div
-      className="absolute inset-0 rounded-r-[6px] rounded-l-[4px] border border-[#d6cfbe] bg-[#fbf9f4] text-[#1c1917] overflow-hidden flex flex-col justify-between p-5 pl-7 select-none shadow-[inset_3px_0_6px_rgba(0,0,0,0.06)]"
+      className="notebook-interior-peek absolute inset-0 rounded-r-[6px] rounded-l-[4px] border border-[#d6cfbe] bg-[#fbf9f4] text-[#1c1917] overflow-hidden flex flex-col justify-between p-5 pl-7 select-none shadow-[inset_3px_0_6px_rgba(0,0,0,0.06)]"
       style={{
         backgroundImage: "radial-gradient(circle, rgba(124, 58, 237, 0.08) 1.2px, transparent 1.2px)",
         backgroundSize: "16px 16px",
@@ -58,7 +58,7 @@ export default function NotebookInteriorPeek({
         />
       </div>
 
-      {/* ── AUTHENTIC YELLOW STICKY NOTE (TILTED WITH PIN & STAR) ── */}
+      {/* ── AUTHENTIC YELLOW STICKY NOTE (TILTED WITH REAL PUSHPIN & STAR) ── */}
       <div
         className="relative z-10 -mr-1 mt-1 p-2.5 rounded-[2px] bg-[#fef08a] text-[#713f12] text-[10px] font-handwriting leading-tight shadow-xs border border-[#fde047]/60"
         style={{
@@ -66,6 +66,14 @@ export default function NotebookInteriorPeek({
           boxShadow: "1px 2px 5px rgba(0, 0, 0, 0.12)",
         }}
       >
+        {/* Brass pushpin pinning the sticky note to paper */}
+        <div className="absolute -top-1.5 right-3 pointer-events-none select-none" aria-hidden="true">
+          <svg viewBox="0 0 20 20" className="w-3.5 h-3.5 drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]">
+            <circle cx="10" cy="10" r="5" fill="#f59e0b" stroke="#b45309" strokeWidth="1" />
+            <circle cx="10" cy="10" r="2.2" fill="#fef3c7" />
+          </svg>
+        </div>
+
         <div className="flex items-start gap-1">
           <span className="text-amber-600 text-xs leading-none">★</span>
           <p className="font-medium text-[11px] sm:text-xs">

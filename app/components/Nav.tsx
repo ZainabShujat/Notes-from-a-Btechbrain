@@ -195,27 +195,61 @@ export default function Nav() {
               </Link>
             ))}
 
+            {/* Universal Bell icon for updates/notifications */}
+            <button
+              type="button"
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent("toggle-updates"));
+              }}
+              className="ml-1 p-2 rounded-md text-ink-3 hover:text-ink-1 hover:bg-surface-1 transition-colors relative cursor-pointer"
+              aria-label="View updates and notifications"
+              title="Site updates & notes notifications"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-accent ring-2 ring-background"></span>
+            </button>
+
             <button
               onClick={toggleTheme}
-              className="ml-2 p-2 rounded-md text-ink-3 hover:text-ink-1 hover:bg-surface-1 transition-colors"
+              className="ml-1 p-2 rounded-md text-ink-3 hover:text-ink-1 hover:bg-surface-1 transition-colors"
               aria-label="Toggle theme"
             >
               {isLight ? "🌙" : "☀️"}
             </button>
           </div>
 
-          {/* Menu button — below tablet */}
-          <button
-            type="button"
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            aria-controls="mobile-nav"
-            onClick={() => setOpen((v) => !v)}
-            className={cx(
-              "md:hidden p-2.5 rounded-md border border-hairline bg-surface-1 backdrop-blur-md transition-colors",
-              open ? "text-accent" : "text-ink-1 hover:bg-surface-2"
-            )}
-          >
+          {/* Right items on mobile: Bell + Hamburger menu button */}
+          <div className="flex md:hidden items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent("toggle-updates"));
+              }}
+              className="p-2.5 rounded-md border border-hairline bg-surface-1 backdrop-blur-md text-ink-1 hover:bg-surface-2 transition-colors relative"
+              aria-label="View updates and notifications"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>
+              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-accent ring-1.5 ring-background"></span>
+            </button>
+
+            {/* Menu button — below tablet */}
+            <button
+              type="button"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              aria-controls="mobile-nav"
+              onClick={() => setOpen((v) => !v)}
+              className={cx(
+                "p-2.5 rounded-md border border-hairline bg-surface-1 backdrop-blur-md transition-colors",
+                open ? "text-accent" : "text-ink-1 hover:bg-surface-2"
+              )}
+            >
             <svg
               className="w-6 h-6"
               viewBox="0 0 24 24"
@@ -240,6 +274,7 @@ export default function Nav() {
               )}
             </svg>
           </button>
+          </div>
         </nav>
       </header>
 

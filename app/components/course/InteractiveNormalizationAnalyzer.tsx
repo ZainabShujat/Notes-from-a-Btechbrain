@@ -206,9 +206,9 @@ export default function InteractiveNormalizationAnalyzer({
         </div>
 
         {/* Highest Normal Form Badge */}
-        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-2 border border-hairline text-xs font-mono font-bold text-ink-1">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface-2 border border-hairline text-xs font-mono font-bold text-ink-1 shape-octagon-sm">
           <span>Highest Normal Form:</span>
-          <span className="text-accent font-bold px-2 py-0.5 rounded bg-accent/15 border border-accent/30">
+          <span className="text-accent font-bold px-2 py-0.5 bg-accent/15 border border-accent/30 shape-octagon-sm">
             {normalFormAnalysis.highestNF}
           </span>
         </div>
@@ -220,21 +220,21 @@ export default function InteractiveNormalizationAnalyzer({
         <button
           type="button"
           onClick={() => loadPreset("gate1")}
-          className="px-2.5 py-1 rounded bg-surface-2 border border-hairline hover:border-hairline-strong text-ink-2"
+          className="px-2.5 py-1 bg-surface-2 border border-hairline hover:border-hairline-strong text-ink-2 shape-octagon-sm cursor-pointer"
         >
           R(ABCD): AB&rarr;C, C&rarr;D, D&rarr;A (3 Keys)
         </button>
         <button
           type="button"
           onClick={() => loadPreset("gate2")}
-          className="px-2.5 py-1 rounded bg-surface-2 border border-hairline hover:border-hairline-strong text-ink-2"
+          className="px-2.5 py-1 bg-surface-2 border border-hairline hover:border-hairline-strong text-ink-2 shape-octagon-sm cursor-pointer"
         >
           R(ABCD): A&rarr;B, B&rarr;C, C&rarr;D (2NF Only)
         </button>
         <button
           type="button"
           onClick={() => loadPreset("gate3")}
-          className="px-2.5 py-1 rounded bg-surface-2 border border-hairline hover:border-hairline-strong text-ink-2"
+          className="px-2.5 py-1 bg-surface-2 border border-hairline hover:border-hairline-strong text-ink-2 shape-octagon-sm cursor-pointer"
         >
           R(ABCDE): Partial Dependency Trap
         </button>

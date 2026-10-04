@@ -3,6 +3,8 @@ import Link from "next/link";
 import { LEARNING_TRACKS } from "../../../lib/notes";
 import { getCourse, getAllCourses } from "../../../lib/courses";
 import { SITE_NAME, SITE_URL, absoluteUrl } from "../../../lib/seo";
+import DontFeelDumbProvider from "../../components/course/DontFeelDumbProvider";
+import { highlightGlossaryTerms } from "../../../lib/courses/glossary";
 import type { Metadata } from "next";
 
 type PageProps = {
@@ -26,27 +28,51 @@ export async function generateMetadata({
   const course = getCourse(subject);
 
   if (!track && !course) {
-    return { title: "Subject not found", robots: { index: false } };
+    return { title: "Subject not found", robots: { index: false, follow: false } };
   }
 
+  const isComplete = subject === "operating-systems";
   const title = course ? course.title : track?.title ?? "Subject";
-  const description =
-    course?.tagline ??
-    track?.tagline ??
-    `Comprehensive student notes, interactive labs, verified PYQs, and revision for ${title}.`;
   const url = `${SITE_URL}/notes/${subject}`;
 
+  // Incomplete / In-build draft subjects should not be indexed in search engines
+  if (!isComplete) {
+    return {
+      title: `${title} Notes (In Build) | ${SITE_NAME}`,
+      description: `Student notebook draft for ${title}. Currently being written and verified.`,
+      alternates: { canonical: url },
+      robots: { index: false, follow: true },
+    };
+  }
+
+  const pageTitle = `${title} Notes | B.Tech & GATE CS`;
+  const description =
+    course?.description ??
+    `Comprehensive student notes, interactive models, verified GATE PYQs, and revision for ${title}.`;
+  const ogImage = absoluteUrl(null);
+
   return {
-    title: `${title} · Student Notebook | ${SITE_NAME}`,
+    title: pageTitle,
     description,
     alternates: { canonical: url },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large" },
+    },
     openGraph: {
-      type: "article",
+      type: "website",
       siteName: SITE_NAME,
-      title: `${title} Notebook | ${SITE_NAME}`,
+      title: pageTitle,
       description,
       url,
-      images: [{ url: absoluteUrl(null), alt: title }],
+      images: [{ url: ogImage, alt: `${title} Notes` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -125,8 +151,64 @@ export default async function SubjectNotebookPage({
         }))
     );
 
+    const subjectUrl = `${SITE_URL}/notes/${subject}`;
+
     return (
-      <main className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 py-10 md:py-16 text-ink-2">
+      <DontFeelDumbProvider>
+        <main className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 py-10 md:py-16 text-ink-2">
+        {/* Structured Data: Course & Breadcrumbs */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Course",
+              name: `${course.title} Notes`,
+              description: course.description,
+              provider: {
+                "@type": "Person",
+                name: "Zainab Shujat",
+                url: "https://zainabshujat.dev/",
+              },
+              hasCourseInstance: {
+                "@type": "CourseInstance",
+                courseMode: "online",
+                courseWorkload: `${course.estimatedTotalHours || course.estimatedHours || 30} hours`,
+              },
+              url: subjectUrl,
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: SITE_URL,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Notes",
+                  item: `${SITE_URL}/notes`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: course.title,
+                  item: subjectUrl,
+                },
+              ],
+            }),
+          }}
+        />
+
         {/* =========================================================
             BREADCRUMB & NOTEBOOK BADGE
             ========================================================= */}
@@ -164,9 +246,12 @@ export default async function SubjectNotebookPage({
             &ldquo;{course.tagline}&rdquo;
           </p>
 
-          <p className="text-xs sm:text-sm text-ink-2 leading-relaxed max-w-3xl mb-5">
-            {course.description}
-          </p>
+          <p
+            className="text-xs sm:text-sm text-ink-2 leading-relaxed max-w-3xl mb-5"
+            dangerouslySetInnerHTML={{
+              __html: highlightGlossaryTerms(course.description),
+            }}
+          />
 
           {/* Action & Typographic Statistics Line (No Pills) */}
           <div className="flex flex-wrap items-center justify-between gap-4 pt-1">
@@ -612,7 +697,8 @@ export default async function SubjectNotebookPage({
             </div>
           </div>
         </section>
-      </main>
+        </main>
+      </DontFeelDumbProvider>
     );
   }
 

@@ -15,14 +15,11 @@ export default function NotebookCover({
 }) {
   return (
     <div
-      className={`relative w-full h-full min-h-[380px] sm:min-h-[420px] rounded-r-[6px] rounded-l-[4px] border border-[#d6cfbe] bg-[#fcfaf5] text-[#1c1917] overflow-hidden flex flex-col justify-between p-6 pl-8 sm:pl-10 select-none transition-shadow duration-300 ${
+      className={`notebook-physical-cover relative w-full h-full min-h-[380px] sm:min-h-[420px] rounded-r-[6px] rounded-l-[4px] border border-[#d6cfbe] bg-[#fcfaf5] text-[#1c1917] overflow-hidden flex flex-col justify-between p-6 pl-8 sm:pl-10 select-none transition-shadow duration-300 ${
         isHovered
           ? "shadow-[0_18px_32px_-8px_rgba(0,0,0,0.28),0_4px_12px_-2px_rgba(0,0,0,0.15)]"
           : "shadow-[0_6px_18px_-4px_rgba(0,0,0,0.14),0_2px_6px_-2px_rgba(0,0,0,0.08)]"
       }`}
-      style={{
-        transformStyle: "preserve-3d",
-      }}
     >
       {/* ── TACTILE CLOTH SPINE TAPE (LEFT) ── */}
       <NotebookSpine
@@ -46,6 +43,19 @@ export default function NotebookCover({
         className="absolute inset-3 left-8 sm:left-9 rounded-[3px] border border-[#1c1917]/10 pointer-events-none"
         aria-hidden="true"
       />
+
+      {/* ── DELICATE CORNER REGISTRATION MARKS & DRAFTING GEOMETRY ── */}
+      <svg
+        viewBox="0 0 100 100"
+        fill="none"
+        className="absolute right-3 bottom-12 w-20 h-20 text-[#1e1b4b]/[0.05] pointer-events-none select-none"
+        aria-hidden="true"
+      >
+        <circle cx="50" cy="50" r="38" stroke="currentColor" strokeWidth="1" strokeDasharray="3 2" />
+        <circle cx="50" cy="50" r="18" stroke="currentColor" strokeWidth="0.8" />
+        <line x1="50" y1="6" x2="50" y2="94" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 2" />
+        <line x1="6" y1="50" x2="94" y2="50" stroke="currentColor" strokeWidth="0.8" strokeDasharray="2 2" />
+      </svg>
 
       {/* ── TOP: SERIAL STAMP & ACADEMIC TITLE ── */}
       <div className="relative z-10 space-y-2">

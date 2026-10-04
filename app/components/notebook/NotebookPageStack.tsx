@@ -8,7 +8,7 @@ export default function NotebookPageStack({
   accentHex?: string;
 }) {
   return (
-    <>
+    <div className="notebook-page-stack pointer-events-none">
       {/* ── PROTRUDING RIGHT INDEX TAB / BOOKMARK ── */}
       <div
         className={`absolute -right-3 top-16 w-3.5 h-9 rounded-r-[3px] shadow-xs z-0 transition-transform duration-300 pointer-events-none flex items-center justify-center ${
@@ -47,6 +47,6 @@ export default function NotebookPageStack({
         }}
         aria-hidden="true"
       />
-    </>
+    </div>
   );
 }

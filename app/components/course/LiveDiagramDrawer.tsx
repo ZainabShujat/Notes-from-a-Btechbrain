@@ -89,7 +89,7 @@ export const DIAGRAM_DEFINITIONS: Record<DiagramPresetKey, DiagramDefinition> = 
         drawSummary: "In the lower Disk box, draw Ready-Suspend and Blocked-Suspend states with swapping transitions.",
         examInstructions: "Draw arrows pointing downwards for 'Suspend' (Swapped Out) and upwards for 'Resume / Activate' (Swapped In). Controlled by Medium-Term Scheduler.",
         marksRubric: "2 Marks: Medium-Term Swapper architecture.",
-        examTip: "Blocked-Suspend can transition to Ready-Suspend while on disk when its I/O finishes without loading into RAM!",
+        examTip: "The process moves from ==pink:Blocked-Suspend → Ready-Suspend==, ==yellow:NOT directly to Ready== when its I/O finishes without loading into RAM!",
         commonTrap: "Missing the horizontal arrow from Blocked-Suspend to Ready-Suspend on disk.",
         activeLayers: ["boundary-ram", "boundary-disk", "labels-memory", "state-new", "state-ready", "state-running", "state-terminated", "arrows-primary", "arrow-preempt", "state-blocked", "arrows-blocked", "state-ready-suspend", "state-blocked-suspend", "arrows-suspend", "arrow-disk-transition"],
         highlightId: "state-ready-suspend",
@@ -1373,29 +1373,29 @@ export default function LiveDiagramDrawer({
   };
 
   return (
-    <div className="w-full my-8 rounded-lg border border-[#e2d9cc] dark:border-[#2e2a42] bg-[#fbf9f4] dark:bg-[#151624] shadow-sm overflow-hidden font-sans">
+    <div className="w-full my-8 border border-[#e2d9cc] bg-[#faf7f2] shadow-sm overflow-hidden font-sans live-exam-studio shape-octagon">
       {/* ── TOP BAR: METADATA & PRESET SELECTOR ── */}
-      <div className="p-4 sm:p-5 border-b border-[#e2d9cc] dark:border-[#2e2a42] bg-[#f5ede0]/50 dark:bg-[#1a1b2d]/60 flex flex-wrap items-center justify-between gap-3">
+      <div className="p-4 sm:p-5 border-b border-[#e2d9cc] bg-[#f5ede0]/70 flex flex-wrap items-center justify-between gap-3 studio-top-bar">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded bg-violet-500/15 text-violet-700 dark:text-violet-300 font-mono text-[10px] font-bold uppercase tracking-wider">
+            <span className="px-2.5 py-1 bg-violet-500/15 text-violet-800 font-mono text-[10px] font-bold uppercase tracking-wider shape-octagon-sm">
               LIVE EXAM DRAWING STUDIO
             </span>
-            <span className="font-mono text-[11px] text-ink-3">
+            <span className="font-mono text-[11px] text-[#64748b]">
               {diagram.subject} &middot; {diagram.totalMarks}
             </span>
           </div>
-          <h4 className="font-handwriting text-2xl sm:text-3xl font-bold text-ink-1">
+          <h4 className="font-handwriting text-2xl sm:text-3xl font-bold text-[#1e1b4b]">
             {diagram.title}
           </h4>
-          <p className="text-xs text-ink-2 font-mono">
+          <p className="text-xs text-[#475569] font-mono">
             {diagram.examContext}
           </p>
         </div>
 
         {/* Preset Selector Dropdown */}
         <div className="flex items-center gap-2">
-          <label htmlFor="diagram-select" className="text-xs font-mono text-ink-3 hidden sm:inline">
+          <label htmlFor="diagram-select" className="text-xs font-mono text-[#64748b] hidden sm:inline">
             Diagram:
           </label>
           <select
@@ -1406,7 +1406,7 @@ export default function LiveDiagramDrawer({
               setCurrentStep(1);
               setIsPlaying(false);
             }}
-            className="px-3 py-1.5 rounded-md border border-[#d6cfbe] dark:border-[#38334f] bg-surface-1 text-ink-1 font-mono text-xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent"
+            className="px-3.5 py-2 border border-[#d6cfbe] bg-white text-[#1e1b4b] font-mono text-xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent shape-octagon-sm"
           >
             <optgroup label="Operating Systems">
               <option value="os-process-lifecycle">OS: 7-State Process Lifecycle</option>
@@ -1434,13 +1434,13 @@ export default function LiveDiagramDrawer({
       </div>
 
       {/* ── PLAYER CONTROLS TOOLBAR ── */}
-      <div className="px-4 sm:px-6 py-3 border-b border-[#e2d9cc] dark:border-[#2e2a42] bg-surface-1/70 flex flex-wrap items-center justify-between gap-3">
+      <div className="px-4 sm:px-6 py-3 border-b border-[#e2d9cc] bg-[#f5ede0]/40 flex flex-wrap items-center justify-between gap-3 studio-top-bar">
         {/* Playback Buttons */}
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={handleTogglePlay}
-            className="px-3.5 py-1.5 rounded bg-violet-600 hover:bg-violet-700 text-white font-mono text-xs font-bold flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
+            className="px-4 py-2 bg-violet-700 hover:bg-violet-800 text-white font-mono text-xs font-bold flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer shape-octagon-sm"
           >
             {isPlaying ? (
               <>
@@ -1458,20 +1458,20 @@ export default function LiveDiagramDrawer({
           <button
             type="button"
             onClick={handleReset}
-            className="px-2.5 py-1.5 rounded border border-hairline hover:bg-surface-2 text-ink-2 font-mono text-xs flex items-center gap-1 transition-colors cursor-pointer"
+            className="px-3 py-1.5 border border-[#d6cfbe] bg-white hover:bg-black/5 text-[#1e1b4b] font-mono text-xs flex items-center gap-1 transition-colors cursor-pointer shape-octagon-sm"
             title="Reset to Step 1"
           >
             <span>⏮</span>
             <span className="hidden sm:inline">Reset</span>
           </button>
 
-          <div className="h-4 w-px bg-hairline mx-1" />
+          <div className="h-4 w-px bg-[#d6cfbe] mx-1" />
 
           <button
             type="button"
             onClick={handlePrev}
             disabled={currentStep <= 1}
-            className="px-2.5 py-1.5 rounded border border-hairline hover:bg-surface-2 text-ink-2 disabled:opacity-40 disabled:pointer-events-none font-mono text-xs flex items-center gap-1 transition-colors cursor-pointer"
+            className="px-3 py-1.5 border border-[#d6cfbe] bg-white hover:bg-black/5 text-[#1e1b4b] disabled:opacity-40 disabled:pointer-events-none font-mono text-xs flex items-center gap-1 transition-colors cursor-pointer shape-octagon-sm"
           >
             <span>◀</span>
             <span className="hidden sm:inline">Prev</span>
@@ -1481,7 +1481,7 @@ export default function LiveDiagramDrawer({
             type="button"
             onClick={handleNext}
             disabled={currentStep >= totalSteps}
-            className="px-2.5 py-1.5 rounded border border-hairline hover:bg-surface-2 text-ink-2 disabled:opacity-40 disabled:pointer-events-none font-mono text-xs flex items-center gap-1 transition-colors cursor-pointer"
+            className="px-3 py-1.5 border border-[#d6cfbe] bg-white hover:bg-black/5 text-[#1e1b4b] disabled:opacity-40 disabled:pointer-events-none font-mono text-xs flex items-center gap-1 transition-colors cursor-pointer shape-octagon-sm"
           >
             <span className="hidden sm:inline">Next</span>
             <span>▶</span>
@@ -1498,12 +1498,12 @@ export default function LiveDiagramDrawer({
                 setIsPlaying(false);
                 setCurrentStep(st.stepNumber);
               }}
-              className={`px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold transition-all cursor-pointer whitespace-nowrap ${
+              className={`px-3 py-1 text-[11px] font-mono font-semibold transition-all cursor-pointer whitespace-nowrap shape-octagon-sm ${
                 currentStep === st.stepNumber
-                  ? "bg-violet-600 text-white shadow-sm ring-2 ring-violet-300 dark:ring-violet-800"
+                  ? "bg-violet-700 text-white shadow-sm ring-1 ring-violet-400"
                   : currentStep > st.stepNumber
-                  ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30"
-                  : "bg-surface-2 text-ink-3 hover:text-ink-1"
+                  ? "bg-emerald-500/15 text-emerald-800 border border-emerald-500/30"
+                  : "bg-white border border-[#d6cfbe] text-[#475569] hover:text-[#1e1b4b]"
               }`}
             >
               Step {st.stepNumber}
@@ -1515,26 +1515,26 @@ export default function LiveDiagramDrawer({
         <button
           type="button"
           onClick={() => setPlaySpeed(playSpeed === 1 ? 1.5 : 1)}
-          className="font-mono text-[11px] text-ink-3 hover:text-ink-1 px-2 py-1 rounded bg-surface-2 border border-hairline"
+          className="font-mono text-[11px] text-[#475569] hover:text-[#1e1b4b] px-2.5 py-1 bg-white border border-[#d6cfbe] shape-octagon-sm"
         >
           {playSpeed}x Speed
         </button>
       </div>
 
       {/* ── MAIN DRAWING CANVAS (EXAM ANSWER SHEET METAPHOR) ── */}
-      <div className="p-4 sm:p-6 bg-[#fcfbf9] dark:bg-[#131422] relative overflow-hidden">
+      <div className="p-4 sm:p-6 bg-[#fcfbf9] relative overflow-hidden studio-canvas">
         {/* Subtle Engineering Grid Paper Background */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-[0.035] bg-[radial-gradient(#000000_1px,transparent_1px)] dark:bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"
+          className="absolute inset-0 pointer-events-none opacity-[0.04] bg-[radial-gradient(#1e1b4b_1px,transparent_1px)] [background-size:16px_16px]"
           aria-hidden="true"
         />
 
         {/* Floating Drawing Status Badge */}
-        <div className="absolute top-3 right-3 z-10 flex items-center gap-2 px-3 py-1 rounded-full bg-surface-1/90 backdrop-blur-sm border border-hairline shadow-sm text-xs font-mono text-ink-2">
+        <div className="absolute top-3 right-3 z-10 flex items-center gap-2 px-3 py-1 bg-white/95 border border-[#d6cfbe] shadow-sm text-xs font-mono text-[#1e1b4b] shape-octagon-sm">
           {isPlaying ? (
             <>
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
+              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-ping" />
+              <span className="text-emerald-700 font-semibold">
                 ✏️ Student Pen Drawing Step {currentStep}/{totalSteps}...
               </span>
             </>
@@ -1546,53 +1546,62 @@ export default function LiveDiagramDrawer({
         </div>
 
         {/* The Progressive SVG Canvas */}
-        <div className="relative z-0 min-h-[300px] flex items-center justify-center p-2 sm:p-4">
+        <div className="relative z-0 min-h-[300px] flex items-center justify-center p-2 sm:p-4 text-[#1e1b4b]">
           {diagram.renderSvg(currentStep, isPlaying)}
         </div>
       </div>
 
       {/* ── EXAM SCORING RUBRIC & INK ANNOTATION BOX ── */}
-      <div className="p-5 sm:p-6 border-t border-[#e2d9cc] dark:border-[#2e2a42] bg-[#fbf8f2] dark:bg-[#171829] space-y-4">
+      <div className="p-5 sm:p-6 border-t border-[#e2d9cc] bg-[#fbf8f2] space-y-4">
         {/* Step Header & Draw Instructions */}
-        <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-dashed border-hairline/80 pb-3">
+        <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-dashed border-[#d6cfbe] pb-3">
           <div>
-            <span className="font-mono text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-wider">
+            <span className="font-mono text-xs font-bold text-violet-700 uppercase tracking-wider">
               {currentStepData.title}
             </span>
-            <p className="text-sm font-sans font-medium text-ink-1 mt-0.5">
+            <p className="text-sm font-sans font-medium text-[#1e1b4b] mt-0.5">
               {currentStepData.drawSummary}
             </p>
           </div>
-          <span className="px-2.5 py-1 rounded bg-amber-500/15 border border-amber-500/30 text-amber-800 dark:text-amber-300 font-mono text-[11px] font-bold">
+          <span className="px-2.5 py-1 bg-amber-500/15 border border-amber-500/30 text-amber-900 font-mono text-[11px] font-bold shape-octagon-sm">
             {currentStepData.marksRubric}
           </span>
         </div>
 
         {/* University Exam Sheet Instructions & Rubric */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-sans">
-          <div className="p-3.5 rounded-md bg-surface-1 border border-hairline/80 space-y-1.5">
-            <span className="font-mono font-bold text-[10px] text-ink-3 uppercase tracking-wider flex items-center gap-1">
+          <div className="p-3.5 bg-white border border-[#d6cfbe] space-y-1.5 shape-octagon-sm">
+            <span className="font-mono font-bold text-[10px] text-[#64748b] uppercase tracking-wider flex items-center gap-1">
               <span>✍️ HOW TO DRAW ON EXAM ANSWER SHEET</span>
             </span>
-            <p className="text-ink-2 leading-relaxed">
+            <p className="text-[#334155] leading-relaxed">
               {currentStepData.examInstructions}
             </p>
           </div>
 
-          <div className="p-3.5 rounded-md bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/25 space-y-1.5">
-            <span className="font-mono font-bold text-[10px] text-rose-700 dark:text-rose-300 uppercase tracking-wider flex items-center gap-1">
+          <div className="p-3.5 bg-rose-50 border border-rose-200 space-y-1.5 shape-octagon-sm">
+            <span className="font-mono font-bold text-[10px] text-rose-700 uppercase tracking-wider flex items-center gap-1">
               <span>⚠️ COMMON EXAM BLUNDER / MARKS LOST</span>
             </span>
-            <p className="text-rose-900 dark:text-rose-200 leading-relaxed">
+            <p className="text-rose-950 leading-relaxed">
               {currentStepData.commonTrap}
             </p>
           </div>
         </div>
 
         {/* Student Handwritten Quick Tip */}
-        <div className="pt-1 flex items-start gap-2 text-violet-700 dark:text-violet-300 font-handwriting text-base sm:text-lg">
+        <div className="pt-1 flex items-start gap-2 text-violet-800 font-handwriting text-base sm:text-lg">
           <span className="shrink-0 font-bold">✎ Tip:</span>
-          <span>{currentStepData.examTip}</span>
+          <span
+            dangerouslySetInnerHTML={{
+              __html: currentStepData.examTip
+                .replace(/==pink:(.*?)==/g, "<mark class='student-highlight highlight-pink'>$1</mark>")
+                .replace(/==green:(.*?)==/g, "<mark class='student-highlight highlight-green'>$1</mark>")
+                .replace(/==purple:(.*?)==/g, "<mark class='student-highlight highlight-purple'>$1</mark>")
+                .replace(/==yellow:(.*?)==/g, "<mark class='student-highlight highlight-yellow'>$1</mark>")
+                .replace(/==(.*?)==/g, "<mark class='student-highlight highlight-yellow'>$1</mark>"),
+            }}
+          />
         </div>
       </div>
     </div>

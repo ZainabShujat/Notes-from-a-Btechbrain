@@ -84,7 +84,7 @@ export default function InteractiveStateTransition({
                 key={idx}
                 type="button"
                 onClick={() => handleTransition(t.to, t.actionDescription)}
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-3 hover:bg-accent/20 border border-hairline hover:border-accent text-xs font-mono text-ink-1 transition-all cursor-pointer shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="inline-flex items-center gap-2 px-3.5 py-2 bg-surface-3 hover:bg-accent/20 border border-hairline hover:border-accent text-xs font-mono text-ink-1 transition-all cursor-pointer shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-accent shape-octagon-sm"
               >
                 <span>{t.trigger}</span>
                 <span className="text-ink-3">→</span>
@@ -95,13 +95,13 @@ export default function InteractiveStateTransition({
             ))}
           </div>
         ) : (
-          <div className="mb-4 text-xs font-mono text-emerald-400 p-2.5 rounded bg-emerald-500/10 border border-emerald-500/20">
+          <div className="mb-4 text-xs font-mono text-emerald-400 p-2.5 bg-emerald-500/10 border border-emerald-500/20 shape-octagon-sm">
             Process has terminated. Execution is finished.
           </div>
         )}
 
         {/* Action Explanation Callout */}
-        <div className="p-3 rounded-lg bg-surface-1 border border-hairline/60">
+        <div className="p-3 bg-surface-1 border border-hairline/60 shape-octagon-sm">
           <span className="text-[10px] font-mono text-ink-3 uppercase tracking-wider block mb-1">
             Last Kernel Operation:
           </span>
@@ -119,7 +119,7 @@ export default function InteractiveStateTransition({
                 setCurrentStateId(config.initialState);
                 setLastAction("Simulator reset to initial READY state.");
               }}
-              className="text-xs font-mono text-ink-3 hover:text-ink-1 transition-colors cursor-pointer"
+              className="px-3 py-1 bg-surface-2 border border-hairline text-xs font-mono text-ink-3 hover:text-ink-1 transition-colors cursor-pointer shape-octagon-sm"
             >
               Reset to Ready ⟳
             </button>

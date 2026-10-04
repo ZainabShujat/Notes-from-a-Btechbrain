@@ -59,6 +59,10 @@ export const metadata: Metadata = {
     images: [DEFAULT_OG_IMAGE],
   },
 
+  icons: {
+    icon: "/favicon.ico",
+  },
+
   robots: {
     index: true,
     follow: true,
@@ -108,6 +112,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         suppressHydrationWarning
         className="antialiased text-ink-2"
       >
+        {/* Structured Data: WebSite & Author schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: SITE_NAME,
+              url: SITE_URL,
+              description: SITE_DESCRIPTION,
+              author: {
+                "@type": "Person",
+                name: AUTHOR_NAME,
+                url: "https://zainabshujat.dev/",
+              },
+            }),
+          }}
+        />
         <Nav />
         {children}
         <UpdatesWidget />

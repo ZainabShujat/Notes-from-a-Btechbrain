@@ -74,13 +74,7 @@ export default function VideosPage() {
         <ol className="flex items-center gap-1.5">
           <li>
             <Link href="/notes" className="hover:text-ink-1 transition-colors">
-              Notes
-            </Link>
-          </li>
-          <li aria-hidden="true">/</li>
-          <li>
-            <Link href="/notes/courses" className="hover:text-ink-1 transition-colors">
-              Resources
+              The Notebooks
             </Link>
           </li>
           <li aria-hidden="true">/</li>
