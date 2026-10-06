@@ -1334,6 +1334,153 @@ svg *,
   height: auto !important;
 }
 
+/* =========================================================
+   NOTEBOOK PAGE-TURN TRANSITIONS
+   Physical paper turn for Previous Note / Next Note
+   ========================================================= */
 
+.notebook-perspective-stage {
+  perspective: 2200px;
+  perspective-origin: 30% 40%;
+  position: relative;
+}
 
+/* ── NEXT NOTE TURN ──
+   1. Lift from right edge with a paper dog-ear curl
+   2. Rotate/curl smoothly toward the left spiral binding (transform-origin: 0% 50%)
+   3. Reveal next note underneath
+*/
+@keyframes notebookPageTurnNext {
+  0% {
+    transform: rotateY(0deg) skewY(0deg) translateZ(0);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.2),
+      0 12px 36px -8px rgba(0, 0, 0, 0.45);
+    filter: brightness(1);
+  }
+  20% {
+    /* Dog-ear paper lift from right edge */
+    transform: rotateY(-8deg) rotateZ(-0.75deg) skewY(-0.5deg) translateZ(12px);
+    box-shadow:
+      -8px 8px 24px -4px rgba(0, 0, 0, 0.35),
+      0 18px 42px -6px rgba(0, 0, 0, 0.4);
+    filter: brightness(1.02);
+  }
+  50% {
+    /* Halfway turned across spiral, showing edge shadow */
+    transform: rotateY(-36deg) rotateZ(-1.2deg) skewY(-1deg) translateZ(24px);
+    box-shadow:
+      -18px 12px 32px -4px rgba(0, 0, 0, 0.4),
+      0 24px 50px -8px rgba(0, 0, 0, 0.45);
+    filter: brightness(0.96);
+  }
+  100% {
+    /* Swept open past the left edge */
+    transform: rotateY(-82deg) rotateZ(-2deg) skewY(-1.5deg) translateZ(35px);
+    opacity: 0;
+    box-shadow:
+      -26px 14px 40px -2px rgba(0, 0, 0, 0.45),
+      0 30px 60px -10px rgba(0, 0, 0, 0.5);
+    filter: brightness(0.88);
+  }
+}
 
+/* Dog-ear corner fold effect on right edge during Next turn */
+.notebook-page-turning-next::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  pointer-events: none;
+  background: linear-gradient(135deg, transparent 50%, rgba(0, 0, 0, 0.08) 51%, rgba(255, 255, 255, 0.45) 55%, transparent 60%);
+  border-bottom-left-radius: 12px;
+  animation: notebookDogEarCurl 0.55s ease-in forwards;
+  z-index: 25;
+}
+
+@keyframes notebookDogEarCurl {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) translate(10px, -10px);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.4) translate(-15px, 15px);
+  }
+}
+
+.notebook-page-turning-next {
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  animation: notebookPageTurnNext 0.55s cubic-bezier(0.25, 0.85, 0.35, 1) forwards;
+  pointer-events: none;
+  z-index: 15;
+  will-change: transform, opacity, box-shadow;
+}
+
+/* ── PREVIOUS NOTE TURN ──
+   1. Previous page emerges from top-left spiral bound
+   2. Smoothly sweeps and overlaps down onto the notebook page
+   3. Settles gently into place
+*/
+@keyframes notebookPageTurnPrev {
+  0% {
+    transform: rotateY(-80deg) rotateZ(2.5deg) translateY(-24px) translateZ(40px);
+    opacity: 0;
+    box-shadow:
+      -20px 20px 48px -4px rgba(0, 0, 0, 0.5),
+      0 32px 64px -10px rgba(0, 0, 0, 0.55);
+    filter: brightness(0.9);
+  }
+  40% {
+    opacity: 1;
+    transform: rotateY(-32deg) rotateZ(1deg) translateY(-8px) translateZ(20px);
+    box-shadow:
+      -12px 14px 34px -4px rgba(0, 0, 0, 0.4),
+      0 20px 46px -8px rgba(0, 0, 0, 0.45);
+    filter: brightness(0.97);
+  }
+  75% {
+    transform: rotateY(-6deg) rotateZ(0.25deg) translateY(-2px) translateZ(6px);
+    box-shadow:
+      -4px 6px 18px -2px rgba(0, 0, 0, 0.28),
+      0 14px 38px -8px rgba(0, 0, 0, 0.45);
+    filter: brightness(1.01);
+  }
+  100% {
+    transform: rotateY(0deg) rotateZ(0deg) translateY(0) translateZ(0);
+    opacity: 1;
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.2),
+      0 12px 36px -8px rgba(0, 0, 0, 0.45);
+    filter: brightness(1);
+  }
+}
+
+.notebook-page-turning-prev {
+  transform-origin: left top;
+  transform-style: preserve-3d;
+  animation: notebookPageTurnPrev 0.58s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events: none;
+  z-index: 25;
+  will-change: transform, opacity, box-shadow;
+}
+
+/* Reduced motion preference fallback */
+@media (prefers-reduced-motion: reduce) {
+  .notebook-page-turning-next,
+  .notebook-page-turning-prev {
+    animation: none !important;
+    transform: none !important;
+    transition: opacity 0.15s ease-in-out !important;
+  }
+  .notebook-page-turning-next::after {
+    display: none !important;
+  }
+}

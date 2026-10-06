@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { CourseMeta, LessonMeta, ModuleMeta } from "../../../lib/courses/types";
 import NotebookSpiralBinding from "../notebook/NotebookSpiralBinding";
 import DontFeelDumbProvider from "./DontFeelDumbProvider";
@@ -21,9 +22,18 @@ export default function CourseLayout({
   nextLesson?: { title: string; href: string } | null;
   children: React.ReactNode;
 }) {
+  const router = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDesktopSidebarCollapsed, setIsDesktopSidebarCollapsed] = useState(false);
   const [activeSectionId, setActiveSectionId] = useState<string>("");
+  const [turnDirection, setTurnDirection] = useState<"next" | "prev" | null>(null);
+  const isNavigatingRef = useRef(false);
+
+  // Clear transition when the current lesson changes (new page settled)
+  useEffect(() => {
+    setTurnDirection(null);
+    isNavigatingRef.current = false;
+  }, [currentLesson?.id]);
 
   // Track expanded modules in sidebar (default to current module expanded)
   const [expandedModules, setExpandedModules] = useState<Record<string, boolean>>(() => {
@@ -41,6 +51,35 @@ export default function CourseLayout({
     }));
   };
 
+  const handleNavigate = (direction: "next" | "prev", href: string) => {
+    if (isNavigatingRef.current) return;
+    isNavigatingRef.current = true;
+
+    // Prefetch target route for instantaneous rendering
+    try {
+      router.prefetch(href);
+    } catch {
+      // Ignore prefetch errors
+    }
+
+    // Check prefers-reduced-motion
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      router.push(href);
+      return;
+    }
+
+    setTurnDirection(direction);
+
+    // Timing tuned for 520ms page turn animation
+    setTimeout(() => {
+      router.push(href);
+    }, 480);
+  };
+
   // Keyboard navigation for previous/next lessons
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -51,9 +90,11 @@ export default function CourseLayout({
         return;
       }
       if (e.key === "ArrowLeft" && prevLesson) {
-        window.location.href = prevLesson.href;
+        e.preventDefault();
+        handleNavigate("prev", prevLesson.href);
       } else if (e.key === "ArrowRight" && nextLesson) {
-        window.location.href = nextLesson.href;
+        e.preventDefault();
+        handleNavigate("next", nextLesson.href);
       }
     };
 
@@ -444,77 +485,97 @@ export default function CourseLayout({
             Occupies clean width with font scaling when sidebar is collapsed
             ========================================================= */}
         <DontFeelDumbProvider>
-          <main
-            className={`relative flex-1 min-w-0 w-full max-w-[1200px] mx-auto transition-all duration-300 ${
-              isDesktopSidebarCollapsed
-                ? "pl-11 xs:pl-12 sm:pl-14 pr-3.5 sm:pr-8 md:pl-20 md:pr-12 lg:pl-24 lg:pr-16 py-6 sm:py-10 md:py-16 notebook-reading-page notebook-vertical-margin-rule notebook-viewport-scaled notebook-expanded rounded-xl sm:rounded-2xl my-2 sm:my-3 md:my-6 border border-hairline/70"
-                : "pl-11 xs:pl-12 sm:pl-14 pr-3.5 sm:pr-8 md:pl-20 md:pr-12 lg:pl-24 lg:pr-16 py-6 sm:py-8 md:py-12 notebook-reading-page notebook-vertical-margin-rule notebook-viewport-scaled rounded-xl sm:rounded-2xl my-2 sm:my-3 md:my-6 border border-hairline/70"
-            } overflow-visible`}
-          >
-          <NotebookSpiralBinding />
-
-          {/* Quiet Student Notebook Folio Line */}
-          <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 pb-3 mb-8 border-b border-dashed border-hairline/80 text-ink-3 text-xs font-mono">
-            <div className="flex items-baseline gap-2">
-              <span className="text-ink-2 font-medium font-mono text-[11px]">
-                {course.title.toUpperCase()}
-              </span>
-              <span className="opacity-40">/</span>
-              <span className="text-ink-3 text-[11px] font-sans">
-                Student Engineering Notebook
-              </span>
-            </div>
-            <div className="text-[11px] text-ink-3/80 flex items-center gap-1.5 font-mono">
-              <span>Page {String(currentLessonIndex).padStart(2, "0")}</span>
-              <span className="opacity-40">&middot;</span>
-              <span className="text-accent font-handwriting text-sm">
-                notes
-              </span>
-            </div>
-          </div>
-
-          {children}
-
-          {/* Previous / Next Topic Navigation */}
-          {(prevLesson || nextLesson) && (
-            <nav
-              aria-label="Topic navigation"
-              className="mt-16 pt-8 border-t border-dashed border-hairline/80 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 w-full min-w-0"
+          <div className="flex-1 min-w-0 w-full max-w-[1200px] mx-auto notebook-perspective-stage">
+            <main
+              className={`relative flex-1 min-w-0 w-full mx-auto transition-all duration-300 ${
+                isDesktopSidebarCollapsed
+                  ? "pl-11 xs:pl-12 sm:pl-14 pr-3.5 sm:pr-8 md:pl-20 md:pr-12 lg:pl-24 lg:pr-16 py-6 sm:py-10 md:py-16 notebook-reading-page notebook-vertical-margin-rule notebook-viewport-scaled notebook-expanded rounded-xl sm:rounded-2xl my-2 sm:my-3 md:my-6 border border-hairline/70"
+                  : "pl-11 xs:pl-12 sm:pl-14 pr-3.5 sm:pr-8 md:pl-20 md:pr-12 lg:pl-24 lg:pr-16 py-6 sm:py-8 md:py-12 notebook-reading-page notebook-vertical-margin-rule notebook-viewport-scaled rounded-xl sm:rounded-2xl my-2 sm:my-3 md:my-6 border border-hairline/70"
+              } ${
+                turnDirection === "next"
+                  ? "notebook-page-turning-next"
+                  : turnDirection === "prev"
+                  ? "notebook-page-turning-prev"
+                  : ""
+              } overflow-visible`}
             >
-              {prevLesson ? (
-                <Link
-                  href={prevLesson.href}
-                  className="flex flex-col py-3 px-4 rounded-[6px] border border-hairline/70 bg-surface-1/40 hover:bg-surface-2 transition-colors text-left flex-1 min-w-0"
-                >
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-ink-3 mb-1">
-                    &larr; Previous Note
-                  </span>
-                  <span className="text-xs sm:text-sm font-semibold text-ink-1 truncate font-sans">
-                    {prevLesson.title}
-                  </span>
-                </Link>
-              ) : (
-                <div className="flex-1" />
-              )}
+            <NotebookSpiralBinding />
 
-              {nextLesson ? (
-                <Link
-                  href={nextLesson.href}
-                  className="flex flex-col py-3 px-4 rounded-[6px] border border-accent/40 bg-accent/5 hover:bg-accent/10 hover:border-accent transition-all text-right flex-1 min-w-0"
-                >
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-accent font-semibold mb-1">
-                    Next Note &rarr;
-                  </span>
-                  <span className="text-xs sm:text-sm font-bold text-ink-1 truncate font-sans">
-                    {nextLesson.title}
-                  </span>
-                </Link>
-              ) : (
-                <div className="flex-1" />
-              )}
-            </nav>
-          )}
-        </main>
+            {/* Quiet Student Notebook Folio Line */}
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 pb-3 mb-8 border-b border-dashed border-hairline/80 text-ink-3 text-xs font-mono">
+              <div className="flex items-baseline gap-2">
+                <span className="text-ink-2 font-medium font-mono text-[11px]">
+                  {course.title.toUpperCase()}
+                </span>
+                <span className="opacity-40">/</span>
+                <span className="text-ink-3 text-[11px] font-sans">
+                  Student Engineering Notebook
+                </span>
+              </div>
+              <div className="text-[11px] text-ink-3/80 flex items-center gap-1.5 font-mono">
+                <span>Page {String(currentLessonIndex).padStart(2, "0")}</span>
+                <span className="opacity-40">&middot;</span>
+                <span className="text-accent font-handwriting text-sm">
+                  notes
+                </span>
+              </div>
+            </div>
+
+            {children}
+
+            {/* Previous / Next Topic Navigation */}
+            {(prevLesson || nextLesson) && (
+              <nav
+                aria-label="Topic navigation"
+                className="mt-16 pt-8 border-t border-dashed border-hairline/80 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 w-full min-w-0"
+              >
+                {prevLesson ? (
+                  <Link
+                    href={prevLesson.href}
+                    onClick={(e) => {
+                      if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                        e.preventDefault();
+                        handleNavigate("prev", prevLesson.href);
+                      }
+                    }}
+                    className="flex flex-col py-3 px-4 rounded-[6px] border border-hairline/70 bg-surface-1/40 hover:bg-surface-2 transition-colors text-left flex-1 min-w-0"
+                  >
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-ink-3 mb-1">
+                      &larr; Previous Note
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-ink-1 truncate font-sans">
+                      {prevLesson.title}
+                    </span>
+                  </Link>
+                ) : (
+                  <div className="flex-1" />
+                )}
+
+                {nextLesson ? (
+                  <Link
+                    href={nextLesson.href}
+                    onClick={(e) => {
+                      if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                        e.preventDefault();
+                        handleNavigate("next", nextLesson.href);
+                      }
+                    }}
+                    className="flex flex-col py-3 px-4 rounded-[6px] border border-accent/40 bg-accent/5 hover:bg-accent/10 hover:border-accent transition-all text-right flex-1 min-w-0"
+                  >
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-accent font-semibold mb-1">
+                      Next Note &rarr;
+                    </span>
+                    <span className="text-xs sm:text-sm font-bold text-ink-1 truncate font-sans">
+                      {nextLesson.title}
+                    </span>
+                  </Link>
+                ) : (
+                  <div className="flex-1" />
+                )}
+              </nav>
+            )}
+          </main>
+        </div>
         </DontFeelDumbProvider>
       </div>
     </div>
