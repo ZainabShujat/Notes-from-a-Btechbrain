@@ -69,9 +69,9 @@ export default function LessonRenderer({
           </button>
         </div>
 
-        <h1 className="font-handwriting text-[clamp(2rem,4vw,2.75rem)] font-bold text-ink-1 tracking-normal leading-[1.15] mb-3 break-words">
+        <h1 className="font-handwriting text-2xl xs:text-3xl sm:text-4xl md:text-[2.75rem] font-bold text-ink-1 tracking-normal leading-snug sm:leading-[1.2] mb-3 break-words">
           <span
-            className="bg-violet-500/10 dark:bg-violet-500/20 px-2 py-0.5 rounded-[4px]"
+            className="inline bg-violet-500/10 dark:bg-violet-500/20 px-1.5 py-0.5 rounded-[4px] [box-decoration-break:clone] [-webkit-box-decoration-break:clone]"
             dangerouslySetInnerHTML={{
               __html: formatMarkdownInline(lesson.title),
             }}
