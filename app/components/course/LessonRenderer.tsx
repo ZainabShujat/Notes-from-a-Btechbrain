@@ -98,6 +98,7 @@ export default function LessonRenderer({
               section={section}
               index={idx}
               modNum={modNum}
+              moduleTitle={moduleTitle}
               subjectSlug={subjectSlug}
               onOpenCheatSheet={() => setIsCheatSheetOpen(true)}
             />
@@ -119,12 +120,14 @@ function SectionBlock({
   section,
   index,
   modNum = "1",
+  moduleTitle,
   subjectSlug,
   onOpenCheatSheet,
 }: {
   section: LessonSection;
   index: number;
   modNum?: string;
+  moduleTitle?: string;
   subjectSlug?: string;
   onOpenCheatSheet?: () => void;
 }) {
@@ -577,7 +580,12 @@ function SectionBlock({
     case "resources":
       return (
         <div id={sectionId} className="scroll-mt-24">
-          <ResourcesAndSources section={section} subjectSlug={subjectSlug} />
+          <ResourcesAndSources
+            section={section}
+            subjectSlug={subjectSlug}
+            modNum={modNum}
+            moduleTitle={moduleTitle}
+          />
         </div>
       );
 

@@ -76,18 +76,355 @@ const EDUCATORS_BY_SUBJECT: Record<string, CuratedEducator[]> = {
   ],
 };
 
+// ─── Module-specific Curated Recommendations for Operating Systems (Topics 1 - 9) ───
+
+interface TopicRecommendationMeta {
+  moduleTitle: string;
+  topicSubtitle: string;
+  educators: CuratedEducator[];
+}
+
+const OS_TOPIC_RECOMMENDATIONS: Record<string, TopicRecommendationMeta> = {
+  "1": {
+    moduleTitle: "Module 1: OS Foundations & Kernel Architecture",
+    topicSubtitle: "Curated high-yield video lectures on Dual Mode Protection, Mode Bit Switches, Traps & System Calls:",
+    educators: [
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · Introduction to Operating System & Functions",
+        url: "https://www.youtube.com/watch?v=vBURTt97EkA",
+        focusArea: "Dual roles of OS (Resource Allocator vs Extended Machine), Kernels, and System Services",
+        recommendedFor: "Crisp first-principles overview with real-world OS architecture intuition.",
+      },
+      {
+        name: "Neso Academy",
+        channelOrSeries: "Neso Academy · Dual Mode Operation & System Calls",
+        url: "https://www.youtube.com/watch?v=kYJjT4329i4",
+        focusArea: "User Mode vs Kernel Mode, Hardware Mode Bit (0/1), Interrupt Vector, Trap Execution",
+        recommendedFor: "Textbook-exact blackboard derivations and hardware-level privilege transition diagrams.",
+      },
+      {
+        name: "Sanchit Jain",
+        channelOrSeries: "Knowledge Gate · System Calls & OS Architecture for GATE",
+        url: "https://www.youtube.com/playlist?list=PLmXKhU9FNesSFvj6gASuWmQd23Ul5omtD",
+        focusArea: "Privileged vs Non-Privileged instructions, Trap vs Interrupt vs Signal, GATE PYQs",
+        recommendedFor: "Direct exam pattern question-solving on privileged instruction classification.",
+      },
+      {
+        name: "Prof. Robert Morris & Frans Kaashoek",
+        channelOrSeries: "MIT 6.828 · Lecture on Isolation Mechanisms, Traps & System Calls",
+        url: "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-828-operating-system-engineering-fall-2012/",
+        focusArea: "xv6 Kernel source code, hardware IDT, trapframe construction, register preservation",
+        recommendedFor: "Deep engineering appreciation of how real Unix kernel code handles the sysret transition.",
+      },
+    ],
+  },
+  "2": {
+    moduleTitle: "Module 2: Processes, Threads & Concurrency",
+    topicSubtitle: "Curated lectures on Process Lifecycle, PCB Memory Layout, Fork() System Calls & Multi-threading Models:",
+    educators: [
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-1.5: Process States in OS & Schedulers",
+        url: "https://www.youtube.com/watch?v=rWFH6PLOIEI",
+        focusArea: "5-State vs 7-State Process Life Cycle, Suspended states, Long/Medium/Short-term schedulers",
+        recommendedFor: "Rapid intuitive mastery of process state transitions and state diagram numericals.",
+      },
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-1.12: User Level vs Kernel Level Threads",
+        url: "https://www.youtube.com/watch?v=1u-iS6Yd9s0",
+        focusArea: "User-Level Threads (ULT) vs Kernel-Level Threads (KLT), TCB structure, Concurrency models",
+        recommendedFor: "Clear breakdown of blocking I/O behavior, thread context switches, and kernel space mapping.",
+      },
+      {
+        name: "Neso Academy",
+        channelOrSeries: "Neso Academy · fork() and exec() System Calls Walkthrough",
+        url: "https://www.youtube.com/watch?v=kYJjT4329i4",
+        focusArea: "fork() execution trees, Return values (PID > 0, PID == 0), Zombie and Orphan processes",
+        recommendedFor: "Visual tree diagram derivations of fork() return values and process hierarchies.",
+      },
+      {
+        name: "Sanchit Jain",
+        channelOrSeries: "Knowledge Gate · Process vs Thread & Fork GATE Numericals",
+        url: "https://www.youtube.com/playlist?list=PLmXKhU9FNesSFvj6gASuWmQd23Ul5omtD",
+        focusArea: "GATE PYQ derivations on nested fork() loops, shared vs private thread resources, PCB fields",
+        recommendedFor: "Exam trick cases on how many times printf() executes in tricky fork() loops.",
+      },
+    ],
+  },
+  "3": {
+    moduleTitle: "Module 3: CPU Scheduling Algorithms",
+    topicSubtitle: "Curated lectures on Gantt Charts, Preemption, FCFS Convoy Effect, Round Robin Quantum & SJF/SRTF:",
+    educators: [
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-2.3: First Come First Serve (FCFS) CPU Scheduling",
+        url: "https://www.youtube.com/watch?v=k4H-Vn5Z43k",
+        focusArea: "FCFS with Arrival Times, Convoy Effect illustration, Turnaround Time and Waiting Time",
+        recommendedFor: "Step-by-step Gantt chart calculations with zero arithmetic ambiguity.",
+      },
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-2.7: Round Robin (RR) Scheduling Algorithm with Example",
+        url: "https://www.youtube.com/watch?v=1u-iS6Yd9s0",
+        focusArea: "Preemptive Ready Queue queue management, Time Quantum tuning, Context Switch overhead",
+        recommendedFor: "The most reliable demonstration of ready-queue tracking during simultaneous arrivals.",
+      },
+      {
+        name: "Neso Academy",
+        channelOrSeries: "Neso Academy · CPU Scheduling Criteria & Algorithms Playlist",
+        url: "https://www.youtube.com/playlist?list=PLBlnK6fEyqRbjR2jT38T3nFiIuWAHh2zH",
+        focusArea: "SJF vs SRTF preemption tie-breakers, Priority Scheduling with Aging, Multi-Level Feedback Queues",
+        recommendedFor: "Structured textbook-level coverage with cleanly paced whiteboard walkthroughs.",
+      },
+      {
+        name: "Sanchit Jain",
+        channelOrSeries: "Knowledge Gate · CPU Scheduling GATE PYQs & Edge Cases",
+        url: "https://www.youtube.com/playlist?list=PLmXKhU9FNesSFvj6gASuWmQd23Ul5omtD",
+        focusArea: "GATE tricky problems with I/O burst interleaving, non-zero arrival times, priority ties",
+        recommendedFor: "Intense numerical speed practice and identifying examiner traps in Gantt charts.",
+      },
+    ],
+  },
+  "4": {
+    moduleTitle: "Module 4: Process Synchronization & Concurrency",
+    topicSubtitle: "Curated lectures on Critical Section Problem, Peterson's Algorithm, Semaphores & Classic Concurrency Problems:",
+    educators: [
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-3.4: Critical Section Problem (Mutual Exclusion, Progress, Bounded Waiting)",
+        url: "https://www.youtube.com/watch?v=TrV_dOX_YHw",
+        focusArea: "Primary vs Secondary criteria, Race Conditions, Shared memory hazards, Lock variable flaws",
+        recommendedFor: "First-principles clarity on why simple software flags fail without hardware test-and-set.",
+      },
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-3.8: Semaphores & L-3.11: Producer Consumer Problem",
+        url: "https://www.youtube.com/watch?v=1u-iS6Yd9s0",
+        focusArea: "Counting vs Binary Semaphores, Atomic wait() and signal(), Bounded-Buffer synchronization",
+        recommendedFor: "Visualizing semaphore value modifications and solving classic producer-consumer flows.",
+      },
+      {
+        name: "Neso Academy",
+        channelOrSeries: "Neso Academy · Peterson's Solution for Process Synchronization",
+        url: "https://www.youtube.com/watch?v=Xh_4M7enU2M",
+        focusArea: "2-Process Peterson's Solution, Proof of Mutual Exclusion, Proof of Progress and Bounded Waiting",
+        recommendedFor: "Rigorous academic proof and counter-examples of synchronization invariants.",
+      },
+      {
+        name: "Amit Khurana",
+        channelOrSeries: "GATE CSE by Amit Khurana · Process Synchronization Masterclass",
+        url: "https://www.youtube.com/playlist?list=PLC36xJgs4dxEGlPPsvshTRh35Vv-Eg_4b",
+        focusArea: "Hardware Test-and-Set Lock (TSL), Swap instructions, Reader-Writer problem, Dining Philosophers",
+        recommendedFor: "Mathematical rigor and handling high-difficulty GATE synchronization questions.",
+      },
+    ],
+  },
+  "5": {
+    moduleTitle: "Module 5: Deadlocks: Principles, Prevention & Avoidance",
+    topicSubtitle: "Curated lectures on Coffman Conditions, Resource Allocation Graphs (RAG), Banker's Algorithm & Safe Sequences:",
+    educators: [
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-4.5: Deadlock Avoidance Banker's Algorithm with Example",
+        url: "https://www.youtube.com/watch?v=Xw2S73P0-3E",
+        focusArea: "Allocation, Max, Need matrices, Available vector updates, Safe State sequence derivation",
+        recommendedFor: "Bulletproof step-by-step matrix calculation workflow for semester and GATE tests.",
+      },
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-4.2 & L-4.3: Resource Allocation Graph (Single vs Multi-Instance)",
+        url: "https://www.youtube.com/watch?v=1u-iS6Yd9s0",
+        focusArea: "Claim edges, Request edges, Assignment edges, Cycle detection criteria in multi-instance RAG",
+        recommendedFor: "Visual knot/cycle detection rules and avoiding false positives in multi-instance graphs.",
+      },
+      {
+        name: "Neso Academy",
+        channelOrSeries: "Neso Academy · Deadlock Characterization & Prevention Methods",
+        url: "https://www.youtube.com/playlist?list=PLBlnK6fEyqRbjR2jT38T3nFiIuWAHh2zH",
+        focusArea: "4 Coffman Conditions (Mutual Exclusion, Hold & Wait, No Preemption, Circular Wait), Prevention vs Avoidance",
+        recommendedFor: "Deep foundational theory explaining how operating systems break circular wait using resource ordering.",
+      },
+      {
+        name: "Sanchit Jain",
+        channelOrSeries: "Knowledge Gate · Banker's Resource-Request Algorithm & GATE PYQs",
+        url: "https://www.youtube.com/playlist?list=PLmXKhU9FNesSFvj6gASuWmQd23Ul5omtD",
+        focusArea: "Request <= Need & Request <= Available checks, Immediate grant safety testing, GATE formula shortcuts",
+        recommendedFor: "Exam speed drilling on multi-resource requests without re-computing the full safety table.",
+      },
+    ],
+  },
+  "6": {
+    moduleTitle: "Module 6: Main Memory Management & Paging",
+    topicSubtitle: "Curated lectures on Logical-to-Physical Translation, Page Tables, TLBs, Multi-level Paging & Internal Fragmentation:",
+    educators: [
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-5.9: What is Paging & Address Translation Architecture",
+        url: "https://www.youtube.com/watch?v=kNTh034379M",
+        focusArea: "Logical Address bit-splitting (Page Number p, Offset d), Physical Frames (f, d), MMU hardware",
+        recommendedFor: "Crystal-clear mental models of base register indexing and physical frame lookup.",
+      },
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-5.13: 2-Level Paging in Operating System | Multilevel Paging",
+        url: "https://www.youtube.com/watch?v=1u-iS6Yd9s0",
+        focusArea: "Outer page table size, Inner page table, PTE calculations, preventing massive page tables in RAM",
+        recommendedFor: "Definitive step-by-step formula derivation for multi-level address bit partitioning.",
+      },
+      {
+        name: "Neso Academy",
+        channelOrSeries: "Neso Academy · Translation Lookaside Buffer (TLB) & Effective Memory Access Time",
+        url: "https://www.youtube.com/playlist?list=PLBlnK6fEyqRbjR2jT38T3nFiIuWAHh2zH",
+        focusArea: "TLB Hit Ratio, Associative hardware cache, EMAT = h*(c + m) + (1-h)*(c + 2m) derivations",
+        recommendedFor: "Blackboard mathematical rigor on single-level and multi-level TLB penalty calculations.",
+      },
+      {
+        name: "Sanchit Jain",
+        channelOrSeries: "Knowledge Gate · Page Table Size & Inverted Page Table Numericals",
+        url: "https://www.youtube.com/playlist?list=PLmXKhU9FNesSFvj6gASuWmQd23Ul5omtD",
+        focusArea: "Page table size = (Virtual space / Page size) * PTE, Inverted Page Table hashing, GATE PYQs",
+        recommendedFor: "Intense numerical drilling on calculating exact memory consumption of hierarchical tables.",
+      },
+    ],
+  },
+  "7": {
+    moduleTitle: "Module 7: Virtual Memory & Page Replacement",
+    topicSubtitle: "Curated lectures on Demand Paging, Page Fault Handling, FIFO, LRU, Optimal & Belady's Anomaly:",
+    educators: [
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-5.22 & L-5.25: FIFO & Least Recently Used (LRU) Page Replacement",
+        url: "https://www.youtube.com/watch?v=kYJ5b9B42Yg",
+        focusArea: "Reference string simulations, Page hit vs Page miss count, Stack/Clock LRU implementation",
+        recommendedFor: "Clear, foolproof tabular layouts for tracking frames during page replacement exams.",
+      },
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-5.23: Belady's Anomaly in FIFO Page Replacement with Example",
+        url: "https://www.youtube.com/watch?v=vXNCq0V1q1U",
+        focusArea: "Belady's counter-intuitive anomaly (more frames -> more page faults), 1,2,3,4,1,2,5,1,2,3,4,5 proof",
+        recommendedFor: "The canonical reference string demonstration showing why FIFO is not a stack algorithm.",
+      },
+      {
+        name: "Neso Academy",
+        channelOrSeries: "Neso Academy · Demand Paging & Effective Access Time with Page Fault Service",
+        url: "https://www.youtube.com/playlist?list=PLBlnK6fEyqRbjR2jT38T3nFiIuWAHh2zH",
+        focusArea: "Page Fault Interrupt lifecycle, Swap space I/O penalty, EMAT with page fault probability p",
+        recommendedFor: "Deriving page fault overhead equations and disk transfer delay calculations.",
+      },
+      {
+        name: "Amit Khurana",
+        channelOrSeries: "GATE CSE by Amit Khurana · Thrashing & Working Set Model",
+        url: "https://www.youtube.com/playlist?list=PLC36xJgs4dxEGlPPsvshTRh35Vv-Eg_4b",
+        focusArea: "Working Set Strategy, Page Fault Frequency (PFF), Thrashing causes and degree of multiprogramming",
+        recommendedFor: "Theoretical depth on CPU utilization drops and operating system thrashing prevention.",
+      },
+    ],
+  },
+  "8": {
+    moduleTitle: "Module 8: File Systems & Storage Architecture",
+    topicSubtitle: "Curated lectures on Unix Inode Architecture, File Allocation (Contiguous, Linked, Indexed) & Directory Structures:",
+    educators: [
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-7.7: Unix Inode Structure with Numerical Example",
+        url: "https://www.youtube.com/watch?v=s5R514n-z3U",
+        focusArea: "Direct block pointers (12), Single Indirect, Double Indirect, Triple Indirect block calculations",
+        recommendedFor: "The most widely cited video for computing Maximum File Size supported by a Unix Inode.",
+      },
+      {
+        name: "Neso Academy",
+        channelOrSeries: "Neso Academy · The UNIX Inode & File Allocation Methods",
+        url: "https://www.youtube.com/playlist?list=PLBlnK6fEyqRbjR2jT38T3nFiIuWAHh2zH",
+        focusArea: "Contiguous vs Linked Allocation (FAT table) vs Indexed Allocation, Internal vs External fragmentation",
+        recommendedFor: "Textbook-grade visual diagrams comparing random access speeds and storage block chains.",
+      },
+      {
+        name: "Sanchit Jain",
+        channelOrSeries: "Knowledge Gate · Inode Numerical Questions for GATE & Semesters",
+        url: "https://www.youtube.com/playlist?list=PLmXKhU9FNesSFvj6gASuWmQd23Ul5omtD",
+        focusArea: "Disk block size variations, Disk block address sizes, GATE PYQs on inode pointer limits",
+        recommendedFor: "High-accuracy calculation templates for tricky inode capacity questions with power-of-two bytes.",
+      },
+      {
+        name: "Ravindrababu Ravula",
+        channelOrSeries: "Ravindrababu Ravula · File System Organization & Inodes",
+        url: "https://www.youtube.com/@Ravindrababu_Ravula",
+        focusArea: "Superblock, Inode table in disk partition, Free space management (Bit vector, Grouping, Counting)",
+        recommendedFor: "Rigorous operating system storage foundations and sector-level disk layout.",
+      },
+    ],
+  },
+  "9": {
+    moduleTitle: "Module 9: I/O Systems & Disk Scheduling",
+    topicSubtitle: "Curated lectures on Disk Geometry, Seek Time, Rotational Latency, FCFS, SSTF, SCAN, C-SCAN & LOOK:",
+    educators: [
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-6.3 & L-6.6: Disk Scheduling Algorithms & SCAN Algorithm",
+        url: "https://www.youtube.com/watch?v=kYv9i4-cR_M",
+        focusArea: "SSTF starvation risks, Elevator (SCAN) algorithm, Cylinder boundaries (0 and N-1) head movements",
+        recommendedFor: "Easy-to-follow cylinder timeline diagrams calculating Total Head Movement without errors.",
+      },
+      {
+        name: "Varun Singla",
+        channelOrSeries: "Gate Smashers · L-6.8 & L-6.9: C-SCAN & C-LOOK Disk Scheduling with Example",
+        url: "https://www.youtube.com/watch?v=1u-iS6Yd9s0",
+        focusArea: "Circular return travel, C-SCAN vs C-LOOK endpoint servicing, Uniform wait time advantages",
+        recommendedFor: "Clear differentiation on when the disk head reverses at the extreme track vs the last request.",
+      },
+      {
+        name: "Neso Academy",
+        channelOrSeries: "Neso Academy · Mass Storage Structure & Disk Access Time Breakdown",
+        url: "https://www.youtube.com/playlist?list=PLBlnK6fEyqRbjR2jT38T3nFiIuWAHh2zH",
+        focusArea: "Disk Platter geometry, Tracks, Sectors, Seek Time + Rotational Latency (1 / 2*RPM) + Transfer Rate",
+        recommendedFor: "Clean mathematical derivations of average rotational delay and disk transfer bandwidth.",
+      },
+      {
+        name: "Sanchit Jain",
+        channelOrSeries: "Knowledge Gate · Disk Scheduling GATE PYQs & Total Head Travel",
+        url: "https://www.youtube.com/playlist?list=PLmXKhU9FNesSFvj6gASuWmQd23Ul5omtD",
+        focusArea: "GATE PYQs on SCAN direction assumptions ('currently moving toward higher track numbers'), Cylinder math",
+        recommendedFor: "Formula shortcuts for quickly subtracting max-min track positions during competitive exams.",
+      },
+    ],
+  },
+};
+
 export default function ResourcesAndSources({
   section,
   subjectSlug,
+  modNum,
+  moduleTitle,
 }: {
   section: ResourcesSection;
   subjectSlug?: string;
+  modNum?: string;
+  moduleTitle?: string;
 }) {
   const { sources, stillStuck } = section;
 
-  // Resolve educator list for this specific subject
+  // Resolve topic-specific recommendation for Operating Systems if applicable
+  const osTopic =
+    subjectSlug === "operating-systems" && modNum && OS_TOPIC_RECOMMENDATIONS[modNum]
+      ? OS_TOPIC_RECOMMENDATIONS[modNum]
+      : null;
+
+  // Resolve educators: use topic-specific for OS modules, fallback to subject-level
   const educators: CuratedEducator[] =
-    (subjectSlug && EDUCATORS_BY_SUBJECT[subjectSlug]) || [];
+    osTopic?.educators ||
+    (subjectSlug && EDUCATORS_BY_SUBJECT[subjectSlug]) ||
+    [];
+
+  const sectionHeaderTitle = osTopic
+    ? `RECOMMENDED YOUTUBE LECTURES & EDUCATORS: ${osTopic.moduleTitle.toUpperCase()}`
+    : "RECOMMENDED YOUTUBE EDUCATORS & FULL-COURSE PLAYLISTS";
+
+  const sectionHeaderSubtitle = osTopic
+    ? osTopic.topicSubtitle
+    : "Curated for clarity, rigorous numerical solving, and semester excellence:";
 
   // Group sources academically
   const primarySources = sources.filter(
@@ -312,10 +649,10 @@ export default function ResourcesAndSources({
         <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-3">
           <div>
             <span className="font-mono text-[10px] uppercase tracking-widest font-bold text-accent block mb-0.5">
-              RECOMMENDED YOUTUBE EDUCATORS & FULL-COURSE PLAYLISTS
+              {sectionHeaderTitle}
             </span>
             <p className="text-xs text-ink-2 max-w-[68ch]">
-              Curated for clarity, rigorous numerical solving, and semester excellence:
+              {sectionHeaderSubtitle}
             </p>
           </div>
         </div>
