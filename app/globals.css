@@ -95,6 +95,13 @@ html {
   overflow-x: clip;
 }
 
+@media (min-width: 1024px) {
+  html {
+    font-size: 14.5px; /* ~90% scaling factor from standard 16px */
+    zoom: 0.9;
+  }
+}
+
 html,
 body {
   min-height: 100%;
@@ -1239,13 +1246,13 @@ svg *,
   border-color: #d6cfbe !important;
 }
 
-/* Default notebook viewport scaling (~85% scale) on desktop screens */
+/* Default notebook viewport scaling on desktop screens */
 @media (min-width: 1024px) {
   .notebook-viewport-scaled {
-    zoom: 0.85;
+    zoom: 1;
   }
   .notebook-viewport-scaled.notebook-expanded {
-    zoom: 1;
+    zoom: 1.05;
   }
 }
 
