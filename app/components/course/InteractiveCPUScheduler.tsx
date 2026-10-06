@@ -660,10 +660,9 @@ export default function InteractiveCPUScheduler({
             ✎ Total CPU Execution Time: {maxTime} ms
           </span>
         </div>
-        <div className="w-full border border-hairline/90 rounded-lg p-1.5 flex bg-surface-1/40 overflow-x-auto min-h-[52px]">
+        <div className="w-full border border-hairline/90 rounded-lg p-1.5 flex bg-surface-1/40 overflow-x-auto sm:overflow-x-visible min-h-[52px] gap-1">
           {ganttChart.map((block, idx) => {
             const duration = block.end - block.start;
-            const widthPct = Math.max(4, (duration / maxTime) * 100);
             const isIdle = block.isIdle;
 
             const pObj = processes.find((p) => p.id === block.processId);
@@ -677,10 +676,13 @@ export default function InteractiveCPUScheduler({
               <div
                 key={idx}
                 style={{
-                  width: `${widthPct}%`,
+                  flexGrow: duration,
+                  flexShrink: 0,
+                  flexBasis: 0,
+                  minWidth: "22px",
                   backgroundColor: !isIdle && pObj?.color ? pObj.color : undefined,
                 }}
-                className={`h-11 flex flex-col items-center justify-center rounded transition-all shrink-0 min-w-[28px] mx-0.5 ${baseBg}`}
+                className={`h-11 flex flex-col items-center justify-center rounded transition-all ${baseBg}`}
                 title={`${block.processId} [${block.start} - ${block.end} ms] (duration: ${duration}ms)`}
               >
                 <span className="text-xs sm:text-sm font-handwriting font-bold leading-none">
@@ -694,12 +696,26 @@ export default function InteractiveCPUScheduler({
           })}
         </div>
 
-        {/* Timeline Ticks */}
-        <div className="flex justify-between text-[10px] font-mono text-ink-3 mt-1.5 px-1 overflow-x-auto">
-          <span>0</span>
-          {ganttChart.map((b, idx) => (
-            <span key={idx}>{b.end}</span>
-          ))}
+        {/* Timeline Ticks (proportional to block widths) */}
+        <div className="flex text-[10px] font-mono text-ink-3 mt-1.5 px-1.5 w-full gap-1">
+          <div className="w-0 shrink-0 text-left -ml-1">0</div>
+          {ganttChart.map((b, idx) => {
+            const duration = b.end - b.start;
+            return (
+              <div
+                key={idx}
+                style={{
+                  flexGrow: duration,
+                  flexShrink: 0,
+                  flexBasis: 0,
+                  minWidth: "22px",
+                }}
+                className="text-right pr-0.5"
+              >
+                {b.end}
+              </div>
+            );
+          })}
         </div>
       </div>
 
