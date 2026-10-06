@@ -216,7 +216,7 @@ body::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *:not([class*="notebook-page-turning"]):not([class*="notebook-page-turning"] *):not([class*="notebook-page-turning"]::before):not([class*="notebook-page-turning"]::after),
+  *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
