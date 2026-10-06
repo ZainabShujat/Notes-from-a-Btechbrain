@@ -149,7 +149,7 @@ ${visualAnchor ? `\n## Visual Reference\n\`\`\`\n${visualAnchor}\n\`\`\`` : ""}
         {/* Modal Scrollable Body */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 text-sm">
           {/* Core Principle / Mental Model Anchor */}
-          <div className="p-3.5 sm:p-4 rounded-lg bg-accent/5 border-l-4 border-accent border-y border-r border-accent/15">
+          <div className="p-3.5 sm:p-4 rounded-lg bg-accent/10 dark:bg-accent/15 border-l-4 border-accent border-y border-r border-accent/25 dark:border-accent/30">
             <span className="text-[11px] font-mono uppercase tracking-widest text-accent font-bold block mb-1">
               CORE PRINCIPLE & MENTAL ANCHOR
             </span>
@@ -164,7 +164,7 @@ ${visualAnchor ? `\n## Visual Reference\n\`\`\`\n${visualAnchor}\n\`\`\`` : ""}
           {/* 2-Column Grid: Formulas/Rules & Exam Traps */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Must-Remember Formulas & Invariants */}
-            <div className="p-4 rounded-lg bg-surface-1/40 border border-hairline/70 flex flex-col">
+            <div className="p-4 rounded-lg bg-surface-1/70 dark:bg-surface-2/60 border border-hairline/80 flex flex-col">
               <div className="flex items-center gap-1.5 mb-3 pb-2 border-b border-hairline/60">
                 <span className="text-base">📐</span>
                 <h3 className="font-mono text-xs uppercase tracking-wider font-bold text-ink-1">
@@ -173,7 +173,7 @@ ${visualAnchor ? `\n## Visual Reference\n\`\`\`\n${visualAnchor}\n\`\`\`` : ""}
               </div>
               <ul className="space-y-2.5 flex-1">
                 {formulasAndRules.map((rule, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-xs sm:text-[13px] text-ink-2 leading-relaxed">
+                  <li key={idx} className="flex items-start gap-2 text-xs sm:text-[13px] text-ink-1 leading-relaxed">
                     <span className="text-accent font-mono font-bold mt-0.5">•</span>
                     <span
                       dangerouslySetInnerHTML={{
@@ -186,7 +186,7 @@ ${visualAnchor ? `\n## Visual Reference\n\`\`\`\n${visualAnchor}\n\`\`\`` : ""}
             </div>
 
             {/* Pitfalls & Corner Cases */}
-            <div className="p-4 rounded-lg bg-surface-1/40 border border-hairline/70 flex flex-col">
+            <div className="p-4 rounded-lg bg-surface-1/70 dark:bg-surface-2/60 border border-hairline/80 flex flex-col">
               <div className="flex items-center gap-1.5 mb-3 pb-2 border-b border-hairline/60">
                 <span className="text-base">⚠️</span>
                 <h3 className="font-mono text-xs uppercase tracking-wider font-bold text-amber-500 dark:text-amber-400">
@@ -195,8 +195,8 @@ ${visualAnchor ? `\n## Visual Reference\n\`\`\`\n${visualAnchor}\n\`\`\`` : ""}
               </div>
               <ul className="space-y-2.5 flex-1">
                 {pitfalls.map((pitfall, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-xs sm:text-[13px] text-ink-2 leading-relaxed">
-                    <span className="text-amber-500 font-mono font-bold mt-0.5">!</span>
+                  <li key={idx} className="flex items-start gap-2 text-xs sm:text-[13px] text-ink-1 leading-relaxed">
+                    <span className="text-amber-500 dark:text-amber-400 font-mono font-bold mt-0.5">!</span>
                     <span
                       dangerouslySetInnerHTML={{
                         __html: formatMarkdownInline(pitfall),
@@ -210,7 +210,7 @@ ${visualAnchor ? `\n## Visual Reference\n\`\`\`\n${visualAnchor}\n\`\`\`` : ""}
 
           {/* High-Yield Tips if present */}
           {highYieldTips.length > 0 && (
-            <div className="p-4 rounded-lg bg-surface-1/40 border border-hairline/70">
+            <div className="p-4 rounded-lg bg-surface-1/70 dark:bg-surface-2/60 border border-hairline/80">
               <div className="flex items-center gap-1.5 mb-2.5 pb-2 border-b border-hairline/60">
                 <span className="text-base">🎯</span>
                 <h3 className="font-mono text-xs uppercase tracking-wider font-bold text-emerald-500 dark:text-emerald-400">
@@ -219,8 +219,8 @@ ${visualAnchor ? `\n## Visual Reference\n\`\`\`\n${visualAnchor}\n\`\`\`` : ""}
               </div>
               <ul className="space-y-2">
                 {highYieldTips.map((tip, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-xs sm:text-[13px] text-ink-2 leading-relaxed">
-                    <span className="text-emerald-500 font-mono font-bold mt-0.5">✓</span>
+                  <li key={idx} className="flex items-start gap-2 text-xs sm:text-[13px] text-ink-1 leading-relaxed">
+                    <span className="text-emerald-500 dark:text-emerald-400 font-mono font-bold mt-0.5">✓</span>
                     <span
                       dangerouslySetInnerHTML={{
                         __html: formatMarkdownInline(tip),
@@ -244,7 +244,7 @@ ${visualAnchor ? `\n## Visual Reference\n\`\`\`\n${visualAnchor}\n\`\`\`` : ""}
                 </div>
                 <span className="text-[10px] font-mono text-ink-3">PREVIEW</span>
               </div>
-              <pre className="font-mono text-[11px] sm:text-xs text-ink-2 leading-tight overflow-x-auto p-2 bg-surface-base/80 rounded border border-hairline/50 select-text whitespace-pre">
+              <pre className="font-mono text-[11px] sm:text-xs text-ink-1 leading-tight overflow-x-auto p-2.5 bg-surface-base/80 dark:bg-black/30 rounded border border-hairline/50 select-text whitespace-pre">
                 {visualAnchor}
               </pre>
             </div>
@@ -256,7 +256,7 @@ ${visualAnchor ? `\n## Visual Reference\n\`\`\`\n${visualAnchor}\n\`\`\`` : ""}
           <span>Notes From A B.Tech Brain &middot; {lesson.slug}</span>
           <button
             onClick={onClose}
-            className="px-3 py-1 rounded bg-surface-2 hover:bg-surface-3 text-ink-1 font-sans text-xs transition-colors"
+            className="px-3 py-1.5 rounded-md bg-accent/20 hover:bg-accent/30 text-accent dark:text-accent-soft font-mono font-semibold text-xs border border-accent/30 transition-all cursor-pointer"
           >
             Done Reading
           </button>

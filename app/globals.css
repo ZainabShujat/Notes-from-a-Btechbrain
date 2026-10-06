@@ -885,84 +885,84 @@ mark.highlighter-violet {
   --color-hairline-strong: rgba(30, 27, 75, 0.22);
 }
 
-.notebook-reading-page h1,
-.notebook-reading-page h2,
-.notebook-reading-page h3,
-.notebook-reading-page h4,
-.notebook-reading-page h5,
-.notebook-reading-page h6,
-.notebook-reading-page .font-handwriting {
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) h1:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) h2:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) h3:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) h4:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) h5:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) h6:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) .font-handwriting:not([role="dialog"] *) {
   color: #1e1b4b !important;
 }
 
-.notebook-reading-page p,
-.notebook-reading-page li,
-.notebook-reading-page span,
-.notebook-reading-page div {
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) p:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) li:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) span:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) div:not([role="dialog"] *) {
   color: inherit;
 }
 
-.notebook-reading-page p,
-.notebook-reading-page li,
-.notebook-reading-page .text-ink-2 {
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) p:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) li:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) .text-ink-2:not([role="dialog"] *) {
   color: #334155 !important;
 }
 
-.notebook-reading-page strong,
-.notebook-reading-page b,
-.notebook-reading-page .text-ink-1 {
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) strong:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) b:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) .text-ink-1:not([role="dialog"] *) {
   color: #1e1b4b !important;
 }
 
-.notebook-reading-page .text-ink-3 {
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) .text-ink-3:not([role="dialog"] *) {
   color: #64748b !important;
 }
 
 /* Ensure callout cards maintain readable text on creamy paper regardless of theme */
-.notebook-reading-page [class*="bg-violet-500"]:not(.student-highlight),
-.notebook-reading-page [class*="bg-purple-500"]:not(.student-highlight) {
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) [class*="bg-violet-500"]:not(.student-highlight):not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) [class*="bg-purple-500"]:not(.student-highlight):not([role="dialog"] *) {
   background-color: rgba(124, 58, 237, 0.12) !important;
   color: #1e1b4b !important;
 }
 
-.notebook-reading-page [class*="bg-yellow-"]:not(.student-highlight),
-.notebook-reading-page [class*="bg-amber-"]:not(.student-highlight) {
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) [class*="bg-yellow-"]:not(.student-highlight):not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) [class*="bg-amber-"]:not(.student-highlight):not([role="dialog"] *) {
   background-color: rgba(245, 158, 11, 0.15) !important;
   color: #78350f !important;
 }
 
-.notebook-reading-page [class*="bg-emerald-"]:not(.student-highlight),
-.notebook-reading-page [class*="bg-green-"]:not(.student-highlight) {
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) [class*="bg-emerald-"]:not(.student-highlight):not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) [class*="bg-green-"]:not(.student-highlight):not([role="dialog"] *) {
   background-color: rgba(16, 185, 129, 0.14) !important;
   color: #064e3b !important;
 }
 
 /* Translucent inline student marker strokes on creamy reading sheets */
-.notebook-reading-page .student-highlight,
-.notebook-reading-page mark {
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) .student-highlight:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) mark:not([role="dialog"] *) {
   color: inherit !important;
   font-weight: inherit;
 }
-.notebook-reading-page .highlight-yellow,
-.notebook-reading-page mark.highlighter-yellow {
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) .highlight-yellow:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) mark.highlighter-yellow:not([role="dialog"] *) {
   background: linear-gradient(104deg, rgba(253, 224, 71, 0.45) 0%, rgba(250, 204, 21, 0.52) 55%, rgba(253, 224, 71, 0.40) 100%) !important;
 }
-.notebook-reading-page .highlight-pink,
-.notebook-reading-page mark.highlighter-pink {
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) .highlight-pink:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) mark.highlighter-pink:not([role="dialog"] *) {
   background: linear-gradient(102deg, rgba(244, 114, 182, 0.40) 0%, rgba(251, 113, 133, 0.46) 60%, rgba(244, 114, 182, 0.35) 100%) !important;
 }
-.notebook-reading-page .highlight-green,
-.notebook-reading-page mark.highlighter-green {
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) .highlight-green:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) mark.highlighter-green:not([role="dialog"] *) {
   background: linear-gradient(105deg, rgba(110, 231, 183, 0.42) 0%, rgba(52, 211, 153, 0.46) 50%, rgba(110, 231, 183, 0.38) 100%) !important;
 }
-.notebook-reading-page .highlight-purple,
-.notebook-reading-page mark.highlighter-purple,
-.notebook-reading-page mark.highlighter-violet {
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) .highlight-purple:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) mark.highlighter-purple:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) mark.highlighter-violet:not([role="dialog"] *) {
   background: linear-gradient(103deg, rgba(216, 180, 254, 0.44) 0%, rgba(192, 132, 252, 0.48) 55%, rgba(216, 180, 254, 0.38) 100%) !important;
 }
 
-.notebook-reading-page pre,
-.notebook-reading-page code {
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) pre:not([role="dialog"] *),
+.notebook-reading-page:not([role="dialog"]):not([role="dialog"] *) code:not([role="dialog"] *) {
   color: #1e1b4b !important;
 }
 
