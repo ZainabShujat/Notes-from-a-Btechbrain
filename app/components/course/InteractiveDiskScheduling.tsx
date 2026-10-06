@@ -162,14 +162,14 @@ export default function InteractiveDiskScheduling({
         </div>
 
         {/* Algorithm Buttons */}
-        <div className="flex flex-wrap gap-1 rounded-lg border border-hairline bg-surface-2 p-1 text-xs font-mono">
+        <div className="flex flex-wrap gap-1 rounded-lg border border-hairline bg-surface-2 p-1 text-xs font-mono max-w-full overflow-x-auto">
           {(["fcfs", "sstf", "scan", "c-scan", "look", "c-look"] as const).map(
             (algo) => (
               <button
                 key={algo}
                 type="button"
                 onClick={() => setAlgorithm(algo)}
-                className={`px-2 py-1 rounded cursor-pointer uppercase ${
+                className={`px-2 py-1 rounded cursor-pointer uppercase whitespace-nowrap ${
                   algorithm === algo
                     ? "bg-accent text-white font-bold shadow-xs"
                     : "text-ink-3 hover:text-ink-1"

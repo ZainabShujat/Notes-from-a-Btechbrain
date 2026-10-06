@@ -28,7 +28,7 @@ export default function InteractiveFlowVisualizer({
       </div>
 
       {/* Step Pills Chain */}
-      <div className="flex flex-wrap items-center gap-2 mb-6">
+      <div className="flex flex-wrap items-center gap-2 mb-6 max-w-full overflow-x-auto pb-1">
         {config.steps.map((step, idx) => {
           const isActive = idx === activeStepIndex;
           const isPast = idx < activeStepIndex;

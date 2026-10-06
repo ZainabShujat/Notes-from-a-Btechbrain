@@ -113,32 +113,32 @@ ${visualAnchor ? `\n## Visual Reference\n\`\`\`\n${visualAnchor}\n\`\`\`` : ""}
             </h2>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               onClick={handleCopyMarkdown}
-              className="px-2.5 py-1 text-xs font-mono rounded border border-hairline/80 bg-surface-2 hover:bg-surface-3 text-ink-2 hover:text-ink-1 transition-colors flex items-center gap-1.5"
+              className="px-2 sm:px-2.5 py-1 text-xs font-mono rounded border border-hairline/80 bg-surface-2 hover:bg-surface-3 text-ink-2 hover:text-ink-1 transition-colors flex items-center gap-1 cursor-pointer"
               title="Copy markdown format"
             >
               {copied ? (
                 <>
-                  <span className="text-emerald-500 font-bold">✓</span> Copied
+                  <span className="text-emerald-500 font-bold">✓</span> <span className="hidden xs:inline">Copied</span>
                 </>
               ) : (
                 <>
-                  <span>📋</span> Copy
+                  <span>📋</span> <span className="hidden xs:inline">Copy</span>
                 </>
               )}
             </button>
             <button
               onClick={handlePrint}
-              className="hidden sm:inline-flex px-2.5 py-1 text-xs font-mono rounded border border-hairline/80 bg-surface-2 hover:bg-surface-3 text-ink-2 hover:text-ink-1 transition-colors items-center gap-1.5"
+              className="hidden sm:inline-flex px-2.5 py-1 text-xs font-mono rounded border border-hairline/80 bg-surface-2 hover:bg-surface-3 text-ink-2 hover:text-ink-1 transition-colors items-center gap-1.5 cursor-pointer"
               title="Print cheat sheet"
             >
               <span>🖨️</span> Print
             </button>
             <button
               onClick={onClose}
-              className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-2 text-ink-3 hover:text-ink-1 transition-colors text-lg font-bold"
+              className="w-8 h-8 flex items-center justify-center rounded-lg bg-surface-2 hover:bg-surface-3 text-ink-2 hover:text-ink-1 transition-colors text-base font-bold cursor-pointer"
               aria-label="Close modal"
             >
               ✕

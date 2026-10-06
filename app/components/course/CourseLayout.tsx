@@ -447,8 +447,8 @@ export default function CourseLayout({
           <main
             className={`relative flex-1 min-w-0 w-full max-w-[1200px] mx-auto transition-all duration-300 ${
               isDesktopSidebarCollapsed
-                ? "pl-10 pr-4 sm:pl-14 sm:pr-8 md:pl-20 md:pr-12 lg:pl-24 lg:pr-16 py-10 md:py-16 notebook-reading-page notebook-vertical-margin-rule notebook-viewport-scaled notebook-expanded rounded-xl sm:rounded-2xl my-3 md:my-6 border border-hairline/70"
-                : "pl-10 pr-4 sm:pl-14 sm:pr-8 md:pl-20 md:pr-12 lg:pl-24 lg:pr-16 py-8 md:py-12 notebook-reading-page notebook-vertical-margin-rule notebook-viewport-scaled rounded-xl sm:rounded-2xl my-3 md:my-6 border border-hairline/70"
+                ? "pl-11 xs:pl-12 sm:pl-14 pr-3.5 sm:pr-8 md:pl-20 md:pr-12 lg:pl-24 lg:pr-16 py-6 sm:py-10 md:py-16 notebook-reading-page notebook-vertical-margin-rule notebook-viewport-scaled notebook-expanded rounded-xl sm:rounded-2xl my-2 sm:my-3 md:my-6 border border-hairline/70"
+                : "pl-11 xs:pl-12 sm:pl-14 pr-3.5 sm:pr-8 md:pl-20 md:pr-12 lg:pl-24 lg:pr-16 py-6 sm:py-8 md:py-12 notebook-reading-page notebook-vertical-margin-rule notebook-viewport-scaled rounded-xl sm:rounded-2xl my-2 sm:my-3 md:my-6 border border-hairline/70"
             } overflow-visible`}
           >
           <NotebookSpiralBinding />

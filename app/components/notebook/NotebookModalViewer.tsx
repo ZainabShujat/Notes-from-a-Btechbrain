@@ -182,13 +182,15 @@ export default function NotebookModalViewer({
             </span>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             {glimpse.isBuilt && (
               <Link
                 href={`/notes/${glimpse.slug}`}
-                className="hidden sm:inline-flex items-center gap-1 text-xs font-mono font-bold text-[#7c3aed] hover:underline px-2.5 py-1 hover:bg-black/5 shape-octagon-sm"
+                className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-mono font-bold text-white px-2.5 py-1 rounded-[4px] hover:opacity-90 shadow-2xs transition-all"
+                style={{ backgroundColor: glimpse.accentHex || "#7c3aed" }}
+                title="Skip preview and open full notebook"
               >
-                <span>Subject Hub</span>
+                <span>Open Notebook</span>
                 <span>&rarr;</span>
               </Link>
             )}
@@ -196,10 +198,10 @@ export default function NotebookModalViewer({
             <button
               type="button"
               onClick={onClose}
-              className="px-2.5 py-1 text-xs font-mono font-bold text-[#57534e] hover:text-[#1c1917] hover:bg-black/8 transition-colors border border-[#d6cfbe] cursor-pointer shape-octagon-sm"
+              className="px-2 sm:px-2.5 py-1 text-xs font-mono font-bold text-[#57534e] hover:text-[#1c1917] hover:bg-black/8 transition-colors border border-[#d6cfbe] cursor-pointer rounded-[4px]"
               aria-label="Close Notebook Preview"
             >
-              ✕ Close
+              ✕ <span className="hidden xs:inline">Close</span>
             </button>
           </div>
         </div>
@@ -317,16 +319,26 @@ export default function NotebookModalViewer({
                     </div>
                   )}
 
-                  <div className="shrink-0 pt-2 flex items-center justify-between border-t border-[#e5ded0] text-[11px] font-mono text-[#78716c]">
-                    <span>
-                      {glimpse.stats.lessonsCount} lessons · {glimpse.stats.labsCount} labs
-                    </span>
+                  <div className="shrink-0 pt-2 flex flex-wrap items-center justify-between gap-2 border-t border-[#e5ded0] text-[11px] font-mono text-[#78716c]">
+                    <div className="flex items-center gap-2">
+                      <span className="hidden xs:inline">
+                        {glimpse.stats.lessonsCount} lessons · {glimpse.stats.labsCount} labs
+                      </span>
+                      {glimpse.isBuilt && (
+                        <Link
+                          href={`/notes/${glimpse.slug}`}
+                          className="text-[#7c3aed] font-semibold hover:underline"
+                        >
+                          Skip preview &rarr;
+                        </Link>
+                      )}
+                    </div>
                     <button
                       type="button"
                       onClick={handleNext}
-                      className="text-[#7c3aed] font-bold hover:underline inline-flex items-center gap-1 cursor-pointer"
+                      className="text-[#7c3aed] font-bold hover:underline inline-flex items-center gap-1 cursor-pointer ml-auto"
                     >
-                      <span>Flip to Diagram / Anchor</span>
+                      <span>Flip Page</span>
                       <span>&rarr;</span>
                     </button>
                   </div>
@@ -441,20 +453,30 @@ export default function NotebookModalViewer({
                     )}
                   </div>
 
-                  <div className="shrink-0 pt-2 flex items-center justify-between border-t border-[#e5ded0] text-[11px] font-mono text-[#78716c]">
-                    <button
-                      type="button"
-                      onClick={handlePrev}
-                      className="hover:underline cursor-pointer"
-                    >
-                      &larr; Previous Page
-                    </button>
+                  <div className="shrink-0 pt-2 flex flex-wrap items-center justify-between gap-2 border-t border-[#e5ded0] text-[11px] font-mono text-[#78716c]">
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={handlePrev}
+                        className="hover:underline cursor-pointer"
+                      >
+                        &larr; Prev
+                      </button>
+                      {glimpse.isBuilt && (
+                        <Link
+                          href={`/notes/${glimpse.slug}`}
+                          className="text-[#7c3aed] font-semibold hover:underline"
+                        >
+                          Skip preview &rarr;
+                        </Link>
+                      )}
+                    </div>
                     <button
                       type="button"
                       onClick={handleNext}
                       className="text-[#7c3aed] font-bold hover:underline inline-flex items-center gap-1 cursor-pointer"
                     >
-                      <span>Flip to Lab / Interactive</span>
+                      <span>Flip Page</span>
                       <span>&rarr;</span>
                     </button>
                   </div>
@@ -542,20 +564,30 @@ export default function NotebookModalViewer({
                     </div>
                   )}
 
-                  <div className="shrink-0 pt-2 flex items-center justify-between border-t border-[#e5ded0] text-[11px] font-mono text-[#78716c]">
-                    <button
-                      type="button"
-                      onClick={handlePrev}
-                      className="hover:underline cursor-pointer"
-                    >
-                      &larr; Previous Page
-                    </button>
+                  <div className="shrink-0 pt-2 flex flex-wrap items-center justify-between gap-2 border-t border-[#e5ded0] text-[11px] font-mono text-[#78716c]">
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={handlePrev}
+                        className="hover:underline cursor-pointer"
+                      >
+                        &larr; Prev
+                      </button>
+                      {glimpse.isBuilt && (
+                        <Link
+                          href={`/notes/${glimpse.slug}`}
+                          className="text-[#7c3aed] font-semibold hover:underline"
+                        >
+                          Skip preview &rarr;
+                        </Link>
+                      )}
+                    </div>
                     <button
                       type="button"
                       onClick={handleNext}
                       className="text-[#7c3aed] font-bold hover:underline inline-flex items-center gap-1 cursor-pointer"
                     >
-                      <span>Flip to Final Syllabus &amp; Action</span>
+                      <span>Final Page</span>
                       <span>&rarr;</span>
                     </button>
                   </div>

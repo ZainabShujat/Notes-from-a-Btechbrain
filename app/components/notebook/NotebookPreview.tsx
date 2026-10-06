@@ -65,7 +65,7 @@ export default function NotebookPreview({
         </div>
       </div>
 
-      {/* ── CLEAN UNDER-NOTEBOOK ACTIONS (FLIP PAGES & SUBJECT HUB) ── */}
+      {/* ── CLEAN UNDER-NOTEBOOK ACTIONS (FLIP PAGES & OPEN NOTEBOOK) ── */}
       <div className="mt-3.5 flex items-center justify-between text-xs font-mono px-1">
         <button
           type="button"
@@ -73,14 +73,14 @@ export default function NotebookPreview({
             e.stopPropagation();
             onOpen();
           }}
-          className="text-[#7c3aed] dark:text-[#a78bfa] hover:underline inline-flex items-center gap-1 font-semibold cursor-pointer"
+          className="text-[#7c3aed] dark:text-[#a78bfa] hover:underline inline-flex items-center gap-1 font-semibold cursor-pointer py-1"
         >
           <span>{notebook.isLocked ? "Preview Syllabus" : "Flip Pages"}</span>
           <span className="font-handwriting text-sm font-bold">✎</span>
         </button>
 
         {notebook.isLocked ? (
-          <span className="text-amber-600/90 dark:text-amber-400/90 font-mono text-[11px] flex items-center gap-1 select-none">
+          <span className="text-amber-600/90 dark:text-amber-400/90 font-mono text-[11px] flex items-center gap-1 select-none py-1">
             <span>In Preparation</span>
             <svg
               viewBox="0 0 24 24"
@@ -100,9 +100,9 @@ export default function NotebookPreview({
           <Link
             href={`/notes/${notebook.slug}`}
             onClick={(e) => e.stopPropagation()}
-            className="text-ink-3 hover:text-ink-1 transition-colors flex items-center gap-1 cursor-pointer"
+            className="text-ink-2 hover:text-[#7c3aed] font-semibold transition-colors flex items-center gap-1 cursor-pointer py-1 px-2 rounded bg-surface-2/60 hover:bg-surface-3"
           >
-            <span>Subject Hub</span>
+            <span>Open Notebook</span>
             <span aria-hidden="true">&rarr;</span>
           </Link>
         )}

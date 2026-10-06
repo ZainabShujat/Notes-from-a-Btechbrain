@@ -520,7 +520,7 @@ export default function InteractiveCPUScheduler({
         <label className="text-xs font-mono text-ink-3 uppercase tracking-wider block mb-2">
           Select Scheduling Algorithm ({ALGORITHMS.length} Supported):
         </label>
-        <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-lg border border-hairline/80 bg-surface-2/60">
+        <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-lg border border-hairline/80 bg-surface-2/60 max-w-full overflow-x-auto pb-1">
           {ALGORITHMS.map((algo) => {
             const isSelected = algorithm === algo.id;
             return (
@@ -528,7 +528,7 @@ export default function InteractiveCPUScheduler({
                 key={algo.id}
                 type="button"
                 onClick={() => setAlgorithm(algo.id)}
-                className={`px-2.5 py-1 text-xs font-mono rounded transition-all cursor-pointer ${
+                className={`px-2.5 py-1 text-xs font-mono rounded transition-all cursor-pointer whitespace-nowrap ${
                   isSelected
                     ? "bg-accent text-white font-bold shadow-xs scale-[1.02]"
                     : "text-ink-2 hover:text-ink-1 hover:bg-surface-3"
