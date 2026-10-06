@@ -1042,7 +1042,7 @@ mark.highlighter-violet {
    while preserving modals, diagrams, canvas, and svg nodes.
    ========================================================= */
 .shape-octagon,
-:where([class*="rounded"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.zoomable-modal-content):not(.zoomable-modal-content *):not(.fixed):not([role="dialog"]):not([role="dialog"] *):not(path):not(circle):not(rect):not(polygon):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *)) {
+:where([class*="rounded"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.zoomable-modal-content):not(.zoomable-modal-content *):not(.fixed):not([role="dialog"]):not([role="dialog"] *):not(path):not(circle):not(rect):not(polygon):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *):not(.not-chamfered):not(h1):not(h1 *)) {
   clip-path: polygon(
     8px 0%,
     calc(100% - 8px) 0%,
@@ -1057,11 +1057,11 @@ mark.highlighter-violet {
 }
 
 .shape-octagon-sm,
-:where([class*="rounded-sm"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *)),
-:where([class*="rounded-\[3px\]"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *)),
-:where([class*="rounded-\[4px\]"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *)),
-:where([class*="rounded-\[5px\]"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *)),
-:where([class*="rounded-\[6px\]"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *)) {
+:where([class*="rounded-sm"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *):not(.not-chamfered):not(h1):not(h1 *)),
+:where([class*="rounded-\[3px\]"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *):not(.not-chamfered):not(h1):not(h1 *)),
+:where([class*="rounded-\[4px\]"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *):not(.not-chamfered):not(h1):not(h1 *)),
+:where([class*="rounded-\[5px\]"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *):not(.not-chamfered):not(h1):not(h1 *)),
+:where([class*="rounded-\[6px\]"]:not(svg):not(svg *):not(.studio-canvas):not(.studio-canvas *):not(.fixed):not([role="dialog"] *):not(.notebook-physical-cover):not(.notebook-physical-cover *):not(.notebook-interior-peek):not(.notebook-interior-peek *):not(.notebook-preview):not(.notebook-preview *):not(.notebook-card):not(.notebook-card *):not(.notebook-spine):not(.notebook-spine *):not(.notebook-page-stack):not(.notebook-page-stack *):not(.not-chamfered):not(h1):not(h1 *)) {
   clip-path: polygon(
     4px 0%,
     calc(100% - 4px) 0%,
@@ -1069,7 +1069,7 @@ mark.highlighter-violet {
     100% calc(100% - 4px),
     calc(100% - 4px) 100%,
     4px 100%,
-    0% calc(100% - 8px),
+    0% calc(100% - 4px),
     0% 4px
   ) !important;
   border-radius: 0 !important;
