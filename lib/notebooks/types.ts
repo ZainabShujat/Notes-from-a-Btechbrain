@@ -111,12 +111,14 @@ export interface NotebookPageData {
 export interface SubjectNotebookData {
   id: string;
   title: string;
+  shortTitle?: string;
+  icon?: string;
   code: string;
   slug: string;
   tagline: string;
   description: string;
   level: string;
-  accentColor: "violet" | "emerald" | "amber" | "cyan" | "indigo" | "rose" | "teal";
+  accentColor: "violet" | "emerald" | "amber" | "cyan" | "indigo" | "rose" | "teal" | "fuchsia" | "pink";
   accentHex: string;
   stats: {
     sectionsCount: number;
@@ -127,6 +129,7 @@ export interface SubjectNotebookData {
   coverAnnotation: string;
   isLocked?: boolean;
   status?: "active" | "draft" | "planned";
+  gateBranches?: ("cs" | "da")[];
   previewSnippets: {
     title: string;
     teaser: string;

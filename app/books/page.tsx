@@ -1,10 +1,11 @@
 import PageHeader from "../components/ui/PageHeader";
 import { pageMetadata } from "../../lib/seo";
+import { BOOK_PROJECTS } from "../../lib/featured-resources";
 
 export const metadata = pageMetadata({
   title: "Books",
   description:
-    "Long-form work currently being written — a coming-of-age exploration of building a direction when nobody gives you one.",
+    BOOK_PROJECTS[0].description,
   path: "/books",
 });
 
@@ -17,36 +18,17 @@ export default function BooksPage() {
         description="The slow work. The things that need more than an article to say."
       />
 
-      {/* Book I */}
-      <article className="mt-8 rounded-xl border border-hairline bg-surface-1 backdrop-blur-sm p-6 md:p-10">
-        <div className="flex items-center gap-3 mb-6">
-          <span className="rounded-md bg-accent-muted px-3 py-1 text-xs font-semibold text-accent-soft tracking-wide uppercase">
-            Book I
-          </span>
-          <span className="rounded-md bg-surface-2 px-3 py-1 text-xs font-medium text-ink-2">
-            In progress
-          </span>
-        </div>
-
-        <h2 className="text-2xl md:text-3xl font-bold text-ink-1 leading-snug mb-4">
-          Notes from a B.Tech Brain Volume 1 (Working Title)
-        </h2>
-
-        <p className="text-base md:text-lg text-ink-2 leading-relaxed mb-6">
-          A coming-of-age exploration of building a direction when nobody gives
-          you one. About growing up in a system that tells you to follow the path but
-          never explains where it leads. About engineering, ambition, confusion,
-          identity, the internet, and figuring things out — slowly, honestly, and
-          sometimes in the wrong order.
-        </p>
-
-        <div className="rounded-lg bg-surface-2 px-5 py-4">
-          <p className="text-sm text-ink-2 leading-relaxed">
-            Currently being handwritten.
-          </p>
-        </div>
-      </article>
-
+      {BOOK_PROJECTS.map((book, index) => (
+        <article key={book.id} className="mt-8 rounded-xl border border-hairline bg-surface-1 p-6 backdrop-blur-sm md:p-10">
+          <div className="mb-6 flex items-center gap-3">
+            <span className="rounded-md bg-accent-muted px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent-soft">Book {index + 1}</span>
+            <span className="rounded-md bg-surface-2 px-3 py-1 text-xs font-medium text-ink-2">{book.status}</span>
+          </div>
+          <h2 className="mb-4 text-2xl font-bold leading-snug text-ink-1 md:text-3xl">{book.title}</h2>
+          <p className="mb-6 text-base leading-relaxed text-ink-2 md:text-lg">{book.description}</p>
+          <div className="rounded-lg bg-surface-2 px-5 py-4"><p className="text-sm leading-relaxed text-ink-2">{book.statusNote}</p></div>
+        </article>
+      ))}
       {/* Future context */}
       <div className="mt-12 text-center">
         <p className="text-sm text-ink-2 leading-relaxed max-w-md mx-auto">

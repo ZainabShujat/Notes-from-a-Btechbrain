@@ -1,4 +1,5 @@
 import { CourseMeta } from "./types";
+import { DA_DATA_TRANSFORMATIONS_LESSON } from "./da-transformations-data";
 
 export const DBMS_COURSE: CourseMeta = {
   id: "dbms",
@@ -27,7 +28,8 @@ export const DBMS_COURSE: CourseMeta = {
     "Prove conflict serializability by constructing directed precedence graphs and detecting topological cycles",
     "Analyze Two-Phase Locking (2PL), Timestamp Ordering, Wait-Die/Wound-Wait deadlock prevention, and Write-Ahead Logging (WAL) recovery",
   ],
-  gateWeightage: "6 - 10 Marks",
+  gateScope: "GATE 2027 CS/IT + DA scope",
+  gateBranches: ["cs", "da"],
   gateSyllabusTopics: [
     "ER-model and relational schema mapping",
     "Relational model: relational algebra, tuple calculus, SQL",
@@ -35,6 +37,7 @@ export const DBMS_COURSE: CourseMeta = {
     "File organization, indexing (e.g., B and B+ trees)",
     "Transactions and concurrency control (ACID, serializability, 2PL, timestamp ordering)",
     "Log-based recovery protocols and checkpointing",
+    "Data warehousing: Architecture, multidimensional data models, star, snowflake and fact constellation schemas, OLAP operations",
   ],
   modules: [
     // =========================================================================
@@ -58,6 +61,18 @@ export const DBMS_COURSE: CourseMeta = {
           hasInteractive: false,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "Three-Schema Levels: External (Views) → Conceptual (Logical Schema) → Internal (Physical Storage). Physical data independence insulates conceptual tables from storage layout; Logical data independence insulates views from schema evolution.",
+            keyFormulasAndRules: [
+              "Physical Data Independence: Alter index, file layout, block format without touching conceptual schema.",
+              "Logical Data Independence: Add table, split columns without breaking existing views.",
+              "DDL defines conceptual tables; DSDL defines storage; DML queries data; DCL manages permissions; TCL manages transactions.",
+            ],
+            examPitfalls: [
+              "Physical data independence is much easier to achieve and maintain than logical data independence.",
+              "File systems manage bytes and files; DBMS engines manage typed relations, constraints, and ACID transactions.",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -289,6 +304,20 @@ export const DBMS_COURSE: CourseMeta = {
           hasInteractive: false,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "Weak Entity Key = Identifying Owner PK + Discriminator. M:N requires 3 tables; 1:N with total participation on N-side requires 2 tables; 1:1 with total participation on both sides requires 1 table.",
+            keyFormulasAndRules: [
+              "M:N relationship → strictly 3 tables.",
+              "1:N relationship with total on N-side → 2 tables (merge relationship into N-side table).",
+              "1:1 relationship with total on both sides → 1 table.",
+              "Weak entity + identifying owner → 2 tables (weak entity table absorbs identifying relationship).",
+              "Multivalued attribute → separate table containing {Owner PK, Attribute}.",
+            ],
+            examPitfalls: [
+              "Multivalued attributes ALWAYS require their own separate table with foreign key to owner.",
+              "A partial key (discriminator) cannot identify a tuple across the database by itself without the owner entity's primary key.",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -514,6 +543,20 @@ export const DBMS_COURSE: CourseMeta = {
           hasInteractive: false,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "Selection filters rows; Projection extracts columns; Cartesian Product multiplies cardinalities; Division answers FOR ALL universal quantification queries.",
+            keyFormulasAndRules: [
+              "deg(R × S) = deg(R) + deg(S); card(R × S) = |R| × |S|.",
+              "Natural Join R(m) ⋈ S(n) with FK = exactly m tuples.",
+              "General Natural Join R(m) ⋈ S(n) bounds = [0, m × n].",
+              "Division R(A, B) ÷ S(B) yields tuples in A associated with EVERY tuple in S.",
+              "Set Difference R - S requires union compatibility (identical arity and compatible domains).",
+            ],
+            examPitfalls: [
+              "Projection removes duplicates in pure relational algebra; SQL SELECT does NOT unless DISTINCT is specified.",
+              "Natural join on disjoint sets of common attribute values yields an empty relation.",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -683,6 +726,20 @@ export const DBMS_COURSE: CourseMeta = {
           hasInteractive: true,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "WHERE requires TRUE to keep rows; UNKNOWN and FALSE are both discarded. Comparison with NULL (col = NULL) evaluates to UNKNOWN. COUNT(*) counts all rows; COUNT(col) counts only non-NULL entries.",
+            keyFormulasAndRules: [
+              "NOT IN with any NULL in subquery returns 0 rows! Always prefer NOT EXISTS.",
+              "COUNT(*) counts all rows; COUNT(col) counts only non-null values.",
+              "Execution order: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY.",
+              "WHERE filters raw rows; HAVING filters grouped aggregates.",
+              "3-Valued Logic truth tables: NULL OR TRUE = TRUE; NULL AND FALSE = FALSE; NULL OR FALSE = UNKNOWN.",
+            ],
+            examPitfalls: [
+              "Never write WHERE col = NULL; write WHERE col IS NULL.",
+              "Column aliases created in SELECT cannot be referenced in WHERE.",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -842,6 +899,20 @@ export const DBMS_COURSE: CourseMeta = {
           hasInteractive: true,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "2NF = No Partial Dependency (prime subset -> non-prime). 3NF = For all X -> Y, X is Superkey OR Y is Prime. BCNF = For all X -> Y, X MUST be a Superkey.",
+            keyFormulasAndRules: [
+              "Superkey count with single key size k: 2^(n - k).",
+              "Lossless Decomposition Condition: (R1 ∩ R2) → R1 or (R1 ∩ R2) → R2.",
+              "3NF always guarantees dependency preservation; BCNF may lose dependencies.",
+              "Attributes that never appear on the RHS of any FD MUST be in every candidate key.",
+              "Armstrong's Axioms: Reflexivity (Y ⊆ X ⇒ X → Y), Augmentation (X → Y ⇒ XZ → YZ), Transitivity (X → Y ∧ Y → Z ⇒ X → Z).",
+            ],
+            examPitfalls: [
+              "A partial dependency only exists when a PROPER SUBSET of a candidate key determines a non-prime attribute.",
+              "If all candidate keys are single attributes, 2NF is automatically satisfied without checking!",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -1039,6 +1110,20 @@ export const DBMS_COURSE: CourseMeta = {
           hasInteractive: true,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "B+ Tree: Keys only in internal nodes; keys + data pointers in leaves; leaves linked horizontally. Internal order: p · Pb + (p - 1) · K ≤ B. Leaf order: m · (K + Pr) + Pb ≤ B.",
+            keyFormulasAndRules: [
+              "Internal order inequality: p · Pb + (p - 1) · K ≤ B.",
+              "Leaf order inequality: m · (K + Pr) + Pb ≤ B.",
+              "Min keys non-root internal: ⌈p/2⌉ - 1. Min keys non-root leaf: ⌈m/2⌉.",
+              "Root min keys: 1 key (2 pointers). Max keys: p - 1.",
+              "Disk I/Os for search = Height + 1 (Height index blocks + 1 data block).",
+            ],
+            examPitfalls: [
+              "In internal nodes, pointers are p and keys are p - 1; in leaf nodes, pointers and keys are both m (plus 1 next block pointer).",
+              "Range queries in B+ Trees do not traverse back up to the root; they walk horizontally along the leaf pointers.",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -1218,6 +1303,20 @@ export const DBMS_COURSE: CourseMeta = {
           hasInteractive: true,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "Conflicting pair = Same data item, different transactions, AT LEAST ONE WRITE. A schedule is Conflict Serializable iff its directed Precedence Graph is ACYCLIC.",
+            keyFormulasAndRules: [
+              "Precedence Graph: Edge Ti → Tj exists if Ti executes an operation that conflicts with a subsequent operation of Tj.",
+              "Acyclic precedence graph? Topological sort gives equivalent serial schedule!",
+              "Recoverable: Ti commits before Tj commits (where Tj reads a value written by Ti).",
+              "Cascadeless: Ti commits before Tj READS the value written by Ti.",
+              "Strict: Ti commits before Tj reads OR writes the item written by Ti.",
+            ],
+            examPitfalls: [
+              "Two READ operations on the same data item never conflict with each other.",
+              "A schedule can be conflict serializable but still non-recoverable! Serializability and Recoverability are independent dimensions.",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -1423,6 +1522,21 @@ export const DBMS_COURSE: CourseMeta = {
           hasInteractive: false,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "Strict 2PL holds exclusive write locks until transaction commit (guarantees cascadelessness). Conservative 2PL acquires all locks prior to execution (deadlock-free). Write-Ahead Logging (WAL) flushes log records before dirty buffer pages.",
+            keyFormulasAndRules: [
+              "Basic 2PL: Growing phase (acquire locks only) -> Shrinking phase (release locks only). Guarantees conflict serializability.",
+              "Strict 2PL: Holds exclusive locks until commit. Guarantees conflict serializability + strict recoverability. Still prone to deadlocks.",
+              "Rigorous 2PL: Holds ALL locks (shared and exclusive) until commit.",
+              "Wait-Die (Non-preemptive): Old waits for Young; Young dies if requesting lock held by Old.",
+              "Wound-Wait (Preemptive): Old wounds Young (preempts lock); Young waits for Old.",
+              "Crash Recovery (WAL): Committed before crash? REDO using log after-image. Uncommitted before crash? UNDO using log before-image.",
+            ],
+            examPitfalls: [
+              "Deadlocks can still occur in Strict 2PL and Rigorous 2PL!",
+              "Redo requires the log's AFTER-image; Undo requires the log's BEFORE-image.",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -1593,6 +1707,194 @@ export const DBMS_COURSE: CourseMeta = {
             },
           ],
         },
+      ],
+    },
+    // =========================================================================
+    // MODULE 9: DATA WAREHOUSING & MULTIDIMENSIONAL MODELING (GATE DA CORE)
+    // =========================================================================
+    {
+      syllabusScope: "GATE 2027 DA-specific warehouse and transformation material; not CS/IT core",
+      id: "module-9-data-warehousing",
+      title: "Module 9: Data Warehousing & Multidimensional Modeling",
+      slug: "data-warehousing-olap",
+      description:
+        "Data warehouse architecture, ETL staging, multidimensional data models, Star vs Snowflake schemas, and OLAP algebra (roll-up, drill-down, slice, dice).",
+      order: 9,
+      lessons: [
+        {
+          id: "data-warehousing-olap-schemas",
+          syllabusScope: "GATE 2027 DA core",
+          title: "Data Warehousing, Multidimensional OLAP Models & Star/Snowflake Schemas",
+          slug: "data-warehousing-olap-schemas",
+          order: 1,
+          estimatedMinutes: 30,
+          tagline: "ETL staging, dimension vs fact tables, star vs snowflake normalizations, and OLAP slicing/dicing operations.",
+          hasInteractive: false,
+          hasGATE: true,
+          hasPractice: true,
+          cheatsheet: {
+            summaryRule: "Data Warehouses separate analytical OLAP workloads from transactional OLTP. Fact tables hold numeric additive measures; Dimension tables hold descriptive hierarchies. Star schema denormalizes dimensions; Snowflake schema normalizes dimensions into BCNF/3NF.",
+            keyFormulasAndRules: [
+              "OLTP vs OLAP: OLTP is write-heavy, 3NF/BCNF normalized, row-oriented, ACID transactional. OLAP is read-heavy, star/snowflake denormalized, column-oriented, analytical aggregate queries.",
+              "Fact Table: Contains composite primary key (concatenation of foreign keys to all dimension tables) and numerical measures (additive e.g. sales, semi-additive e.g. bank balance, non-additive e.g. unit price/ratios).",
+              "Star Schema: Single central fact table directly referencing completely denormalized, un-normalized dimension tables (simple queries, fast joins, higher data redundancy).",
+              "Snowflake Schema: Dimension tables are normalized into sub-dimension hierarchies (e.g., Item -> Brand -> Category). Reduces redundancy, but requires multi-table joins.",
+              "Fact Constellation (Galaxy Schema): Multiple fact tables sharing common conformed dimension tables (e.g., Sales Fact and Shipping Fact sharing Date and Store dimensions).",
+              "OLAP Operations: (1) Roll-up (aggregation/climbing hierarchy e.g. day -> month), (2) Drill-down (disaggregation/descending hierarchy e.g. quarter -> month), (3) Slice (fixing one dimension e.g. Time = '2024'), (4) Dice (sub-cube selection along multiple dimensions), (5) Pivot (rotating cube axes).",
+              "OLAP Architectures: ROLAP (Relational OLAP, star schemas in RDBMS), MOLAP (Multidimensional OLAP, pre-computed dense arrays/tensors), HOLAP (Hybrid OLAP, detailed data in ROLAP, aggregated summaries in MOLAP).",
+            ],
+            examPitfalls: [
+              "A measure cannot be added across dimensions if it is non-additive (e.g., averaging percentages or profit margins across stores requires recomputing numerator and denominator).",
+              "Snowflake schema reduces storage redundancy compared to Star schema, but degrades query performance due to additional JOIN operations.",
+            ],
+          },
+          sections: [
+            {
+              type: "explanation",
+              heading: "1. The Architectural Divide: OLTP vs Data Warehousing (OLAP)",
+              body: [
+                "Operational database systems (**OLTP — On-Line Transaction Processing**) are engineered for high-concurrency, short write transactions that insert, update, and delete individual records (e.g., ATM withdrawals, e-commerce checkouts). OLTP databases prioritize ACID transactions and 3NF/BCNF normalization to eliminate write update anomalies.",
+                "In contrast, a **Data Warehouse (OLAP — On-Line Analytical Processing)** is an enterprise repository constructed for consolidated decision-support queries scanning millions of historical records (e.g., 'What was the year-over-year revenue growth across electronics in the Southern region?').",
+                "**The Three-Tier Architecture:**",
+                "1. **Bottom Tier (Data Sources & Staging)**: Heterogeneous operational databases (SQL, ERP, flat files) undergo **ETL (Extract, Transform, Load)** to clean, reconcile, and format data into persistent staging areas.",
+                "2. **Middle Tier (OLAP Server)**: An analytical engine organizing data into multidimensional cubes (ROLAP, MOLAP, or HOLAP).",
+                "3. **Top Tier (Front-End Clients)**: Business intelligence dashboards, report generators, and data mining algorithms.",
+              ],
+              callout: {
+                kind: "mental-model",
+                title: "Why Not Run Analytics Directly on OLTP?",
+                message: "A massive analytical aggregate query on an OLTP database would lock entire tables, exhaust buffer pools, and block real-time customer transactions. Decoupling analytics into a Data Warehouse isolates operational throughput from reporting overhead.",
+              },
+            },
+            {
+              type: "explanation",
+              heading: "2. Multidimensional Modeling: Facts, Dimensions & Measures",
+              body: [
+                "A **Multidimensional Data Model** views data in the form of a data cube defined by **Dimensions** and **Measures**.",
+                "**Fact Table:** A central table storing quantitative numerical metrics of a business process (e.g., quantity sold, revenue, shipping cost). Its primary key is a composite key consisting of foreign keys referencing all connected dimension tables.",
+                "**Dimension Tables:** Surrounding tables containing descriptive attributes and hierarchical categorization levels (e.g., `Time`: day -> month -> quarter -> year; `Location`: street -> city -> state -> country; `Product`: item -> brand -> category).",
+                "**Taxonomy of Measures:**",
+                "1. **Additive Measures**: Can be summed meaningfully across all dimensions (e.g., `sales_amount`, `units_sold`).",
+                "2. **Semi-Additive Measures**: Can be summed across some dimensions but not others (e.g., `account_balance` can be summed across accounts or branches, but NOT across time).",
+                "3. **Non-Additive Measures**: Cannot be summed across any dimension (e.g., `unit_price`, `percentage_discount`, `temperature`). Must be aggregated using ratios of sums rather than sum of ratios.",
+              ],
+            },
+            {
+              type: "comparison",
+              heading: "3. Schema Architecture Comparison: Star vs Snowflake vs Constellation",
+              leadParagraph: "Comparing the three primary multidimensional database schema paradigms in analytical engineering.",
+              columns: ["Star Schema", "Snowflake Schema", "Fact Constellation (Galaxy)"],
+              criteria: [
+                {
+                  criterion: "Dimension Normalization",
+                  values: [
+                    "Completely denormalized (1 table per dimension)",
+                    "Fully normalized into 3NF/BCNF sub-dimensions",
+                    "Can be shared normalized or denormalized",
+                  ],
+                },
+                {
+                  criterion: "Query Join Complexity",
+                  values: [
+                    "Minimal (single join between fact and each dimension)",
+                    "High (requires multi-table snowflake chain joins)",
+                    "Moderate to high (depends on query span)",
+                  ],
+                },
+                {
+                  criterion: "Data Redundancy",
+                  values: [
+                    "High (attributes repeated in dimension tables)",
+                    "Low (redundancy eliminated via normalization)",
+                    "Low to moderate",
+                  ],
+                },
+                {
+                  criterion: "Fact Tables Count",
+                  values: [
+                    "Single central fact table",
+                    "Single central fact table",
+                    "Multiple central fact tables sharing conformed dimensions",
+                  ],
+                },
+                {
+                  criterion: "Typical Usage",
+                  values: [
+                    "Departmental Data Marts & high-speed reporting",
+                    "Large data warehouses with complex hierarchies",
+                    "Enterprise data warehouses modeling multiple business processes",
+                  ],
+                },
+              ],
+            },
+            {
+              type: "explanation",
+              heading: "4. OLAP Algebra: Roll-Up, Drill-Down, Slice, Dice & Pivot",
+              body: [
+                "OLAP engines provide five core interactive operations to navigate multidimensional data cubes:",
+                "1. **Roll-up (Drill-Up / Aggregation)**: Performs data aggregation either by climbing up a dimension hierarchy (e.g., aggregating daily sales into monthly totals) or by dimension reduction (dropping a dimension entirely from the cube).",
+                "2. **Drill-down (Roll-Down)**: The reverse of roll-up: introduces finer detail by stepping down a dimension hierarchy (e.g., expanding quarterly revenue into monthly figures) or by adding a new dimension.",
+                "3. **Slice**: Performs a selection on one dimension of the cube, resulting in a sub-cube of lower dimensionality (e.g., selecting `Time = 'Q1'` produces a 2D slice across Product and Location).",
+                "4. **Dice**: Defines a sub-cube by applying selection conditions on two or more dimensions (e.g., `Location in ('CA', 'NY')` AND `Time in ('Q1', 'Q2')` AND `Item in ('Laptop')`).",
+                "5. **Pivot (Rotate)**: Visual rotation of axes to view the data from different perspectives (e.g., swapping row and column dimensions in a cross-tabulated spreadsheet).",
+              ],
+            },
+            {
+              type: "gate-analysis",
+              heading: "5. GATE Worked Example: Dimensional Table Cardinality & Cube Sizing",
+              weightage: "2 Marks (GATE DA)",
+              trap: "Remember that an n-dimensional data cube has 2^n cuboids (including the 0-D apex cuboid and 1-D base cuboids).",
+              solutionSteps: [
+                "Problem Statement (Modeled on GATE DA Pattern):",
+                "A data warehouse contains a Star Schema with a central Fact table and 4 Dimension tables: Date, Store, Customer, and Product.",
+                "Given parameters:",
+                "  - Date dimension has 365 rows (1 year).",
+                "  - Store dimension has 50 rows.",
+                "  - Customer dimension has 10,000 rows.",
+                "  - Product dimension has 200 rows.",
+                "  - The Fact table contains 2,000,000 transaction records.",
+                "  - Each Fact record stores: 4 foreign keys (4 bytes each) and 2 measures: 'units_sold' (4 bytes) and 'total_amount' (8 bytes).",
+                "Calculate: (a) Total number of possible cuboids in the data cube, (b) The maximum possible theoretical cell capacity in the base cuboid, and (c) The raw storage size of the Fact table.",
+                "Step 1: Compute total number of cuboids:",
+                "  A data cube with n dimensions has 2^n distinct cuboids (each corresponding to a subset of dimensions).",
+                "  Here n = 4.",
+                "  Total cuboids = 2^4 = 16 cuboids.",
+                "Step 2: Compute theoretical maximum cell capacity of base cuboid:",
+                "  The base cuboid represents all combinations of all 4 dimensions:",
+                "  Max cells = |Date| * |Store| * |Customer| * |Product|",
+                "  Max cells = 365 * 50 * 10,000 * 200 = 36,500,000,000 cells (36.5 billion cells).",
+                "  Notice: since the actual Fact table has 2,000,000 records, the data cube density is: 2,000,000 / 36.5 billion ≈ 0.0055% (an extremely sparse data cube, typical of real OLAP engines).",
+                "Step 3: Calculate Fact table storage size:",
+                "  Bytes per record = (4 FKs * 4 bytes) + 4 bytes (units) + 8 bytes (amount)",
+                "  Bytes per record = 16 + 4 + 8 = 28 bytes.",
+                "  Total Fact table raw size = 2,000,000 records * 28 bytes = 56,000,000 bytes = 56 MB.",
+                "Conclusion: 16 cuboids; theoretical capacity = 36.5B cells; Fact table size = 56 MB.",
+              ],
+            },
+            {
+              type: "resources",
+              heading: "6. Authoritative References",
+              sources: [
+                {
+                  title: "The Data Warehouse Toolkit: The Definitive Guide to Dimensional Modeling (3rd Edition)",
+                  authorOrInstitution: "Ralph Kimball, Margy Ross (Wiley)",
+                  topic: "The industry standard reference on dimensional modeling, star schemas, and fact tables",
+                  url: "https://www.wiley.com/en-us/The+Data+Warehouse+Toolkit",
+                  type: "primary-standard",
+                  relevance: "Definitive methodology for dimensional business intelligence architectures.",
+                },
+                {
+                  title: "Data Mining: Concepts and Techniques (3rd Edition)",
+                  authorOrInstitution: "Jiawei Han, Micheline Kamber, Jian Pei (Morgan Kaufmann)",
+                  topic: "Chapter 4: Data Warehousing and Online Analytical Processing",
+                  type: "primary-standard",
+                  relevance: "Formal multidimensional data model, OLAP cuboids, and snowflake algebra.",
+                },
+              ],
+            },
+          ],
+        },
+        DA_DATA_TRANSFORMATIONS_LESSON,
       ],
     },
   ],

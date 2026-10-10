@@ -2,7 +2,6 @@ import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 import { getObservationById } from '../../../wonder/data';
 
-export const runtime = 'edge';
 
 export async function GET(req: NextRequest) {
   try {
@@ -33,6 +32,14 @@ export async function GET(req: NextRequest) {
       );
     }
 
+    const [year, month, day] = obs.date.split('-').map(Number);
+    const formattedDate = new Date(year, month - 1, day).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    const bodyText = obs.body.length > 320 ? obs.body.substring(0, 317) + '...' : obs.body;
+
     return new ImageResponse(
       (
         <div
@@ -49,47 +56,46 @@ export async function GET(req: NextRequest) {
           }}
         >
           {/* Header */}
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '60px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '50px' }}>
             <div
               style={{
-                width: '100px',
-                height: '100px',
+                width: '90px',
+                height: '90px',
                 borderRadius: '50%',
                 backgroundColor: '#262626',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginRight: '30px',
+                marginRight: '24px',
                 overflow: 'hidden',
                 border: '2px solid #404040'
               }}
             >
-              {/* Fallback avatar visual since we can't easily fetch the actual image URL in edge without Absolute URL */}
-              <div style={{ fontSize: '50px' }}>🧠</div>
+              <div style={{ fontSize: '46px' }}>🧠</div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{ fontSize: '42px', fontWeight: 700, color: '#f5f5f5' }}>Zainab Shujat</span>
-              <span style={{ fontSize: '28px', color: '#a3a3a3', marginTop: '4px' }}>@btechbrain</span>
+              <span style={{ fontSize: '38px', fontWeight: 700, color: '#f5f5f5' }}>Zainab Shujat</span>
+              <span style={{ fontSize: '26px', color: '#a3a3a3', marginTop: '2px' }}>@btechbrain</span>
             </div>
           </div>
 
           {/* Body */}
-          <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-            <span style={{ fontSize: '48px', fontWeight: 700, color: '#f5f5f5', marginBottom: '24px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1, justifyContent: 'center' }}>
+            <span style={{ fontSize: '44px', fontWeight: 700, color: '#f5f5f5', marginBottom: '20px', lineHeight: 1.25 }}>
               {obs.title}
             </span>
-            <span style={{ fontSize: '36px', lineHeight: 1.5, color: '#d4d4d4', whiteSpace: 'pre-wrap' }}>
-              {obs.body.length > 250 ? obs.body.substring(0, 247) + '...' : obs.body}
+            <span style={{ fontSize: '32px', lineHeight: 1.5, color: '#d4d4d4', whiteSpace: 'pre-wrap' }}>
+              {bodyText}
             </span>
           </div>
 
           {/* Footer */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '40px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '36px' }}>
             <span style={{ fontSize: '24px', color: '#737373' }}>
-              {new Date(obs.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              {formattedDate}
             </span>
-            <span style={{ fontSize: '28px', fontWeight: 600, color: '#8b5cf6' }}>
-              Notes From a B.Tech Brain
+            <span style={{ fontSize: '26px', fontWeight: 600, color: '#a78bfa' }}>
+              Notes From a B.Tech Brain · Wonder
             </span>
           </div>
         </div>
@@ -97,6 +103,9 @@ export async function GET(req: NextRequest) {
       {
         width: 1200,
         height: 630,
+        headers: {
+          'Cache-Control': 'public, max-age=86400, stale-while-revalidate=604800',
+        },
       }
     );
   } catch (e) {

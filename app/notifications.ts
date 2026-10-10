@@ -4,6 +4,69 @@
 
 const notifications = [
   {
+    id: 37,
+    date: "2026-10-10",
+    title: "Editorial Homepage & Content-Led Showcase",
+    message: `Transformed the root homepage from a directory hub into an editorial publication landing page.<br><br>
+Highlights in this overhaul:<ul style="margin: 0.5em 0 0.5em 1.5em; padding: 0;">
+<li><strong>Real Content Previews</strong>: highlights live newsletter editions, curiosity teasers from Wonder, subject notebook previews, and featured interactive labs.</li>
+<li><strong>Calm CSS-First Motion</strong>: replaced erratic scroll-linked movement with a subtle, low-amplitude ambient hero glow that respects <code>prefers-reduced-motion</code>.</li>
+<li><strong>Topic Pathways</strong>: direct visual gateways linking high-level curiosities directly to deep-dive academic folios.</li>
+</ul>`,
+    version: "v1.2.0",
+    color: "#0ea5e9", // sky
+  },
+  {
+    id: 36,
+    date: "2026-10-10",
+    title: "Brain Map 2.0: Unified Knowledge Graph",
+    message: `A complete ground-up re-architecture of the Brain Map interactive visualization.<br><br>
+Key enhancements:<ul style="margin: 0.5em 0 0.5em 1.5em; padding: 0;">
+<li><strong>Cross-Medium Graph</strong>: links all 18 subject notebooks, lessons, Wonder observations, long-form articles, books, and interactive simulators into an interconnected semantic web.</li>
+<li><strong>Cluster & Edge Provenance</strong>: nodes dynamically declare their relationship types (contains, references, related-to, classified-under).</li>
+<li><strong>Enhanced Navigation</strong>: click-to-focus camera controls, topic clustering, and integrated preview drawers.</li>
+</ul>`,
+    version: "v1.2.0",
+    color: "#a855f7", // purple
+  },
+  {
+    id: 35,
+    date: "2026-10-10",
+    title: "The Academic Notebooks: All 18 Subjects Live",
+    message: `A monumental milestone for Notes From a B.Tech Brain: expanded the digital library into a full-scale academic engine covering all 18 core subjects across GATE CS/IT and GATE Data Science & AI.<br><br>
+Features in this release:<ul style="margin: 0.5em 0 0.5em 1.5em; padding: 0;">
+<li><strong>254 Prerendered Static Lessons</strong> compiled with Next.js Turbopack for instantaneous page loads.</li>
+<li><strong>100% Official GATE Syllabus Coverage</strong> spanning Systems, Theory, Hardware, Math, Networks, DBMS, and AI/ML.</li>
+<li><strong>Deep Analytical Parity</strong>: step-by-step mathematical proofs, worked numerical traces, and algorithm derivations.</li>
+<li><strong>Standardized Lesson Cheatsheets</strong> on every single folio, preserving operational conditions and high-yield exam pitfalls.</li>
+</ul>`,
+    version: "v1.2.0",
+    color: "#6366f1", // indigo
+  },
+  {
+    id: 34,
+    date: "2026-10-10",
+    title: "Bespoke Cover Art & Hand-Drawn Sketches",
+    message: `Replaced generic placeholder graphics on the notebook shelf with 18 custom, hand-crafted vector sketches in <code>SubjectCoverSketch</code>.<br><br>
+Each subject now features bespoke technical artwork reflecting its core ideas: from CPU pipeline stages and TCP 3-way handshakes to Turing machine tapes, K-maps, SVD ellipses, and neural backpropagation networks.`,
+    version: "v1.2.0",
+    color: "#ec4899", // pink
+  },
+  {
+    id: 33,
+    date: "2026-10-10",
+    title: "Content Quality Standard & 31-Rule Audit",
+    message: `Completed a comprehensive institutional audit of all 18 subjects against our publication standard (<code>VERIFY_CONTENT.md</code>).<br><br>
+Guarantees verified across the library:<ul style="margin: 0.5em 0 0.5em 1.5em; padding: 0;">
+<li><strong>Zero AI Fluff</strong>: clean, direct, student-first engineering prose with zero generic filler.</li>
+<li><strong>Authentic GATE Labeling</strong>: zero synthetic questions falsely marked as historic PYQs; all original problems clearly designated.</li>
+<li><strong>Authoritative Citations</strong>: standard canonical textbooks cited for every subject (Silberschatz, Cormen/CLRS, Strang, Russell & Norvig, etc.).</li>
+<li><strong>Full Mobile Optimization</strong>: responsive reading layouts, touch-friendly cheatsheet modals, and crisp high-contrast typography.</li>
+</ul>`,
+    version: "v1.2.0",
+    color: "#06b6d4", // cyan
+  },
+  {
     id: 32,
     date: "2026-08-30",
     title: "Custom 404 Page Added",

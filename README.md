@@ -31,7 +31,7 @@ A fully-functional Next.js platform that:
 - Houses **The Notebooks**: Curriculum-mapped CS study manuscripts with skeuomorphic engineering notebook design
 - Includes **Interactive CS Simulators**: Full CPU schedulers (FCFS, SJF, SRTF, Priority, Round Robin) and Banker's Algorithm deadlock avoidance
 - Features **Dedicated Topic Cheat Sheets** & **"Don't Feel Dumb" Glossary** with clipped-corner octagon geometry
-- Features an interactive **Brain Map** (force-directed graph) linking recurring ideas
+- Features an interactive **Brain Map** of editions, Wonder notes, notebooks, lessons, and learning experiences, linked through verified structure and authored references
 - Runs a custom chronological **Daily Feed** timeline with likes and shareability
 - Implements **responsive design** optimized for all device sizes
 - Provides flawless **Light & Dark mode** toggling using CSS-first variable architecture
@@ -61,7 +61,7 @@ A fully-functional Next.js platform that:
 * ✅ **Universal Notification System**: Site update drawer accessible via universal bell header navigation
 * ✅ **v1.1.0**: Fully migrated to the Worlds architecture
 * ✅ Dynamic Open Graph (OG) Image generation using Next.js Edge runtime
-* ✅ Interactive **Brain Map** visualizing idea constellations
+* ✅ Interactive **Brain Map** indexing publication and learning resources
 * ✅ **Wonder** section completely overhauled into an X-style timeline feed
 * ✅ Games Hub integrated with embedded interactive iframe projects
 * ✅ CSS Theme Engine refactored for flawless Dark/Light mode integration
@@ -93,7 +93,7 @@ A fully-functional Next.js platform that:
   - Unique chamfered octagon shapes on glossary definitions, topic cheat sheets, and release updates.
 
 - **Brain Map Visualization:**
-  - A client-side, interactive, force-directed graph built with d3-force that maps out the underlying connections between articles, tags, and overarching themes.
+  - A content-backed force graph indexes editions, Wonder notes, notebooks, lessons, embedded interactive lesson sections and the shared labs catalog, categories, an in-progress book, and published browser games. Explicit course structure, category metadata, and authored links produce the verified relationships; tags are searchable metadata only. The map includes type/category filters, search, details with original links, reduced-motion support, and a keyboard-accessible resource index.
 
 - **Wonder Daily Feed:**
   - A chronological, scrollable timeline for micro-observations. Complete with individual routing, persistent liking, and quick-share copy links.
@@ -121,8 +121,8 @@ A fully-functional Next.js platform that:
   Rebuilding the newsletter subscriber infrastructure using Supabase and Resend.
 - **Reading Time Estimates:**  
   Automatic calculation of article reading time.  
-- **Tag System Expansion:**  
-  Tying the frontend tag filters directly into the Brain Map node structures.
+- **Unified content feeds:**
+  Include database-only published editions once shared article loading and route guarantees support the same graph-integrity checks.
 
 ---
 
@@ -168,3 +168,7 @@ This project demonstrates:
 - **d3-force integration** with React for data visualization
 - **Markdown processing** with gray-matter and remark
 - **Continuous deployment** workflows with Vercel
+
+## Editorial homepage refresh — 2026-10-10
+
+The homepage now serves as the publication's editorial landing page rather than a second navigation menu. It leads with the existing orbiting hero and a clear Editions action, then draws featured/recent writing and dated Wonder observations from the existing content sources. It previews live notebook routes and the interactive lab, presents a self-contained Brain Map illustration linking to `/map`, and closes with article-led topic pathways. The hero keeps its composition stable, uses slow CSS-only ambient motion, and disables nonessential movement under `prefers-reduced-motion`. No route or navigation changes were made.

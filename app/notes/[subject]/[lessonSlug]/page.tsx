@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getLesson, getAllLessons, getNextAndPrevLesson } from "../../../../lib/courses";
 import CourseLayout from "../../../components/course/CourseLayout";
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const { lesson, course } = data;
-  const isComplete = course.slug === "operating-systems";
+  const isComplete = Boolean(course);
 
   if (!isComplete) {
     return {
@@ -79,9 +79,6 @@ export default async function LessonPage({ params }: PageProps) {
   if (!data) return notFound();
 
   const { course, module, lesson } = data;
-  if (course.slug !== "operating-systems") {
-    redirect(`/notes/${course.slug}`);
-  }
   const { prev, next } = getNextAndPrevLesson(course.slug, lesson.slug);
 
   const lessonUrl = `${SITE_URL}/notes/${course.slug}/${lesson.slug}`;

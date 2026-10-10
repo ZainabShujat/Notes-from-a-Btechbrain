@@ -13,7 +13,7 @@ import { cx } from "./ui/cx";
  * Secondary: Cross-subject shortcuts (Labs, PYQs, Revision).
  */
 
-const NOTEBOOKS_PRIMARY = [
+const NOTEBOOKS_CS = [
   {
     num: "01",
     title: "Operating Systems",
@@ -56,9 +56,6 @@ const NOTEBOOKS_PRIMARY = [
     slug: "discrete-mathematics",
     desc: "Predicate logic, relations, POSETs, graph coloring & planarity",
   },
-];
-
-const NOTEBOOKS_SECONDARY = [
   {
     num: "08",
     title: "Data Structures",
@@ -97,12 +94,65 @@ const NOTEBOOKS_SECONDARY = [
   },
 ];
 
+const NOTEBOOKS_DA = [
+  {
+    num: "01",
+    title: "General Aptitude",
+    slug: "general-aptitude",
+    desc: "Numerical ability, verbal reasoning & spatial logic",
+  },
+  {
+    num: "02",
+    title: "Probability & Statistics",
+    slug: "probability-and-statistics",
+    desc: "Bayes' theorem, random variables, hypothesis testing & p-values",
+  },
+  {
+    num: "03",
+    title: "Linear Algebra",
+    slug: "linear-algebra",
+    desc: "Vector spaces, SVD, eigenvalues, projections & PCA foundations",
+  },
+  {
+    num: "04",
+    title: "Calculus & Optimization",
+    slug: "calculus-and-optimization",
+    desc: "Gradient descent, Hessian matrix, convexity & Lagrange multipliers",
+  },
+  {
+    num: "05",
+    title: "Programming, DS & Algo",
+    slug: "algorithms",
+    desc: "Python/C constructs, stacks, trees, sorting & dynamic programming",
+  },
+  {
+    num: "06",
+    title: "Database Mgmt. & Warehousing",
+    slug: "dbms",
+    desc: "ER models, relational algebra, SQL, normalization & data warehousing",
+  },
+  {
+    num: "07",
+    title: "Machine Learning",
+    slug: "machine-learning",
+    desc: "Supervised & unsupervised, SVMs, decision trees, cross-entropy & ROC",
+  },
+  {
+    num: "08",
+    title: "Artificial Intelligence",
+    slug: "artificial-intelligence",
+    desc: "Heuristic search, A*, minimax game trees & propositional logic",
+  },
+];
+
 export default function NotesDropdown() {
   const [open, setOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<"cs" | "da">("cs");
   const containerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const isActive = pathname.startsWith("/notes");
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
 
   // Close when route changes
   useEffect(() => {
@@ -194,74 +244,154 @@ export default function NotesDropdown() {
           aria-label="Notes by Subject"
         >
           <div className="rounded-xl border border-hairline bg-raised shadow-2xl p-5 overflow-hidden">
-            {/* Header: Editorial Subject-First Eyebrow */}
+            {/* Header: Editorial Subject-First Eyebrow & Branch Switcher */}
             <div className="flex items-center justify-between border-b border-hairline pb-3 mb-3.5">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <span className="text-[10px] font-mono font-bold tracking-widest text-accent uppercase">
                   THE NOTEBOOKS
                 </span>
+                {/* Branch Switcher Tabs */}
+                <div className="inline-flex p-0.5 rounded-md bg-surface-2 border border-hairline">
+                  <button
+                    onClick={() => setActiveTab("cs")}
+                    className={cx(
+                      "px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold transition-all cursor-pointer",
+                      activeTab === "cs"
+                        ? "bg-raised text-blue-600 dark:text-blue-400 shadow-xs"
+                        : "text-ink-2 hover:text-ink-1"
+                    )}
+                  >
+                    GATE CS/IT (13)
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("da")}
+                    className={cx(
+                      "px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold transition-all cursor-pointer",
+                      activeTab === "da"
+                        ? "bg-raised text-purple-600 dark:text-purple-400 shadow-xs"
+                        : "text-ink-2 hover:text-ink-1"
+                    )}
+                  >
+                    GATE AI & DA (8)
+                  </button>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Link
+                  href="/notes/gate"
+                  className="text-xs font-mono font-semibold text-accent hover:underline flex items-center gap-1"
+                >
+                  <span>GATE Hub</span>
+                  <span aria-hidden="true">&rarr;</span>
+                </Link>
                 <span className="text-hairline">|</span>
-                <span className="text-xs text-ink-3 font-mono">
-                  Subjects, organized the way we study them.
-                </span>
-              </div>
-              <Link
-                href="/notes"
-                className="text-xs font-mono font-semibold text-accent hover:underline flex items-center gap-1"
-              >
-                <span>All Notebooks</span>
-                <span aria-hidden="true">&rarr;</span>
-              </Link>
-            </div>
-
-            {/* Two Column Subject Grid */}
-            <div className="grid grid-cols-2 gap-x-6 gap-y-1">
-              {/* Column 1 */}
-              <div className="space-y-1">
-                {NOTEBOOKS_PRIMARY.map((nb) => (
-                  <Link
-                    key={nb.slug}
-                    href={`/notes/${nb.slug}`}
-                    className="group block px-2.5 py-1.5 rounded-lg hover:bg-surface-2/60 transition-colors"
-                  >
-                    <div className="flex items-baseline gap-2">
-                      <span className="font-mono text-[10px] text-ink-3 group-hover:text-accent font-semibold">
-                        {nb.num}
-                      </span>
-                      <span className="text-xs font-semibold text-ink-1 group-hover:text-accent transition-colors font-sans truncate">
-                        {nb.title}
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-ink-3 truncate pl-5">
-                      {nb.desc}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-
-              {/* Column 2 */}
-              <div className="space-y-1">
-                {NOTEBOOKS_SECONDARY.map((nb) => (
-                  <Link
-                    key={nb.slug}
-                    href={`/notes/${nb.slug}`}
-                    className="group block px-2.5 py-1.5 rounded-lg hover:bg-surface-2/60 transition-colors"
-                  >
-                    <div className="flex items-baseline gap-2">
-                      <span className="font-mono text-[10px] text-ink-3 group-hover:text-accent font-semibold">
-                        {nb.num}
-                      </span>
-                      <span className="text-xs font-semibold text-ink-1 group-hover:text-accent transition-colors font-sans truncate">
-                        {nb.title}
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-ink-3 truncate pl-5">
-                      {nb.desc}
-                    </p>
-                  </Link>
-                ))}
+                <Link
+                  href="/notes"
+                  className="text-xs font-mono text-ink-3 hover:text-ink-1 flex items-center gap-1"
+                >
+                  <span>All Shelf</span>
+                </Link>
               </div>
             </div>
+
+            {/* Two Column Subject Grid for Active Branch */}
+            {activeTab === "cs" ? (
+              <div className="grid grid-cols-2 gap-x-6 gap-y-1">
+                {/* CS Column 1 */}
+                <div className="space-y-1">
+                  {NOTEBOOKS_CS.slice(0, 7).map((nb) => (
+                    <Link
+                      key={nb.slug}
+                      href={`/notes/${nb.slug}`}
+                      className="group block px-2.5 py-1.5 rounded-lg hover:bg-surface-2/60 transition-colors"
+                    >
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-mono text-[10px] text-ink-3 group-hover:text-accent font-semibold">
+                          {nb.num}
+                        </span>
+                        <span className="text-xs font-semibold text-ink-1 group-hover:text-accent transition-colors font-sans truncate">
+                          {nb.title}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-ink-3 truncate pl-5">
+                        {nb.desc}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* CS Column 2 */}
+                <div className="space-y-1">
+                  {NOTEBOOKS_CS.slice(7).map((nb) => (
+                    <Link
+                      key={nb.slug}
+                      href={`/notes/${nb.slug}`}
+                      className="group block px-2.5 py-1.5 rounded-lg hover:bg-surface-2/60 transition-colors"
+                    >
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-mono text-[10px] text-ink-3 group-hover:text-accent font-semibold">
+                          {nb.num}
+                        </span>
+                        <span className="text-xs font-semibold text-ink-1 group-hover:text-accent transition-colors font-sans truncate">
+                          {nb.title}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-ink-3 truncate pl-5">
+                        {nb.desc}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 gap-x-6 gap-y-1">
+                {/* DA Column 1 */}
+                <div className="space-y-1">
+                  {NOTEBOOKS_DA.slice(0, 4).map((nb) => (
+                    <Link
+                      key={nb.slug + nb.num}
+                      href={`/notes/${nb.slug}`}
+                      className="group block px-2.5 py-1.5 rounded-lg hover:bg-surface-2/60 transition-colors"
+                    >
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-mono text-[10px] text-purple-600 dark:text-purple-400 group-hover:text-accent font-semibold">
+                          {nb.num}
+                        </span>
+                        <span className="text-xs font-semibold text-ink-1 group-hover:text-purple-500 transition-colors font-sans truncate">
+                          {nb.title}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-ink-3 truncate pl-5">
+                        {nb.desc}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* DA Column 2 */}
+                <div className="space-y-1">
+                  {NOTEBOOKS_DA.slice(4).map((nb) => (
+                    <Link
+                      key={nb.slug + nb.num}
+                      href={`/notes/${nb.slug}`}
+                      className="group block px-2.5 py-1.5 rounded-lg hover:bg-surface-2/60 transition-colors"
+                    >
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-mono text-[10px] text-purple-600 dark:text-purple-400 group-hover:text-accent font-semibold">
+                          {nb.num}
+                        </span>
+                        <span className="text-xs font-semibold text-ink-1 group-hover:text-purple-500 transition-colors font-sans truncate">
+                          {nb.title}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-ink-3 truncate pl-5">
+                        {nb.desc}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Secondary Cross-Subject Shortcuts Footer */}
             <div className="mt-4 pt-3 border-t border-hairline flex items-center justify-between text-xs font-mono text-ink-3">

@@ -85,6 +85,8 @@ export type ModuleMeta = {
 
 // ─── Subject ────────────────────────────────────────────────────────
 
+export type GateBranch = "cs" | "da";
+
 export type SubjectMeta = {
   id: string;
   title: string;
@@ -99,6 +101,8 @@ export type SubjectMeta = {
   /** Will interactive labs be available? */
   hasLabs: boolean;
   hasPYQs: boolean;
+  /** Applicable GATE branches */
+  gateBranches?: GateBranch[];
 };
 
 // ─── Resource ───────────────────────────────────────────────────────
@@ -136,6 +140,7 @@ export type PracticeItem = {
 // ─── Learning Tracks ────────────────────────────────────────────────
 
 export const LEARNING_TRACKS: SubjectMeta[] = [
+  // ── GATE CS/IT & Common ──
   {
     id: "general-aptitude",
     title: "General Aptitude",
@@ -143,12 +148,13 @@ export const LEARNING_TRACKS: SubjectMeta[] = [
     shortTitle: "Aptitude",
     icon: "🧠",
     color: "bg-amber-400",
-    tagline: "Verbal, numerical, and logical reasoning for GATE.",
+    tagline: "Verbal, numerical, and logical reasoning for GATE CS/IT & DA.",
     topicCount: 8,
-    highlights: ["Verbal reasoning", "Numerical ability"],
+    highlights: ["Verbal reasoning", "Numerical ability", "Spatial aptitude"],
     modules: [],
     hasLabs: false,
     hasPYQs: true,
+    gateBranches: ["cs", "da"],
   },
   {
     id: "engineering-mathematics",
@@ -163,6 +169,7 @@ export const LEARNING_TRACKS: SubjectMeta[] = [
     modules: [],
     hasLabs: false,
     hasPYQs: true,
+    gateBranches: ["cs"],
   },
   {
     id: "discrete-mathematics",
@@ -177,6 +184,7 @@ export const LEARNING_TRACKS: SubjectMeta[] = [
     modules: [],
     hasLabs: false,
     hasPYQs: true,
+    gateBranches: ["cs"],
   },
   {
     id: "digital-logic",
@@ -191,6 +199,7 @@ export const LEARNING_TRACKS: SubjectMeta[] = [
     modules: [],
     hasLabs: true,
     hasPYQs: true,
+    gateBranches: ["cs"],
   },
   {
     id: "computer-organization",
@@ -205,6 +214,7 @@ export const LEARNING_TRACKS: SubjectMeta[] = [
     modules: [],
     hasLabs: true,
     hasPYQs: true,
+    gateBranches: ["cs"],
   },
   {
     id: "programming-in-c",
@@ -219,6 +229,7 @@ export const LEARNING_TRACKS: SubjectMeta[] = [
     modules: [],
     hasLabs: true,
     hasPYQs: true,
+    gateBranches: ["cs"],
   },
   {
     id: "data-structures",
@@ -233,6 +244,7 @@ export const LEARNING_TRACKS: SubjectMeta[] = [
     modules: [],
     hasLabs: true,
     hasPYQs: true,
+    gateBranches: ["cs", "da"],
   },
   {
     id: "algorithms",
@@ -247,6 +259,7 @@ export const LEARNING_TRACKS: SubjectMeta[] = [
     modules: [],
     hasLabs: true,
     hasPYQs: true,
+    gateBranches: ["cs", "da"],
   },
   {
     id: "theory-of-computation",
@@ -261,6 +274,7 @@ export const LEARNING_TRACKS: SubjectMeta[] = [
     modules: [],
     hasLabs: true,
     hasPYQs: true,
+    gateBranches: ["cs"],
   },
   {
     id: "compiler-design",
@@ -275,6 +289,7 @@ export const LEARNING_TRACKS: SubjectMeta[] = [
     modules: [],
     hasLabs: true,
     hasPYQs: true,
+    gateBranches: ["cs"],
   },
   {
     id: "operating-systems",
@@ -289,6 +304,7 @@ export const LEARNING_TRACKS: SubjectMeta[] = [
     modules: [],
     hasLabs: true,
     hasPYQs: true,
+    gateBranches: ["cs"],
   },
   {
     id: "dbms",
@@ -297,12 +313,13 @@ export const LEARNING_TRACKS: SubjectMeta[] = [
     shortTitle: "DBMS",
     icon: "🗄️",
     color: "bg-sky-400",
-    tagline: "From tables to transactions.",
-    topicCount: 10,
-    highlights: ["SQL Lab", "Normalization", "Transactions"],
+    tagline: "From relational schemas to transactions and data warehousing.",
+    topicCount: 12,
+    highlights: ["SQL Lab", "Normalization", "Transactions", "Data Warehousing"],
     modules: [],
     hasLabs: true,
     hasPYQs: true,
+    gateBranches: ["cs", "da"],
   },
   {
     id: "computer-networks",
@@ -317,6 +334,84 @@ export const LEARNING_TRACKS: SubjectMeta[] = [
     modules: [],
     hasLabs: true,
     hasPYQs: true,
+    gateBranches: ["cs"],
+  },
+
+  // ── GATE Data Science & AI (DA) Core ──
+  {
+    id: "probability-and-statistics",
+    title: "Probability and Statistics",
+    slug: "probability-and-statistics",
+    shortTitle: "Prob & Stats",
+    icon: "🎲",
+    color: "bg-cyan-500",
+    tagline: "Counting, conditional probability, distributions, and hypothesis testing for Data Science.",
+    topicCount: 10,
+    highlights: ["Random variables", "Bayes theorem", "Distributions", "Hypothesis testing"],
+    modules: [],
+    hasLabs: true,
+    hasPYQs: true,
+    gateBranches: ["da"],
+  },
+  {
+    id: "linear-algebra",
+    title: "Linear Algebra",
+    slug: "linear-algebra",
+    shortTitle: "Linear Algebra",
+    icon: "📐",
+    color: "bg-blue-500",
+    tagline: "Vector spaces, projections, SVD, eigenvalues and PCA foundations.",
+    topicCount: 8,
+    highlights: ["Matrix decompositions", "Eigenvalues", "SVD & PCA", "Vector projections"],
+    modules: [],
+    hasLabs: true,
+    hasPYQs: true,
+    gateBranches: ["da"],
+  },
+  {
+    id: "calculus-and-optimization",
+    title: "Calculus and Optimization",
+    slug: "calculus-and-optimization",
+    shortTitle: "Calculus & Opt",
+    icon: "📈",
+    color: "bg-fuchsia-400",
+    tagline: "Multivariable gradients, Hessian matrices, convex sets, and gradient descent.",
+    topicCount: 8,
+    highlights: ["Gradient descent", "Convex optimization", "Lagrange multipliers", "Hessian"],
+    modules: [],
+    hasLabs: true,
+    hasPYQs: true,
+    gateBranches: ["da"],
+  },
+  {
+    id: "machine-learning",
+    title: "Machine Learning",
+    slug: "machine-learning",
+    shortTitle: "Machine Learning",
+    icon: "🤖",
+    color: "bg-purple-500",
+    tagline: "Supervised & unsupervised algorithms, neural networks, SVMs, and bias-variance tradeoff.",
+    topicCount: 12,
+    highlights: ["Regression & classification", "SVMs & Kernels", "Decision trees", "Clustering & PCA"],
+    modules: [],
+    hasLabs: true,
+    hasPYQs: true,
+    gateBranches: ["da"],
+  },
+  {
+    id: "artificial-intelligence",
+    title: "Artificial Intelligence",
+    slug: "artificial-intelligence",
+    shortTitle: "AI",
+    icon: "🧠",
+    color: "bg-pink-500",
+    tagline: "Search algorithms, heuristic A*, adversarial minimax, and logic reasoning.",
+    topicCount: 9,
+    highlights: ["Informed search (A*)", "Adversarial minimax", "Alpha-Beta pruning", "Propositional logic"],
+    modules: [],
+    hasLabs: true,
+    hasPYQs: true,
+    gateBranches: ["da"],
   },
 ];
 

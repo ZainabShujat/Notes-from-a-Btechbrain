@@ -18,7 +18,16 @@ export const OPERATING_SYSTEMS_COURSE: CourseMeta = {
   estimatedTotalHours: 32,
   targetAudience:
     "B.Tech Computer Science / Information Technology undergraduates, systems engineers, and serious GATE CS aspirants.",
-  gateWeightage: "GATE CS topic coverage; current marks vary by paper and year",
+  learningOutcomes: [
+    "Distinguish kernel mode from user mode and trace hardware interrupts, traps, and system calls",
+    "Model process life-cycles, analyze context switches, and compute CPU scheduling metrics (TAT, WT, Response time)",
+    "Solve classical synchronization problems using mutexes, semaphores, and monitor invariants",
+    "Verify deadlock conditions and execute Banker's Safety and Resource-Request algorithms",
+    "Calculate address translation times across single/multi-level page tables, TLBs, and inverted tables",
+    "Trace and compare FIFO, LRU, and Optimal page replacement algorithms while analyzing Belady's anomaly",
+    "Calculate disk seek times for FCFS, SSTF, SCAN, and C-SCAN algorithms and analyze Unix Inode file allocation",
+  ],
+  gateScope: "GATE 2027 CS/IT scope",
   gateSyllabusTopics: [
     "Processes, threads, inter-process communication, concurrency and synchronization",
     "Deadlock detection, prevention and avoidance (Banker's algorithm)",

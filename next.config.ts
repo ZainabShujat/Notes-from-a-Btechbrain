@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  outputFileTracingRoot: process.cwd(),
+  turbopack: { root: process.cwd() },
   async redirects() {
     return [
       // Old routes → new worlds

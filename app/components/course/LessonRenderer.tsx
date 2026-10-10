@@ -52,7 +52,11 @@ export default function LessonRenderer({
               <>
                 <span className="opacity-40">&middot;</span>
                 <span className="bg-[#fef08a] dark:bg-[#facc15] text-[#713f12] dark:text-[#422006] px-2 py-0.5 rounded-[3px] text-[10px] font-bold tracking-wider font-mono">
-                  GATE CS LENS
+                  {subjectSlug && ["probability-and-statistics", "linear-algebra", "calculus-and-optimization", "machine-learning", "artificial-intelligence"].includes(subjectSlug)
+                    ? "GATE DA LENS"
+                    : subjectSlug && ["data-structures", "algorithms", "dbms", "general-aptitude", "programming-in-c"].includes(subjectSlug)
+                    ? "GATE CS & DA LENS"
+                    : "GATE CS LENS"}
                 </span>
               </>
             )}
@@ -565,6 +569,52 @@ function SectionBlock({
         <div id={sectionId} className="scroll-mt-24">
           <GateLens section={section} />
         </div>
+      );
+
+    case "gate-analysis":
+      return (
+        <section id={sectionId} className="my-10 py-6 scroll-mt-24 space-y-5 border-y border-dashed border-hairline/80">
+          <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-dashed border-hairline/60 pb-2">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-ink-3 block">
+              WORKED EXAM ANALYSIS &middot; STEP-BY-STEP DERIVATION
+            </span>
+            {section.weightage && (
+              <span className="font-mono text-xs text-accent font-semibold px-2 py-0.5 rounded bg-accent/10 border border-accent/20">
+                {section.weightage}
+              </span>
+            )}
+          </div>
+
+          {section.heading && (
+            <h3 className="font-handwriting text-2xl sm:text-3xl font-bold text-ink-1">
+              {section.heading}
+            </h3>
+          )}
+
+          {section.trap && (
+            <div className="p-3.5 rounded-lg bg-amber-500/10 border border-amber-500/25 flex items-start gap-3">
+              <span className="text-amber-600 dark:text-amber-400 font-mono text-xs font-bold uppercase tracking-wider shrink-0 mt-0.5">
+                ⚠️ Pitfall Warning:
+              </span>
+              <p className="text-xs sm:text-sm text-ink-2 font-sans leading-relaxed">
+                {section.trap}
+              </p>
+            </div>
+          )}
+
+          <div className="space-y-3 pt-1">
+            {section.solutionSteps.map((step, sIdx) => (
+              <div key={sIdx} className="pl-4 border-l-2 border-accent/40 space-y-1">
+                <p
+                  className="text-xs sm:text-sm text-ink-1 font-mono leading-relaxed whitespace-pre-wrap"
+                  dangerouslySetInnerHTML={{
+                    __html: formatMarkdownInline(step),
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
       );
 
     case "quick-revision":

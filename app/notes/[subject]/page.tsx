@@ -31,7 +31,7 @@ export async function generateMetadata({
     return { title: "Subject not found", robots: { index: false, follow: false } };
   }
 
-  const isComplete = subject === "operating-systems";
+  const isComplete = Boolean(course);
   const title = course ? course.title : track?.title ?? "Subject";
   const url = `${SITE_URL}/notes/${subject}`;
 
@@ -90,35 +90,7 @@ export default async function SubjectNotebookPage({
 
   if (!track && !course) return notFound();
 
-  if (course && course.slug !== "operating-systems") {
-    return (
-      <main className="mx-auto max-w-3xl px-4 py-16 text-ink-2 sm:px-6 md:px-8 md:py-24">
-        <nav className="mb-8 text-xs font-mono text-ink-3" aria-label="Breadcrumb">
-          <Link href="/notes" className="hover:text-ink-1 transition-colors">The Notebooks</Link>
-          <span className="mx-2" aria-hidden="true">/</span>
-          <span className="text-ink-1">{course.title}</span>
-        </nav>
-        <p className="mb-3 text-xs font-mono font-bold uppercase tracking-widest text-amber-500">
-          NOTEBOOK IN BUILD
-        </p>
-        <h1 className="text-4xl font-extrabold tracking-tight text-ink-1 sm:text-5xl">
-          {course.title}
-        </h1>
-        <p className="mt-5 text-lg leading-relaxed">
-          Some working drafts exist, but this notebook is not complete or fully verified yet.
-          The available material should not be treated as a finished notebook.
-        </p>
-        <Link
-          href="/notes/operating-systems"
-          className="mt-8 inline-flex items-center gap-2 rounded bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent/90"
-        >
-          Explore Operating Systems <span aria-hidden="true">&rarr;</span>
-        </Link>
-      </main>
-    );
-  }
-
-  // If a full interactive notebook exists for this subject
+  // If a course exists for this subject
   if (course) {
     const totalLessons = course.modules.reduce(
       (acc, m) => acc + m.lessons.length,
@@ -234,7 +206,11 @@ export default async function SubjectNotebookPage({
             </span>
             <span className="text-hairline font-mono text-xs">|</span>
             <span className="text-xs font-mono text-ink-3">
-              Computer Science &middot; B.Tech &middot; GATE CS
+              {course.gateBranches?.includes("da") && !course.gateBranches?.includes("cs")
+                ? "Data Science & AI · GATE DA"
+                : course.gateBranches?.includes("da") && course.gateBranches?.includes("cs")
+                ? "Computer Science & Data Science · GATE CS/IT & DA"
+                : "Computer Science · B.Tech · GATE CS"}
             </span>
           </div>
 
@@ -444,20 +420,20 @@ export default async function SubjectNotebookPage({
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-sm font-mono font-bold uppercase tracking-wider text-amber-500">
-                  B &middot; GATE CS/IT Exam Lens &amp; Weightage
+                  B &middot; GATE 2027 Syllabus Scope
                 </h3>
                 <p className="text-xs text-ink-2 mt-0.5">
-                  High-frequency calculation topics, mark weights, and common calculation traps.
+                  Official syllabus scope and related lesson coverage; topics outside the syllabus are marked as enrichment.
                 </p>
               </div>
               <span className="text-xs font-mono font-bold text-amber-500 shrink-0">
-                {course.gateWeightage} Total
+                {course.gateScope}
               </span>
             </div>
 
             <div className="p-4 rounded border border-hairline bg-surface-1/30 space-y-3">
               <span className="font-mono text-xs font-bold text-ink-1 block">
-                Syllabus Topics (GATE 2027 Alignment):
+                Official syllabus topics:
               </span>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-ink-2 font-mono">
                 {(course.gateSyllabusTopics || []).map((topic, tIdx) => (

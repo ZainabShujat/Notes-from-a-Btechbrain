@@ -6,12 +6,24 @@ import { COA_COURSE } from "./coa-data";
 import { TOC_COURSE } from "./toc-data";
 import { C_PROGRAMMING_COURSE } from "./c-prog-data";
 import { DISCRETE_MATHEMATICS_COURSE } from "./discrete-maths-data";
+import { GENERAL_APTITUDE_COURSE } from "./general-aptitude-data";
+import { ENGINEERING_MATHEMATICS_COURSE } from "./engineering-mathematics-data";
+import { DIGITAL_LOGIC_COURSE } from "./digital-logic-data";
+import { DATA_STRUCTURES_COURSE } from "./data-structures-data";
+import { ALGORITHMS_COURSE } from "./algorithms-data";
+import { COMPILER_DESIGN_COURSE } from "./compiler-design-data";
+import { PROB_STATS_COURSE } from "./prob-stats-data";
+import { LINEAR_ALGEBRA_COURSE } from "./linear-algebra-data";
+import { CALCULUS_OPTIMIZATION_COURSE } from "./calculus-opt-data";
+import { MACHINE_LEARNING_COURSE } from "./machine-learning-data";
+import { ARTIFICIAL_INTELLIGENCE_COURSE } from "./artificial-intelligence-data";
 
 /**
  * Course Registry.
- * Complete collection of B.Tech & GATE CS notebooks.
+ * Complete collection of B.Tech & GATE CS/IT and GATE DA subject notebooks.
  */
 export const COURSES: CourseMeta[] = [
+  // GATE CS/IT Core & Shared
   OPERATING_SYSTEMS_COURSE,
   DBMS_COURSE,
   COMPUTER_NETWORKS_COURSE,
@@ -19,6 +31,19 @@ export const COURSES: CourseMeta[] = [
   TOC_COURSE,
   C_PROGRAMMING_COURSE,
   DISCRETE_MATHEMATICS_COURSE,
+  GENERAL_APTITUDE_COURSE,
+  ENGINEERING_MATHEMATICS_COURSE,
+  DIGITAL_LOGIC_COURSE,
+  DATA_STRUCTURES_COURSE,
+  ALGORITHMS_COURSE,
+  COMPILER_DESIGN_COURSE,
+
+  // GATE Data Science & AI (DA) Core
+  PROB_STATS_COURSE,
+  LINEAR_ALGEBRA_COURSE,
+  CALCULUS_OPTIMIZATION_COURSE,
+  MACHINE_LEARNING_COURSE,
+  ARTIFICIAL_INTELLIGENCE_COURSE,
 ];
 
 function normalizeCourse(course: CourseMeta): CourseMeta {

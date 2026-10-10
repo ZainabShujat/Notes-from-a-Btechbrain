@@ -4,17 +4,11 @@ import { pageMetadata } from "../../lib/seo";
 
 export const metadata = pageMetadata({
   title: "Brain Map",
-  description:
-    "An interactive map of recurring ideas and the connections between them across every article on the site.",
+  description: "Explore the connected editions, Wander notes, notebooks, lessons, and interactive experiences across Notes From a B.Tech Brain.",
   path: "/map",
 });
 
 export default async function MapPage() {
-  const clusters = await generateMapData();
-
-  return (
-    <main className="min-h-screen bg-[#050816] text-white overflow-hidden">
-      <BrainMap clusters={clusters} />
-    </main>
-  );
+  const data = await generateMapData();
+  return <BrainMap data={data} />;
 }

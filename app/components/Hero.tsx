@@ -1,48 +1,8 @@
-"use client";
-
-import { useRef } from "react";
 import Link from "next/link";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 
 export default function Hero() {
-  const containerRef = useRef<HTMLElement>(null);
-  const shouldReduceMotion = useReducedMotion();
-
-  // Subtle scroll-linked parallax (disabled if user prefers reduced motion)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const titleY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, shouldReduceMotion ? 0 : -35]
-  );
-  const pathY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, shouldReduceMotion ? 0 : 25]
-  );
-  const conceptsOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.5, 0.9],
-    [1, 0.9, shouldReduceMotion ? 1 : 0.3]
-  );
-  const artifactLeftY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, shouldReduceMotion ? 0 : -45]
-  );
-  const artifactRightY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, shouldReduceMotion ? 0 : -20]
-  );
-
   return (
     <section
-      ref={containerRef}
       className="relative min-h-[92vh] flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 py-16 sm:py-20 overflow-hidden"
     >
       {/* =========================================================
@@ -67,13 +27,14 @@ export default function Hero() {
         }}
       />
 
+      <div className="pointer-events-none absolute inset-0 z-0 hero-star-field" aria-hidden="true" />
+
       {/* =========================================================
           MIDGROUND LAYER: ORGANIC THINKING PATH BEHIND TITLE
           An irregular, imperfect meandering thought line like someone
           tracing an idea as they ponder. Asymmetrical, human, subtle.
           ========================================================= */}
-      <motion.div
-        style={{ y: pathY }}
+      <div
         className="pointer-events-none absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 w-[125%] sm:w-[115%] md:w-[108%] max-w-[980px] h-[360px] md:h-[420px] select-none z-0"
         aria-hidden="true"
       >
@@ -92,6 +53,7 @@ export default function Hero() {
             strokeLinejoin="round"
             className="text-accent/25 dark:text-accent/20"
           />
+          <path d="M 70,220 C 140,160 210,130 310,145 C 410,160 380,270 290,280 C 200,290 190,190 270,130 C 350,70 520,75 660,110 C 800,145 870,210 830,280 C 790,345 660,340 510,320 C 390,305 340,360 450,380 C 580,400 760,365 890,300" pathLength={100} stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeDasharray="0.7 99.3" className="text-highlight/55 hero-travel-light" />
 
           {/* Faint secondary contemplative pencil branch */}
           <path
@@ -119,7 +81,7 @@ export default function Hero() {
             strokeWidth="1.2"
           />
         </svg>
-      </motion.div>
+      </div>
 
       {/* =========================================================
           MIDGROUND LAYER: 3 CORE WORKING NOTEBOOK ARTIFACTS
@@ -127,8 +89,7 @@ export default function Hero() {
           ========================================================= */}
 
       {/* Artifact 1: Torn note scrap — "why does this work?" (Left / mid-high) */}
-      <motion.div
-        style={{ y: artifactLeftY }}
+      <div
         className="hidden sm:block absolute left-3 md:left-8 lg:left-14 top-20 md:top-24 z-10 hero-artifact-1"
       >
         <div className="group rounded-md border border-amber-500/25 dark:border-amber-400/20 bg-amber-500/[0.05] dark:bg-amber-400/[0.04] backdrop-blur-xs px-2.5 py-1.5 shadow-xs transition-transform duration-300 hover:rotate-0 hover:scale-105 select-none">
@@ -140,11 +101,10 @@ export default function Hero() {
             [ proof pending ]
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Artifact 2: Code logic fragment (Right / mid-low) */}
-      <motion.div
-        style={{ y: artifactRightY }}
+      <div
         className="hidden md:block absolute right-4 lg:right-16 top-[58%] lg:top-[54%] z-10 hero-artifact-2"
       >
         <div className="group rounded-lg border border-hairline/70 bg-surface-1/90 dark:bg-surface-1/80 backdrop-blur-xs px-3 py-2 shadow-xs transition-transform duration-300 hover:rotate-0 hover:scale-105 select-none">
@@ -165,7 +125,7 @@ export default function Hero() {
             </code>
           </pre>
         </div>
-      </motion.div>
+      </div>
 
       {/* Artifact 3: Mini graph diagram fragment (Top-right) */}
       <div className="hidden lg:block absolute right-8 xl:right-24 top-14 z-10 hero-artifact-3 pointer-events-none select-none">
@@ -207,13 +167,11 @@ export default function Hero() {
           FOREGROUND / CENTER LAYER:
           THE 4 CONCEPTS & CENTRAL IDENTITY
           ========================================================= */}
-      <motion.div
-        style={{ y: titleY }}
+      <div
         className="relative z-20 flex flex-col items-center text-center max-w-3xl mx-auto w-full"
       >
         {/* Concept 1: UNDERSTAND (Asymmetrical: top-left-of-center) */}
-        <motion.div
-          style={{ opacity: conceptsOpacity }}
+        <div
           className="absolute -top-11 sm:-top-13 left-[40%] sm:left-[44%] -translate-x-1/2 z-20 hero-orbit-understand"
         >
           <Link
@@ -240,11 +198,10 @@ export default function Hero() {
               UNDERSTAND
             </span>
           </Link>
-        </motion.div>
+        </div>
 
         {/* Concept 2: INTERACT (Asymmetrical: upper-left) */}
-        <motion.div
-          style={{ opacity: conceptsOpacity }}
+        <div
           className="hidden sm:block absolute top-[36%] -translate-y-1/2 -left-3 md:-left-12 lg:-left-20 z-20 hero-orbit-interact"
         >
           <Link
@@ -268,11 +225,10 @@ export default function Hero() {
               INTERACT
             </span>
           </Link>
-        </motion.div>
+        </div>
 
         {/* Concept 3: PRACTICE (Asymmetrical: mid-right) */}
-        <motion.div
-          style={{ opacity: conceptsOpacity }}
+        <div
           className="hidden sm:block absolute top-[48%] -translate-y-1/2 -right-3 md:-right-12 lg:-right-20 z-20 hero-orbit-practice"
         >
           <Link
@@ -291,7 +247,7 @@ export default function Hero() {
               ✓
             </span>
           </Link>
-        </motion.div>
+        </div>
 
         {/* CENTRAL TYPOGRAPHY (The strongest visual anchor) */}
         <h1 className="relative z-10 text-4xl sm:text-5xl md:text-7xl font-black tracking-tight leading-[1.08]">
@@ -303,9 +259,15 @@ export default function Hero() {
           A place to explore things I don&apos;t understand yet.
         </p>
 
+        <Link
+          href="/editions"
+          className="relative z-10 mt-6 inline-flex items-center gap-3 border border-ink-1/15 bg-accent-strong px-5 py-3 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          Read the latest editions <span aria-hidden="true">↗</span>
+        </Link>
+
         {/* Concept 4: REVISE (Asymmetrical: bottom-right-of-center) */}
-        <motion.div
-          style={{ opacity: conceptsOpacity }}
+        <div
           className="hidden sm:block mt-8 sm:mt-10 z-20 ml-6 hero-orbit-revise"
         >
           <Link
@@ -321,7 +283,7 @@ export default function Hero() {
               →
             </span>
           </Link>
-        </motion.div>
+        </div>
 
         {/* Mobile-optimized organic layout for the 4 concepts */}
         <div className="mt-8 flex flex-col items-center gap-2.5 sm:hidden z-10 w-full px-2">
@@ -364,9 +326,9 @@ export default function Hero() {
 
           {/* Downward arrow button with gentle hover & drift */}
           <a
-            href="#worlds"
+            href="#latest-heading"
             className="group mt-5 flex flex-col items-center text-ink-3 hover:text-ink-1 transition-colors cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded-full p-1"
-            aria-label="Scroll down to exploration worlds"
+            aria-label="Scroll down to the latest writing"
           >
             <div className="hero-arrow-drift p-2 rounded-full border border-hairline/70 hover:border-hairline-strong bg-surface-1/40 hover:bg-surface-2 transition-all">
               <svg
@@ -386,7 +348,7 @@ export default function Hero() {
             </div>
           </a>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

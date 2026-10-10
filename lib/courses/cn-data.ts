@@ -1,4 +1,5 @@
 import { CourseMeta } from "./types";
+import { CN_SOCKET_API_LESSON } from "./cn-socket-data";
 
 export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
   id: "computer-networks",
@@ -28,16 +29,18 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
     "Trace Distance Vector Bellman-Ford updates, count-to-infinity traps, and Dijkstra Link-State shortest paths",
     "Model TCP congestion window (cwnd) growth across Slow Start, Congestion Avoidance, and Fast Recovery phases",
   ],
-  gateWeightage: "7 - 10 Marks",
+  gateScope: "GATE 2027 CS/IT scope",
   gateSyllabusTopics: [
     "Principles of layering: OSI and TCP/IP protocol stacks",
     "Basics of packet switching, circuit switching, and delay analysis",
+    "Physical layer: Nyquist bit rate, Shannon-Hartley capacity formula, SNR dB conversions, transmission media",
     "Data link layer: framing, error detection (CRC, checksum), flow control (Stop-and-Wait, GBN, SR)",
-    "Medium Access Control: ALOHA, CSMA/CD, Ethernet frame formats",
+    "Medium Access Control: ALOHA, CSMA/CD, Ethernet frame formats, transparent bridges, Spanning Tree Protocol (STP)",
     "Network layer: IPv4 addressing, CIDR, subnetting, NAT, fragmentation",
-    "Routing algorithms: Distance Vector (RIP), Link State (OSPF)",
-    "Transport layer: UDP, TCP connection management, flow control, congestion control",
-    "Application layer: DNS resolution, HTTP persistent/non-persistent connections",
+    "Routing algorithms: Distance Vector (RIP), Link State (OSPF), BGP path vector",
+    "Transport layer: UDP, TCP connection management, flow control, congestion control (Tahoe vs Reno)",
+    "Application layer: DNS resolution, HTTP persistent/non-persistent connections, SMTP, POP3",
+    "Network security: RSA public-key algorithm, Diffie-Hellman key exchange, SHA-256 digital signatures, firewalls",
   ],
   modules: [
     // =========================================================================
@@ -61,6 +64,21 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
           hasInteractive: false,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "OSI is a 7-layer reference model; TCP/IP is the practical 4/5-layer implementation. As data descends the stack, each layer encapsulates headers (Application: Messages, Transport: Segments/Datagrams, Network: Packets, Data Link: Frames, Physical: Bits). Total nodal delay is d_nodal = d_proc + d_queue + d_trans + d_prop.",
+            keyFormulasAndRules: [
+              "Transmission Delay: d_trans = L / R (depends strictly on packet length L and link bandwidth R).",
+              "Propagation Delay: d_prop = d / s (depends strictly on distance d and signal velocity s in medium).",
+              "Bandwidth-Delay Product (BDP): BDP = R * d_prop (measures maximum in-flight bits filling the pipe).",
+              "Store-and-Forward Pipelined Delay: For M packets across N links, Total Time = N * d_trans + N * d_prop + (M - 1) * d_trans.",
+              "Traffic Intensity: I = (L * a) / R. If I > 1, queue grows without bound and packet loss occurs.",
+            ],
+            examPitfalls: [
+              "Bandwidth does NOT affect signal propagation speed; higher bandwidth only reduces transmission delay L/R.",
+              "In store-and-forward routing, intermediate routers cannot forward a packet until all bits of that packet have been completely received.",
+              "PDU nomenclature: Application = Messages, Transport = Segments/Datagrams, Network = Packets, Data Link = Frames.",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -190,6 +208,153 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             },
           ],
         },
+        {
+          id: "physical-layer-capacity-and-switching",
+          title: "Physical Layer: Channel Capacity, Nyquist-Shannon Bounds & Switching",
+          slug: "physical-layer-capacity-and-switching",
+          order: 2,
+          estimatedMinutes: 25,
+          tagline: "Nyquist bit rate, Shannon-Hartley capacity, SNR decibels, and circuit vs packet switching.",
+          hasInteractive: false,
+          hasGATE: true,
+          hasPractice: true,
+          cheatsheet: {
+            summaryRule: "Nyquist formula defines the maximum theoretical bit rate on a noiseless channel: C = 2B log2(M). Shannon-Hartley capacity theorem defines the absolute upper bound on a noisy Gaussian channel: C = B log2(1 + SNR). In real systems, the actual achievable bit rate is min(Nyquist, Shannon).",
+            keyFormulasAndRules: [
+              "Nyquist Bit Rate (Noiseless): C = 2 * B * log2(M) bps, where B = bandwidth (Hz) and M = discrete signaling levels.",
+              "Shannon-Hartley Capacity (Noisy): C = B * log2(1 + SNR) bps, where SNR = S / N (linear power ratio, NOT dB).",
+              "SNR in Decibels: SNR_dB = 10 * log10(SNR)  <=>  SNR = 10^(SNR_dB / 10).",
+              "Circuit Switching: Dedicated end-to-end path established before data transfer. Constant bit rate, zero queuing delay after setup, low link utilization during idle bursts.",
+              "Packet Switching: Data broken into independent packets multiplexed statistically across shared links. High utilization, variable queuing delays, jitter, packet drop under congestion.",
+            ],
+            examPitfalls: [
+              "Never plug SNR_dB directly into the Shannon formula! You must first convert decibels to linear SNR: SNR = 10^(SNR_dB / 10).",
+              "If a question asks for the minimum number of signal levels M needed on a noisy channel, first calculate Shannon capacity C, then equate C = 2B log2(M) to solve for M = ceil(2^(C / (2B))).",
+              "Virtual Circuit (VC) packet switching maintains a connection state table in routers and preserves packet order, but packets still experience queuing delays and store-and-forward transmission.",
+            ],
+          },
+          sections: [
+            {
+              type: "explanation",
+              heading: "1. The Physics of the Channel: Bandwidth & Signal Attenuation",
+              body: [
+                "Every physical transmission medium acts as a band-pass filter that attenuates high-frequency Fourier components of transmitted square waveforms. As pulses travel along copper or fiber, high frequencies decay rapidly, rounding the sharp pulse transitions and leading to ==purple:Intersymbol Interference (ISI)==.",
+                "To transmit digital symbols without overlapping each other at the receiver, the symbol transmission rate (baud rate) cannot exceed twice the available analog bandwidth B (in Hertz). This fundamental physical constraint leads directly to the classical Nyquist and Shannon channel bounds.",
+              ],
+            },
+            {
+              type: "explanation",
+              heading: "2. Nyquist Bit Rate for Noiseless Channels",
+              body: [
+                "In 1928, Harry Nyquist proved that for an ideal noiseless channel of bandwidth B Hertz, the maximum symbol transmission rate without ISI is exactly 2B baud (symbols per second).",
+                "If each symbol encodes M distinct discrete voltage levels, each symbol carries log2(M) bits of information.",
+                "**Nyquist Maximum Data Rate Formula:**",
+                "$$C = 2 \\times B \\times \\log_2(M) \\quad \\text{bits per second (bps)}$$",
+                "Implication: On a noiseless channel, data rate can be arbitrarily increased simply by increasing the number of signaling levels M. However, in the real world, thermal noise limits how closely signaling levels can be spaced before the receiver confuses adjacent levels.",
+              ],
+            },
+            {
+              type: "explanation",
+              heading: "3. Shannon-Hartley Theorem for Noisy Channels",
+              body: [
+                "In 1948, Claude Shannon published the mathematical foundation of information theory, proving that random thermal noise (Additive White Gaussian Noise, AWGN) imposes an insurmountable upper limit on the error-free information capacity of any physical channel.",
+                "**Shannon-Hartley Capacity Formula:**",
+                "$$C = B \\times \\log_2(1 + \\text{SNR}) \\quad \\text{bits per second (bps)}$$",
+                "Where:",
+                "• B is the channel bandwidth in Hertz (Hz).",
+                "• SNR is the Signal-to-Noise Ratio (power ratio S / N) in linear units, NOT decibels.",
+                "Converting SNR from Decibels to Linear:",
+                "$$\\text{SNR}_{\\text{dB}} = 10 \\log_{10}(\\text{SNR}) \\implies \\text{SNR} = 10^{\\frac{\\text{SNR}_{\\text{dB}}}{10}}$$",
+                "Key Principle: No matter how many signal levels M you engineer, you CANNOT exceed Shannon capacity C on a channel with bandwidth B and signal-to-noise ratio SNR without introducing errors!",
+              ],
+              callout: {
+                kind: "gate-tip",
+                title: "Decibel Conversion Table for Rapid GATE Mental Math",
+                message:
+                  "• 10 dB = 10\n• 20 dB = 100\n• 30 dB = 1,000\n• 40 dB = 10,000\n• 3 dB ≈ 2 (doubling of signal power)\nExample: If SNR_dB = 30 dB, then SNR = 1000. Then log2(1 + 1000) = log2(1001) ≈ 10 bits/sec/Hz.",
+              },
+            },
+            {
+              type: "comparison",
+              heading: "4. Switching Architectures: Circuit vs Packet vs Virtual Circuit Switching",
+              leadParagraph:
+                "Comparison of core telecommunication and data networking transmission architectures:",
+              columns: ["Dimension", "Circuit Switching (PSTN/ISDN)", "Datagram Packet Switching (Internet IPv4/IPv6)", "Virtual Circuit Packet Switching (ATM/X.25/MPLS)"],
+              criteria: [
+                {
+                  criterion: "Connection Setup",
+                  values: ["Mandatory 3-way path reservation before data flows", "Connectionless: No prior setup; packets sent immediately", "Mandatory setup phase to assign Virtual Circuit IDs (VCID)"],
+                },
+                {
+                  criterion: "Routing per Packet",
+                  values: ["Entire call uses same physical path dedicated exclusively", "Each packet routed independently; may take different paths", "All packets follow fixed VC path using VC translation tables"],
+                },
+                {
+                  criterion: "Bandwidth Reservation",
+                  values: ["Dedicated guaranteed bandwidth; wasted if idle", "Statistical multiplexing on demand; dynamic sharing", "Statistical multiplexing; dynamic sharing with QoS guarantees"],
+                },
+                {
+                  criterion: "Packet Delivery Order",
+                  values: ["Guaranteed strictly in-order arrival", "Packets can arrive out of order (reordering needed at L4)", "Guaranteed in-order arrival along virtual circuit"],
+                },
+                {
+                  criterion: "Failure Sensitivity",
+                  values: ["Link failure aborts the entire active circuit", "Robust: subsequent packets dynamically route around failed links", "Link failure aborts all active VCs traversing that link"],
+                },
+              ],
+            },
+            {
+              type: "gate-analysis",
+              heading: "5. GATE Worked Numerical: Combined Nyquist & Shannon Engineering",
+              weightage: "2 Marks (Common GATE CS Trap)",
+              trap: "Students frequently compute Shannon capacity and stop, forgetting that physical transmitters use discrete levels M governed by Nyquist!",
+              solutionSteps: [
+                "Problem (Modeled on GATE Pattern): A telephone channel has an analog bandwidth B = 4 kHz and a signal-to-noise ratio SNR_dB = 30 dB.",
+                "Calculate:",
+                "  (a) The theoretical maximum channel capacity C.",
+                "  (b) The minimum number of discrete signal levels M required to transmit at a rate of 24 kbps using Nyquist signaling, and whether this transmission is theoretically possible on this channel.",
+                "Step 1: Compute Shannon Capacity C:",
+                "  Bandwidth B = 4,000 Hz.",
+                "  SNR_dB = 30 dB -> Linear SNR = 10^(30 / 10) = 10^3 = 1000.",
+                "  Shannon Capacity C = B * log2(1 + SNR) = 4000 * log2(1 + 1000) = 4000 * log2(1001).",
+                "  Since 2^10 = 1024, log2(1001) ≈ 9.967 bits.",
+                "  C = 4000 * 9.967 ≈ 39,869 bps ≈ 39.87 kbps.",
+                "Step 2: Check feasibility of 24 kbps transmission:",
+                "  Since desired rate R = 24 kbps < C (39.87 kbps), error-free transmission at 24 kbps is theoretically possible!",
+                "Step 3: Determine required discrete signal levels M via Nyquist formula:",
+                "  R = 2 * B * log2(M) bps",
+                "  24,000 = 2 * 4,000 * log2(M) = 8,000 * log2(M)",
+                "  log2(M) = 24,000 / 8,000 = 3",
+                "  M = 2^3 = 8 signal levels.",
+                "Conclusion: Shannon capacity is 39.87 kbps; 24 kbps is achievable using M = 8 discrete signal levels.",
+              ],
+            },
+            {
+              type: "resources",
+              heading: "6. References & Curated Study Materials",
+              sources: [
+                {
+                  title: "Data Communications and Networking (5th Edition)",
+                  authors: "Behrouz A. Forouzan",
+                  year: "2012",
+                  publisher: "McGraw-Hill",
+                  link: "https://www.mheducation.com",
+                  relevance:
+                    "Chapter 3: Data and Signals — comprehensive derivations of Fourier analysis, Nyquist bit rate, and Shannon capacity.",
+                },
+                {
+                  title: "Computer Networks (5th Edition)",
+                  authors: "Andrew S. Tanenbaum, David J. Wetherall",
+                  year: "2011",
+                  publisher: "Pearson",
+                  link: "https://www.pearson.com",
+                  relevance:
+                    "Chapter 2: The Physical Layer — transmission media properties and modulation schemes.",
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
 
@@ -214,6 +379,20 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
           hasInteractive: false,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "Data Link framing delimits frames using byte stuffing (character-oriented) or bit stuffing (inserting 0 after five consecutive 1s in HDLC). CRC uses modulo-2 polynomial division (XOR without borrow); generator of degree r appends r zeros, generating an r-bit remainder. Minimum Hamming distance d_min >= e + 1 detects e errors; d_min >= 2t + 1 corrects t errors.",
+            keyFormulasAndRules: [
+              "HDLC Bit Stuffing: Transmitter inserts '0' after five consecutive '1's. Receiver strips '0' after five '1's.",
+              "CRC Codeword: Transmit T = D * 2^r XOR R, where R = (D * 2^r) mod_2 G.",
+              "CRC Error Detection Capability: If G(x) has x^0 = 1, detects all single-bit errors; if (x+1) is a factor of G(x), detects all odd numbers of bit errors; detects all burst errors of length <= r.",
+              "Hamming Distance Bounds: Error detection: d_min >= e + 1; Error correction: d_min >= 2t + 1; Simultaneous detection & correction: d_min >= e + t + 1 (e > t).",
+            ],
+            examPitfalls: [
+              "A polynomial of degree r has r + 1 coefficients/bits! For example, x^4 + x + 1 has degree 4, represented as 10011 (5 bits), appending 4 zeros.",
+              "In bit stuffing, never count the stuffed 0 as part of the next sequence of five 1s.",
+              "CRC division uses XOR arithmetic (no carries and no borrows); 1 XOR 1 = 0, 0 XOR 0 = 0, 1 XOR 0 = 1.",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -330,6 +509,21 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
           hasInteractive: false,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "Flow control manages sender transmission rates to avoid overflowing receiver buffers. Stop-and-Wait has W_S = 1, W_R = 1 with eta = 1 / (1 + 2a). Go-Back-N has W_S = 2^k - 1, W_R = 1 with cumulative ACKs and go-back retransmissions. Selective Repeat has W_S = 2^(k-1), W_R = 2^(k-1) with independent ACKs and individual retransmissions. Pipelined efficiency is eta = min(1, W_S / (1 + 2a)).",
+            keyFormulasAndRules: [
+              "Normalized Propagation Parameter: a = T_p / T_t = (d / s) / (L / R).",
+              "Total Round-Trip Cycle Time: T_cycle = T_t + 2 * T_p + T_ack (if T_ack is negligible, T_cycle = T_t + 2 * T_p).",
+              "Stop-and-Wait Efficiency & Throughput: eta = 1 / (1 + 2a); Throughput = eta * Bandwidth = L / (T_t + 2 * T_p).",
+              "Pipelined Window Efficiency: eta = min(1, W_S / (1 + 2a)). For 100% utilization: W_S >= 1 + 2a.",
+              "Sequence Number Bounds for k Bits: Stop-and-Wait: k >= 1; Go-Back-N: W_S + W_R <= 2^k => W_S <= 2^k - 1 (since W_R = 1); Selective Repeat: W_S + W_R <= 2^k => W_S <= 2^(k-1) and W_R <= 2^(k-1).",
+            ],
+            examPitfalls: [
+              "If ACK transmission time T_ack is NOT negligible, Cycle Time = T_t + 2 * T_p + T_ack.",
+              "In Go-Back-N, receiver window W_R = 1, so out-of-order error-free frames are unconditionally discarded!",
+              "In Selective Repeat, if sequence numbers are not at least 2 * W_S, duplicate frames from the preceding window wrap around and overlap with the new window, corrupting data.",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -457,6 +651,22 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
           hasInteractive: false,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "CSMA/CD enforces 'listen before talk, listen while talk'. To detect collisions before transmission completes, transmission time must satisfy T_t >= 2 * T_p, yielding minimum frame size L_min = 2 * T_p * Bandwidth. Binary exponential backoff chooses an integer slot r in [0, 2^min(n, 10) - 1] after collision n.",
+            keyFormulasAndRules: [
+              "CSMA/CD Condition: T_t >= 2 * T_p <=> L_min / R >= 2 * (d / s) => L_min >= 2 * (d / s) * R.",
+              "Maximum Network Cable Span: d_max = (L_min * s) / (2 * R).",
+              "Pure ALOHA Throughput: S = G * e^(-2G); Maximum S_max = 1 / (2e) ≈ 18.4% at G = 0.5.",
+              "Slotted ALOHA Throughput: S = G * e^(-G); Maximum S_max = 1 / e ≈ 36.8% at G = 1.0.",
+              "IEEE 802.3 Standard Bounds: Minimum frame size = 64 bytes (46B payload + 18B header/trailer); Slot time = 512 bit times (51.2 μs at 10 Mbps).",
+              "Binary Exponential Backoff: Backoff slot r drawn uniformly from [0, 2^k - 1], where k = min(n, 10) for 1 <= n <= 15. Collision count drops after 16 failed attempts.",
+            ],
+            examPitfalls: [
+              "If bandwidth R doubles while cable length stays constant, L_min must double to retain collision detection!",
+              "Repeaters and Hubs extend the physical collision domain; Bridges and Switches divide the collision domain into distinct collision segments.",
+              "CSMA/CA (used in Wi-Fi IEEE 802.11) uses RTS/CTS (Request to Send / Clear to Send) handshakes and NAV timers because wireless stations cannot detect collisions while transmitting (Hidden Terminal Problem).",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -531,6 +741,144 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             },
           ],
         },
+        {
+          id: "lan-switching-and-data-link-devices",
+          title: "Connecting Devices, Transparent Bridges & Spanning Tree Protocol (STP)",
+          slug: "lan-switching-and-data-link-devices",
+          order: 2,
+          estimatedMinutes: 24,
+          tagline: "Collision vs broadcast domains, transparent bridge backward learning, and Spanning Tree Protocol.",
+          hasInteractive: false,
+          hasGATE: true,
+          hasPractice: true,
+          cheatsheet: {
+            summaryRule: "Connecting devices operate at different layers: Hubs/Repeaters operate at Layer 1 (single collision domain, single broadcast domain). Bridges/Switches operate at Layer 2 (each switch port is its own collision domain; all ports share one broadcast domain). Routers operate at Layer 3 (each router interface is its own collision domain AND its own broadcast domain). STP eliminates Layer 2 bridging loops.",
+            keyFormulasAndRules: [
+              "Collision Domain Count: Hubs/Repeaters = 1 collision domain for all connected ports; Switches/Bridges = 1 collision domain per connected active port; Routers = 1 collision domain per interface.",
+              "Broadcast Domain Count: Hubs and Switches do NOT isolate broadcasts = 1 broadcast domain across all interconnected switches/hubs (unless VLANs are configured); Routers isolate broadcasts = 1 broadcast domain per router interface.",
+              "Transparent Bridge Learning Algorithm: Upon receiving frame with source MAC S on port P: Add or update entry (MAC=S, Port=P, Timer=0). If destination MAC D is in forwarding table on port Q != P, forward to port Q. If D is on port P, filter (drop). If D is unknown or broadcast (FF:FF:FF:FF:FF:FF), flood to all ports except P.",
+              "Spanning Tree Protocol (STP IEEE 802.1D): Bridge ID = 2-byte Priority (default 32768) + 6-byte MAC. Root Bridge = Bridge with smallest Bridge ID. Root Port = Port with lowest path cost to Root Bridge. Designated Port = Port with lowest path cost on each segment. Blocked Port = All remaining alternate ports.",
+            ],
+            examPitfalls: [
+              "A Hub does NOT break up collision domains! If 8 computers connect to a single 8-port Hub, there is exactly 1 collision domain.",
+              "A Switch breaks up collision domains, but NOT broadcast domains! An 8-port switch has 8 collision domains, but only 1 broadcast domain.",
+              "In STP, the bridge with the LOWEST (smallest numerical) Bridge ID becomes the Root Bridge, NOT the highest!",
+            ],
+          },
+          sections: [
+            {
+              type: "explanation",
+              heading: "1. Networking Connecting Devices Hierarchy",
+              body: [
+                "To interconnect local area networks, hardware devices operate across distinct layers of the protocol stack:",
+                "1. Repeaters & Hubs (Layer 1 - Physical): Receive electrical/optical signals and regenerate (amplify) bit streams onto all other ports. They have no memory, do not inspect frame headers, and create a single shared ==purple:Collision Domain== and a single ==yellow:Broadcast Domain==.",
+                "2. Bridges & Layer 2 Switches (Layer 2 - Data Link): Multi-port bridges that maintain an internal forwarding database (CAM table). They inspect 48-bit MAC addresses, filter traffic to prevent collisions from spreading, and isolate each port into an independent ==green:Collision Domain==. However, standard Layer 2 switches forward broadcast frames (e.g. ARP requests) to all ports, leaving a single ==yellow:Broadcast Domain==.",
+                "3. Routers (Layer 3 - Network): Examine 32-bit/128-bit logical IP addresses to route packets between disparate networks. Routers block Layer 2 broadcasts by default, isolating both ==green:Collision Domains== and ==pink:Broadcast Domains== per interface.",
+              ],
+            },
+            {
+              type: "comparison",
+              heading: "2. Collision vs Broadcast Domain Operational Comparison",
+              leadParagraph:
+                "Domain boundary rules for standard network equipment:",
+              columns: ["Device", "OSI Layer", "Collision Domains Created", "Broadcast Domains Created"],
+              criteria: [
+                {
+                  criterion: "Hub / Repeater (N ports)",
+                  values: ["Layer 1 (Physical)", "Exactly 1 (shared across all N ports)", "Exactly 1 (shared across all N ports)"],
+                },
+                {
+                  criterion: "Bridge (2 ports)",
+                  values: ["Layer 2 (Data Link)", "2 collision domains (1 per port)", "1 broadcast domain (floods broadcasts)"],
+                },
+                {
+                  criterion: "Switch (N active ports)",
+                  values: ["Layer 2 (Data Link)", "N collision domains (1 per active port)", "1 broadcast domain (floods broadcasts)"],
+                },
+                {
+                  criterion: "Router (K interfaces)",
+                  values: ["Layer 3 (Network)", "K collision domains (1 per interface)", "K broadcast domains (blocks broadcasts)"],
+                },
+              ],
+            },
+            {
+              type: "explanation",
+              heading: "3. Transparent Bridge Backward Learning Algorithm",
+              body: [
+                "A transparent bridge operates plug-and-play without requiring manual network configuration. It learns network topology dynamically through ==yellow:backward learning==:",
+                "Algorithm Execution on Arrival of Frame (Source = S, Destination = D) on Port P:",
+                "1. Inspection & Learning: The bridge inspects Source MAC S. It writes or refreshes the entry in its Filtering/Forwarding Table: `(MAC = S, Port = P, TTL = 300s)`.",
+                "2. Destination Lookup & Forwarding Decision:",
+                "  • Case A (Same Segment): If Destination D is in the table and mapped to Port P, the bridge drops (filters) the frame because the destination is already on the source segment.",
+                "  • Case B (Known Different Segment): If Destination D is in the table and mapped to Port Q (where Q != P), the bridge forwards the frame exclusively onto Port Q.",
+                "  • Case C (Unknown Destination or Broadcast): If Destination D is NOT in the table, or if D is the broadcast MAC `FF:FF:FF:FF:FF:FF`, the bridge floods the frame to ALL active ports EXCEPT the incoming port P.",
+              ],
+            },
+            {
+              type: "explanation",
+              heading: "4. Spanning Tree Protocol (STP IEEE 802.1D)",
+              body: [
+                "Redundant physical links between switches are essential for fault tolerance. However, redundant links create ==pink:Layer 2 Physical Loops==, causing:",
+                "• Broadcast Storms: Broadcast frames circulate infinitely, saturating network bandwidth.",
+                "• Multiple Frame Copies: Unicast frames arrive repeatedly at destination hosts.",
+                "• CAM Table Instability: Switch MAC learning tables thrash continuously as frames arrive from oscillating ports.",
+                "STP Algorithm (Radia Perlman):",
+                "1. Elect Root Bridge: Switches exchange Bridge Protocol Data Units (BPDUs). The switch with the lowest numerical Bridge ID (Priority + MAC) becomes the Root Bridge.",
+                "2. Elect Root Ports (RP): On every non-root switch, the port with the lowest cumulative path cost to the Root Bridge is designated as the Root Port (exactly 1 RP per non-root switch).",
+                "3. Elect Designated Ports (DP): On every physical link/segment, the switch port providing the lowest path cost to the Root Bridge is elected as the Designated Port (all ports on the Root Bridge are DPs).",
+                "4. Block Alternate Ports: All remaining ports are placed into the Blocking/Discarding state, breaking all loops while maintaining hot standby backup paths.",
+              ],
+            },
+            {
+              type: "gate-analysis",
+              heading: "5. GATE Worked Numerical: Domain Counting & Bridge Table Trace",
+              weightage: "2 Marks",
+              trap: "Remember that each interface of a router is BOTH an independent collision domain AND an independent broadcast domain!",
+              solutionSteps: [
+                "Problem (Modeled on GATE Pattern): A campus network consists of:",
+                "  • 1 Router with 3 active interfaces (R1, R2, R3).",
+                "  • Interface R1 connects to an 8-port Switch S1. S1 connects to 7 host PCs.",
+                "  • Interface R2 connects to a 4-port Hub H1. H1 connects to 3 host PCs.",
+                "  • Interface R3 connects to an 8-port Switch S2. S2 connects to 5 host PCs and a 4-port Hub H2. H2 connects to 3 host PCs.",
+                "Calculate: (a) Total number of Collision Domains, and (b) Total number of Broadcast Domains in the network.",
+                "Step 1: Calculate Broadcast Domains:",
+                "  Routers isolate broadcast traffic. Each active router interface defines exactly 1 broadcast domain.",
+                "  The router has 3 active interfaces (R1, R2, R3).",
+                "  Switches and Hubs do not create separate broadcast domains.",
+                "  Total Broadcast Domains = 3.",
+                "Step 2: Calculate Collision Domains per Router Interface branch:",
+                "  Branch 1 (R1 -> Switch S1):",
+                "    S1 has 8 active links: 1 link to router R1 + 7 links to host PCs = 8 links.",
+                "    Each active switch link is an independent collision domain = 8 collision domains.",
+                "  Branch 2 (R2 -> Hub H1):",
+                "    H1 connects to R2 and 3 PCs. A Hub shares a single physical wire.",
+                "    Entire Hub H1 branch = 1 collision domain.",
+                "  Branch 3 (R3 -> Switch S2 -> Hub H2):",
+                "    S2 has active ports: 1 link to router R3 + 5 links to PCs + 1 link to Hub H2 = 7 switch ports.",
+                "    Each of these 7 switch ports forms a collision domain = 7 collision domains.",
+                "    (The 3 PCs connected to Hub H2 all share the single collision domain provided by that one switch port).",
+                "    Total collision domains in Branch 3 = 7.",
+                "Step 3: Total Collision Domains = 8 + 1 + 7 = 16 Collision Domains.",
+                "Conclusion: Total Broadcast Domains = 3; Total Collision Domains = 16.",
+              ],
+            },
+            {
+              type: "resources",
+              heading: "6. References & Curated Study Materials",
+              sources: [
+                {
+                  title: "Computer Networks: A Systems Approach (6th Edition)",
+                  authors: "Larry L. Peterson, Bruce S. Davie",
+                  year: "2020",
+                  publisher: "Morgan Kaufmann",
+                  link: "https://book.systemsapproach.org",
+                  relevance:
+                    "Chapter 3: Direct Link Networks — definitive coverage of learning bridges, spanning tree protocol, and switch architectures.",
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
 
@@ -555,6 +903,22 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
           hasInteractive: false,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "IPv4 header is 20 to 60 bytes (HLEN scaled by 4). Fragmentation occurs when datagram size > MTU; Fragment Offset is measured in 8-byte blocks of payload data. CIDR uses variable-length /n prefix with Longest Prefix Matching (LPM). Subnet ID = IP AND Mask; Direct Broadcast Address (DBA) sets all host bits to 1; Usable hosts = 2^(32-n) - 2.",
+            keyFormulasAndRules: [
+              "Header Length (HLEN): Expressed in 4-byte words (range 5 to 15, corresponding to 20 to 60 bytes).",
+              "Total Length: 16-bit field spanning header + payload (maximum 65,535 bytes).",
+              "Fragmentation Offsets: Fragment Offset = (Payload bytes transmitted prior to this fragment) / 8.",
+              "Flags: DF = 1 (Don't Fragment); MF = 1 (More Fragments follow); MF = 0 (Last fragment).",
+              "Usable Host IP Addresses in /n Subnet: 2^(32 - n) - 2 (excludes Network Address and Direct Broadcast Address).",
+              "Private IP Blocks (RFC 1918): Class A: 10.0.0.0/8; Class B: 172.16.0.0/12; Class C: 192.168.0.0/16.",
+            ],
+            examPitfalls: [
+              "Fragment Offset counts PAYLOAD bytes only, NEVER including the 20-byte IP header!",
+              "Every fragment (except possibly the very last fragment) MUST carry a payload size that is an exact integer multiple of 8 bytes.",
+              "Don't forget to subtract 2 for the Network ID and Direct Broadcast Address when calculating usable host addresses.",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -682,6 +1046,21 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
           hasInteractive: false,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "Routing algorithms determine paths through the network. Distance Vector (RIP, Bellman-Ford) shares entire routing table with immediate neighbors only; prone to slow convergence and Count-to-Infinity. Link State (OSPF, Dijkstra) floods local link states to all routers in the domain; every router builds an identical global topology graph and executes Dijkstra SPF. Path Vector (BGP) advertises complete AS-PATH lists to prevent inter-domain loops.",
+            keyFormulasAndRules: [
+              "Bellman-Ford Equation: D_x(y) = min_v { c(x, v) + D_v(y) } over all neighbors v of x.",
+              "RIP Protocol Bounds: Metric is hop count; Maximum valid path length is 15 hops; 16 hops represents infinity (unreachable).",
+              "Count-to-Infinity Mitigations: Split Horizon (do not re-advertise route to the interface from which it was learned); Poison Reverse (advertise cost = infinity back to next hop).",
+              "OSPF Hierarchy: Area 0 (Backbone Area) interconnects standard areas; Area Border Routers (ABR) connect standard areas to Area 0; Autonomous System Boundary Routers (ASBR) connect OSPF to external routing domains.",
+              "BGP Loop Detection: A BGP router discards any routing update if its own Autonomous System Number (ASN) already appears in the AS-PATH attribute list.",
+            ],
+            examPitfalls: [
+              "Split Horizon with Poison Reverse does NOT completely prevent loops involving three or more routers!",
+              "Link State Packets (LSPs) are flooded to ALL routers, but each LSP only lists the costs to IMMEDIATE neighbors.",
+              "Distance Vector updates are sent ONLY to immediate neighbors, but contain distance estimates to ALL routers in the entire network.",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -795,6 +1174,23 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
           hasInteractive: false,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "TCP provides reliable, in-order, byte-stream delivery with 3-way handshake and 4-way teardown (TIME_WAIT = 2MSL). Transmission window is W = min(cwnd, rwnd). Slow Start doubles cwnd every RTT; Congestion Avoidance adds 1 MSS every RTT (AIMD). On Timeout: ssthresh = cwnd / 2, cwnd = 1 MSS (Tahoe & Reno). On 3 Duplicate ACKs: Reno sets ssthresh = cwnd / 2, cwnd = ssthresh + 3 MSS, continuing linear growth without dropping to 1.",
+            keyFormulasAndRules: [
+              "Effective Transmission Window: W = min(cwnd, rwnd).",
+              "Slow Start Growth: cwnd = cwnd + 1 MSS per ACK received (doubles cwnd each RTT) until cwnd >= ssthresh.",
+              "Congestion Avoidance Growth: cwnd = cwnd + (1 / cwnd) MSS per ACK received (increases by 1 MSS each RTT).",
+              "Timeout Event (Tahoe & Reno): ssthresh = max(cwnd / 2, 2 MSS); cwnd = 1 MSS; enters Slow Start.",
+              "3 Duplicate ACKs (Reno Fast Recovery): ssthresh = max(cwnd / 2, 2 MSS); cwnd = ssthresh + 3 MSS; continues Congestion Avoidance.",
+              "TCP Header: 20 to 60 bytes; Sequence number counts bytes, not packets; SYN and FIN flags each consume 1 sequence number (ACK with no data consumes 0).",
+              "Karn's Algorithm: Do not measure RTT for retransmitted segments; double timeout timer (exponential backoff) upon every retransmission.",
+            ],
+            examPitfalls: [
+              "SYN and FIN consume exactly 1 sequence number each, even when they carry 0 payload bytes! ACK segments without data consume 0 sequence numbers.",
+              "In Slow Start, cwnd increases by 1 MSS for EACH individual ACK received, which doubles cwnd in one RTT if all segments are ACKed individually.",
+              "Do not confuse Tahoe and Reno: On 3 duplicate ACKs, Tahoe drops cwnd to 1, while Reno enters Fast Recovery and drops cwnd to ssthresh + 3.",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -876,6 +1272,7 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             },
           ],
         },
+        CN_SOCKET_API_LESSON,
       ],
     },
 
@@ -900,6 +1297,20 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
           hasInteractive: false,
           hasGATE: true,
           hasPractice: true,
+          cheatsheet: {
+            summaryRule: "Application protocols provide user network services. DNS resolves hostnames to IPs via hierarchical servers (Root -> TLD -> Authoritative); Iterative gives referrals while Recursive queries on behalf of client. HTTP/1.0 uses non-persistent connections (2 RTT per object); HTTP/1.1 uses persistent connections (1 RTT per object); HTTP/2 uses binary multiplexed streams; HTTP/3 uses QUIC over UDP. Email uses SMTP (push, port 25), POP3 (pull, port 110), IMAP (pull with server sync, port 143).",
+            keyFormulasAndRules: [
+              "Non-Persistent HTTP RTT Total: For base HTML + N objects, Total RTTs = (1 + N) * 2 RTT = 2(N + 1) RTTs (without parallel connections).",
+              "Persistent HTTP Without Pipelining: 2 RTT (base HTML) + N * 1 RTT = N + 2 RTTs.",
+              "Persistent HTTP With Pipelining: 2 RTT (base HTML) + 1 RTT (burst of all N objects) = 3 RTTs.",
+              "DNS Ports: UDP Port 53 (standard lookups <= 512 bytes); TCP Port 53 (zone transfers and responses > 512 bytes).",
+              "Email Ports: SMTP (TCP 25, 587 submission); POP3 (TCP 110, 995 SSL); IMAP (TCP 143, 993 SSL).",
+            ],
+            examPitfalls: [
+              "Non-persistent HTTP requires a BRAND NEW TCP handshake (1 RTT) PLUS 1 RTT for HTTP get/response for EACH referenced image, resulting in 2 RTT per image!",
+              "Do not confuse SMTP and POP3: SMTP is a push protocol used to send mail from client to server and between servers; POP3 and IMAP are pull protocols used to retrieve mail from the mailbox server to the client.",
+            ],
+          },
           sections: [
             {
               type: "explanation",
@@ -962,6 +1373,204 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
                   url: "https://www.youtube.com/playlist?list=PLxCzCOWd7aiGShFormBZvhs6quW3hVgTL",
                   whyThisHelps:
                     "Step-by-step ladder diagrams demonstrating exact RTT counting in GATE questions.",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
+    // =========================================================================
+    // MODULE 9: NETWORK SECURITY & CRYPTOGRAPHY
+    // =========================================================================
+    {
+      id: "cn-module-9-network-security-and-cryptography",
+      title: "Module 9: Network Security, Cryptography & Firewalls",
+      slug: "network-security-and-cryptography",
+      description:
+        "Symmetric vs asymmetric ciphers, RSA public-key algorithm, Diffie-Hellman key exchange, SHA cryptographic hashes, digital signatures, and firewall packet filtering.",
+      order: 9,
+      lessons: [
+        {
+          id: "network-security-and-cryptography",
+          title: "Network Security: Cryptography, RSA Math, Diffie-Hellman & Firewalls",
+          slug: "network-security-and-cryptography",
+          order: 1,
+          estimatedMinutes: 28,
+          tagline: "Symmetric vs asymmetric ciphers, RSA modular exponentiation, Diffie-Hellman, and packet-filtering firewalls.",
+          hasInteractive: false,
+          hasGATE: true,
+          hasPractice: true,
+          cheatsheet: {
+            summaryRule: "Network Security provides confidentiality, integrity, authentication, and non-repudiation. Symmetric ciphers (DES, AES) use 1 shared key for encryption and decryption. Asymmetric ciphers (RSA) use key pairs (Public/Private); security rests on prime factorization. Diffie-Hellman establishes a shared key over an insecure channel. Digital signatures encrypt message digest (SHA) with the sender's Private Key. Firewalls inspect packets (stateless vs stateful).",
+            keyFormulasAndRules: [
+              "RSA Key Generation: Select primes p, q. n = p * q. phi(n) = (p - 1)(q - 1). Choose e coprime to phi(n). Compute d = e^(-1) mod phi(n) via e * d = 1 (mod phi(n)).",
+              "RSA Encryption & Decryption: Ciphertext c = m^e mod n; Plaintext m = c^d mod n (requires 0 <= m < n).",
+              "Diffie-Hellman Shared Secret: Alice sends A = g^a mod p; Bob sends B = g^b mod p; Shared Key K = B^a mod p = A^b mod p = g^(ab) mod p.",
+              "Digital Signature Generation & Verification: Signature S = D_Kpriv_sender(Hash(M)); Verification: Valid if E_Kpub_sender(S) == Hash(M).",
+              "Firewall Types: Stateless Packet Filter (Layer 3/4 header: IP, Port, TCP flags SYN/ACK); Stateful Inspection (tracks TCP 3-way handshake state table); Application Gateway / Proxy (Layer 7 payload inspection).",
+            ],
+            examPitfalls: [
+              "In RSA, private exponent d is computed modulo phi(n) = (p - 1)(q - 1), NOT modulo n!",
+              "Diffie-Hellman key exchange is vulnerable to active Man-in-the-Middle (MitM) attacks unless combined with digital signatures or certificates for authentication.",
+              "To sign a message for authentication/non-repudiation, the sender uses their own PRIVATE key. To encrypt for confidentiality, the sender uses the recipient's PUBLIC key.",
+            ],
+          },
+          sections: [
+            {
+              type: "explanation",
+              heading: "1. Security Fundamentals & Symmetric vs Asymmetric Ciphers",
+              body: [
+                "Network security encompasses four fundamental pillars (the CIA+N model):",
+                "• Confidentiality: Only authorized sender and receiver understand message content (achieved via encryption).",
+                "• Integrity: Ensuring the message was not altered in transit (achieved via cryptographic hashes and MACs).",
+                "• Authentication: Confirming the true identity of the communicating peer.",
+                "• Non-Repudiation: Proving that the sender genuinely sent the message (achieved via digital signatures).",
+                "Symmetric vs Asymmetric Cryptographic Paradigms:",
+                "1. Symmetric Key Cryptography: Sender and receiver share the identical secret key K. Very fast, computationally light, used for bulk data encryption. Examples: DES (56-bit key, obsolete), Triple-DES (3DES, 168-bit key), AES (Advanced Encryption Standard, Rijndael with 128, 192, or 256-bit keys). Key distribution problem: How do sender and receiver agree on K over an untrusted internet?",
+                "2. Asymmetric (Public-Key) Cryptography: Each entity owns an asymmetric key pair: a publicly published Public Key (K_pub) and a strictly guarded Private Key (K_priv). A message encrypted with K_pub can only be decrypted by the matching K_priv. Solves the key distribution problem. Examples: RSA, Diffie-Hellman, ECC (Elliptic Curve Cryptography).",
+              ],
+            },
+            {
+              type: "explanation",
+              heading: "2. The RSA Public-Key Cryptosystem: Mathematical Derivation",
+              body: [
+                "Invented in 1977 by Ron Rivest, Adi Shamir, and Leonard Adleman, RSA is the most widely deployed public-key algorithm. Its security rests on the computational intractability of factoring large composite integers into their prime components.",
+                "RSA Algorithm Step-by-Step:",
+                "1. Choose two large, distinct prime numbers p and q.",
+                "2. Compute modulus n = p * q. The bit length of n is the key length (e.g. 2048 bits).",
+                "3. Compute Euler's Totient function: phi(n) = (p - 1) * (q - 1).",
+                "4. Select public exponent e such that 1 < e < phi(n) and gcd(e, phi(n)) = 1 (e is coprime to phi(n)). Commonly chosen values in practice are 3, 17, or 65537 (2^16 + 1).",
+                "5. Compute private decryption exponent d such that: d = e^(-1) mod phi(n), meaning: (e * d) mod phi(n) = 1.",
+                "   This is solved efficiently using the Extended Euclidean Algorithm.",
+                "6. Key Pairs: Public Key = (e, n); Private Key = (d, n).",
+                "7. Encryption (by Sender using Public Key):",
+                "   $$c = m^e \\bmod n \\quad (\\text{where plaintext integer } 0 \\le m < n)$$",
+                "8. Decryption (by Recipient using Private Key):",
+                "   $$m = c^d \\bmod n$$",
+                "Correctness Proof (Euler's Totient Theorem):",
+                "Since e * d = 1 (mod phi(n)), there exists an integer k such that e * d = k * phi(n) + 1.",
+                "Then c^d = (m^e)^d = m^(e*d) = m^(k * phi(n) + 1) = (m^phi(n))^k * m.",
+                "By Euler's Theorem, if gcd(m, n) = 1, then m^phi(n) = 1 (mod n). Hence, 1^k * m = m (mod n).",
+              ],
+              callout: {
+                kind: "gate-tip",
+                title: "Crucial GATE Trap: Modular Base for d vs c",
+                message:
+                  "Private exponent d is computed modulo phi(n) = (p - 1)(q - 1). Encryption and decryption are computed modulo n = p * q! Never mix up the two moduli.",
+              },
+            },
+            {
+              type: "explanation",
+              heading: "3. Diffie-Hellman Key Exchange & Digital Signatures",
+              body: [
+                "Diffie-Hellman Key Exchange Protocol:",
+                "Allows two parties (Alice and Bob) who have never met to establish a shared symmetric secret key over a public eavesdropped channel without transmitting the key itself.",
+                "1. Public parameters: A large prime p and a primitive root modulo p, denoted g.",
+                "2. Alice picks a secret random private number a (1 <= a < p) and sends public value A = g^a mod p.",
+                "3. Bob picks a secret random private number b (1 <= b < p) and sends public value B = g^b mod p.",
+                "4. Alice computes shared key: K = B^a mod p = (g^b)^a mod p = g^(ab) mod p.",
+                "5. Bob computes shared key: K = A^b mod p = (g^a)^b mod p = g^(ab) mod p.",
+                "Eavesdropper Eve sees p, g, A, B, but computing a or b requires solving the Discrete Logarithm Problem, which is computationally infeasible for large p (e.g. 2048-bit primes).",
+                "Digital Signatures & Secure Hash Functions (SHA-256):",
+                "A digital signature provides non-repudiation and authentication.",
+                "1. Sender computes fixed-size digest H = Hash(M) using a cryptographic hash function (SHA-256: one-way, collision-resistant).",
+                "2. Sender encrypts H using their own PRIVATE key: S = (H)^d_sender mod n_sender.",
+                "3. Receiver decrypts signature using sender's PUBLIC key: H' = (S)^e_sender mod n_sender.",
+                "4. If H' == Hash(M), the receiver has mathematical proof that the message originated from the sender and was not modified.",
+              ],
+            },
+            {
+              type: "explanation",
+              heading: "4. Firewalls: Packet-Filtering, Stateful & Application Gateways",
+              body: [
+                "A firewall is a network security appliance that monitors and filters incoming and outgoing traffic based on configured security policies.",
+                "1. Stateless Packet-Filtering Firewalls (Layer 3 & 4): Inspects individual IP datagrams in isolation. Evaluates rules based on: Source/Destination IP address, Source/Destination Port numbers, IP Protocol type (TCP, UDP, ICMP), and TCP control flags (SYN, ACK). High performance, but vulnerable to IP spoofing and cannot detect connection context.",
+                "2. Stateful Inspection Firewalls (Layer 4): Maintains an active state connection table. Verifies whether incoming packets belong to an existing, legitimately initiated TCP session (e.g. allows incoming ACK packets only if a matching outgoing SYN was previously observed).",
+                "3. Application-Level Gateways / Proxy Firewalls (Layer 7): Intercepts application traffic (HTTP, FTP, DNS) at the application layer. Can inspect message payloads, detect malicious SQL injection or cross-site scripting strings, and filter specific URLs.",
+              ],
+            },
+            {
+              type: "gate-analysis",
+              heading: "5. GATE Worked Numerical: Complete RSA Cryptosystem Calculation",
+              weightage: "2 Marks (Compulsory Topic in GATE CS)",
+              trap: "When calculating d = e^(-1) mod phi(n), ensure e * d mod phi(n) = 1. A common mistake is solving e * d mod n = 1!",
+              solutionSteps: [
+                "Problem (Original Practice Problem · Modeled on GATE Pattern):",
+                "In an RSA cryptosystem, the prime numbers are p = 7 and q = 11. The public encryption exponent is chosen as e = 13.",
+                "Calculate:",
+                "  (a) The modulus n and Euler's totient phi(n).",
+                "  (b) The private decryption exponent d.",
+                "  (c) The ciphertext c corresponding to plaintext message m = 8.",
+                "  (d) Verify decryption of c back to m.",
+                "Step 1: Compute modulus n and phi(n):",
+                "  n = p * q = 7 * 11 = 77.",
+                "  phi(n) = (p - 1) * (q - 1) = (7 - 1) * (11 - 1) = 6 * 10 = 60.",
+                "Step 2: Find private exponent d:",
+                "  We require e * d = 1 (mod phi(n)) => 13 * d = 1 (mod 60).",
+                "  Using the Extended Euclidean Algorithm or trial multiples of 60:",
+                "    13 * d = 60 * k + 1",
+                "    For k = 1: 60(1) + 1 = 61 (not divisible by 13).",
+                "    For k = 2: 60(2) + 1 = 121 (not divisible by 13).",
+                "    For k = 3: 60(3) + 1 = 181 (not divisible by 13).",
+                "    For k = 4: 60(4) + 1 = 241 (not divisible by 13).",
+                "    For k = 5: 60(5) + 1 = 301 (not divisible by 13).",
+                "    For k = 6: 60(6) + 1 = 361 (not divisible by 13).",
+                "    For k = 7: 60(7) + 1 = 421 (not divisible by 13).",
+                "    For k = 8: 60(8) + 1 = 481 -> 481 / 13 = 37 exactly! (13 * 37 = 481).",
+                "  Thus, private exponent d = 37.",
+                "  (Notice: 13 * 37 = 481 = 8 * 60 + 1 = 1 mod 60).",
+                "Step 3: Encrypt plaintext m = 8:",
+                "  Ciphertext c = m^e mod n = 8^13 mod 77.",
+                "  Use modular exponentiation (repeated squaring):",
+                "    8^1 = 8 mod 77",
+                "    8^2 = 64 = -13 mod 77",
+                "    8^4 = (-13)^2 = 169 = 2 * 77 + 15 = 15 mod 77",
+                "    8^8 = 15^2 = 225 = 2 * 77 + 71 = 71 = -6 mod 77",
+                "  Now decompose exponent 13 = 8 + 4 + 1:",
+                "    8^13 = 8^8 * 8^4 * 8^1 = (-6) * 15 * 8 mod 77",
+                "    (-6 * 15) = -90 = -90 + 2 * 77 = -90 + 154 = 64 mod 77",
+                "    64 * 8 = 512 = 6 * 77 + 50 = 50 mod 77.",
+                "  Ciphertext c = 50.",
+                "Step 4: Decrypt ciphertext c = 50 using private exponent d = 37:",
+                "  m = c^d mod n = 50^37 mod 77.",
+                "  50 = -27 mod 77.",
+                "  50^2 = 2500 = 32 * 77 + 36 = 36 mod 77.",
+                "  50^4 = 36^2 = 1296 = 16 * 77 + 64 = 64 = -13 mod 77.",
+                "  50^8 = (-13)^2 = 169 = 15 mod 77.",
+                "  50^16 = 15^2 = 225 = -6 mod 77.",
+                "  50^32 = (-6)^2 = 36 mod 77.",
+                "  Decompose exponent 37 = 32 + 4 + 1:",
+                "  50^37 = 50^32 * 50^4 * 50^1 mod 77",
+                "  = 36 * (-13) * 50 mod 77",
+                "  36 * (-13) = -468 = -468 + 7 * 77 = -468 + 539 = 71 = -6 mod 77.",
+                "  (-6) * 50 = -300 = -300 + 4 * 77 = -300 + 308 = 8 mod 77.",
+                "  Decrypted plaintext m = 8! (Matches original plaintext).",
+                "Conclusion: n = 77, phi(n) = 60, d = 37, c = 50, and decryption recovers m = 8.",
+              ],
+            },
+            {
+              type: "resources",
+              heading: "6. References & Curated Study Materials",
+              sources: [
+                {
+                  title: "Cryptography and Network Security: Principles and Practice (8th Edition)",
+                  authors: "William Stallings",
+                  year: "2020",
+                  publisher: "Pearson",
+                  link: "https://www.pearson.com",
+                  relevance:
+                    "Chapters 3, 9, 10, 13: Detailed mathematical derivations of AES, RSA, Diffie-Hellman key exchange, SHA-256, and firewall architectures.",
+                },
+                {
+                  title: "Computer Networking: A Top-Down Approach (8th Edition)",
+                  authors: "James F. Kurose, Keith W. Ross",
+                  year: "2020",
+                  publisher: "Pearson",
+                  link: "https://www.pearson.com",
+                  relevance:
+                    "Chapter 8: Network Security — principles of cryptography, message integrity, and firewalls in the Internet protocol stack.",
                 },
               ],
             },

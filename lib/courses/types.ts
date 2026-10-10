@@ -401,6 +401,7 @@ export interface LessonMeta {
   hasGATE: boolean;
   hasPractice: boolean;
   cheatsheet?: LessonCheatSheet;
+  syllabusScope?: string;
   sections: LessonSection[];
 }
 
@@ -411,6 +412,7 @@ export interface ModuleMeta {
   order: number;
   tagline?: string;
   description?: string;
+  syllabusScope?: string;
   lessons: LessonMeta[];
 }
 
@@ -431,7 +433,8 @@ export interface CourseMeta {
   estimatedHours?: number;
   targetAudience?: string;
   learningOutcomes?: string[];
-  gateWeightage: string; // e.g. "8–10 Marks in GATE CS/IT"
+  gateScope: string; // Official GATE syllabus relationship; do not infer mark weightage.
+  gateBranches?: ("cs" | "da")[];
   gateSyllabusTopics?: string[];
   modules: ModuleMeta[];
 }

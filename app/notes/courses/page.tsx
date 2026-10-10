@@ -106,7 +106,7 @@ export default function CoursesPage() {
                   <div className="font-mono text-xs text-ink-3 tracking-wider uppercase">
                     <span className="text-accent font-semibold">STUDENT NOTES</span>
                     <span className="mx-2 text-hairline">·</span>
-                    <span>GATE: {course.gateWeightage}</span>
+                    <span>Scope: {course.gateScope}</span>
                     <span className="mx-2 text-hairline">·</span>
                     <span>~{course.estimatedTotalHours}H READ TIME</span>
                   </div>

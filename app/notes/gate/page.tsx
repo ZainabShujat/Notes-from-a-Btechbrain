@@ -1,22 +1,19 @@
 import Link from "next/link";
 import { LEARNING_TRACKS } from "../../../lib/notes";
 import PageHeader from "../../components/ui/PageHeader";
-import Card from "../../components/ui/Card";
-import { cx } from "../../components/ui/cx";
 import { pageMetadata } from "../../../lib/seo";
 import type { Metadata } from "next";
+import GateSubjectFilterGrid, { GateWeightageItem } from "./GateSubjectFilterGrid";
 
 export const metadata: Metadata = pageMetadata({
-  title: "GATE CS Preparation Hub",
+  title: "GATE CS/IT & DA Preparation Hub",
   description:
-    "Exam-oriented preparation for GATE Computer Science: subject-wise marks distribution, high-yield topics, formula sheets, and verified PYQs.",
+    "Exam-oriented preparation for GATE Computer Science (CS/IT) and Data Science & Artificial Intelligence (DA): subject-wise marks distribution, high-yield topics, formula sheets, and verified PYQs.",
   path: "/notes/gate",
 });
 
-const GATE_WEIGHTAGE_DATA: Record<
-  string,
-  { marks: string; highYield: string; tier: "Tier 1 (High Yield)" | "Tier 2" | "Tier 3" }
-> = {
+const GATE_WEIGHTAGE_DATA: Record<string, GateWeightageItem> = {
+  // ── GATE CS/IT & Common ──
   "operating-systems": {
     marks: "8–10 Marks",
     highYield: "CPU Scheduling (RR, SJF), Paging & TLB EMAT, Banker's Safe State, Semaphores",
@@ -54,7 +51,7 @@ const GATE_WEIGHTAGE_DATA: Record<
   },
   dbms: {
     marks: "6–8 Marks",
-    highYield: "B+ Tree index calculations, Normal Forms (BCNF, 3NF), Conflict Serializable schedules",
+    highYield: "B+ Tree index calculations, Normal Forms (BCNF, 3NF), Conflict Serializable schedules, Data Warehousing",
     tier: "Tier 1 (High Yield)",
   },
   "computer-networks": {
@@ -82,6 +79,33 @@ const GATE_WEIGHTAGE_DATA: Record<
     highYield: "Numerical ability, Spatial aptitude, Reading comprehension, Syllogisms",
     tier: "Tier 1 (High Yield)",
   },
+
+  // ── GATE Data Science & AI (DA) Specific ──
+  "probability-and-statistics": {
+    marks: "12–15 Marks",
+    highYield: "Bayes' Theorem, Conditional Expectation, Normal/Poisson Distributions, Hypothesis Testing (t-test, z-test, p-value)",
+    tier: "Tier 1 (High Yield)",
+  },
+  "linear-algebra": {
+    marks: "10–12 Marks",
+    highYield: "Vector Spaces & Subspaces, SVD Factorization, Eigenvalues & Cayley-Hamilton, Projections & Least Squares",
+    tier: "Tier 1 (High Yield)",
+  },
+  "calculus-and-optimization": {
+    marks: "8–10 Marks",
+    highYield: "Gradient Descent & step size, Hessian Matrix, Convex Sets & Functions, Lagrange Multipliers",
+    tier: "Tier 2",
+  },
+  "machine-learning": {
+    marks: "14–18 Marks",
+    highYield: "Bias-Variance Tradeoff, SVM Max-Margin & Kernels, Decision Tree Information Gain, Cross-Entropy Loss, ROC-AUC",
+    tier: "Tier 1 (High Yield)",
+  },
+  "artificial-intelligence": {
+    marks: "8–10 Marks",
+    highYield: "A* Admissible & Consistent Heuristics, Alpha-Beta Pruning, Minimax Game Trees, Propositional Inference",
+    tier: "Tier 2",
+  },
 };
 
 export default function GatePage() {
@@ -96,14 +120,14 @@ export default function GatePage() {
             </Link>
           </li>
           <li aria-hidden="true">/</li>
-          <li className="text-ink-1 font-semibold">GATE CS Preparation Hub</li>
+          <li className="text-ink-1 font-semibold">GATE CS/IT & DA Hub</li>
         </ol>
       </nav>
 
       <PageHeader
-        eyebrow="GATE CS/IT EXAMINATION HUB"
-        title="GATE CS Strategy & Subject War-Rooms"
-        description="Exam-oriented preparation for the Graduate Aptitude Test in Engineering. Filter by mark weightage, review high-yield numerical patterns, and dive directly into verified PYQ archives."
+        eyebrow="GATE CS/IT & DATA SCIENCE & AI (DA) EXAMINATION HUB"
+        title="GATE Strategy, Subject Lenses & Weightage"
+        description="Dual-track exam-oriented preparation for both GATE CS/IT (13 subjects) and GATE Data Science & Artificial Intelligence (DA, 8 subjects). Filter by curriculum branch, inspect high-yield numerical patterns, and dive directly into verified PYQs."
       />
 
       {/* Quick Action Exam Shortcuts Banner */}
@@ -165,68 +189,12 @@ export default function GatePage() {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {LEARNING_TRACKS.map((subject) => {
-            const gateMeta = GATE_WEIGHTAGE_DATA[subject.slug] ?? {
-              marks: "5–8 Marks",
-              highYield: "Core concepts & PYQs",
-              tier: "Tier 2",
-            };
-
-            return (
-              <Card
-                key={subject.id}
-                href={`/notes/${subject.slug}?view=gate`}
-                padding="none"
-                className="h-full hover:border-accent/40"
-              >
-                <div className="p-5 md:p-6 flex flex-col h-full justify-between">
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-2.5">
-                      <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-accent/15 text-accent-soft border border-accent/25">
-                        {gateMeta.marks}
-                      </span>
-                      <span className="text-[10px] font-mono text-ink-3">
-                        {gateMeta.tier}
-                      </span>
-                    </div>
-
-                    <div className="flex items-start gap-2.5 mb-2">
-                      <span
-                        aria-hidden="true"
-                        className={cx(
-                          "mt-1 h-2.5 w-2.5 shrink-0 rounded-full",
-                          subject.color
-                        )}
-                      />
-                      <h3 className="font-bold text-ink-1 text-base leading-snug">
-                        {subject.title}
-                      </h3>
-                    </div>
-
-                    <p className="text-xs text-ink-2 leading-relaxed mb-4">
-                      {subject.tagline}
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-hairline/60">
-                    <span className="text-[10px] font-mono text-ink-3 uppercase block mb-1">
-                      High-Yield Subtopics:
-                    </span>
-                    <p className="text-xs font-mono text-ink-1 line-clamp-2">
-                      {gateMeta.highYield}
-                    </p>
-                    <div className="mt-3 flex items-center justify-between text-xs font-mono text-accent">
-                      <span>Open GATE Lens →</span>
-                      <span>🎯 PYQs</span>
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            );
-          })}
-        </div>
+        <GateSubjectFilterGrid
+          subjects={LEARNING_TRACKS}
+          weightageData={GATE_WEIGHTAGE_DATA}
+        />
       </div>
     </main>
   );
 }
+

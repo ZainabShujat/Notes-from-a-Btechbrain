@@ -1506,3 +1506,48 @@ svg *,
   }
 }
 
+
+/* Homepage hero: low-amplitude motion, with the headline and layout at rest. */
+@keyframes hero-path-drift {
+  0%, 100% { transform: translate(0, 0) rotate(-0.12deg); opacity: .82; }
+  50% { transform: translate(2px, -2px) rotate(0.12deg); opacity: 1; }
+}
+@keyframes hero-orbit-understand { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes hero-orbit-interact { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-3px); } }
+@keyframes hero-orbit-practice { 0%, 100% { transform: translateY(0); opacity: .94; } 50% { transform: translateY(3px); opacity: 1; } }
+@keyframes hero-orbit-revise { 0%, 100% { transform: translateY(0) rotate(-.35deg); } 50% { transform: translateY(2px) rotate(.35deg); } }
+@keyframes hero-artifact-float-1 { 0%, 100% { transform: translateY(0) rotate(-1.4deg); } 50% { transform: translateY(-3px) rotate(-1deg); } }
+@keyframes hero-artifact-float-2 { 0%, 100% { transform: translateY(0) rotate(1deg); } 50% { transform: translateY(3px) rotate(1.2deg); } }
+@keyframes hero-artifact-float-3 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-2px, -2px); } }
+@keyframes hero-arrow-drift { 0%, 100% { transform: translateY(0); opacity: .7; } 50% { transform: translateY(2px); opacity: 1; } }
+@keyframes hero-travel { to { stroke-dashoffset: 0; } }
+@keyframes hero-stars { 0%, 100% { opacity: .34; } 50% { opacity: .68; } }
+
+.hero-thinking-path { animation-duration: 31s; }
+.hero-travel-light { animation: hero-travel 30s linear infinite; }
+.hero-orbit-understand { animation-duration: 17s; }
+.hero-orbit-interact { animation-duration: 22s; }
+.hero-orbit-practice { animation-duration: 19s; }
+.hero-orbit-revise { animation-duration: 25s; }
+.hero-artifact-1 { animation-duration: 26s; }
+.hero-artifact-2 { animation-duration: 29s; }
+.hero-artifact-3 { animation-duration: 23s; }
+.hero-arrow-drift { animation-duration: 5.5s; }
+.hero-star-field {
+  background-image:
+    radial-gradient(circle at 16% 22%, currentColor 1px, transparent 1.5px),
+    radial-gradient(circle at 84% 28%, currentColor 1px, transparent 1.5px),
+    radial-gradient(circle at 22% 76%, currentColor 1.2px, transparent 1.7px),
+    radial-gradient(circle at 77% 81%, currentColor 1px, transparent 1.6px),
+    radial-gradient(circle at 61% 14%, currentColor .8px, transparent 1.4px),
+    radial-gradient(circle at 91% 58%, currentColor .8px, transparent 1.4px);
+  color: var(--color-accent);
+  opacity: .16;
+  animation: hero-stars 13s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-travel-light,
+  .hero-star-field { animation: none !important; }
+  .hero-travel-light { display: none; }
+}
