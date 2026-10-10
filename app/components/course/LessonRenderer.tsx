@@ -82,6 +82,8 @@ export default function LessonRenderer({
           />
         </h1>
 
+        {lesson.syllabusScope && <p className="mb-3 inline-flex rounded bg-amber-500/10 px-2 py-1 text-[10px] font-mono text-amber-700 dark:text-amber-300">{lesson.syllabusScope}</p>}
+
         {/* Serif Subtitle */}
         {lesson.tagline && (
           <p className="text-[clamp(1rem,1.2vw,1.125rem)] text-ink-2 leading-relaxed font-serif italic max-w-[68ch]">

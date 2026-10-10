@@ -361,7 +361,7 @@ export default async function SubjectNotebookPage({
                       </h4>
                     </div>
                     <span className="text-[11px] font-mono text-ink-3 shrink-0">
-                      {mod.lessons.length} note{mod.lessons.length > 1 ? "s" : ""}
+                      {mod.lessons.length} note{mod.lessons.length > 1 ? "s" : ""}{mod.syllabusScope && <span className="block text-[9px] text-amber-600 dark:text-amber-400 normal-case tracking-normal max-w-40 text-right">{mod.syllabusScope}</span>}
                     </span>
                   </div>
 
@@ -386,7 +386,7 @@ export default async function SubjectNotebookPage({
                             <span className="font-mono text-[10px] text-ink-3">
                               {modIdx + 1}.{lIdx + 1}
                             </span>
-                            <span>{lesson.title}</span>
+                            <span>{lesson.title}</span>{lesson.syllabusScope && <span className="ml-1 rounded bg-amber-500/10 px-1 py-0.5 text-[9px] font-mono text-amber-700 dark:text-amber-300">{lesson.syllabusScope}</span>}
                           </Link>
                           <p className="text-[11px] text-ink-3 pl-5">
                             {lesson.tagline}
