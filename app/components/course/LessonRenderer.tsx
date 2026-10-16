@@ -8,6 +8,7 @@ import InteractiveBankersAlgorithm from "./InteractiveBankersAlgorithm";
 import InteractivePageReplacement from "./InteractivePageReplacement";
 import InteractiveDiskScheduling from "./InteractiveDiskScheduling";
 import InteractiveSemaphore from "./InteractiveSemaphore";
+import InteractiveSlidingWindow from "./InteractiveSlidingWindow";
 import InteractiveSerializabilityChecker from "./InteractiveSerializabilityChecker";
 import InteractiveBPlusTreeCalculator from "./InteractiveBPlusTreeCalculator";
 import InteractiveNormalizationAnalyzer from "./InteractiveNormalizationAnalyzer";
@@ -311,6 +312,9 @@ function SectionBlock({
             )}
             {section.interactive.kind === "semaphore" && (
               <InteractiveSemaphore config={section.interactive.config} />
+            )}
+            {section.interactive.kind === "sliding-window" && (
+              <InteractiveSlidingWindow config={section.interactive.config} />
             )}
             {section.interactive.kind === "serializability-checker" && (
               <InteractiveSerializabilityChecker config={section.interactive.config} />

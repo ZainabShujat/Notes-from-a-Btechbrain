@@ -117,6 +117,19 @@ export interface DiskSchedulingConfig {
   requests: number[];
 }
 
+export interface SlidingWindowConfig {
+  title: string;
+  caption?: string;
+  /** Total frames to deliver. */
+  frameCount: number;
+  /** Sender window size W_s for Go-Back-N and Selective Repeat. */
+  windowSize: number;
+  /** a = T_p / T_t. */
+  propagationRatio: number;
+  /** Index of the frame lost on its first transmission; null for no loss. */
+  lostFrame: number | null;
+}
+
 export interface SemaphoreSimulatorConfig {
   title: string;
   caption?: string;
@@ -170,6 +183,7 @@ export type InteractiveBlockConfig =
   | { kind: "page-replacement"; config: PageReplacementConfig }
   | { kind: "disk-scheduling"; config: DiskSchedulingConfig }
   | { kind: "semaphore"; config: SemaphoreSimulatorConfig }
+  | { kind: "sliding-window"; config: SlidingWindowConfig }
   | { kind: "serializability-checker"; config: SerializabilityCheckerConfig }
   | { kind: "b-plus-tree-calculator"; config: BPlusTreeCalculatorConfig }
   | { kind: "normalization-analyzer"; config: NormalizationAnalyzerConfig }

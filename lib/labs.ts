@@ -117,7 +117,22 @@ export const DBMS_LABS = [
   },
 ];
 
+export const CN_LABS = [
+  {
+    id: "sliding-window",
+    title: "Sliding Window Retransmission Lab",
+    module: "Module 3: Flow Control & Sliding Window Protocols",
+    courseSlug: "computer-networks",
+    lessonSlug: "sliding-window-protocols-and-efficiency",
+    description:
+      "Lose a frame and watch what goes on the wire under Stop-and-Wait, Go-Back-N, and Selective Repeat. Change the window size and a = Tp/Tt to see efficiency and the sequence bits each protocol needs.",
+    tags: ["Go-Back-N", "Selective Repeat", "Link Efficiency", "Sequence Numbers"],
+    features: ["Frame-by-frame retransmission timeline", "Live efficiency η = min(1, W/(1+2a))", "Sequence bits for GBN vs SR"],
+  },
+];
+
 export const COURSE_LABS = [
   ...OS_LABS.map((lab) => ({ ...lab, courseSlug: "operating-systems", subjectName: "Operating Systems" })),
   ...DBMS_LABS.map((lab) => ({ ...lab, subjectName: "Database Management Systems" })),
+  ...CN_LABS.map((lab) => ({ ...lab, subjectName: "Computer Networks" })),
 ];

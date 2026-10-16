@@ -580,8 +580,26 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
               ],
             },
             {
+              type: "interactive",
+              heading: "3. Lab: Watch Go-Back-N and Selective Repeat Handle a Lost Frame",
+              leadParagraph:
+                "Switch protocols, change the window size and a = T_p / T_t, and pick a frame to lose. The efficiency, sequence-bit count, and the exact frames on the wire update as you go.",
+              interactive: {
+                kind: "sliding-window",
+                config: {
+                  title: "Sliding Window Retransmission Lab",
+                  caption:
+                    "Model: one chosen frame is lost on its first transmission, ACKs are never lost, and the sender's window base is at the lost frame when its timer expires.",
+                  frameCount: 8,
+                  windowSize: 4,
+                  propagationRatio: 2,
+                  lostFrame: 2,
+                },
+              },
+            },
+            {
               type: "gate-analysis",
-              heading: "3. GATE Worked Numerical: 100% Link Utilization & Sequence Number Bits",
+              heading: "4. GATE Worked Numerical: 100% Link Utilization & Sequence Number Bits",
               weightage: "2 Marks (Most Frequent CN Numerical in GATE)",
               trap: "In Go-Back-N, if optimal window size is W, you need at least W + 1 distinct sequence numbers! Sequence bits k = ceil(log2(W + 1)). In Selective Repeat, k = ceil(log2(2 * W)).",
               solutionSteps: [
@@ -602,7 +620,7 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             },
             {
               type: "resources",
-              heading: "4. References & Curated Study Materials",
+              heading: "5. References & Curated Study Materials",
               sources: [
                 {
                   title: "Data Communications and Networking (5th Edition)",
