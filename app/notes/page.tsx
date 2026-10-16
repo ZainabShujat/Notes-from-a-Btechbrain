@@ -210,7 +210,7 @@ export default function NotesLandingPage() {
               Cheat Sheets
             </h3>
             <p className="text-xs text-ink-3 leading-relaxed relative z-10">
-              One-page summaries for exam-night revision. Operating Systems only for now.
+              One-page summaries for exam-night revision, for every subject.
             </p>
           </Link>
 
@@ -241,7 +241,7 @@ export default function NotesLandingPage() {
               10-Minute Rapid Revision
             </h3>
             <p className="text-xs text-ink-3 leading-relaxed relative z-10">
-              Recall sheets to skim on your phone right before the exam. Operating Systems only for now.
+              Recall sheets to skim on your phone right before the exam, for every subject.
             </p>
           </Link>
         </div>

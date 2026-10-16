@@ -1,11 +1,13 @@
 import Link from "next/link";
+import { getSubjectRevision, REVISION_SUBJECTS } from "../../../lib/courses/revision";
 import PageHeader from "../../components/ui/PageHeader";
+import SubjectSwitcher from "../../components/ui/SubjectSwitcher";
 import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Operating Systems Comprehensive Cheat Sheets",
+  title: "Cheat Sheets for Every Subject",
   description:
-    "Compact, scannable revision sheets for Operating Systems: CPU scheduling formulas, Coffman conditions, paging TLB EMAT, Banker's algorithm, and disk seek times.",
+    "One-page revision sheets for every B.Tech subject notebook: the core rule, key formulas, and exam traps for each topic.",
   path: "/notes/cheat-sheets",
 });
 
@@ -137,7 +139,55 @@ const OS_CHEAT_SHEETS = [
   },
 ];
 
-export default function CheatSheetsPage() {
+type Sheet = {
+  id: string;
+  title: string;
+  module: string;
+  lessonSlug: string;
+  summary?: string;
+  coreRules: string[];
+  formulas: string[];
+  pitfalls: string[];
+  tips: string[];
+};
+
+const DEFAULT_SUBJECT = "operating-systems";
+
+/** OS keeps its hand-curated module sheets; other subjects use each lesson's cheat sheet. */
+function sheetsFor(subjectSlug: string): Sheet[] {
+  if (subjectSlug === DEFAULT_SUBJECT) {
+    return OS_CHEAT_SHEETS.map((sheet) => ({ ...sheet, tips: [] }));
+  }
+  return getSubjectRevision(subjectSlug).flatMap(({ sheet, moduleTitle, lessonTitle, lessonSlug }) =>
+    sheet
+      ? [
+          {
+            id: lessonSlug,
+            title: lessonTitle,
+            module: moduleTitle,
+            lessonSlug,
+            summary: sheet.summaryRule,
+            coreRules: sheet.keyFormulasAndRules,
+            formulas: [],
+            pitfalls: sheet.examPitfalls,
+            tips: sheet.highYieldTips ?? [],
+          },
+        ]
+      : []
+  );
+}
+
+export default async function CheatSheetsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ subject?: string }>;
+}) {
+  const { subject } = await searchParams;
+  const activeSlug = REVISION_SUBJECTS.some((s) => s.slug === subject) ? subject! : DEFAULT_SUBJECT;
+  const activeTitle = REVISION_SUBJECTS.find((s) => s.slug === activeSlug)!.title;
+  const subjects = REVISION_SUBJECTS.map((s) => ({ ...s, count: sheetsFor(s.slug).length }));
+  const sheets = sheetsFor(activeSlug);
+
   return (
     <main className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 py-10 md:py-16">
       {/* Breadcrumb */}
@@ -161,32 +211,20 @@ export default function CheatSheetsPage() {
 
       <PageHeader
         eyebrow="RAPID EXAM REFERENCE · 1-PAGE SUMMARIES"
-        title="Operating Systems Cheat Sheets"
-        description="High-density reference sheets designed for the student with 10 minutes before an exam. Review core invariants, calculation formulas, and subtle traps across every major topic."
+        title={`${activeTitle} Cheat Sheets`}
+        description="One page per topic for when you have 10 minutes before an exam: the core rule, the formulas, and the traps."
       />
 
-      {/* Subject Filter Bar */}
-      <div className="flex flex-wrap items-center gap-2 mb-8 pb-4 border-b border-hairline text-xs font-mono">
-        <span className="text-ink-3 text-[11px] font-bold uppercase tracking-wider mr-1">
-          SUBJECT:
-        </span>
-        <span className="px-3 py-1.5 rounded bg-accent text-white font-semibold shadow-2xs">
-          Operating Systems ({OS_CHEAT_SHEETS.length} Topic Sheets)
-        </span>
-        <span className="px-3 py-1.5 rounded bg-surface-2 text-ink-3 border border-hairline/60">
-          DBMS (Coming Soon)
-        </span>
-        <span className="px-3 py-1.5 rounded bg-surface-2 text-ink-3 border border-hairline/60">
-          Computer Networks (Coming Soon)
-        </span>
-        <span className="px-3 py-1.5 rounded bg-surface-2 text-ink-3 border border-hairline/60">
-          COA (Coming Soon)
-        </span>
-      </div>
+      <SubjectSwitcher
+        basePath="/notes/cheat-sheets"
+        subjects={subjects}
+        activeSlug={activeSlug}
+        activeClassName="bg-accent text-white"
+      />
 
       {/* Sheets List */}
       <div className="space-y-8">
-        {OS_CHEAT_SHEETS.map((sheet) => (
+        {sheets.map((sheet) => (
           <article
             key={sheet.id}
             id={sheet.id}
@@ -203,12 +241,18 @@ export default function CheatSheetsPage() {
               </div>
 
               <Link
-                href={`/notes/operating-systems/${sheet.lessonSlug}`}
+                href={`/notes/${activeSlug}/${sheet.lessonSlug}`}
                 className="text-xs font-mono text-ink-3 hover:text-accent transition-colors shrink-0"
               >
                 Open Full Lesson &rarr;
               </Link>
             </div>
+
+            {sheet.summary && (
+              <p className="text-sm sm:text-base font-bold text-ink-1 font-sans leading-snug">
+                {sheet.summary}
+              </p>
+            )}
 
             {/* Core Invariants */}
             <div className="space-y-2">
@@ -226,6 +270,7 @@ export default function CheatSheetsPage() {
             </div>
 
             {/* Formulas Box */}
+            {sheet.formulas.length > 0 && (
             <div className="p-4 rounded-md border border-hairline bg-surface-2/60 space-y-2">
               <span className="text-xs font-mono font-bold text-accent uppercase tracking-wider block">
                 Mathematical Formulas:
@@ -241,6 +286,7 @@ export default function CheatSheetsPage() {
                 ))}
               </div>
             </div>
+            )}
 
             {/* Common Pitfalls */}
             <div className="space-y-2 pt-1 border-t border-hairline/40">
@@ -256,6 +302,22 @@ export default function CheatSheetsPage() {
                 ))}
               </ul>
             </div>
+
+            {sheet.tips.length > 0 && (
+              <div className="space-y-2 pt-1 border-t border-hairline/40">
+                <span className="text-xs font-mono font-bold text-accent uppercase tracking-wider block">
+                  High-Yield Tips:
+                </span>
+                <ul className="space-y-1 text-xs text-ink-2">
+                  {sheet.tips.map((t, tIdx) => (
+                    <li key={tIdx} className="flex items-start gap-2">
+                      <span className="text-accent font-bold">&rarr;</span>
+                      <span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </article>
         ))}
       </div>

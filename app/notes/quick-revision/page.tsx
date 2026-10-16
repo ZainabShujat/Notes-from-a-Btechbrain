@@ -1,33 +1,31 @@
 import Link from "next/link";
-import { getCourse } from "../../../lib/courses";
+import { getSubjectRevision, REVISION_SUBJECTS } from "../../../lib/courses/revision";
 import PageHeader from "../../components/ui/PageHeader";
+import SubjectSwitcher from "../../components/ui/SubjectSwitcher";
 import { pageMetadata } from "../../../lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Operating Systems 10-Minute Rapid Revision & Panic Sheets",
+  title: "10-Minute Rapid Revision & Panic Sheets",
   description:
-    "Timed revision designed for the 10 minutes before an exam. Core invariants, rapid memory anchors, and decision trees for Operating Systems.",
+    "Timed revision for the 10 minutes before an exam: core rules, must-remember formulas, and common traps for every B.Tech subject notebook.",
   path: "/notes/quick-revision",
 });
 
-export default function QuickRevisionPage() {
-  const osCourse = getCourse("operating-systems");
+const DEFAULT_SUBJECT = "operating-systems";
 
-  // Extract all quick-revision sections from the Operating Systems course
-  const revisionSections = osCourse
-    ? osCourse.modules.flatMap((m) =>
-        m.lessons.flatMap((l) =>
-          l.sections
-            .filter((sec) => sec.type === "quick-revision")
-            .map((sec) => ({
-              moduleTitle: m.title.replace(/^Module \d+:\s*/i, ""),
-              lessonTitle: l.title,
-              lessonSlug: l.slug,
-              ...(sec.type === "quick-revision" ? sec : {}),
-            }))
-        )
-      )
-    : [];
+export default async function QuickRevisionPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ subject?: string }>;
+}) {
+  const { subject } = await searchParams;
+  const activeSlug = REVISION_SUBJECTS.some((s) => s.slug === subject) ? subject! : DEFAULT_SUBJECT;
+  const activeTitle = REVISION_SUBJECTS.find((s) => s.slug === activeSlug)!.title;
+  const subjects = REVISION_SUBJECTS.map((s) => ({
+    ...s,
+    count: getSubjectRevision(s.slug).filter((r) => r.panicCard).length,
+  }));
+  const revisionSections = getSubjectRevision(activeSlug).filter((r) => r.panicCard);
 
   return (
     <main className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 py-10 md:py-16">
@@ -52,33 +50,21 @@ export default function QuickRevisionPage() {
 
       <PageHeader
         eyebrow="TIMED REVISION · 1-MINUTE PANIC SHEETS"
-        title="Operating Systems 10-Minute Rapid Revision"
-        description="Designed specifically for the crucial minutes before entering the exam hall. High-yield memory anchors, core mathematical invariants, and ASCII execution flowcharts."
+        title={`${activeTitle} 10-Minute Rapid Revision`}
+        description="For the last few minutes before the exam hall: one core rule per topic, the formulas you must remember, and the traps that cost marks."
       />
 
-      {/* Subject Filter Bar */}
-      <div className="flex flex-wrap items-center gap-2 mb-8 pb-4 border-b border-hairline text-xs font-mono">
-        <span className="text-ink-3 text-[11px] font-bold uppercase tracking-wider mr-1">
-          SUBJECT:
-        </span>
-        <span className="px-3 py-1.5 rounded bg-amber-500 text-slate-950 font-bold shadow-2xs">
-          Operating Systems ({revisionSections.length} Panic Sheets)
-        </span>
-        <span className="px-3 py-1.5 rounded bg-surface-2 text-ink-3 border border-hairline/60">
-          DBMS (Coming Soon)
-        </span>
-        <span className="px-3 py-1.5 rounded bg-surface-2 text-ink-3 border border-hairline/60">
-          Computer Networks (Coming Soon)
-        </span>
-        <span className="px-3 py-1.5 rounded bg-surface-2 text-ink-3 border border-hairline/60">
-          Algorithms (Coming Soon)
-        </span>
-      </div>
+      <SubjectSwitcher
+        basePath="/notes/quick-revision"
+        subjects={subjects}
+        activeSlug={activeSlug}
+        activeClassName="bg-amber-500 text-slate-950"
+      />
 
       {/* Panic Sheets Stream */}
       <div className="space-y-8">
         {revisionSections.map((rev, idx) => {
-          const card = rev.oneMinutePanicCard;
+          const card = rev.panicCard;
           if (!card) return null;
 
           return (
@@ -89,7 +75,7 @@ export default function QuickRevisionPage() {
               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 border-b border-hairline/60 pb-3">
                 <div>
                   <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-500 block">
-                    PANIC SHEET 0{idx + 1} &middot; {rev.moduleTitle}
+                    PANIC SHEET {String(idx + 1).padStart(2, "0")} &middot; {rev.moduleTitle}
                   </span>
                   <h2 className="text-lg sm:text-xl font-bold text-ink-1 font-sans">
                     {rev.lessonTitle}
@@ -97,7 +83,7 @@ export default function QuickRevisionPage() {
                 </div>
 
                 <Link
-                  href={`/notes/operating-systems/${rev.lessonSlug}`}
+                  href={`/notes/${activeSlug}/${rev.lessonSlug}`}
                   className="text-xs font-mono text-ink-3 hover:text-accent transition-colors shrink-0"
                 >
                   Full Lesson &rarr;
