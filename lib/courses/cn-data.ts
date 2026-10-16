@@ -152,7 +152,6 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "4. GATE Step-by-Step Numerical: Store-and-Forward Packet Switching Delay",
-              weightage: "2 Marks (High Frequency)",
               trap: "In store-and-forward packet switching, intermediate routers must receive the ENTIRE packet before forwarding the first bit to the next link!",
               solutionSteps: [
                 "Problem: A source host sends a file of size F = 1.5 Megabytes over a path of N = 4 identical links. Each link has bandwidth R = 10 Mbps and propagation delay d_prop = 5 ms. The file is split into packets of size P = 1500 bytes (including 20 bytes header). Neglect processing and queuing delays.",
@@ -306,7 +305,6 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "5. GATE Worked Numerical: Combined Nyquist & Shannon Engineering",
-              weightage: "2 Marks (Common GATE CS Trap)",
               trap: "Students frequently compute Shannon capacity and stop, forgetting that physical transmitters use discrete levels M governed by Nyquist!",
               solutionSteps: [
                 "Problem (Modeled on GATE Pattern): A telephone channel has an analog bandwidth B = 4 kHz and a signal-to-noise ratio SNR_dB = 30 dB.",
@@ -425,7 +423,6 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. GATE Worked Numerical: CRC Remainder & Transmitted Codeword",
-              weightage: "2 Marks (Compulsory in GATE CS)",
               trap: "If generator polynomial G(x) = x^3 + x + 1, its degree is 3! That means you MUST append exactly 3 zeros to the data, and the generator binary bit string has 4 bits: 1011.",
               solutionSteps: [
                 "Problem: Given Data = 110101 and Generator G(x) = x^3 + x + 1. Find the CRC remainder and the transmitted bit frame.",
@@ -501,6 +498,7 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
       lessons: [
         {
           id: "sliding-window-protocols-and-efficiency",
+            syllabusScope: "Optional link-layer protocol enrichment beyond the named GATE 2027 CS/IT network topics",
           title: "Sliding Window: Stop-and-Wait, Go-Back-N & Selective Repeat",
           slug: "sliding-window-protocols-and-efficiency",
           order: 1,
@@ -600,7 +598,6 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "4. GATE Worked Numerical: 100% Link Utilization & Sequence Number Bits",
-              weightage: "2 Marks (Most Frequent CN Numerical in GATE)",
               trap: "In Go-Back-N, if optimal window size is W, you need at least W + 1 distinct sequence numbers! Sequence bits k = ceil(log2(W + 1)). In Selective Repeat, k = ceil(log2(2 * W)).",
               solutionSteps: [
                 "Problem: A 1000 km link has bandwidth B = 100 Mbps and propagation speed s = 2 * 10^8 m/s. Frame size L = 1000 bytes. Find:",
@@ -700,7 +697,6 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. The Golden Rule of CSMA/CD: Minimum Frame Size Derivation",
-              weightage: "2 Marks (Guaranteed GATE Topic)",
               trap: "A transmitting station MUST continue transmitting until the round-trip signal has had time to return. If the frame is too short, the transmission finishes before the collision signal returns, and the collision goes undetected!",
               solutionSteps: [
                 "Worst-Case Scenario: Station A and Station B are at opposite ends of a cable separated by propagation delay T_p.",
@@ -761,6 +757,7 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
         },
         {
           id: "lan-switching-and-data-link-devices",
+            syllabusScope: "Core: switching; STP and bridge details are enrichment",
           title: "Connecting Devices, Transparent Bridges & Spanning Tree Protocol (STP)",
           slug: "lan-switching-and-data-link-devices",
           order: 2,
@@ -850,7 +847,6 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "5. GATE Worked Numerical: Domain Counting & Bridge Table Trace",
-              weightage: "2 Marks",
               trap: "Remember that each interface of a router is BOTH an independent collision domain AND an independent broadcast domain!",
               solutionSteps: [
                 "Problem (Modeled on GATE Pattern): A campus network consists of:",
@@ -960,7 +956,6 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Step-by-Step Numerical: IP Datagram Fragmentation",
-              weightage: "2 Marks (Compulsory in GATE CS)",
               trap: "Remember to subtract the 20-byte IP header from the link MTU to determine maximum payload per fragment, and ensure payload is divisible by 8!",
               solutionSteps: [
                 "Problem: An IPv4 datagram of Total Length = 4000 bytes (with 20-byte IP header) arrives at a router whose output interface has an MTU (Maximum Transmission Unit) of 1500 bytes. Calculate the number of fragments, their sizes, DF/MF flags, and fragment offsets.",
@@ -990,7 +985,6 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "4. GATE Worked Numerical: Subnet Mask & Usable IP Range",
-              weightage: "1-2 Marks",
               trap: "Always check which octet the prefix split falls into. For /26, 26 = 8 + 8 + 8 + 2, so the boundary is in the 4th octet with 2 subnet bits and 6 host bits.",
               solutionSteps: [
                 "Problem: An ISP assigns host IP 198.51.100.142 / 27. Find the Subnet Mask, Network ID, Broadcast ID, and the range of usable host addresses.",
@@ -1126,7 +1120,6 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. GATE Worked Numerical: Distance Vector Routing Table Update",
-              weightage: "2 Marks",
               trap: "When applying Bellman-Ford update from neighbor vector, don't forget to ADD the link cost to that neighbor before comparing against current known distance!",
               solutionSteps: [
                 "Problem: Node X is connected to neighbors A, B, and C with direct link costs: c(X, A) = 2, c(X, B) = 5, c(X, C) = 1.",
@@ -1240,7 +1233,6 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. GATE Worked Numerical: TCP cwnd Evolution & Threshold Calculation",
-              weightage: "2 Marks (High Frequency)",
               trap: "Check whether loss is due to TIMEOUT or 3 DUPLICATE ACKs, and whether the question specifies TCP Tahoe or TCP Reno!",
               solutionSteps: [
                 "Problem: A TCP connection has initial ssthresh = 16 MSS. cwnd starts at 1 MSS. A timeout occurs during transmission round 7. Find the value of ssthresh and cwnd in round 8, 9, and 10.",
@@ -1347,7 +1339,6 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: HTTP Persistent vs Non-Persistent RTTs",
-              weightage: "2 Marks",
               trap: "Non-persistent HTTP requires a BRAND NEW TCP 3-way handshake for every individual referenced object! Persistent HTTP reuses the single established TCP connection.",
               solutionSteps: [
                 "Problem: A web client fetches a page containing 1 base HTML text file and 10 referenced JPEG images located on the same server. Neglect transmission delay and DNS lookup time. Calculate total RTTs under:",
@@ -1412,6 +1403,7 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
       lessons: [
         {
           id: "network-security-and-cryptography",
+            syllabusScope: "Optional enrichment; not listed in the GATE 2027 CS/IT Computer Networks syllabus",
           title: "Network Security: Cryptography, RSA Math, Diffie-Hellman & Firewalls",
           slug: "network-security-and-cryptography",
           order: 1,
@@ -1512,7 +1504,6 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "5. GATE Worked Numerical: Complete RSA Cryptosystem Calculation",
-              weightage: "2 Marks (Compulsory Topic in GATE CS)",
               trap: "When calculating d = e^(-1) mod phi(n), ensure e * d mod phi(n) = 1. A common mistake is solving e * d mod n = 1!",
               solutionSteps: [
                 "Problem (Original Practice Problem · Modeled on GATE Pattern):",

@@ -1,31 +1,35 @@
-# Current State: GATE CS/IT & GATE DA Notebook Skeletons
+# Current State: GATE CS/IT & GATE DA Notebook Audit
 
 ## Overview
-All 18 academic subject notebooks across GATE CS/IT (13 subjects) and GATE Data Science & AI (8 subjects with shared crossovers) have been standardized and completed with declarative, syllabus-aligned subject structures modeled after the reference Operating Systems notebook.
+The repository registers 18 course records, comprising 104 modules and 199 lessons (counts generated from `getAllCourses()` in `lib/courses/index.ts`). This is a structural count, not a claim that all syllabus requirements are fully taught. The 2027 audit and per-topic matrix are in [GATE_2027_COVERAGE_MATRIX.md](GATE_2027_COVERAGE_MATRIX.md) and [GATE_2027_AUDIT_REPORT.md](GATE_2027_AUDIT_REPORT.md). Operating Systems is the 9-module, 15-lesson reference and was not edited for this audit.
 
-## Subject Status Matrix
+The source-derived total differs from stale counts in prior reports: TOC has 9 lessons (not 10), Data Structures now has 15 (including five explicit DA Python lessons), DBMS has 10 (including the DA transformation lesson), and Computer Networks has 12 (including the socket API lesson). Total non-OS scope: 95 modules, 184 lessons.
 
-| Subject | Code | Track | Course File | Modules Count | Lessons Count | Status |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Operating Systems** | `CS-01` | CS/IT | `lib/courses/os-data.ts` | 9 Modules | 15 Lessons | Complete (Reference) |
-| **Database Management Systems** | `CS-02` | CS & DA | `lib/courses/dbms-data.ts` | 9 Modules | 9 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Computer Networks** | `CS-03` | CS/IT | `lib/courses/cn-data.ts` | 9 Modules | 11 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Computer Organization & Architecture** | `CS-04` | CS/IT | `lib/courses/coa-data.ts` | 5 Modules | 10 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Theory of Computation** | `CS-05` | CS/IT | `lib/courses/toc-data.ts` | 5 Modules | 10 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Programming in C** | `CS-06` | CS/IT | `lib/courses/c-prog-data.ts` | 5 Modules | 10 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Discrete Mathematics** | `CS-07` | CS/IT | `lib/courses/discrete-maths-data.ts` | 5 Modules | 11 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **General Aptitude** | `CS-08 / DA-01` | CS & DA | `lib/courses/general-aptitude-data.ts` | 5 Modules | 10 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Engineering Mathematics** | `CS-09` | CS/IT | `lib/courses/engineering-mathematics-data.ts` | 5 Modules | 10 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Digital Logic** | `CS-10` | CS/IT | `lib/courses/digital-logic-data.ts` | 5 Modules | 10 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Data Structures** | `CS-11 / DA-05` | CS & DA | `lib/courses/data-structures-data.ts` | 5 Modules | 10 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Algorithms** | `CS-12 / DA-05` | CS & DA | `lib/courses/algorithms-data.ts` | 5 Modules | 11 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Compiler Design** | `CS-13` | CS/IT | `lib/courses/compiler-design-data.ts` | 5 Modules | 10 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Probability and Statistics** | `DA-02` | DA | `lib/courses/prob-stats-data.ts` | 5 Modules | 11 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Linear Algebra** | `DA-03` | DA | `lib/courses/linear-algebra-data.ts` | 5 Modules | 11 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Calculus and Optimization** | `DA-04` | DA | `lib/courses/calculus-opt-data.ts` | 5 Modules | 10 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Machine Learning** | `DA-07` | DA | `lib/courses/machine-learning-data.ts` | 6 Modules | 14 Lessons | Complete (Benchmark Quality · Tier 1B) |
-| **Artificial Intelligence** | `DA-08` | DA | `lib/courses/artificial-intelligence-data.ts` | 5 Modules | 10 Lessons | Complete (Benchmark Quality · Tier 1B) |
+## Current Subject Structure
 
+| Subject | Track | Modules | Lessons | Audit status |
+|---|---|---:|---:|---|
+| Operating Systems | CS/IT | 9 | 15 | Reference; unchanged |
+| Database Management Systems | CS/IT + DA | 9 | 10 | DA warehouse/transformation coverage expanded; matrix records remaining verification |
+| Computer Networks | CS/IT | 9 | 12 | Socket API added; NAT/depth verification noted |
+| Computer Organization & Architecture | CS/IT | 5 | 10 | Core topic mapping in matrix |
+| Theory of Computation | CS/IT | 5 | 9 | Includes CFL pumping lemma |
+| Programming in C | CS/IT | 5 | 10 | Core and enrichment distinguished in matrix |
+| Discrete Mathematics | CS/IT + DA | 5 | 11 | Algebraic-structure/generating-function depth flagged |
+| General Aptitude | Common | 5 | 10 | Common 15-mark section; topic scope mapped |
+| Engineering Mathematics | CS/IT | 5 | 10 | Shared overlap identified; enrichment distinguished |
+| Digital Logic | CS/IT | 5 | 10 | Core topic mapping in matrix |
+| Data Structures | CS/IT + DA | 6 | 15 | Five DA Python lessons added |
+| Algorithms | CS/IT + DA | 5 | 11 | Shared core; enrichment distinguished |
+| Compiler Design | CS/IT | 5 | 10 | Core topic mapping in matrix |
+| Probability & Statistics | DA | 5 | 11 | Test assumptions/examples need further verification |
+| Linear Algebra | DA | 5 | 11 | “Partition matrix” official wording needs interpretation |
+| Calculus & Optimization | DA | 5 | 10 | Single-variable core; advanced optimization marked enrichment |
+| Machine Learning | DA | 6 | 14 | Named DA scope mapped; ensembles/t-SNE marked enrichment |
+| Artificial Intelligence | DA | 5 | 10 | Named DA scope mapped; local search/CSP marked enrichment |
+
+## Audit caveat
+The remainder of this file contains historical project notes. Earlier statements there that claim 100% syllabus coverage or “benchmark quality” are not verified by this audit and are superseded by the linked topic-by-topic matrix. Do not treat old course-title matches, marks, or frequency language as evidence of coverage.
 ## Content Verification & Structural Integrity
 - **Phase 1 Route Unlocking (Complete & Verified)**: Removed hardcoded Operating Systems exclusivity in `app/notes/[subject]/page.tsx` and `app/notes/[subject]/[lessonSlug]/page.tsx`. All 18 registered subjects now render their complete subject notebook interface and lesson readers.
 - **Phase 2A Machine Learning (`DA-07`) Full Benchmark Implementation (Complete & Quality-Audited)**:

@@ -100,7 +100,6 @@ export const C_PROGRAMMING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. GATE Worked Code Tracing: Short-Circuit Side Effects",
-              weightage: "2 Marks (Classical GATE Snippet)",
               trap: "Never skip short-circuit evaluation! If a pre/post-increment is inside a bypassed expression, the variable's value DOES NOT change!",
               solutionSteps: [
                 "Consider the following C code snippet:",
@@ -182,7 +181,6 @@ export const C_PROGRAMMING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: Static Scope & Variable Shadowing",
-              weightage: "2 Marks",
               trap: "Inner block declarations SHADOW outer block declarations with the same name. Static variables retain their value across function calls, but local automatic variables re-initialize every call!",
               solutionSteps: [
                 "Consider the code:",
@@ -292,7 +290,6 @@ export const C_PROGRAMMING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: 2D Array Pointer Dereferencing",
-              weightage: "2 Marks (High Frequency in GATE CS)",
               trap: "In a 2D array int M[3][4], M has type pointer-to-array of 4 ints (int(*)[4]). Dereferencing *M yields type int* pointing to M[0][0]!",
               solutionSteps: [
                 "Given declaration: int M[3][4] = { {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12} };",
@@ -452,7 +449,6 @@ export const C_PROGRAMMING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: Recursion with Static Variables",
-              weightage: "2 Marks (Classic GATE Trap)",
               trap: "Static variables are initialized ONLY ONCE at program startup in the Data Segment. Their values persist across all recursive calls!",
               solutionSteps: [
                 "Consider the recursive function:",
@@ -598,7 +594,6 @@ export const C_PROGRAMMING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: Calculating sizeof(struct)",
-              weightage: "2 Marks",
               trap: "Don't forget the trailing padding at the end of the structure! The total size must be a multiple of the largest member's size.",
               solutionSteps: [
                 "Consider the structure on a 32-bit machine where sizeof(char)=1, sizeof(short)=2, sizeof(int)=4:",
@@ -792,6 +787,7 @@ export const C_PROGRAMMING_COURSE: CourseMeta = {
         },
         {
           id: "file-handling-and-format-specifiers",
+            syllabusScope: "Optional C enrichment; file handling is not named in the GATE 2027 CS/IT C syllabus",
           title: "Standard I/O, Format Specifiers & File Streams",
           slug: "file-handling-and-format-specifiers",
           order: 2,

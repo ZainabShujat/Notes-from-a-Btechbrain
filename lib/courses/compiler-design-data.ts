@@ -94,7 +94,6 @@ export const COMPILER_DESIGN_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Token Counting & Buffer Pointer Dynamics",
-              weightage: "2 Marks (GATE CS)",
               trap: "String literals count as exactly 1 token regardless of the spaces or words inside them. Preprocessor directives or printf format specifiers are tokenized as single string constant tokens.",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",
@@ -207,7 +206,6 @@ export const COMPILER_DESIGN_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Minimal DFA States for Token Recognition",
-              weightage: "2 Marks (GATE CS)",
               trap: "Do not forget the trap/dead state when counting total states of a complete DFA over an alphabet Sigma.",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",
@@ -313,7 +311,6 @@ export const COMPILER_DESIGN_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Comprehensive FIRST & FOLLOW Derivation",
-              weightage: "2 Marks (GATE CS)",
               trap: "Notice that E' and T' are nullable non-terminals resulting from left-recursion elimination.",
               solutionSteps: [
                 "Consider the standard arithmetic expression grammar with left recursion eliminated:",
@@ -415,7 +412,6 @@ export const COMPILER_DESIGN_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Proving a Grammar is NOT LL(1)",
-              weightage: "2 Marks (GATE CS)",
               trap: "Even though the grammar has no left recursion and appears factored, check the intersection between FIRST and FOLLOW for nullable non-terminals.",
               solutionSteps: [
                 "Consider the grammar:",
@@ -519,7 +515,6 @@ export const COMPILER_DESIGN_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Computing LR(0) State Item Count",
-              weightage: "2 Marks (GATE CS)",
               trap: "Remember to augment the grammar with S' -> S before generating state I0.",
               solutionSteps: [
                 "Consider the grammar:",
@@ -608,7 +603,6 @@ export const COMPILER_DESIGN_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Identifying SLR(1) Shift-Reduce Conflict",
-              weightage: "2 Marks (GATE CS)",
               trap: "Check if the shift terminal symbol appears in the FOLLOW set of the non-terminal being reduced.",
               solutionSteps: [
                 "Consider the classic assignment grammar:",
@@ -706,7 +700,6 @@ export const COMPILER_DESIGN_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Grammar that is CLR(1) but NOT LALR(1)",
-              weightage: "2 Marks (GATE CS)",
               trap: "Watch for identical cores with distinct reduce lookaheads that collide upon state union.",
               solutionSteps: [
                 "Consider the grammar G:",
@@ -817,7 +810,6 @@ export const COMPILER_DESIGN_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Classifying SDDs and Attribute Evaluation",
-              weightage: "2 Marks (GATE CS)",
               trap: "Distinguish between parent inherited attributes (valid in L-attributed) and parent synthesized attributes (invalid in L-attributed).",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",
@@ -905,7 +897,6 @@ export const COMPILER_DESIGN_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Array Address Translation to TAC",
-              weightage: "2 Marks (GATE CS)",
               trap: "Remember row-major index multiplier: i * NumberOfColumns + j.",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",
@@ -1017,7 +1008,6 @@ export const COMPILER_DESIGN_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Leader Identification & CFG Partitioning",
-              weightage: "2 Marks (GATE CS)",
               trap: "Every instruction immediately following a conditional or unconditional branch is a leader.",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",

@@ -1842,7 +1842,6 @@ export const DBMS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "5. GATE Worked Example: Dimensional Table Cardinality & Cube Sizing",
-              weightage: "2 Marks (GATE DA)",
               trap: "Remember that an n-dimensional data cube has 2^n cuboids (including the 0-D apex cuboid and 1-D base cuboids).",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE DA Pattern):",

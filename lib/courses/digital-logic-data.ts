@@ -95,7 +95,6 @@ export const DIGITAL_LOGIC_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Minimization via Consensus & Duality",
-              weightage: "2 Marks (GATE CS)",
               trap: "Watch for hidden consensus terms disguised by distributing or grouping with a third variable.",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",
@@ -186,7 +185,6 @@ export const DIGITAL_LOGIC_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Counting PIs and EPIs with Don't Cares",
-              weightage: "2 Marks (GATE CS)",
               trap: "Don't cares (d) can help form PIs, but an EPI must cover an original minterm (1), not merely a don't-care condition.",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",
@@ -293,7 +291,6 @@ export const DIGITAL_LOGIC_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: 2's Complement Subtraction & Overflow",
-              weightage: "2 Marks (GATE CS)",
               trap: "Remember to sign-extend both operands to the same bit width before performing addition.",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",
@@ -382,7 +379,6 @@ export const DIGITAL_LOGIC_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Delay Comparison RCA vs CLA",
-              weightage: "2 Marks (GATE CS)",
               trap: "Distinguish between the time required to generate the final carry output vs the final sum bit.",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",
@@ -483,7 +479,6 @@ export const DIGITAL_LOGIC_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Function Synthesis via 4:1 MUX with Reordered Select Lines",
-              weightage: "2 Marks (GATE CS)",
               trap: "Notice that select inputs are chosen as B (MSB) and C (LSB), leaving A as the input data variable.",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",
@@ -565,7 +560,6 @@ export const DIGITAL_LOGIC_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Logic Function Synthesis via Active-Low Decoder",
-              weightage: "2 Marks (GATE CS)",
               trap: "Active-low outputs combined into a NOR or AND gate perform different dual functions.",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",
@@ -645,7 +639,6 @@ export const DIGITAL_LOGIC_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: PLA Capacity & Product Term Sharing",
-              weightage: "2 Marks (GATE CS)",
               trap: "Optimize multiple outputs simultaneously to maximize shared product terms.",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",
@@ -761,7 +754,6 @@ export const DIGITAL_LOGIC_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Converting a JK Flip-Flop to a T Flip-Flop",
-              weightage: "2 Marks (GATE CS)",
               trap: "Ensure that Q is treated as an input variable alongside T when simplifying J and K.",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",
@@ -856,7 +848,6 @@ export const DIGITAL_LOGIC_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Tracing Sequence of a Feedback Counter",
-              weightage: "2 Marks (GATE CS)",
               trap: "Trace all flip-flops simultaneously on the clock edge; do not propagate new states within the same clock period.",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",
@@ -984,7 +975,6 @@ export const DIGITAL_LOGIC_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Analysis: Maximum Clock Frequency and Hold Slack Calculation",
-              weightage: "2 Marks (GATE CS)",
               trap: "Pay close attention to whether clock skew is positive (destination clock arrives later) or negative (destination clock arrives earlier).",
               solutionSteps: [
                 "Problem Statement (Modeled on GATE Pattern):",

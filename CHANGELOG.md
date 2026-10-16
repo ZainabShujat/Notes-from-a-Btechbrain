@@ -1,3 +1,10 @@
+## [GATE 2027 Research-Led Curriculum Audit] - 2026-10-10
+
+- Added `GATE_2027_COVERAGE_MATRIX.md` with source-derived counts and CS/IT, DA, and common General Aptitude topic mappings, lesson IDs, core/enrichment distinctions, and unresolved verification items; added the summary audit report `GATE_2027_AUDIT_REPORT.md`.
+- Added the DA Python module (`da-python-programming`, five lessons) to Data Structures, a dedicated DA data-transformation lesson in DBMS, and a TCP socket API lesson in Computer Networks.
+- Added explicit syllabus-scope metadata and visible scope labels for annotated modules/lessons. Removed unsupported mark/frequency strings from non-OS worked-practice metadata. Existing OS content remains unchanged.
+- Corrected current source-derived counts: 18 courses, 104 modules, 199 lessons; 95 modules/184 lessons outside the OS reference course.
+- Verification status and remaining factual-depth questions are recorded in `GATE_2027_AUDIT_REPORT.md`; no historical question is newly asserted as a PYQ.
 # Changelog: Notes From A B.Tech Brain
 
 ## [Editorial Homepage Refresh] - 2026-10-10

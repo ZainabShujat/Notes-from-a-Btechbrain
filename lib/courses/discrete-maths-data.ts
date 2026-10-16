@@ -115,7 +115,6 @@ export const DISCRETE_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Testing Argument Validity via Resolution",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "To prove validity by refutation, you must negate the conclusion before resolving.",
               solutionSteps: [
                 "Problem: Determine the validity of the argument with premises P1: p -> (q v r), P2: ~q, P3: ~r, and conclusion C: ~p.",
@@ -204,7 +203,6 @@ export const DISCRETE_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Formalizing Complex Natural Language Specifications",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Distinguish 'only if' from 'if' when setting up the direction of logical implication.",
               solutionSteps: [
                 "Problem: Translate the following English statement into first-order predicate logic using predicates Student(x), Course(y), Enrolled(x, y), and Passed(x, y):",
@@ -310,7 +308,6 @@ export const DISCRETE_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Exact Counting on Finite Set of Size n = 4",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Do not mix up Reflexive & Symmetric with just Symmetric. Adding reflexivity forces all n diagonal entries to 1, eliminating 2^n degrees of freedom.",
               solutionSteps: [
                 "Problem: For a set A containing n = 4 elements, calculate:",
@@ -399,7 +396,6 @@ export const DISCRETE_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Testing Divisibility Lattices for Complements",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "D_n is a Boolean algebra if and only if n has no repeated prime factors (square-free).",
               solutionSteps: [
                 "Problem: Consider the divisibility relation on D_36 = {1, 2, 3, 4, 6, 9, 12, 18, 36}. Determine whether (D_36, |) is a lattice, and whether it forms a Boolean algebra.",
@@ -507,7 +503,6 @@ export const DISCRETE_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Subgroup Order Analysis using Lagrange Theorem",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Possible subgroup orders must be divisors of |G|. Non-divisors can never be subgroup orders.",
               solutionSteps: [
                 "Problem: A group G has order |G| = 30. What are all possible orders of non-trivial proper subgroups of G? Can G have a subgroup of order 7?",
@@ -594,7 +589,6 @@ export const DISCRETE_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Generator and Element Order Calculation",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Remember that order of an element under addition is k * a = 0 mod n, not a^k.",
               solutionSteps: [
                 "Problem: Consider the cyclic group G = (Z_18, +_18).",
@@ -698,7 +692,6 @@ export const DISCRETE_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Constrained Integer Solutions & Derangements",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Shift variables to >= 0 by subtracting non-zero lower bounds from total sum r.",
               solutionSteps: [
                 "Problem: Find the number of integer solutions to x1 + x2 + x3 + x4 = 10 subject to constraints x1 >= 1, x2 >= 2, x3 >= 0, x4 >= 0.",
@@ -787,7 +780,6 @@ export const DISCRETE_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Solving Second-Order Recurrence Relation",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Ensure initial conditions a0 and a1 are substituted correctly into the general solution to avoid algebraic sign flips.",
               solutionSteps: [
                 "Problem: Solve the recurrence relation a_n = 5*a_{n-1} - 6*a_{n-2} for n >= 2, with initial conditions a_0 = 1, a_1 = 4.",
@@ -895,7 +887,6 @@ export const DISCRETE_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Minimum Edges and Handshaking Inequality",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Use the inequality sum deg(v) >= n * delta(G) when minimum degree is specified.",
               solutionSteps: [
                 "Problem: An undirected connected graph G has 8 vertices, and every vertex has degree at least 3. What is the minimum possible number of edges in G?",
@@ -987,7 +978,6 @@ export const DISCRETE_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Planar Graph Face Counting & Invariant Check",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Always verify whether the graph is connected before using V - E + F = 2.",
               solutionSteps: [
                 "Problem: A connected simple planar graph has V = 10 vertices and divides the plane into F = 8 faces. Find the number of edges E, and verify whether the planar edge bound holds.",
@@ -1077,7 +1067,6 @@ export const DISCRETE_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Chromatic Number of Wheel Graph",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Notice whether W_n denotes total n vertices or an n-cycle rim.",
               solutionSteps: [
                 "Problem: Find the chromatic number chi(G) of the Wheel graph W_7 (which consists of an outer cycle C_6 on 6 vertices connected to a central hub vertex).",
