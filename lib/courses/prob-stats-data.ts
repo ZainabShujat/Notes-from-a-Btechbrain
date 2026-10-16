@@ -1,4 +1,5 @@
 import { CourseMeta } from "./types";
+import { PS_T_AND_CHISQUARE_TESTS_LESSON } from "./ps-tests-data";
 
 export const PROB_STATS_COURSE: CourseMeta = {
   id: "probability-and-statistics",
@@ -970,6 +971,7 @@ export const PROB_STATS_COURSE: CourseMeta = {
             },
           ],
         },
+        PS_T_AND_CHISQUARE_TESTS_LESSON,
       ],
     },
   ],

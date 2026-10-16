@@ -1,5 +1,6 @@
 import { CourseMeta } from "./types";
 import { CN_SOCKET_API_LESSON } from "./cn-socket-data";
+import { CN_NAT_AND_IP_SUPPORT_LESSON } from "./cn-ip-support-data";
 
 export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
   id: "computer-networks",
@@ -1034,6 +1035,7 @@ export const COMPUTER_NETWORKS_COURSE: CourseMeta = {
             },
           ],
         },
+        CN_NAT_AND_IP_SUPPORT_LESSON,
       ],
     },
 

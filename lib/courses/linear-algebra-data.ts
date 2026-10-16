@@ -1,4 +1,5 @@
 import { CourseMeta } from "./types";
+import { LA_BLOCK_AND_IDEMPOTENT_LESSON, LA_LU_DECOMPOSITION_LESSON } from "./la-matrices-data";
 
 export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
   id: "linear-algebra",
@@ -484,6 +485,7 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             },
           ],
         },
+        LA_LU_DECOMPOSITION_LESSON,
       ],
     },
 
@@ -935,6 +937,7 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             },
           ],
         },
+        LA_BLOCK_AND_IDEMPOTENT_LESSON,
       ],
     },
 

@@ -1,4 +1,5 @@
 import { CourseMeta } from "./types";
+import { ML_CROSS_VALIDATION_LESSON } from "./ml-cv-data";
 
 export const MACHINE_LEARNING_COURSE: CourseMeta = {
   id: "machine-learning",
@@ -1123,6 +1124,7 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             },
           ],
         },
+        ML_CROSS_VALIDATION_LESSON,
       ],
     },
   ],
