@@ -55,9 +55,9 @@ export default function PYQsPage() {
       </nav>
 
       <PageHeader
-        eyebrow="AUTHENTIC GATE CS ARCHIVE · 1998–2024"
+        eyebrow="GATE CS · OPERATING SYSTEMS"
         title="Previous Year Questions (PYQs)"
-        description="Authentic examination questions with verified official answer keys, step-by-step mathematical derivations, formula references, and critical trap warnings."
+        description="Past GATE questions with step-by-step derivations, formula references, and trap warnings. Questions marked for source verification are still being checked against the official keys."
       />
 
       {/* Subject Filter Bar */}
@@ -86,7 +86,7 @@ export default function PYQsPage() {
             Operating Systems &middot; Authentic GATE CS Archive
           </h2>
           <span className="text-xs font-mono text-amber-500 font-semibold">
-            {osPYQs.length} Verified Questions with Solutions
+            {osPYQs.length} Questions with Solutions
           </span>
         </div>
 

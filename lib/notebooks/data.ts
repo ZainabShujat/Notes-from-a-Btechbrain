@@ -1,6 +1,13 @@
+import { getCourse } from "../courses";
+import { COURSE_LABS } from "../labs";
 import { SubjectNotebookData } from "./types";
 
-export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
+/** Source entries carry only hand-maintained stats; the rest is derived below. */
+type SubjectNotebookEntry = Omit<SubjectNotebookData, "stats"> & {
+  stats: Pick<SubjectNotebookData["stats"], "pyqsCount">;
+};
+
+const NOTEBOOK_ENTRIES: SubjectNotebookEntry[] = [
   // ── 01. OPERATING SYSTEMS ──────────────────────────────────────
   {
     id: "operating-systems",
@@ -13,9 +20,6 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "violet",
     accentHex: "#a855f7",
     stats: {
-      sectionsCount: 9,
-      notesCount: 15,
-      labsCount: 7,
       pyqsCount: 0,
     },
     coverAnnotation: "✎ built from standard references; exam sources pending verification",
@@ -195,9 +199,6 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "indigo",
     accentHex: "#6366f1",
     stats: {
-      sectionsCount: 9,
-      notesCount: 9,
-      labsCount: 4,
       pyqsCount: 0,
     },
     coverAnnotation: "✎ benchmark complete · verified with Korth, Navathe & Ramakrishnan",
@@ -376,9 +377,6 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "emerald",
     accentHex: "#10b981",
     stats: {
-      sectionsCount: 5,
-      notesCount: 11,
-      labsCount: 0,
       pyqsCount: 0,
     },
     coverAnnotation: "✎ verified with CLRS, Kleinberg-Tardos & Garey-Johnson · 11 lessons",
@@ -568,10 +566,7 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "cyan",
     accentHex: "#06b6d4",
     stats: {
-      sectionsCount: 9,
-      notesCount: 10,
-      labsCount: 6,
-      pyqsCount: 36,
+      pyqsCount: 0,
     },
     coverAnnotation: "✎ benchmark complete",
     previewSnippets: [
@@ -707,9 +702,6 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "amber",
     accentHex: "#f59e0b",
     stats: {
-      sectionsCount: 5,
-      notesCount: 10,
-      labsCount: 0,
       pyqsCount: 0,
     },
     coverAnnotation: "✎ verified with Patterson-Hennessy & Hamacher",
@@ -806,9 +798,6 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "rose",
     accentHex: "#f43f5e",
     stats: {
-      sectionsCount: 5,
-      notesCount: 10,
-      labsCount: 0,
       pyqsCount: 0,
     },
     coverAnnotation: "✎ verified with Hopcroft-Ullman & Sipser",
@@ -906,9 +895,6 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "teal",
     accentHex: "#14b8a6",
     stats: {
-      sectionsCount: 5,
-      notesCount: 10,
-      labsCount: 0,
       pyqsCount: 0,
     },
     coverAnnotation: "✎ verified with Kernighan-Ritchie & ISO C99 Standard",
@@ -1004,9 +990,6 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "indigo",
     accentHex: "#6366f1",
     stats: {
-      sectionsCount: 5,
-      notesCount: 11,
-      labsCount: 0,
       pyqsCount: 0,
     },
     coverAnnotation: "✎ verified with Kenneth Rosen & Tremblay-Manohar",
@@ -1084,9 +1067,6 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "violet",
     accentHex: "#8b5cf6",
     stats: {
-      sectionsCount: 5,
-      notesCount: 10,
-      labsCount: 0,
       pyqsCount: 0,
     },
     coverAnnotation: "✎ verified with CLRS, Horowitz-Sahni & Weiss · 10 lessons",
@@ -1168,9 +1148,6 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "amber",
     accentHex: "#d97706",
     stats: {
-      sectionsCount: 5,
-      notesCount: 10,
-      labsCount: 0,
       pyqsCount: 0,
     },
     coverAnnotation: "✎ benchmark complete · verified against standard dragon book references",
@@ -1250,9 +1227,6 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "teal",
     accentHex: "#0d9488",
     stats: {
-      sectionsCount: 5,
-      notesCount: 10,
-      labsCount: 0,
       pyqsCount: 0,
     },
     coverAnnotation: "✎ benchmark complete · verified against standard mano references",
@@ -1332,10 +1306,7 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "indigo",
     accentHex: "#4f46e5",
     stats: {
-      sectionsCount: 5,
-      notesCount: 10,
-      labsCount: 2,
-      pyqsCount: 40,
+      pyqsCount: 0,
     },
     coverAnnotation: "✎ benchmark complete",
     status: "active",
@@ -1413,10 +1384,7 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "emerald",
     accentHex: "#059669",
     stats: {
-      sectionsCount: 5,
-      notesCount: 10,
-      labsCount: 2,
-      pyqsCount: 35,
+      pyqsCount: 0,
     },
     coverAnnotation: "✎ benchmark complete",
     isLocked: false,
@@ -1496,9 +1464,6 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "cyan",
     accentHex: "#06b6d4",
     stats: {
-      sectionsCount: 5,
-      notesCount: 11,
-      labsCount: 0,
       pyqsCount: 0,
     },
     coverAnnotation: "✎ verified with Ross, Wasserman & Wackerly · 11 lessons",
@@ -1581,9 +1546,6 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "indigo",
     accentHex: "#4f46e5",
     stats: {
-      sectionsCount: 5,
-      notesCount: 11,
-      labsCount: 0,
       pyqsCount: 0,
     },
     coverAnnotation: "✎ verified with Strang, Lay & Deisenroth · 11 lessons",
@@ -1666,9 +1628,6 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "fuchsia",
     accentHex: "#d946ef",
     stats: {
-      sectionsCount: 5,
-      notesCount: 10,
-      labsCount: 0,
       pyqsCount: 0,
     },
     coverAnnotation: "✎ verified with Boyd, Nocedal & Stewart · 10 lessons",
@@ -1751,9 +1710,6 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "violet",
     accentHex: "#8b5cf6",
     stats: {
-      sectionsCount: 5,
-      notesCount: 14,
-      labsCount: 0,
       pyqsCount: 0,
     },
     coverAnnotation: "✎ verified with Hastie, Bishop & Murphy · 14 lessons",
@@ -1836,10 +1792,7 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     accentColor: "pink",
     accentHex: "#ec4899",
     stats: {
-      sectionsCount: 5,
-      notesCount: 10,
-      labsCount: 2,
-      pyqsCount: 20,
+      pyqsCount: 0,
     },
     coverAnnotation: "✎ benchmark complete",
     status: "active",
@@ -1907,6 +1860,25 @@ export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = [
     ],
   },
 ];
+
+/**
+ * Section, note, and lab counts come from the course and lab registries so the
+ * cards can't drift from what the notebook pages actually contain.
+ */
+function withDerivedStats(entry: SubjectNotebookEntry): SubjectNotebookData {
+  const course = getCourse(entry.slug);
+  return {
+    ...entry,
+    stats: {
+      ...entry.stats,
+      sectionsCount: course?.modules.length ?? 0,
+      notesCount: course?.modules.reduce((n, m) => n + m.lessons.length, 0) ?? 0,
+      labsCount: COURSE_LABS.filter((lab) => lab.courseSlug === entry.slug).length,
+    },
+  };
+}
+
+export const SUBJECT_NOTEBOOKS: SubjectNotebookData[] = NOTEBOOK_ENTRIES.map(withDerivedStats);
 
 /** Helper to retrieve a notebook by slug */
 export function getSubjectNotebook(slug: string): SubjectNotebookData | undefined {

@@ -654,7 +654,7 @@ export default function NotebookModalViewer({
                           <path d="m9 12 2 2 4-4" />
                         </svg>
                         <span className="font-mono text-xl sm:text-2xl font-bold text-[#f59e0b] block leading-none">
-                          {glimpse.stats.pyqsCount > 0 ? glimpse.stats.pyqsCount : "Compulsory"}
+                          {glimpse.stats.pyqsCount > 0 ? glimpse.stats.pyqsCount : "—"}
                         </span>
                         <span className="text-[10px] font-mono uppercase text-[#78716c] mt-1">
                           GATE PYQs

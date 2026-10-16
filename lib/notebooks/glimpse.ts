@@ -73,10 +73,10 @@ export function getSubjectGlimpse(notebook: SubjectNotebookData): SubjectGlimpse
       accentHex: notebook.accentHex || "#7c3aed",
       level: notebook.level || "B.Tech · GATE CS",
       stats: {
-        modulesCount: notebook.stats.sectionsCount || 6,
-        lessonsCount: notebook.stats.notesCount || 0,
-        labsCount: notebook.stats.labsCount || 0,
-        pyqsCount: notebook.stats.pyqsCount || 0,
+        modulesCount: notebook.stats.sectionsCount,
+        lessonsCount: notebook.stats.notesCount,
+        labsCount: notebook.stats.labsCount,
+        pyqsCount: notebook.stats.pyqsCount,
       },
       snippets: [],
       anchor: {
@@ -348,8 +348,8 @@ export function getSubjectGlimpse(notebook: SubjectNotebookData): SubjectGlimpse
     stats: {
       modulesCount: course.modules.length,
       lessonsCount: totalLessons,
-      labsCount: notebook.stats.labsCount || 6,
-      pyqsCount: notebook.stats.pyqsCount || 30,
+      labsCount: notebook.stats.labsCount,
+      pyqsCount: notebook.stats.pyqsCount,
     },
     snippets,
     anchor,
