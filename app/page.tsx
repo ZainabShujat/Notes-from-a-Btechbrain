@@ -1,192 +1,323 @@
 import Link from "next/link";
-import { getCombinedPosts, type PostMeta } from "../lib/posts";
+import { getCombinedPosts } from "../lib/posts";
 import { OBSERVATIONS } from "./wonder/data";
 import { SUBJECT_NOTEBOOKS } from "../lib/notebooks/data";
-import Hero from "./components/Hero";
+import { COURSE_LABS } from "../lib/labs";
+import MorphEmblem from "./components/home/MorphEmblem";
+import HomeMotion from "./components/home/HomeMotion";
+import "./components/home/home.css";
 
 export const metadata = {
-  title: "Notes From a B.Tech Brain — Ideas worth following",
+  title: "Notes From a B.Tech Brain: the night-before notes for every B.Tech subject",
   description:
-    "A student-built digital publication connecting curious essays, careful technical notes, interactive experiments, and the ideas between them.",
+    "Free, student-written notes, one-page cheat sheets, and interactive labs for every B.Tech CSE subject, with GATE mapping where it helps.",
 };
 
-function excerpt(post: PostMeta) {
-  if (post.excerpt?.trim()) return post.excerpt.trim();
-  return (post.content || "").replace(/[#>*_`\[\]()]/g, " ").replace(/\s+/g, " ").trim().slice(0, 190);
-}
+const VIBE_POST_SLUG = "vibe-coding-without-losing-brain";
+const FEATURED_NOTEBOOKS = ["operating-systems", "dbms", "computer-networks"];
 
-function formatDate(value?: string) {
-  if (!value) return "";
+/** Loops at the top left, runs down the margins, and crosses only between sections. */
+const THREAD_PATH =
+  "M -30,110 C 60,40 150,80 156,160 C 162,250 70,268 62,206 C 54,140 140,118 176,176 " +
+  "C 220,250 110,500 64,720 C 40,830 90,880 260,890 C 520,905 820,850 1110,900 " +
+  "C 1190,960 1170,1350 1150,1640 C 1130,1860 1180,1960 960,1990 " +
+  "C 700,2020 300,1960 120,2120 C 40,2200 50,2420 70,2600 C 90,2760 400,2800 760,2790 " +
+  "C 1000,2785 1160,2840 1240,2960";
+
+/** Deterministic star field so server and client render the same sky. */
+const STARS = (() => {
+  let seed = 7;
+  const rnd = () => {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  };
+  return Array.from({ length: 80 }, () => {
+    const size = rnd() < 0.85 ? 1.5 : 2.6;
+    return {
+      left: `${(rnd() * 100).toFixed(2)}%`,
+      top: `${(rnd() * 100).toFixed(2)}%`,
+      size,
+      delay: `-${(rnd() * 4).toFixed(2)}s`,
+      duration: `${(3 + rnd() * 4).toFixed(2)}s`,
+    };
+  });
+})();
+
+/** Go-Back-N with window 4 when frame 2 is lost: 0 1 2x 3 4 5, then 2 3 4 5 again. */
+const WIRE: { n: number; kind: "ok" | "lost" | "drop" | "re" }[] = [
+  { n: 0, kind: "ok" }, { n: 1, kind: "ok" }, { n: 2, kind: "lost" }, { n: 3, kind: "drop" }, { n: 4, kind: "drop" },
+  { n: 5, kind: "drop" }, { n: 2, kind: "re" }, { n: 3, kind: "re" }, { n: 4, kind: "re" }, { n: 5, kind: "re" },
+];
+
+function shortDate(value: string) {
   const date = new Date(value);
   return Number.isNaN(date.getTime())
     ? ""
-    : new Intl.DateTimeFormat("en", { month: "long", day: "numeric", year: "numeric" }).format(date);
+    : new Intl.DateTimeFormat("en", { month: "short", day: "numeric" }).format(date).toUpperCase();
 }
 
-function StoryLink({ post, className = "" }: { post: PostMeta; className?: string }) {
-  return (
-    <Link href={`/post/${post.slug}`} className={`group ${className}`}>
-      <h3 className="text-ink-1 transition-colors group-hover:text-accent-soft">{post.title}</h3>
-      {excerpt(post) && <p className="mt-2 text-ink-3 leading-relaxed">{excerpt(post)}</p>}
-      {formatDate(post.date) && <time className="mt-3 block font-mono text-[11px] uppercase tracking-wider text-ink-3/75">{formatDate(post.date)}</time>}
-    </Link>
-  );
-}
+const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? "" : "s"}`;
 
 export default async function Home() {
   const posts = await getCombinedPosts();
   const editions = posts.filter((post) => post.slug && post.title && post.category?.toLowerCase() !== "i-wonder-why");
-  const featured = editions[0];
-  const recentEditions = editions.slice(1, 4);
-  const notebooks = SUBJECT_NOTEBOOKS.filter((book) => !book.isLocked && book.status !== "planned").slice(0, 3);
-  const wonderNotes = OBSERVATIONS.slice(0, 3);
-  const topics: { eyebrow: string; title: string; story?: PostMeta; href?: string; linkLabel?: string }[] = [
-    { eyebrow: "Systems & the invisible", title: "What happens beneath the interface?", href: "/notes/operating-systems", linkLabel: "Open the Operating Systems notebook" },
-    { eyebrow: "Mind, habit & attention", title: "Why do ordinary things feel the way they do?", story: posts.find((p) => p.slug === "why-the-brain-loves-patterns") },
-    { eyebrow: "Making & meaning", title: "What do we learn by building in public?", story: posts.find((p) => p.slug === "vibe-coding-without-losing-brain") },
-    { eyebrow: "Student life, honestly", title: "How does ambition fit inside a real life?", story: posts.find((p) => p.slug === "when-passion-meets-paycheck") },
-  ];
+  const edition = editions.find((post) => post.slug !== VIBE_POST_SLUG);
+  const wonder = OBSERVATIONS[0];
+
+  const subjectCount = SUBJECT_NOTEBOOKS.length;
+  const noteCount = SUBJECT_NOTEBOOKS.reduce((sum, nb) => sum + nb.stats.notesCount, 0);
+  const labCount = COURSE_LABS.length;
+  const featured = FEATURED_NOTEBOOKS.map((id) => SUBJECT_NOTEBOOKS.find((nb) => nb.id === id)).filter(
+    (nb): nb is (typeof SUBJECT_NOTEBOOKS)[number] => Boolean(nb)
+  );
 
   return (
-    <main className="text-ink-2">
-      <Hero />
+    <div id="hm-root" className="hm-root bg-base text-ink-1">
+      <svg className="hm-thread" data-smil aria-hidden="true" viewBox="0 0 1200 3000" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="hm-thread-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#c4b5fd" />
+            <stop offset="0.45" stopColor="#a855f7" />
+            <stop offset="1" stopColor="#facc15" />
+          </linearGradient>
+        </defs>
+        <path d={THREAD_PATH} fill="none" stroke="rgba(168,85,247,0.10)" strokeWidth="9" vectorEffect="non-scaling-stroke" strokeLinecap="round" />
+        <path
+          className="hm-thread-main"
+          pathLength={1}
+          d={THREAD_PATH}
+          fill="none"
+          stroke="url(#hm-thread-grad)"
+          strokeOpacity="0.42"
+          strokeWidth="2"
+          vectorEffect="non-scaling-stroke"
+          strokeLinecap="round"
+        />
+        <g className="hm-spark">
+          <circle r="9" fill="rgba(250,204,21,0.35)">
+            <animateMotion dur="28s" repeatCount="indefinite" path={THREAD_PATH} />
+          </circle>
+          <circle r="3" fill="#fffbe6" fillOpacity="0.9">
+            <animateMotion dur="28s" repeatCount="indefinite" path={THREAD_PATH} />
+          </circle>
+        </g>
+      </svg>
 
-      <section className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12 pb-24 md:pb-32" aria-labelledby="latest-heading">
-        <div className="mb-8 flex items-end justify-between gap-4 border-b border-hairline pb-4">
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent-soft">From the publication</p>
-            <h2 id="latest-heading" className="mt-2 text-2xl font-semibold tracking-tight text-ink-1 sm:text-3xl">Ideas to spend a little time with.</h2>
+      <div className="hm-layer">
+        {/* ============ HERO ============ */}
+        <section aria-labelledby="hero-title" className="hm-hero">
+          <div className="hm-sky" aria-hidden="true">
+            <div className="hm-nebula" style={{ width: 1100, height: 760, background: "radial-gradient(closest-side, rgba(147,51,234,0.42), rgba(147,51,234,0.12) 55%, transparent)" }} />
+            <div className="hm-nebula" style={{ width: 520, height: 360, left: "62%", top: "60%", background: "radial-gradient(closest-side, rgba(250,204,21,0.16), transparent)", animationDelay: "-4s" }} />
+            <div className="hm-dots" />
+            {STARS.map((s, i) => (
+              <span
+                key={i}
+                className="hm-star"
+                style={{ left: s.left, top: s.top, width: s.size, height: s.size, animationDelay: s.delay, animationDuration: s.duration }}
+              />
+            ))}
+            <span className="hm-shooting" style={{ left: "88%", top: "8%" }} />
+            <span className="hm-shooting" style={{ left: "58%", top: "2%", width: 110, animationDelay: "5.5s" }} />
           </div>
-          <Link href="/editions" className="hidden text-sm font-medium text-ink-3 underline decoration-hairline underline-offset-4 transition-colors hover:text-ink-1 sm:inline">All editions <span aria-hidden="true">↗</span></Link>
-        </div>
 
-        <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
-          {featured ? (
-            <article className="relative flex min-h-[300px] flex-col justify-end overflow-hidden border border-hairline bg-surface-1 p-6 sm:min-h-[370px] sm:p-10">
-              <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-70 dark:opacity-50" style={{ background: "radial-gradient(ellipse at 88% 18%, color-mix(in srgb, var(--color-accent) 18%, transparent), transparent 48%), linear-gradient(145deg, transparent 45%, color-mix(in srgb, var(--color-highlight) 7%, transparent))" }} />
-              <div aria-hidden="true" className="pointer-events-none absolute right-[-2rem] top-[-3rem] hidden h-64 w-64 rounded-full border border-accent/15 sm:block"><span className="absolute left-1/2 top-1/2 h-2 w-2 rounded-full bg-highlight/70" /></div>
-              <div className="relative max-w-xl">
-                <p className="mb-5 font-mono text-[11px] uppercase tracking-[0.2em] text-accent-soft">The latest edition <span className="px-2 text-ink-3/50">/</span> {featured.category?.replaceAll("-", " ")}</p>
-                <Link href={`/post/${featured.slug}`} className="group">
-                  <h3 className="max-w-2xl text-3xl font-semibold leading-[1.08] tracking-tight text-ink-1 transition-colors group-hover:text-accent-soft sm:text-5xl">{featured.title}</h3>
-                  <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-2 sm:text-lg">{excerpt(featured)}</p>
-                  <span className="mt-8 inline-flex items-center gap-3 border-b border-accent/40 pb-1 text-sm font-semibold text-ink-1">Read the edition <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span></span>
-                </Link>
-              </div>
-            </article>
-          ) : <div className="border border-hairline p-8">New editions are on their way.</div>}
+          <div className="hm-scrap hm-f1" aria-hidden="true" style={{ left: "2%", top: "38%", width: 168, background: "#fef3c7", color: "#3b2a05", padding: "10px 14px 12px", borderRadius: "4px 14px 6px 10px", boxShadow: "0 18px 40px -12px rgba(0,0,0,.7)" }}>
+            <div className="hm-hand" style={{ fontSize: 24, lineHeight: 1, fontWeight: 700 }}>? why does this work?</div>
+            <div className="hm-mono" style={{ fontSize: 10, marginTop: 6, opacity: 0.6, letterSpacing: ".08em" }}>[ proof pending ]</div>
+          </div>
+          <div className="hm-scrap hm-f2" aria-hidden="true" style={{ right: "1.5%", top: "38%", width: 186, background: "rgba(13,11,34,0.92)", border: "1px solid rgba(168,85,247,0.5)", borderRadius: 12, padding: "10px 14px", boxShadow: "0 0 40px -6px rgba(168,85,247,.55)" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255,255,255,.1)", paddingBottom: 6, marginBottom: 8 }}>
+              <span className="hm-mono" style={{ fontSize: 10, color: "#948cb5", letterSpacing: ".14em" }}>SEARCH.TS</span>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#34d399", boxShadow: "0 0 10px #34d399" }} />
+            </div>
+            <pre className="hm-mono" style={{ margin: 0, fontSize: 12, lineHeight: 1.5, color: "#c9c2e4" }}>
+              <span style={{ color: "#c4b5fd" }}>if</span> (state === <span style={{ color: "#facc15" }}>&quot;stuck&quot;</span>) {"{"}
+              {"\n  "}rethink(); <span style={{ color: "#5d5680" }}>{"// O(1)"}</span>
+              {"\n}"}
+            </pre>
+          </div>
 
-          <div className="flex flex-col justify-between">
-            <div>
-              <div className="mb-2 flex items-center justify-between">
-                <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-3">More from the journal</h3>
-                <span aria-hidden="true" className="text-highlight">✳</span>
-              </div>
-              <div className="divide-y divide-hairline">
-                {recentEditions.map((post) => (
-                  <StoryLink key={post.slug} post={post} className="block py-5 first:pt-4" />
+          <div className="relative z-[2] mx-auto flex w-full max-w-[1100px] flex-col items-center px-5 pt-5 pb-1.5 text-center">
+            <MorphEmblem notebookCount={subjectCount} labCount={labCount} />
+            <p className="hm-rise hm-hand m-0 mb-1.5 -rotate-2 text-accent-soft" style={{ fontSize: "clamp(24px, 2.6cqi, 34px)" }}>
+              the night-before notes for every B.Tech subject
+            </p>
+            <h1 id="hero-title" className="hm-title hm-rise" style={{ animationDelay: ".1s" }}>
+              <span className="hm-title-top">Notes From a</span>
+              <span className="relative inline-block pb-[.1em]">
+                <span className="hm-brain-word">B.Tech Brain</span>
+                <svg aria-hidden="true" viewBox="0 0 600 30" preserveAspectRatio="none" className="absolute left-[2%] bottom-[-.05em] h-[.22em] w-[96%] overflow-visible">
+                  <path className="hm-marker" pathLength={1} d="M 6,20 C 120,6 260,26 380,14 C 470,6 540,12 594,10" fill="none" stroke="#a855f7" strokeWidth="9" strokeLinecap="round" opacity=".85" />
+                </svg>
+              </span>
+            </h1>
+            <p className="hm-rise mt-4 max-w-[36ch] text-ink-2" style={{ fontSize: "clamp(17px, 1.7cqi, 22px)", animationDelay: ".25s" }}>
+              A place to explore things I don&apos;t understand yet, and to make sure you understand them by morning.
+            </p>
+            <div className="hm-rise mt-5 flex flex-wrap justify-center gap-3" style={{ animationDelay: ".4s" }}>
+              <Link href="/notes" className="hm-btn hm-btn-primary">
+                Open the notes <span aria-hidden="true">→</span>
+              </Link>
+              <Link href="/notes/cheat-sheets" className="hm-btn hm-btn-secondary">
+                Exam tomorrow? Cheat sheets
+              </Link>
+            </div>
+            <p className="hm-rise hm-mono mt-3.5 text-[12px] tracking-[.14em] text-ink-3" style={{ animationDelay: ".55s" }}>
+              {subjectCount} SUBJECTS · {noteCount} NOTES · {labCount} LABS · FREE, NO SIGN-UP
+            </p>
+          </div>
+
+          <div className="relative z-[2] flex flex-col items-center px-5 pt-[18px] pb-[22px]">
+            <p className="m-0 text-[15px] font-bold uppercase tracking-[.24em]">What are you curious about?</p>
+            <a href="#everything" aria-label="Scroll to what's on the site" className="hm-drift mt-2 grid h-[46px] w-[46px] place-items-center rounded-full border border-hairline-strong text-ink-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M19 14l-7 7-7-7M12 21V3" />
+              </svg>
+            </a>
+          </div>
+
+          <HomeMotion />
+        </section>
+
+        {/* ============ A BIT OF EVERYTHING ============ */}
+        <section id="everything" aria-labelledby="mix-title" className="mx-auto max-w-[1280px] px-5 pt-7 pb-10">
+          <div className="mb-[18px]" data-reveal>
+            <p className="hm-hand m-0 -rotate-2 origin-left text-[28px] text-accent-soft">what&apos;s in here</p>
+            <h2 id="mix-title" className="m-0 font-black leading-none tracking-[-0.04em]" style={{ fontSize: "clamp(38px, 5cqi, 72px)" }}>
+              A bit of <span className="text-highlight">everything.</span>
+            </h2>
+          </div>
+
+          <div className="hm-bento">
+            <div className="hm-tile hm-tile-lead hm-t-notes" data-reveal>
+              <span className="hm-mono hm-kicker">NOTEBOOKS · {subjectCount} SUBJECTS</span>
+              <h3 className="hm-tile-title" style={{ fontSize: "clamp(28px, 3.2cqi, 44px)" }}>
+                The whole B.Tech syllabus, written the way a friend would explain it.
+              </h3>
+              <div className="mt-1 flex flex-col gap-2">
+                {featured.map((nb) => (
+                  <Link key={nb.id} href={`/notes/${nb.slug}`} className="hm-row">
+                    <span className="hm-mono hm-code">{nb.id === "operating-systems" ? "OS" : nb.id === "dbms" ? "DBMS" : "CN"}</span>
+                    <span className="flex-1">{nb.title}</span>
+                    <span className="hm-mono hm-meta">
+                      {plural(nb.stats.notesCount, "note")}
+                      {nb.stats.labsCount > 0 && ` · ${plural(nb.stats.labsCount, "lab")}`}
+                    </span>
+                  </Link>
                 ))}
               </div>
+              <Link href="/notes" className="hm-cta" style={{ color: "var(--theme-highlight)" }}>
+                Browse all {subjectCount} subjects →
+              </Link>
             </div>
-            <div className="mt-8 border-l-2 border-highlight/50 pl-5">
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-3">A small observation</p>
-              {wonderNotes[0] && <Link href={`/wonder/${wonderNotes[0].id}`} className="group mt-2 block">
-                <h3 className="text-xl font-medium text-ink-1 group-hover:text-accent-soft">{wonderNotes[0].title}</h3>
-                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-3">{wonderNotes[0].body}</p>
-                <span className="mt-3 inline-block text-xs font-semibold text-highlight">Follow the thought →</span>
-              </Link>}
+
+            <div className="hm-tile hm-t-lab" data-reveal>
+              <span className="hm-mono hm-kicker">LABS · {labCount} TO PLAY WITH</span>
+              <h3 className="hm-tile-title">Lose a frame. Watch Go-Back-N resend it.</h3>
+              <div role="img" aria-label="Frames 0 to 5 are sent, frame 2 is lost, then frames 2 to 5 are sent again" className="hm-mono flex flex-wrap gap-1.5">
+                {WIRE.map((f, i) => (
+                  <span
+                    key={i}
+                    className={`hm-frame ${f.kind === "lost" ? "hm-lose hm-frame-ok" : `hm-send hm-frame-${f.kind}`}`}
+                    style={{ animationDelay: `${(0.3 + i * 0.25).toFixed(2)}s` }}
+                  >
+                    {f.n}
+                  </span>
+                ))}
+              </div>
+              <p className="hm-hand m-0 text-[22px] text-highlight">go on, try breaking it</p>
+              <Link href="/notes/labs" className="hm-cta">Open the labs →</Link>
             </div>
-          </div>
-        </div>
 
-        <div className="mt-12 grid gap-px border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-3">
-          {wonderNotes.slice(1).map((note) => <Link key={note.id} href={`/wonder/${note.id}`} className="group bg-base p-5 transition-colors hover:bg-surface-1 sm:p-6">
-            <time className="font-mono text-[10px] uppercase tracking-widest text-ink-3">Wonder · {formatDate(note.date)}</time>
-            <h3 className="mt-3 text-lg font-medium leading-snug text-ink-1 group-hover:text-accent-soft">{note.title}</h3>
-            <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-3">{note.body}</p>
-          </Link>)}
-        </div>
-      </section>
+            <div className="hm-tile hm-t-sheet" data-reveal>
+              <span className="hm-mono hm-kicker">CHEAT SHEETS</span>
+              <div className="-rotate-[1.5deg] rounded-lg bg-[#f5f3ff] px-4 py-3.5 text-[#1e1b3a] shadow-[0_14px_30px_-12px_rgba(0,0,0,.8)]">
+                <div className="mb-2 border-b-[1.5px] border-[#ddd6fe] pb-1.5 text-lg font-black">Paging · 1 page</div>
+                <div className="text-sm leading-normal">
+                  Offset bits = <span className="hm-mono bg-[#fde047] px-1">log₂(page size)</span>
+                </div>
+                <div className="mt-1 text-sm leading-normal text-[#9f1239]">
+                  <strong>Trap:</strong> offset bits match in logical and physical addresses.
+                </div>
+              </div>
+              <Link href="/notes/cheat-sheets" className="hm-cta">One for every topic →</Link>
+            </div>
 
-      <section className="border-y border-hairline bg-surface-1/50" aria-labelledby="notebooks-heading">
-        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20 lg:px-12 lg:py-28">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent-soft">Made to learn by doing</p>
-            <h2 id="notebooks-heading" className="mt-4 max-w-lg text-4xl font-semibold leading-[1.05] tracking-tight text-ink-1 sm:text-5xl">Good notes should change how a problem looks.</h2>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-ink-3">Student-built technical notebooks move from intuition to precise explanations, worked examples, and tools you can actually try.</p>
-            <Link href="/notes" className="mt-7 inline-flex items-center gap-2 border-b border-ink-3/40 pb-1 text-sm font-semibold text-ink-1 hover:border-accent-soft">Step inside the notebooks <span aria-hidden="true">↗</span></Link>
-          </div>
-          <div className="space-y-0">
-            {notebooks.map((book, index) => <Link href={`/notes/${book.slug}`} key={book.id} className="group grid gap-4 border-t border-hairline py-6 sm:grid-cols-[4rem_1fr_auto] sm:items-center sm:py-8">
-              <span className="font-mono text-xs text-ink-3/70">0{index + 1}</span>
-              <span>
-                <span className="block text-2xl font-medium tracking-tight text-ink-1 transition-colors group-hover:text-accent-soft sm:text-3xl">{book.title}</span>
-                <span className="mt-2 block max-w-xl text-sm leading-relaxed text-ink-3">{book.tagline}</span>
-                {book.previewSnippets[0] && <span className="mt-3 inline-block border-l border-highlight/50 pl-3 font-mono text-xs text-ink-3">Inside: {book.previewSnippets[0].title}</span>}
-              </span>
-              <span className="hidden text-2xl text-ink-3 transition-transform group-hover:translate-x-1 sm:block" aria-hidden="true">→</span>
-            </Link>)}
-            <Link href="/notes/labs" className="mt-4 flex flex-col justify-between gap-4 border border-accent/25 bg-accent/5 p-6 transition-colors hover:bg-accent/10 sm:flex-row sm:items-center sm:p-7">
-              <span><span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent-soft">Open the lab</span><span className="mt-2 block text-xl font-medium text-ink-1">Make the algorithm move.</span><span className="mt-1 block text-sm text-ink-3">Explore the interactive simulators for scheduling, memory, and more.</span></span>
-              <span aria-hidden="true" className="text-2xl text-accent-soft">↗</span>
+            <Link href={`/wonder/${wonder.id}`} className="hm-tile hm-t-wonder" data-reveal style={{ background: "radial-gradient(120% 90% at 0% 0%, rgba(168,85,247,.28), color-mix(in srgb, var(--theme-raised) 92%, transparent) 70%)", borderColor: "rgba(196,181,253,.3)" }}>
+              <span className="hm-mono hm-kicker">WONDER · {shortDate(wonder.date)}</span>
+              <p className="hm-hand m-0 text-[28px] leading-none text-accent-soft">I wonder why…</p>
+              <h3 className="hm-tile-title">{wonder.title}</h3>
+              <span className="hm-cta">Read Wonder →</span>
             </Link>
-          </div>
-        </div>
-      </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-24 sm:px-8 lg:px-12 lg:py-32" aria-labelledby="map-heading">
-        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
-          <div className="relative order-2 aspect-[1.08] overflow-hidden border border-hairline bg-[#11121b] p-5 sm:p-8 lg:order-1" aria-label="Illustration of ideas connected across the publication">
-            <div aria-hidden="true" className="absolute inset-0 opacity-30" style={{ backgroundImage: "radial-gradient(rgba(196,181,253,.32) .7px, transparent .7px)", backgroundSize: "19px 19px" }} />
-            <svg viewBox="0 0 560 430" className="relative h-full w-full" fill="none" role="img" aria-labelledby="brain-map-illustration-title">
-              <title id="brain-map-illustration-title">An editorial sketch of connected ideas: systems, memory, attention, making, and wonder</title>
-              <g stroke="#a78bfa" strokeOpacity=".24" strokeWidth="1.2">
-                <path d="M280 210 130 104M280 210 430 90M280 210 470 270M280 210 330 365M280 210 92 315M130 104 430 90M430 90 470 270M470 270 330 365M330 365 92 315M92 315 130 104" />
-                <path d="M130 104 330 365M430 90 92 315" strokeOpacity=".1" />
-              </g>
-              <g fill="#171927" stroke="#8b7acb" strokeOpacity=".68">
-                <circle cx="130" cy="104" r="33"/><circle cx="430" cy="90" r="26"/><circle cx="470" cy="270" r="31"/><circle cx="330" cy="365" r="24"/><circle cx="92" cy="315" r="27"/>
-              </g>
-              <circle cx="280" cy="210" r="49" fill="#29213c" stroke="#c4b5fd" strokeOpacity=".85" />
-              <circle cx="280" cy="210" r="4" fill="#f5d47b" />
-              <g fill="#d8d2eb" fontFamily="ui-monospace, monospace" fontSize="11" letterSpacing="1.5">
-                <text x="95" y="110">SYSTEMS</text><text x="399" y="95">MEMORY</text><text x="441" y="276">ATTENTION</text><text x="306" y="370">MAKING</text><text x="55" y="320">WONDER</text>
-              </g>
-              <text x="280" y="205" fill="#fff" textAnchor="middle" fontFamily="ui-sans-serif, sans-serif" fontSize="14" fontWeight="600">one idea</text>
-              <text x="280" y="225" fill="#c4b5fd" textAnchor="middle" fontFamily="ui-sans-serif, sans-serif" fontSize="14">leads to another</text>
-              <g fill="#f5d47b" fillOpacity=".7"><circle cx="190" cy="150" r="2"/><circle cx="381" cy="182" r="1.5"/><circle cx="205" cy="310" r="1.7"/><circle cx="360" cy="316" r="1.5"/></g>
-            </svg>
-            <span className="absolute bottom-4 left-5 font-mono text-[9px] uppercase tracking-[0.2em] text-white/45 sm:bottom-6 sm:left-8">A map of recurring ideas · 01—∞</span>
-          </div>
-          <div className="order-1 lg:order-2">
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-highlight">The ideas are connected</p>
-            <h2 id="map-heading" className="mt-4 text-4xl font-semibold leading-[1.05] tracking-tight text-ink-1 sm:text-6xl">A publication with a mind of its own.</h2>
-            <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-2">An essay about memory sits beside a note on operating systems. A question about attention meets a story about making. The Brain Map follows those quiet threads across the archive.</p>
-            <Link href="/map" className="mt-8 inline-flex items-center gap-3 text-sm font-semibold text-ink-1 group">Explore the Brain Map <span aria-hidden="true" className="text-highlight transition-transform group-hover:translate-x-1">→</span></Link>
-          </div>
-        </div>
-      </section>
+            <Link href="/map" className="hm-tile hm-t-map" data-reveal>
+              <span className="hm-mono hm-kicker">BRAIN MAP</span>
+              <svg aria-hidden="true" viewBox="0 0 260 120" className="h-[110px] w-full">
+                <g stroke="rgba(196,181,253,.45)" strokeWidth="1.2">
+                  <line x1="40" y1="60" x2="110" y2="28" /><line x1="110" y1="28" x2="190" y2="44" /><line x1="110" y1="28" x2="130" y2="92" />
+                  <line x1="40" y1="60" x2="130" y2="92" /><line x1="190" y1="44" x2="226" y2="96" /><line x1="130" y1="92" x2="226" y2="96" />
+                </g>
+                <circle cx="40" cy="60" r="7" fill="#a855f7" /><circle cx="110" cy="28" r="9" fill="#facc15" /><circle cx="190" cy="44" r="6" fill="#c4b5fd" />
+                <circle cx="130" cy="92" r="7" fill="#a855f7" /><circle cx="226" cy="96" r="5" fill="#c4b5fd" />
+              </svg>
+              <h3 className="hm-tile-title text-xl">See how every note, lab and essay connects.</h3>
+              <span className="hm-cta">Explore the map →</span>
+            </Link>
 
-      <section className="border-t border-hairline bg-surface-1/40" aria-labelledby="breadth-heading">
-        <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
-          <div className="grid gap-8 border-b border-hairline pb-10 md:grid-cols-[0.7fr_1.3fr] md:items-end">
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent-soft">A curious mind rarely stays in one lane</p>
-            <h2 id="breadth-heading" className="max-w-3xl text-4xl font-semibold leading-[1.05] tracking-tight text-ink-1 sm:text-6xl">From the kernel to the corners of being human.</h2>
+            <Link href="/vibe-coding" className="hm-tile hm-t-vibe" data-reveal>
+              <span className="hm-mono hm-kicker">VIBE CODING</span>
+              <h3 className="hm-tile-title">AI can write the code. You&apos;re still responsible for what it does.</h3>
+              <span className="hm-hand text-[22px] text-highlight">how to vibe code without losing your brain</span>
+            </Link>
+
+            {edition && (
+              <Link href={`/post/${edition.slug}`} className="hm-tile hm-t-ed" data-reveal>
+                <span className="hm-mono hm-kicker">EDITION · LONG READ</span>
+                <h3 className="hm-tile-title">{edition.title}</h3>
+                <span className="hm-hand text-[22px] text-highlight">the long one</span>
+              </Link>
+            )}
           </div>
-          <div className="grid gap-x-12 md:grid-cols-2">
-            {topics.map((topic, index) => <div key={topic.eyebrow} className="border-b border-hairline py-7 sm:py-9">
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-3">0{index + 1} / {topic.eyebrow}</span>
-              <p className="mt-3 text-xl font-medium leading-snug text-ink-1 sm:text-2xl">{topic.title}</p>
-              {topic.href ? <Link href={topic.href} className="group mt-4 inline-flex items-center gap-2 text-sm text-ink-3 hover:text-ink-1">{topic.linkLabel}<span className="text-highlight transition-transform group-hover:translate-x-1" aria-hidden="true">→</span></Link> : topic.story ? <Link href={`/post/${topic.story.slug}`} className="group mt-4 inline-flex items-center gap-2 text-sm text-ink-3 hover:text-ink-1">{topic.story.title}<span className="text-highlight transition-transform group-hover:translate-x-1" aria-hidden="true">→</span></Link> : <Link href="/editions" className="mt-4 inline-flex items-center gap-2 text-sm text-ink-3 hover:text-ink-1">Find a thread in the editions <span className="text-highlight" aria-hidden="true">→</span></Link>}
-            </div>)}
+        </section>
+
+        {/* ============ LAST-MINUTE ============ */}
+        <section aria-labelledby="lm-title" className="relative py-3.5" data-reveal>
+          <div className="-rotate-[1.4deg] bg-[#facc15] text-[#1a1405] shadow-[0_0_80px_-10px_rgba(250,204,21,.45)]">
+            <div className="mx-auto flex max-w-[1280px] rotate-[1.4deg] flex-wrap items-center justify-between gap-5 px-5 py-8">
+              <div className="flex-[1_1_440px]">
+                <p className="hm-hand m-0 text-[28px] text-[#7c3aed]">read this in the exam queue</p>
+                <h2 id="lm-title" className="m-0 font-black leading-[.95] tracking-[-0.045em]" style={{ fontSize: "clamp(44px, 6.4cqi, 96px)" }}>
+                  Exam tomorrow?
+                </h2>
+                <p className="mt-3 max-w-[46ch] text-[19px] font-medium">
+                  A one-page cheat sheet for every topic, and 10-minute revision cards to skim on your phone. All {subjectCount} subjects.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/notes/cheat-sheets" className="hm-btn bg-[#05031a] text-[#facc15]">Cheat sheets →</Link>
+                <Link href="/notes/quick-revision" className="hm-btn border-2 border-[#05031a] text-[#1a1405]">10-minute revision →</Link>
+              </div>
+            </div>
           </div>
-          <div className="mt-14 flex flex-col items-start justify-between gap-6 border-t border-hairline pt-8 sm:flex-row sm:items-center">
-            <p className="max-w-xl text-lg leading-relaxed text-ink-2">Follow a question, find a new one, and see where it takes you.</p>
-            <Link href="/editions" className="inline-flex items-center gap-3 bg-accent-strong px-6 py-3 text-sm font-semibold text-on-accent transition-colors hover:bg-accent-soft">Explore the publication <span aria-hidden="true">↗</span></Link>
+        </section>
+
+        {/* ============ PERSONAL ============ */}
+        <section aria-labelledby="me-title" className="mx-auto max-w-[1280px] px-5 pt-9 pb-12" data-reveal>
+          <div className="max-w-[640px] -rotate-1 rounded-[6px_18px_8px_14px] bg-[#fef3c7] px-7 py-6 text-[#3b2a05] shadow-[0_24px_60px_-18px_rgba(0,0,0,.8)]">
+            {/* TODO(Zainab): replace this placeholder with your own note. */}
+            <h2 id="me-title" className="hm-hand m-0 text-[34px] font-bold leading-[1.1]">
+              I&apos;m Zainab, a final-year B.Tech student. I wrote these while learning this stuff myself.
+            </h2>
+            <div className="mt-2.5 flex flex-wrap gap-x-[18px] gap-y-1 text-[15px] font-bold">
+              <Link href="/about" className="inline-flex min-h-11 items-center text-[#6d28d9] underline">About me</Link>
+              <a href="https://zainabshujat.dev" target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center text-[#6d28d9] underline">Portfolio</a>
+              <a href="https://www.linkedin.com/in/zainab-shujat-56b14928b/" target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center text-[#6d28d9] underline">
+                Follow on LinkedIn
+              </a>
+            </div>
           </div>
-          {wonderNotes[1] && <p className="mt-10 text-xs text-ink-3">Recently wondered: <Link href={`/wonder/${wonderNotes[1].id}`} className="underline decoration-hairline underline-offset-4 hover:text-ink-1">{wonderNotes[1].title}</Link></p>}
-        </div>
-      </section>
-    </main>
+        </section>
+      </div>
+    </div>
   );
 }

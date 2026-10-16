@@ -85,12 +85,12 @@ export default function AboutPage() {
             </span>
           </Link>
           <Link
-            href="/books"
+            href="/vibe-coding"
             className="block rounded-lg bg-surface-1 border border-hairline px-5 py-3 hover:bg-surface-2 transition-colors"
           >
-            <span className="font-semibold text-ink-1">📖 Books</span>
+            <span className="font-semibold text-ink-1">🤖 Vibe Coding</span>
             <span className="text-ink-3 text-sm ml-2">
-              — Long-form writing in progress
+              — Using AI to code without handing over your judgment
             </span>
           </Link>
         </div>
