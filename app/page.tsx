@@ -286,7 +286,7 @@ export default async function Home() {
             <div className="mx-auto flex max-w-[1280px] rotate-[1.4deg] flex-wrap items-center justify-between gap-5 px-5 py-8">
               <div className="flex-[1_1_440px]">
                 <p className="hm-hand m-0 text-[28px] text-[#7c3aed]">read this in the exam queue</p>
-                <h2 id="lm-title" className="m-0 font-black leading-[.95] tracking-[-0.045em]" style={{ fontSize: "clamp(44px, 6.4cqi, 96px)" }}>
+                <h2 id="lm-title" className="m-0 font-black text-[#1a1405] leading-[.95] tracking-[-0.045em]" style={{ fontSize: "clamp(44px, 6.4cqi, 96px)" }}>
                   Exam tomorrow?
                 </h2>
                 <p className="mt-3 max-w-[46ch] text-[19px] font-medium">
@@ -305,7 +305,7 @@ export default async function Home() {
         <section aria-labelledby="me-title" className="mx-auto max-w-[1280px] px-5 pt-9 pb-12" data-reveal>
           <div className="max-w-[640px] -rotate-1 rounded-[6px_18px_8px_14px] bg-[#fef3c7] px-7 py-6 text-[#3b2a05] shadow-[0_24px_60px_-18px_rgba(0,0,0,.8)]">
             {/* TODO(Zainab): replace this placeholder with your own note. */}
-            <h2 id="me-title" className="hm-hand m-0 text-[34px] font-bold leading-[1.1]">
+            <h2 id="me-title" className="hm-hand m-0 text-[34px] text-[#3b2a05] font-bold leading-[1.1]">
               I&apos;m Zainab, a final-year B.Tech student. I wrote these while learning this stuff myself.
             </h2>
             <div className="mt-2.5 flex flex-wrap gap-x-[18px] gap-y-1 text-[15px] font-bold">
