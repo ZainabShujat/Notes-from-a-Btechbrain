@@ -48,7 +48,7 @@ export default function UpdatesWidget() {
   }, [isOpen]);
 
   return (
-    <div ref={widgetRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-auto">
+    <div ref={widgetRef} className="updates-widget fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-auto">
       {/* Popup Window */}
       {isOpen && (
         <div
