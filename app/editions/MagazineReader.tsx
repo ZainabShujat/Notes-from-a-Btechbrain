@@ -197,14 +197,16 @@ export default function MagazineReader({
     const pageIndex = (el: Element) =>
       Math.round((el.getBoundingClientRect().left - left0) / step);
 
+    // Keyed by edition as well as column, so two editions never share a page even
+    // if the browser skips a column break. Insertion order is reading order.
     const placed = new Map<
-      number,
+      string,
       { edition: string | null; blocks: Block[] }
     >();
     const place = (el: Element, edition: string | null, block: Block) => {
-      const i = pageIndex(el);
-      if (!placed.has(i)) placed.set(i, { edition, blocks: [] });
-      placed.get(i)!.blocks.push(block);
+      const key = `${edition}|${pageIndex(el)}`;
+      if (!placed.has(key)) placed.set(key, { edition, blocks: [] });
+      placed.get(key)!.blocks.push(block);
     };
 
     flow
@@ -244,9 +246,11 @@ export default function MagazineReader({
         }
       });
 
-    const textPages: Page[] = [...placed.entries()]
-      .sort((a, b) => a[0] - b[0])
-      .map(([, p]) => ({ kind: "text", edition: p.edition, blocks: p.blocks }));
+    const textPages: Page[] = [...placed.values()].map((p) => ({
+      kind: "text",
+      edition: p.edition,
+      blocks: p.blocks,
+    }));
     const next: Page[] = [{ kind: "cover" }, ...textPages, { kind: "end" }];
     setPages(next);
 
