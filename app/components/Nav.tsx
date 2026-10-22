@@ -19,6 +19,7 @@ const PRIMARY_LINKS = [
 ];
 
 const SECONDARY = [
+  { href: "/reels", label: "Reels", icon: "🎬" },
   { href: "/about", label: "About", icon: "👋" },
 ];
 
