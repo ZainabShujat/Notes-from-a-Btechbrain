@@ -18,7 +18,7 @@ export default async function EditionsPage() {
   const magazines = buildMagazines(posts);
 
   return (
-    <main className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-16 md:py-24">
+    <main className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 pt-6 pb-16 md:pt-8 md:pb-24">
       <PageHeader
         eyebrow="✍️ What I write"
         title="The magazine shelf"

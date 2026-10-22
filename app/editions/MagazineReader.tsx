@@ -52,7 +52,7 @@ const PAGE = {
   padX: 44,
   padTop: 48,
   padBottom: 46,
-  font: 16.5,
+  font: 19,
 };
 
 type Dims = {
@@ -77,11 +77,13 @@ function formatDate(value: string) {
 }
 
 function computeDims(wrapWidth: number, viewportHeight: number): Dims {
-  const availH = Math.max(320, viewportHeight - 190);
-  const spread = Math.min(wrapWidth / (PAGE.w * 2), availH / PAGE.h, 1);
-  // Below ~60% a spread's text gets too small to read, so show one page larger instead.
-  if (spread >= 0.6) return { per: 2, scale: spread };
-  return { per: 1, scale: Math.min(wrapWidth / PAGE.w, availH / PAGE.h, 1) };
+  const availH = Math.max(320, viewportHeight - 150);
+  const single = Math.min(wrapWidth / PAGE.w, availH / PAGE.h, 1.2);
+  const spread = Math.min(wrapWidth / (PAGE.w * 2), availH / PAGE.h, 1.2);
+  // When height is the limit a spread is as large as a single page, so show both.
+  // Only narrow screens, where a spread's text would get too small, drop to one page.
+  if (spread >= single * 0.95 || spread >= 0.6) return { per: 2, scale: spread };
+  return { per: 1, scale: single };
 }
 
 /** Rebuilds a page's HTML from its blocks, reopening the body and list wrappers they came from. */
@@ -195,14 +197,16 @@ export default function MagazineReader({
     const pageIndex = (el: Element) =>
       Math.round((el.getBoundingClientRect().left - left0) / step);
 
+    // Keyed by edition as well as column, so two editions never share a page even
+    // if the browser skips a column break. Insertion order is reading order.
     const placed = new Map<
-      number,
+      string,
       { edition: string | null; blocks: Block[] }
     >();
     const place = (el: Element, edition: string | null, block: Block) => {
-      const i = pageIndex(el);
-      if (!placed.has(i)) placed.set(i, { edition, blocks: [] });
-      placed.get(i)!.blocks.push(block);
+      const key = `${edition}|${pageIndex(el)}`;
+      if (!placed.has(key)) placed.set(key, { edition, blocks: [] });
+      placed.get(key)!.blocks.push(block);
     };
 
     flow
@@ -242,9 +246,11 @@ export default function MagazineReader({
         }
       });
 
-    const textPages: Page[] = [...placed.entries()]
-      .sort((a, b) => a[0] - b[0])
-      .map(([, p]) => ({ kind: "text", edition: p.edition, blocks: p.blocks }));
+    const textPages: Page[] = [...placed.values()].map((p) => ({
+      kind: "text",
+      edition: p.edition,
+      blocks: p.blocks,
+    }));
     const next: Page[] = [{ kind: "cover" }, ...textPages, { kind: "end" }];
     setPages(next);
 
@@ -499,7 +505,7 @@ export default function MagazineReader({
 
   return (
     <main
-      className="mx-auto max-w-[1240px] px-3 sm:px-6 py-5 md:py-8"
+      className="mx-auto max-w-[1240px] px-3 sm:px-6 py-2 md:py-3"
       style={style}
     >
       <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
