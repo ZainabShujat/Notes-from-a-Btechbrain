@@ -88,7 +88,6 @@ export const COA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: Expanding Opcode Formulation",
-              weightage: "2 Marks (Core Recurring Numerical)",
               trap: "Every unallocated pattern at an n-address level is multiplied by 2^k when expanded to the (n-1)-address level, where k is the bit-width of the freed register address field!",
               solutionSteps: [
                 "Problem: A processor has a 16-bit instruction word and 16 general-purpose CPU registers (requiring 4 bits each for register addressing). The processor supports 3-address, 2-address, and 1-address instructions.",
@@ -192,7 +191,6 @@ export const COA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: Single-Cycle vs Multi-Cycle Datapath Delay",
-              weightage: "2 Marks",
               trap: "In a single-cycle datapath, the clock period MUST accommodate the SLOWEST instruction in the instruction set architecture (typically LOAD). In a multi-cycle datapath, the clock period equals the SLOWEST functional unit plus register setup time!",
               solutionSteps: [
                 "Problem: A processor has functional unit latencies: Instruction Memory = 250 ps, Register File Read = 150 ps, ALU = 200 ps, Data Memory = 300 ps, and Register File Write = 100 ps. Multiplexers and wiring introduce zero delay.",
@@ -293,7 +291,6 @@ export const COA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: Encoding Real Decimal to IEEE 754 Hex",
-              weightage: "2 Marks",
               trap: "Remember that the biased exponent E = e + 127. When normalizing, the radix point moves past the first non-zero bit, leaving an implicit leading 1 that is NOT stored in the mantissa!",
               solutionSteps: [
                 "Problem: Convert the decimal number -13.625 into IEEE 754 single-precision format and write the 32-bit result in hexadecimal.",
@@ -406,7 +403,6 @@ export const COA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: Carry Lookahead Adder (CLA) Gate Latency",
-              weightage: "2 Marks (High Frequency)",
               trap: "Ripple carry adders have delay O(n) proportional to the number of bits. Carry Lookahead Adders (CLA) compute all carries in parallel in O(1) gate delays using Carry Generate (G_i) and Carry Propagate (P_i) terms!",
               solutionSteps: [
                 "Problem: In a 4-bit Carry Lookahead Adder, each 2-input AND, OR, and XOR gate has a propagation delay of 10 ns, 10 ns, and 15 ns respectively. Assume gates have unlimited fan-in.",
@@ -514,7 +510,6 @@ export const COA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: Cache Bit Splitting & Tag Directory Size",
-              weightage: "2 Marks",
               trap: "Always divide cache capacity by (Block Size * k) to get the number of sets in a set-associative cache. Do not use the line count directly for the index field!",
               solutionSteps: [
                 "Problem: A 32-bit byte-addressable system contains a 64 KB 4-way set-associative cache with 64-byte block size. Find:",
@@ -552,7 +547,6 @@ export const COA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "4. GATE Worked Numerical: Multi-Level Cache AMAT",
-              weightage: "2 Marks",
               trap: "Ensure you check whether L2 miss rate is specified as LOCAL or GLOBAL! If GLOBAL miss rate is given, the formula simplifies to: AMAT = T_L1 + M_L1 * T_L2 + M_L2,global * T_MM.",
               solutionSteps: [
                 "Problem: An L1 cache has hit time = 1 ns and miss rate = 8%. An L2 cache has hit time = 6 ns and local miss rate = 12%. Main memory access latency is 100 ns. Calculate overall AMAT.",
@@ -626,7 +620,6 @@ export const COA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: Low-Order Memory Interleaving Latency",
-              weightage: "2 Marks",
               trap: "Consecutive memory requests to low-order interleaved banks overlap in parallel. The time to read m consecutive words is NOT m * T_cycle, but T_access + (m - 1) * T_bus!",
               solutionSteps: [
                 "Problem: A main memory system has 8 memory banks organized with low-order interleaving. Each bank has a memory cycle time of 80 ns. The bus transfer time per word is 10 ns. Find:",
@@ -745,7 +738,6 @@ export const COA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. GATE Worked Numerical: Unequal Stage Delays & Effective CPI",
-              weightage: "2 Marks",
               trap: "Clock period is set by the slowest stage delay PLUS latch delay! Non-pipelined instruction time is the pure sum of stage delays without latches.",
               solutionSteps: [
                 "Problem: A 5-stage pipeline has stage delays: IF = 160 ps, ID = 120 ps, EX = 220 ps, MEM = 180 ps, and WB = 100 ps. Pipeline register latch delay is 20 ps. In a benchmark program, 20% of instructions are conditional branches that cause 2 stall cycles. Find:",
@@ -830,7 +822,6 @@ export const COA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: 2-Bit Dynamic Predictor Accuracy",
-              weightage: "2 Marks",
               trap: "Trace loop branches carefully! For a loop executing N times, the branch is TAKEN (N-1) times and NOT TAKEN on the final exit.",
               solutionSteps: [
                 "Problem: A loop `for (int i = 0; i < 4; i++)` is executed. The conditional branch at the loop bottom is predicted using a 2-bit saturating predictor initialized to Strongly Not Taken (00). Find the number of mispredictions for the first execution of this loop.",
@@ -924,7 +915,6 @@ export const COA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: Horizontal vs Vertical Control Word Width",
-              weightage: "2 Marks",
               trap: "Always include the +1 state for the inactive / NO-OP condition in vertical microinstruction field encoding! A group of 7 signals requires ceil(log2(7 + 1)) = 3 bits.",
               solutionSteps: [
                 "Problem: A processor has 32 control signals divided into 4 mutually exclusive groups containing 7, 12, 5, and 8 signals respectively. The control memory stores 512 words. Find:",
@@ -1023,7 +1013,6 @@ export const COA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: DMA Cycle Stealing CPU Overhead",
-              weightage: "2 Marks",
               trap: "Data rate must be matched with bus transfer cycle time! Always compute how many bus cycles are stolen per second.",
               solutionSteps: [
                 "Problem: A hard disk transfers data at a rate of 4 MB/sec (where 1 MB = 10^6 bytes). The system bus has a cycle time of 200 ns and transfers 1 byte per cycle. The CPU clock frequency is 20 MHz with an average CPI of 2.0.",

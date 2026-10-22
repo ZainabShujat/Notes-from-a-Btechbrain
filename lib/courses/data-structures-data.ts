@@ -116,7 +116,6 @@ export const DATA_STRUCTURES_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: 3D Array Address Calculation with Custom Bounds",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Always compute the dimension spans D1, D2, D3 as U - L + 1 before setting up the multiplication offsets.",
               solutionSteps: [
                 "Problem: An array A[1..5, -2..3, 0..4] is stored in Row-Major order starting at Base Address 2000. Each element occupies 2 bytes. Compute the exact byte address of element A[3, 1, 2].",
@@ -212,7 +211,6 @@ export const DATA_STRUCTURES_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Circular Queue Full/Empty State Sequence",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Remember that front points to the position before the first element, while rear points directly to the last inserted element.",
               solutionSteps: [
                 "Problem: A circular queue of array size N = 6 is initially empty with front = 0 and rear = 0. Perform the following sequence of operations: Enqueue(10), Enqueue(20), Enqueue(30), Dequeue(), Enqueue(40), Enqueue(50), Enqueue(60), Dequeue(). What are the final values of front, rear, and the number of stored elements?",
@@ -324,7 +322,6 @@ export const DATA_STRUCTURES_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Node Count & Traversal Reconstruction",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Do not confuse internal nodes with degree-2 nodes. Degree-1 nodes are internal nodes that do NOT count toward n2.",
               solutionSteps: [
                 "Problem: A binary tree has 14 leaf nodes and a total of 35 nodes. How many nodes have exactly 1 child? Also determine the total number of edges.",
@@ -412,7 +409,6 @@ export const DATA_STRUCTURES_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: BST Inorder Successor & Node Deletion Sequence",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "When deleting a node with 2 children, its successor has at most ONE child (a right child), so the successor deletion never recursively triggers Case 3.",
               solutionSteps: [
                 "Problem: Keys [50, 30, 70, 20, 40, 60, 80, 35, 45] are inserted into an initially empty BST. Find the Inorder Successor of node 30, and trace the tree structure after deleting node 30.",
@@ -530,7 +526,6 @@ export const DATA_STRUCTURES_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Maximum Height of an AVL Tree Given Node Count",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "If n falls strictly between N(h) and N(h+1), the maximum possible height is h, NOT h+1.",
               solutionSteps: [
                 "Problem: What is the maximum possible height of an AVL tree containing n = 30 nodes (where a single-node tree has height 0)?",
@@ -627,7 +622,6 @@ export const DATA_STRUCTURES_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: B+ Tree Order & Maximum Key Derivation",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Do not forget the single sibling pointer P in the leaf node equation.",
               solutionSteps: [
                 "Problem: A database file system has a disk block size of B = 512 bytes. In a B+ tree index, search keys are K = 8 bytes, block pointers are P = 4 bytes, and record pointers are Pr = 6 bytes. Calculate the maximum order p of an internal node and the maximum capacity q of a leaf node.",
@@ -734,7 +728,6 @@ export const DATA_STRUCTURES_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Maximum Element Location in Min-Heap",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "In a Min-Heap, the maximum element is never at an internal node; it is always at a leaf node.",
               solutionSteps: [
                 "Problem: An array of n = 10 distinct elements forms a Min-Heap. What are the possible indices where the maximum element can reside (using 1-based indexing)?",
@@ -832,7 +825,6 @@ export const DATA_STRUCTURES_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Double Hashing Probe Sequence Execution",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Ensure h2(k) step size is added modulo m at each probe iteration i.",
               solutionSteps: [
                 "Problem: Keys are inserted into a hash table of size m = 11 using Double Hashing with hash functions h1(k) = k % 11 and h2(k) = 1 + (k % 7). If slot h1(k) is occupied, find the sequence of probes for key k = 37.",
@@ -913,7 +905,6 @@ export const DATA_STRUCTURES_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Expected Probes Calculation at High Load Factor",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Use the natural logarithm ln, not base-10 log, in the successful search probe formula.",
               solutionSteps: [
                 "Problem: An open-addressed hash table using double hashing operates at a load factor of alpha = 0.75. Calculate the expected number of probes for an unsuccessful search and a successful search.",
@@ -998,7 +989,6 @@ export const DATA_STRUCTURES_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Rank Invariant & Union Sequence",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Rank increases if and only if both roots being unioned have identical rank.",
               solutionSteps: [
                 "Problem: Elements {1, 2, 3, 4, 5, 6, 7, 8} are initialized using Make-Set (rank 0 for all). The following sequence of Union operations is performed using Union by Rank: Union(1, 2), Union(3, 4), Union(5, 6), Union(7, 8), Union(1, 3), Union(5, 7), Union(1, 5). What is the final rank of the root node?",

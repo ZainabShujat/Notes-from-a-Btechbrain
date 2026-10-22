@@ -174,10 +174,10 @@ export default function NotesLandingPage() {
               </span>
             </div>
             <h3 className="font-bold text-sm text-ink-1 group-hover:text-amber-500 transition-colors mb-1 font-sans">
-              Verified GATE PYQs
+              GATE PYQs
             </h3>
             <p className="text-xs text-ink-3 leading-relaxed relative z-10">
-              10-year official question bank with step-by-step derivations and trap warnings.
+              Operating Systems questions with step-by-step derivations and trap warnings. More subjects later.
             </p>
           </Link>
 
@@ -210,7 +210,7 @@ export default function NotesLandingPage() {
               Cheat Sheets
             </h3>
             <p className="text-xs text-ink-3 leading-relaxed relative z-10">
-              One-page high-density mental model summaries for exam night revision.
+              One-page summaries for exam-night revision, for every subject.
             </p>
           </Link>
 
@@ -241,7 +241,7 @@ export default function NotesLandingPage() {
               10-Minute Rapid Revision
             </h3>
             <p className="text-xs text-ink-3 leading-relaxed relative z-10">
-              Rapid recall sheets designed to be reviewed on your phone right before entering the hall.
+              Recall sheets to skim on your phone right before the exam, for every subject.
             </p>
           </Link>
         </div>

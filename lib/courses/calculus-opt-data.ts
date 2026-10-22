@@ -98,7 +98,6 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Exponential Limit & MVT Root Interval",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Use the logarithmic transformation ln(y) to resolve the 1^inf indeterminate form.",
               solutionSteps: [
                 "Problem: (a) Evaluate L = lim_{x -> 0} (1 + sin x)^{1/x}. (b) For f(x) = x^3 - x on [0, 2], find the value of c in (0, 2) satisfying Lagrange's Mean Value Theorem.",
@@ -179,7 +178,6 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: 3rd-Order Taylor Approximation & Error",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Remember the alternating signs in ln(1 + u) = u - u^2/2 + u^3/3 - ... and apply the chain rule.",
               solutionSteps: [
                 "Problem: Find the 3rd-degree Taylor polynomial P_3(x) for f(x) = ln(1 + 2x) centered at a = 0. Use P_3(x) to approximate ln(1.2), and find the absolute error compared to the exact value.",
@@ -232,6 +230,7 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
       lessons: [
         {
           id: "partial-derivatives-gradient-and-directional-derivatives",
+            syllabusScope: "Optional enrichment beyond GATE 2027 DA single-variable calculus",
           title: "Partial Derivatives, Gradients & Directional Derivatives",
           slug: "partial-derivatives-gradient-and-directional-derivatives",
           order: 1,
@@ -273,7 +272,6 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: 3D Directional Derivative & Normal Vector",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Normalize the given 3D direction vector before computing the inner product.",
               solutionSteps: [
                 "Problem: Find the directional derivative of f(x, y, z) = x^2 * y * z + 2 * y^2 * z at point P(1, 1, 2) in the direction of vector v = [ 1, 2, 2 ]^T.",
@@ -312,6 +310,7 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
         },
         {
           id: "multivariate-taylor-series-and-unconstrained-extrema",
+            syllabusScope: "Optional enrichment beyond GATE 2027 DA single-variable calculus",
           title: "Multivariate Taylor Approximations & Hessian Classification",
           slug: "multivariate-taylor-series-and-unconstrained-extrema",
           order: 2,
@@ -356,7 +355,6 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Complete Critical Point Classification",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Evaluate both critical points separately; check discriminant D and f_xx at each point.",
               solutionSteps: [
                 "Problem: Find and classify all critical points of f(x, y) = x^3 + y^3 - 3*x*y.",
@@ -417,6 +415,7 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
       lessons: [
         {
           id: "convex-sets-convex-functions-and-jensens-inequality",
+            syllabusScope: "Optional enrichment beyond GATE 2027 DA single-variable calculus",
           title: "Convex Sets, Convex Functions & Jensen's Inequality",
           slug: "convex-sets-convex-functions-and-jensens-inequality",
           order: 1,
@@ -461,7 +460,6 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Proving Convexity via Hessian Matrix",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "To prove convexity everywhere, verify that all leading principal minors are non-negative for ALL values of (x, y).",
               solutionSteps: [
                 "Problem: Prove that the function f(x, y) = exp(x - y) + x^2 + 2*y^2 is strictly convex everywhere on R^2.",
@@ -503,6 +501,7 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
         },
         {
           id: "lagrangian-duality-and-slaters-condition",
+            syllabusScope: "Optional enrichment beyond GATE 2027 DA single-variable calculus",
           title: "Lagrangian Duality, Dual Problem & Slater's Condition",
           slug: "lagrangian-duality-and-slaters-condition",
           order: 2,
@@ -545,7 +544,6 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Deriving Dual Function & Verifying Duality",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Minimize the Lagrangian over x analytically before setting up the dual maximization.",
               solutionSteps: [
                 "Problem: Consider the primal problem: minimize f(x) = (1/2) * x^2 subject to x >= 2 (rewritten as 2 - x <= 0). (a) Derive the Lagrange dual function g(lambda). (b) Solve the dual problem and verify strong duality.",
@@ -601,6 +599,7 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
       lessons: [
         {
           id: "method-of-lagrange-multipliers-for-equality-constraints",
+            syllabusScope: "Optional enrichment beyond GATE 2027 DA single-variable calculus",
           title: "The Method of Lagrange Multipliers",
           slug: "method-of-lagrange-multipliers-for-equality-constraints",
           order: 1,
@@ -639,7 +638,6 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Multi-Constraint Lagrange Optimization",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Set up the gradient proportionality system alongside both equality constraint equations.",
               solutionSteps: [
                 "Problem: Find the minimum value of f(x, y, z) = x^2 + 2*y^2 + z^2 subject to two simultaneous equality constraints: g1(x, y, z) = x + y + z - 1 = 0 and g2(x, y, z) = x - y = 0.",
@@ -685,6 +683,7 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
         },
         {
           id: "karush-kuhn-tucker-kkt-conditions-and-complementary-slackness",
+            syllabusScope: "Optional enrichment beyond GATE 2027 DA single-variable calculus",
           title: "Karush-Kuhn-Tucker (KKT) Conditions & Complementary Slackness",
           slug: "karush-kuhn-tucker-kkt-conditions-and-complementary-slackness",
           order: 2,
@@ -725,7 +724,6 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Constrained Quadratic Program via KKT Case Analysis",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Test both active (lambda > 0) and inactive (lambda = 0) constraint cases systematically.",
               solutionSteps: [
                 "Problem: Minimize f(x, y) = (x - 3)^2 + (y - 3)^2 subject to the inequality constraint x + y <= 4, with x >= 0, y >= 0.",
@@ -787,6 +785,7 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
       lessons: [
         {
           id: "gradient-descent-learning-rates-and-convergence-analysis",
+            syllabusScope: "Optional enrichment beyond GATE 2027 DA single-variable calculus",
           title: "Gradient Descent, Learning Rates & Convergence",
           slug: "gradient-descent-learning-rates-and-convergence-analysis",
           order: 1,
@@ -829,7 +828,6 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Maximum Stable Learning Rate on Quadratic Loss",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "The maximum stable learning rate is alpha_max = 2 / lambda_max, NOT 1 / lambda_max.",
               solutionSteps: [
                 "Problem: Consider the quadratic loss function f(x, y) = 4*x^2 + y^2. (a) Find the Lipschitz constant L and the maximum stable learning rate alpha_max. (b) Trace the first Gradient Descent update starting from (x0, y0) = (1, 1) with learning rate alpha = 0.1.",
@@ -874,6 +872,7 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
         },
         {
           id: "second-order-optimization-newtons-method",
+            syllabusScope: "Optional enrichment beyond GATE 2027 DA single-variable calculus",
           title: "Second-Order Optimization & Newton's Method",
           slug: "second-order-optimization-newtons-method",
           order: 2,
@@ -914,7 +913,6 @@ export const CALCULUS_OPTIMIZATION_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Exact Single-Step Newton Convergence",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Invert the 2x2 Hessian matrix accurately using the adjugate formula H^{-1} = (1 / det(H)) * adj(H).",
               solutionSteps: [
                 "Problem: Apply one iteration of Newton's method to minimize f(x, y) = 2*x^2 + y^2 - 2*x*y - 4*x starting from initial guess (x0, y0) = (0, 0). Show that the step jumps directly to the exact global minimum.",

@@ -15,10 +15,11 @@ const PRIMARY_LINKS = [
   { href: "/games", label: "Games", icon: "🎮" },
   { href: "/work", label: "The Work We Do", icon: "🌍" },
   { href: "/wonder", label: "Wonder", icon: "🌀" },
-  { href: "/books", label: "Books", icon: "📖" },
+  { href: "/vibe-coding", label: "Vibe Coding", icon: "🤖" },
 ];
 
 const SECONDARY = [
+  { href: "/reels", label: "Reels", icon: "🎬" },
   { href: "/about", label: "About", icon: "👋" },
 ];
 

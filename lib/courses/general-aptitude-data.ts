@@ -95,7 +95,6 @@ export const GENERAL_APTITUDE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Repeated Dilution & Mixture Ratio",
-              weightage: "2 Marks (GATE Standard Pattern)",
               trap: "Do not subtract linear amounts; each removal takes away a mixture containing both wine and water.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -130,6 +129,7 @@ export const GENERAL_APTITUDE_COURSE: CourseMeta = {
         },
         {
           id: "work-rate-and-speed-time-distance",
+            syllabusScope: "Quantitative Aptitude extension; this specific format is not named in the GATE 2027 GA syllabus",
           title: "Work-Rate, Pipes & Cisterns, Relative Speed & Motion",
           slug: "work-rate-and-speed-time-distance",
           order: 2,
@@ -183,7 +183,6 @@ export const GENERAL_APTITUDE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Alternating Work with Pipe Leak",
-              weightage: "2 Marks (GATE CS/DA Pattern)",
               trap: "When working in alternate hours, do not divide total work by cycle work directly near the end, because the tank might fill during an active filling hour before the leak hour occurs.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -284,7 +283,6 @@ export const GENERAL_APTITUDE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Gap Method for Non-Adjacent Seating",
-              weightage: "2 Marks (GATE CS/DA)",
               trap: "Do not subtract adjacent pairs from total without accounting for triple overlaps.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -368,7 +366,6 @@ export const GENERAL_APTITUDE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Cylinder Volume to Wire Conversion",
-              weightage: "2 Marks (GATE Pattern)",
               trap: "Ensure all units are converted to the same dimension (meters vs millimeters) before equating volumes.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -455,7 +452,6 @@ export const GENERAL_APTITUDE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Example: Multi-Premise Syllogism",
-              weightage: "1 Mark (GATE Aptitude Core)",
               trap: "Watch out for 'Some' not implying 'All'.",
               solutionSteps: [
                 "Statements: 1. All engineers are problem solvers. 2. Some problem solvers are mathematicians.",
@@ -536,7 +532,6 @@ export const GENERAL_APTITUDE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Circular Seating with Dual Orientations",
-              weightage: "2 Marks (GATE Pattern)",
               trap: "Carefully reverse left/right orientations for members who face outward compared to inward.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -635,7 +630,6 @@ export const GENERAL_APTITUDE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Identifying Rotational Equivalence",
-              weightage: "1 Mark (GATE Spatial Pattern)",
               trap: "Distinguish between mirror reflections and 90/180-degree planar rotations.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -715,7 +709,6 @@ export const GENERAL_APTITUDE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Validating Folded Cube Perspectives",
-              weightage: "2 Marks (Compulsory GATE Spatial Pattern)",
               trap: "Remember that opposite faces can never share a common edge in the folded 3D cube.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -810,7 +803,6 @@ export const GENERAL_APTITUDE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Subject-Verb Agreement with Intervening Phrase",
-              weightage: "1 Mark (GATE Verbal Pattern)",
               trap: "Allowing a plural object of a preposition to distract from a singular subject.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -900,7 +892,6 @@ export const GENERAL_APTITUDE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Critical Reasoning Assumption Identification",
-              weightage: "2 Marks (GATE Verbal Pattern)",
               trap: "Do not confuse an additional consequence with a required underlying assumption.",
               solutionSteps: [
                 "Passage [Original Practice Problem · Modeled on GATE Pattern]:",

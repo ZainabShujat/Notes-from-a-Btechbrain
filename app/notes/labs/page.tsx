@@ -1,12 +1,12 @@
 import Link from "next/link";
 import PageHeader from "../../components/ui/PageHeader";
 import { pageMetadata } from "../../../lib/seo";
-import { COURSE_LABS, DBMS_LABS, OS_LABS } from "../../../lib/labs";
+import { CN_LABS, COURSE_LABS, DBMS_LABS, OS_LABS } from "../../../lib/labs";
 
 export const metadata = pageMetadata({
-  title: "Interactive Operating Systems Laboratories & Simulators",
+  title: "Interactive Laboratories & Simulators",
   description:
-    "Explore 8 hands-on OS simulators: Banker's algorithm, CPU scheduling Gantt charts, 7-state process machines, page replacement, and disk trajectories.",
+    "Hands-on simulators for Operating Systems, DBMS, and Computer Networks: CPU scheduling, Banker's algorithm, page replacement, B+ trees, serializability, and sliding window retransmission.",
   path: "/notes/labs",
 });
 
@@ -55,8 +55,8 @@ export default function LabsPage() {
         <span className="px-3 py-1.5 rounded bg-surface-2 text-ink-3 border border-hairline/60">
           Digital Logic (In Development)
         </span>
-        <span className="px-3 py-1.5 rounded bg-surface-2 text-ink-3 border border-hairline/60">
-          Computer Networks (In Development)
+        <span className="px-3 py-1.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold shadow-2xs">
+          Computer Networks ({CN_LABS.length} {CN_LABS.length === 1 ? "Lab" : "Labs"})
         </span>
       </div>
 

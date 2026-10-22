@@ -8,6 +8,7 @@ import InteractiveBankersAlgorithm from "./InteractiveBankersAlgorithm";
 import InteractivePageReplacement from "./InteractivePageReplacement";
 import InteractiveDiskScheduling from "./InteractiveDiskScheduling";
 import InteractiveSemaphore from "./InteractiveSemaphore";
+import InteractiveSlidingWindow from "./InteractiveSlidingWindow";
 import InteractiveSerializabilityChecker from "./InteractiveSerializabilityChecker";
 import InteractiveBPlusTreeCalculator from "./InteractiveBPlusTreeCalculator";
 import InteractiveNormalizationAnalyzer from "./InteractiveNormalizationAnalyzer";
@@ -312,6 +313,9 @@ function SectionBlock({
             {section.interactive.kind === "semaphore" && (
               <InteractiveSemaphore config={section.interactive.config} />
             )}
+            {section.interactive.kind === "sliding-window" && (
+              <InteractiveSlidingWindow config={section.interactive.config} />
+            )}
             {section.interactive.kind === "serializability-checker" && (
               <InteractiveSerializabilityChecker config={section.interactive.config} />
             )}
@@ -445,7 +449,15 @@ function SectionBlock({
         </section>
       );
 
-    case "comparison":
+    case "comparison": {
+      // Tables come in two shapes: one header per value column, or a leading
+      // header that labels the row names (columns.length === values + 1).
+      const valueCount = Math.max(
+        ...section.criteria.map((c) => c.values?.length ?? [c.first, c.second].filter((v) => v !== undefined).length)
+      );
+      const hasRowLabelHeader = section.columns.length === valueCount + 1;
+      const rowLabelHeader = hasRowLabelHeader ? section.columns[0] : "Feature / Aspect";
+      const valueHeaders = hasRowLabelHeader ? section.columns.slice(1) : section.columns.slice(0, valueCount);
       return (
         <section id={sectionId} className="my-10 scroll-mt-24 space-y-4">
           {section.heading && (
@@ -466,9 +478,15 @@ function SectionBlock({
             <table className="w-full text-left text-xs sm:text-sm border-collapse">
               <thead>
                 <tr className="border-b border-hairline bg-surface-2/60 text-ink-3 font-mono uppercase text-[11px]">
-                  <th className="py-2.5 px-4 font-semibold">Feature / Aspect</th>
-                  <th className="py-2.5 px-4 font-semibold text-accent">{section.columns[0]}</th>
-                  <th className="py-2.5 px-4 font-semibold text-ink-1">{section.columns[1]}</th>
+                  <th className="py-2.5 px-4 font-semibold">{rowLabelHeader}</th>
+                  {valueHeaders.map((column, colIdx) => (
+                    <th
+                      key={colIdx}
+                      className={`py-2.5 px-4 font-semibold ${colIdx === 0 ? "text-accent" : "text-ink-1"}`}
+                    >
+                      {column}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody className="divide-y divide-hairline text-ink-2 font-sans">
@@ -477,18 +495,17 @@ function SectionBlock({
                     <td className="py-3 px-4 font-mono font-medium text-ink-1 text-xs">
                       {c.feature ?? c.criterion}
                     </td>
-                    <td
-                      className="py-3 px-4 leading-relaxed"
-                      dangerouslySetInnerHTML={{
-                        __html: formatMarkdownInline(c.first ?? c.values?.[0] ?? ""),
-                      }}
-                    />
-                    <td
-                      className="py-3 px-4 leading-relaxed"
-                      dangerouslySetInnerHTML={{
-                        __html: formatMarkdownInline(c.second ?? c.values?.[1] ?? ""),
-                      }}
-                    />
+                    {valueHeaders.map((_, colIdx) => (
+                      <td
+                        key={colIdx}
+                        className="py-3 px-4 leading-relaxed"
+                        dangerouslySetInnerHTML={{
+                          __html: formatMarkdownInline(
+                            (colIdx === 0 ? c.first : colIdx === 1 ? c.second : undefined) ?? c.values?.[colIdx] ?? ""
+                          ),
+                        }}
+                      />
+                    ))}
                   </tr>
                 ))}
               </tbody>
@@ -505,6 +522,7 @@ function SectionBlock({
           )}
         </section>
       );
+    }
 
     case "misconceptions":
       return (

@@ -1,4 +1,5 @@
 import { CourseMeta } from "./types";
+import { LA_BLOCK_AND_IDEMPOTENT_LESSON, LA_LU_DECOMPOSITION_LESSON } from "./la-matrices-data";
 
 export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
   id: "linear-algebra",
@@ -103,7 +104,6 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Subspace Verification & Basis Extraction",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Ensure you solve for the number of free variables; dim(W) = n - number of independent linear constraints.",
               solutionSteps: [
                 "Problem: Let W be the subset of R^4 defined by: W = { (x, y, z, w) in R^4 : x + 2y - z = 0  and  y - w = 0 }. Verify that W is a subspace of R^4, find its dimension, and construct a basis.",
@@ -184,7 +184,6 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Complete Decomposition of Four Subspaces",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Pivot column indices in RREF point back to original matrix columns for C(A).",
               solutionSteps: [
                 "Problem: For matrix A = [ [1, 2, 0, 1], [0, 1, 1, 0], [1, 3, 1, 1] ] (size 3 x 4), find the rank, nullity, and bases for all four fundamental subspaces.",
@@ -267,7 +266,6 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Change of Basis Transformation Matrix",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Remember P^{-1} A P ordering: columns of P are the new basis vectors expressed in standard coordinates.",
               solutionSteps: [
                 "Problem: Let T: R^2 -> R^2 be defined by T(x, y) = (2x + 3y, x - y). Find the standard matrix A = [T]_E, and compute the representation matrix B = [T]_B in the basis B = { b1 = (1, 1)^T, b2 = (1, -1)^T }.",
@@ -365,7 +363,6 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Parameterized System Consistency Analysis",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Distinguish when the augmented column introduces an extra pivot versus when it falls into existing pivot structure.",
               solutionSteps: [
                 "Problem: Consider the system of linear equations in variables x, y, z:",
@@ -454,7 +451,6 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Compound Determinant Identity",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Carefully factor the scalar 2 out of the 3x3 matrix: factor is 2^3 = 8.",
               solutionSteps: [
                 "Problem: Let A be an invertible 3 x 3 real matrix such that det(A) = 5. Find the value of: det( 2 * A^{-1} * A^T * adj(A) ).",
@@ -489,6 +485,7 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             },
           ],
         },
+        LA_LU_DECOMPOSITION_LESSON,
       ],
     },
 
@@ -549,7 +546,6 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Eigenvalues & Eigenspaces of 3x3 Matrix",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Notice the block-triangular structure to rapidly factor the characteristic polynomial.",
               solutionSteps: [
                 "Problem: Find all eigenvalues and basis vectors for the eigenspaces of matrix A = [ [2, 1, 1], [1, 2, 1], [0, 0, 1] ].",
@@ -637,7 +633,6 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Diagonalizability Test & Matrix Power",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Check GM = n - rank(A - lambda*I) to confirm sufficient independent eigenvectors.",
               solutionSteps: [
                 "Problem: Let A = [ [1, 2], [0, 3] ]. Verify if A is diagonalizable. Construct the modal matrix P and diagonal matrix D, and compute A^4.",
@@ -677,6 +672,7 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
         },
         {
           id: "cayley-hamilton-theorem-and-minimal-polynomial",
+            syllabusScope: "Optional enrichment; Cayley-Hamilton/minimal polynomial are not named in the GATE 2027 DA linear algebra list",
           title: "Cayley-Hamilton Theorem & Minimal Polynomials",
           slug: "cayley-hamilton-theorem-and-minimal-polynomial",
           order: 3,
@@ -717,7 +713,6 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Evaluating Matrix Polynomial via Cayley-Hamilton",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Use the characteristic polynomial identity A^2 = tr(A)*A - det(A)*I to reduce high powers iteratively.",
               solutionSteps: [
                 "Problem: Let A = [ [1, 2], [3, 4] ]. (a) Use the Cayley-Hamilton theorem to find A^{-1}. (b) Express A^4 as a linear combination of A and I.",
@@ -813,7 +808,6 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: 3D Gram-Schmidt Orthonormalization",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Ensure intermediate vectors u2 and u3 are strictly orthogonal to all previously constructed vectors before normalizing.",
               solutionSteps: [
                 "Problem: Orthonormalize the basis { v1 = [1, 1, 0]^T, v2 = [1, 0, 1]^T, v3 = [0, 1, 1]^T } in R^3.",
@@ -902,7 +896,6 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Sylvester's Criterion & Spectral Decomposition",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Confirm all leading principal minors are strictly positive for strict positive definiteness.",
               solutionSteps: [
                 "Problem: Let A = [ [2, -1, 0], [-1, 2, -1], [0, -1, 2] ]. (a) Test if A is Positive Definite using Sylvester's criterion. (b) Find its eigenvalues to confirm.",
@@ -944,6 +937,7 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             },
           ],
         },
+        LA_BLOCK_AND_IDEMPOTENT_LESSON,
       ],
     },
 
@@ -1005,7 +999,6 @@ export const LINEAR_ALGEBRA_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Complete SVD & Rank-1 Approximation",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Use u_i = (1 / sigma_i) * A * v_i to ensure the left singular vectors have consistent signs with V.",
               solutionSteps: [
                 "Problem: Find the singular values, SVD matrices, and the optimal rank-1 approximation A_1 for matrix A = [ [3, 2, 2], [2, 3, -2] ] (size 2 x 3). What fraction of the total variance is captured by A_1?",

@@ -151,7 +151,6 @@ export const ARTIFICIAL_INTELLIGENCE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "5. GATE Worked Numerical: Node Expansion Counts in IDS vs BFS",
-              weightage: "2 Marks",
               trap: "Remember that the bottom level nodes in IDS are generated exactly ONCE, whereas the root is generated d + 1 times!",
               solutionSteps: [
                 "Problem (Original Practice Problem · Modeled on GATE DA Pattern):",
@@ -278,7 +277,6 @@ export const ARTIFICIAL_INTELLIGENCE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "4. GATE DA Worked Example: A* Node Expansion Trace",
-              weightage: "2 Marks (High Frequency in GATE DA)",
               trap: "Nodes are selected for expansion strictly based on lowest f(n) = g(n) + h(n), not purely h(n) or g(n) alone!",
               solutionSteps: [
                 "Problem: Trace A* Graph Search from Start S to Goal G. Given transitions with step costs and heuristics h:",
@@ -351,6 +349,7 @@ export const ARTIFICIAL_INTELLIGENCE_COURSE: CourseMeta = {
       lessons: [
         {
           id: "local-search-and-optimization",
+            syllabusScope: "Optional enrichment beyond the named GATE 2027 DA AI syllabus topics",
           title: "Local Search Optimization: Hill Climbing & Simulated Annealing",
           slug: "local-search-and-optimization",
           order: 1,
@@ -405,7 +404,6 @@ export const ARTIFICIAL_INTELLIGENCE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. GATE Worked Numerical: Simulated Annealing Acceptance Probability",
-              weightage: "2 Marks",
               trap: "Ensure Delta E is computed as (New Value - Current Value). For a worsening move, Delta E must be negative!",
               solutionSteps: [
                 "Problem (Original Practice Problem · Modeled on GATE DA Pattern):",
@@ -442,6 +440,7 @@ export const ARTIFICIAL_INTELLIGENCE_COURSE: CourseMeta = {
         },
         {
           id: "constraint-satisfaction-problems-ac3",
+            syllabusScope: "Optional enrichment beyond the named GATE 2027 DA AI syllabus topics",
           title: "Constraint Satisfaction Problems & The AC-3 Arc Consistency Algorithm",
           slug: "constraint-satisfaction-problems-ac3",
           order: 2,
@@ -515,7 +514,6 @@ export const ARTIFICIAL_INTELLIGENCE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "4. GATE DA Worked Numerical: AC-3 Domain Pruning Trace",
-              weightage: "2 Marks",
               trap: "Notice that arc consistency is directional: testing Xi -> Xj removes values from Xi, NOT Xj!",
               solutionSteps: [
                 "Problem (Original Practice Problem · Modeled on GATE DA Pattern):",
@@ -625,7 +623,6 @@ export const ARTIFICIAL_INTELLIGENCE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. GATE DA Worked Example: Alpha-Beta Pruning Cutoff Count",
-              weightage: "2 Marks (Compulsory in GATE DA)",
               trap: "Ensure that alpha is updated ONLY at MAX nodes, and beta is updated ONLY at MIN nodes!",
               solutionSteps: [
                 "Problem (Original Practice Problem · Modeled on GATE DA Pattern):",
@@ -717,7 +714,6 @@ export const ARTIFICIAL_INTELLIGENCE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. GATE Worked Numerical: Expectiminimax Root Decision",
-              weightage: "2 Marks",
               trap: "Weight each child of a chance node by its explicit probability before computing the expected value!",
               solutionSteps: [
                 "Problem (Original Practice Problem · Modeled on GATE DA Pattern):",
@@ -823,7 +819,6 @@ export const ARTIFICIAL_INTELLIGENCE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. GATE Worked Numerical: CNF Conversion Pipeline",
-              weightage: "2 Marks",
               trap: "Distribute OR over AND carefully: (A and B) or C becomes (A or C) and (B or C)!",
               solutionSteps: [
                 "Problem (Original Practice Problem · Modeled on GATE DA Pattern):",
@@ -915,7 +910,6 @@ export const ARTIFICIAL_INTELLIGENCE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. GATE DA Worked Example: Most General Unifier (MGU)",
-              weightage: "2 Marks (Compulsory in GATE DA)",
               trap: "Apply substitutions from earlier arguments to subsequent arguments before matching them!",
               solutionSteps: [
                 "Problem (Original Practice Problem · Modeled on GATE DA Pattern):",
@@ -944,7 +938,6 @@ export const ARTIFICIAL_INTELLIGENCE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "4. GATE DA Worked Example: Resolution Refutation Theorem Proof",
-              weightage: "2 Marks",
               trap: "To prove theorem alpha, add NEGATION ~alpha to the Knowledge Base, NOT alpha itself!",
               solutionSteps: [
                 "Problem (Original Practice Problem · Modeled on GATE DA Pattern):",
@@ -1097,7 +1090,6 @@ export const ARTIFICIAL_INTELLIGENCE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "5. GATE DA Worked Numerical: D-Separation & Independence Testing",
-              weightage: "2 Marks (High Frequency in GATE DA)",
               trap: "Remember: conditioning on a collider OPENS the path, while conditioning on a non-collider BLOCKS the path!",
               solutionSteps: [
                 "Problem (Original Practice Problem · Modeled on GATE DA Pattern):",
@@ -1220,7 +1212,6 @@ export const ARTIFICIAL_INTELLIGENCE_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. GATE DA Worked Numerical: Exact Inference Calculation",
-              weightage: "2 Marks (High Frequency in GATE DA)",
               trap: "Be sure to normalize at the end so probabilities P(X=true|e) + P(X=false|e) = 1!",
               solutionSteps: [
                 "Problem (Original Practice Problem · Modeled on GATE DA Pattern):",

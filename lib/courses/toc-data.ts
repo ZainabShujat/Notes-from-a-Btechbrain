@@ -86,7 +86,6 @@ export const TOC_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: Minimal DFA State Counting",
-              weightage: "2 Marks (Compulsory Recurring Type in GATE CS)",
               trap: "Do not forget the Dead / Trap State! In DFAs, every state MUST have defined transitions for every symbol in Sigma. An invalid prefix that can never lead to an accepting string must transition to a dead trap state.",
               solutionSteps: [
                 "Problem: Find the minimum number of states in a DFA accepting all binary strings over {0, 1} that start with '01' and end with '10'.",
@@ -174,7 +173,6 @@ export const TOC_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: Converting DFA to RE via Arden's Theorem",
-              weightage: "2 Marks",
               trap: "Ensure that equation is in R = Q + RP form (with R on the right of P, not PR!). If R = Q + PR, the solution is P*Q.",
               solutionSteps: [
                 "Problem: Consider a DFA with states {q1, q2}, start state q1, accepting state q2. Transitions:",
@@ -350,7 +348,6 @@ export const TOC_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: Equivalence via Symmetric Difference",
-              weightage: "2 Marks",
               trap: "To test if two DFAs accept the same language, you do NOT have to test infinitely many strings. Minimize both DFAs and check graph isomorphism, or test emptiness of their symmetric difference!",
               solutionSteps: [
                 "Problem: Let M1 and M2 be two DFAs over {0, 1}. Describe the exact algorithmic procedure to decide whether L(M1) = L(M2).",
@@ -436,7 +433,6 @@ export const TOC_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. GATE Worked Numerical: Derivation Steps in CNF Grammar",
-              weightage: "2 Marks (High Frequency)",
               trap: "The formula 2n - 1 applies ONLY when the grammar is in Chomsky Normal Form (CNF)! For general grammars, derivation lengths can vary.",
               solutionSteps: [
                 "Problem: A context-free grammar G is in Chomsky Normal Form. A string w of length 15 is derived in G. How many derivation steps were executed?",

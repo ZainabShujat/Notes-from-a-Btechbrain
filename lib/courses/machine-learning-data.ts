@@ -1,4 +1,5 @@
 import { CourseMeta } from "./types";
+import { ML_CROSS_VALIDATION_LESSON } from "./ml-cv-data";
 
 export const MACHINE_LEARNING_COURSE: CourseMeta = {
   id: "machine-learning",
@@ -100,7 +101,6 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: 2D Feature Normal Equation Calculation",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Remember to prepend a column of 1s to account for the intercept term w0.",
               solutionSteps: [
                 "Problem: Fit a line y = w0 + w1 * x through data points (1, 2), (2, 5), (3, 7) using Ordinary Least Squares.",
@@ -188,7 +188,6 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Ridge Shrinkage Computation",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Ensure lambda is added along the diagonal of X^T X, not added to individual elements.",
               solutionSteps: [
                 "Problem: An orthonormal design matrix X satisfies X^T X = I. If the OLS estimate is w_{ols} = [4, -2]^T and Ridge regularization parameter is lambda = 1, find the Ridge weight vector w_{ridge}.",
@@ -270,7 +269,6 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Odds and Probability Calculation",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Do not confuse Odds = p / (1-p) with Probability p = Odds / (1 + Odds).",
               solutionSteps: [
                 "Problem: A logistic regression model outputs w^T x = 1.386 for an input instance. What are the predicted odds and probability p that the instance belongs to the positive class?",
@@ -334,7 +332,6 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Laplace Smoothing Calculation",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Do not forget to smooth both positive and negative conditional frequencies when estimating probabilities from sparse data.",
               solutionSteps: [
                 "Problem: In a binary text classification training set of 20 documents (12 Spam, 8 Ham), the word 'prize' appears in 6 Spam documents and 0 Ham documents. If the vocabulary size is |V| = 1000 words, compute the Laplace-smoothed probability P('prize' | Ham).",
@@ -417,7 +414,6 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: 2D Fisher's Linear Discriminant Derivation",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Do not invert individual class matrices S_1 and S_2. You must sum them first to form S_W = S_1 + S_2 before inverting.",
               solutionSteps: [
                 "Problem: A 2D binary classification problem has two classes C1 and C2 with sample means: mu_1 = [1, 2]^T and mu_2 = [3, 4]^T. The class scatter matrices are: S_1 = [ 2  1 ] / [ 1  2 ] and S_2 = [ 1  0 ] / [ 0  1 ]. Compute the optimal Fisher linear projection vector w*.",
@@ -511,7 +507,6 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Information Gain on Discrete Features",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Remember to weight each child entropy by its proportion |S_v| / |S|.",
               solutionSteps: [
                 "Problem: A dataset of 10 samples has 6 Positive (+) and 4 Negative (-) instances. A feature splits it into Left (4+, 1-) and Right (2+, 3-). Compute the Information Gain.",
@@ -547,6 +542,7 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
         },
         {
           id: "ensemble-methods-bagging-and-boosting",
+            syllabusScope: "Optional enrichment; ensemble methods are not named in the GATE 2027 DA ML list",
           title: "Ensemble Learning: Random Forests, Bagging & AdaBoost",
           slug: "ensemble-methods-bagging-and-boosting",
           order: 2,
@@ -581,7 +577,6 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: AdaBoost Classifier Weighting",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "If an error rate eps_m >= 0.5, the weak learner performs no better than random guessing.",
               solutionSteps: [
                 "Problem: An AdaBoost weak learner produces a training error rate eps = 0.20 on weighted training data. Compute the stage weight alpha assigned to this learner.",
@@ -663,7 +658,6 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Support Vector Hyperplane Calculation",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Use the KKT condition alpha_1 y_1 + alpha_2 y_2 + alpha_3 y_3 = 0 to solve dual multipliers.",
               solutionSteps: [
                 "Problem: Find the maximum margin hyperplane for 3 support vectors: Positive (+1) at (2, 0) and (0, 2); Negative (-1) at (0, 0).",
@@ -734,7 +728,6 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Polynomial Kernel Explicit Mapping Verification",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Remember the sqrt(2) scaling factor on cross-terms when deriving the explicit feature vector phi(x).",
               solutionSteps: [
                 "Problem: For 2D vectors x = [x1, x2]^T and z = [z1, z2]^T, show that the kernel K(x, z) = (x^T z)^2 corresponds to an explicit 3D feature mapping phi(x).",
@@ -815,7 +808,6 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: XOR Architecture Minimum Parameters",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Remember to count both weights and bias parameters in each layer.",
               solutionSteps: [
                 "Problem: What is the minimum number of hidden neurons in a 1-hidden layer MLP (with step or ReLU activation) required to solve the 2-input XOR problem?",
@@ -884,7 +876,6 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: 1-Step Backpropagation Weight Update",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Evaluate the activation derivative g'(z) at the pre-activation value z.",
               solutionSteps: [
                 "Problem: A neuron has single input x = 2.0, weight w = 1.5, bias b = 0. Target output y = 1.0. Activation is linear g(z) = z, loss is squared error L = (1/2)(y_hat - y)^2. Learning rate eta = 0.1. Compute updated weight w_new.",
@@ -968,7 +959,6 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: 1D K-Means Centroid Iteration",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Recompute cluster membership immediately based on nearest centroid before taking the new mean.",
               solutionSteps: [
                 "Problem: Given 1D points [2, 4, 10, 12, 20] and initial centroids mu1 = 3 and mu2 = 15. Perform one iteration of K-Means and find the updated centroids.",
@@ -1001,6 +991,7 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
         },
         {
           id: "dimensionality-reduction-pca-and-tsne",
+            syllabusScope: "PCA is GATE 2027 DA core; t-SNE is optional enrichment",
           title: "Dimensionality Reduction: Principal Component Analysis (PCA) & t-SNE",
           slug: "dimensionality-reduction-pca-and-tsne",
           order: 2,
@@ -1035,7 +1026,6 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: PCA Explained Variance Proportion",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Explained variance proportion is the ratio of selected eigenvalues to the trace of the covariance matrix.",
               solutionSteps: [
                 "Problem: A 3D dataset has sample covariance matrix with eigenvalues lambda1 = 8.0, lambda2 = 3.0, lambda3 = 1.0. What percentage of total variance is retained by projecting onto the top-2 principal components?",
@@ -1105,7 +1095,6 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Complete Evaluation Metric Derivation",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Recall has False Negatives (FN) in the denominator; Precision has False Positives (FP) in the denominator.",
               solutionSteps: [
                 "Problem: A diagnostic test evaluates 200 patients. Confusion matrix: TP = 70, FP = 10, FN = 30, TN = 90. Compute Precision, Recall, Specificity, and F1-Score.",
@@ -1135,6 +1124,7 @@ export const MACHINE_LEARNING_COURSE: CourseMeta = {
             },
           ],
         },
+        ML_CROSS_VALIDATION_LESSON,
       ],
     },
   ],

@@ -106,7 +106,6 @@ export const ENGINEERING_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Parametric Consistency of Linear Systems",
-              weightage: "2 Marks (Compulsory GATE Pattern)",
               trap: "Students frequently confuse the condition for no solution with infinite solutions. For infinite solutions, the entire row in the augmented matrix including RHS must reduce to 0 = 0.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -218,7 +217,6 @@ export const ENGINEERING_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Matrix Inverse and Powers via Cayley-Hamilton",
-              weightage: "2 Marks (GATE CS)",
               trap: "When applying Cayley-Hamilton to find A^{-1}, remember that the constant term c_0 becomes c_0 * A^{-1}, not c_0 * I.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -333,7 +331,6 @@ export const ENGINEERING_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: 1^infinity Indeterminate Form & Continuity Junction",
-              weightage: "2 Marks (GATE CS)",
               trap: "Students often forget to take exp() of the final inner limit when resolving 1^infinity forms.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -412,7 +409,6 @@ export const ENGINEERING_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Finding the Point 'c' in LMVT",
-              weightage: "1 to 2 Marks (GATE Pattern)",
               trap: "If multiple roots for c arise, discard any values outside the open interval (a, b).",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -515,7 +511,6 @@ export const ENGINEERING_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Multivariable Critical Point Classification",
-              weightage: "2 Marks (GATE CS Pattern)",
               trap: "Ensure you find all pairs of (x, y) that simultaneously satisfy both partial equations f_x = 0 and f_y = 0.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -610,7 +605,6 @@ export const ENGINEERING_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Leibniz Differentiation Under Integral Sign",
-              weightage: "2 Marks (GATE CS)",
               trap: "Remember to evaluate the integrand at the upper limit and multiply by the derivative of that upper limit.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -708,7 +702,6 @@ export const ENGINEERING_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Three-Machine Defect Rate Bayes Analysis",
-              weightage: "2 Marks (Compulsory GATE Pattern)",
               trap: "Carefully map which machine produced the defective item vs which machine is being queried in the numerator.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -799,7 +792,6 @@ export const ENGINEERING_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Finding PDF Normalization Constant and Variance",
-              weightage: "2 Marks (GATE CS)",
               trap: "Remember to integrate over the valid support interval only, and do not forget to square E[X] when subtracting from E[X^2].",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -904,7 +896,6 @@ export const ENGINEERING_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Exponential Memoryless Property in Server Queueing",
-              weightage: "2 Marks (GATE CS)",
               trap: "Using full conditional probability integrals when the memoryless property gives the answer directly.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",
@@ -1000,7 +991,6 @@ export const ENGINEERING_MATHEMATICS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Problem: Central Limit Theorem on Packet Transmission",
-              weightage: "2 Marks (GATE CS)",
               trap: "Standard error is sigma / sqrt(n), do not divide by n.",
               solutionSteps: [
                 "Problem [Original Practice Problem · Modeled on GATE Pattern]:",

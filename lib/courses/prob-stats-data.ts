@@ -1,4 +1,5 @@
 import { CourseMeta } from "./types";
+import { PS_T_AND_CHISQUARE_TESTS_LESSON } from "./ps-tests-data";
 
 export const PROB_STATS_COURSE: CourseMeta = {
   id: "probability-and-statistics",
@@ -100,7 +101,6 @@ export const PROB_STATS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Combinatorial Feature Selection Probability",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Use the complement rule: P(At least one collinear) = 1 - P(Zero collinear selected).",
               solutionSteps: [
                 "Problem: An automated machine learning feature selector randomly picks a subset of 3 features from an available set of 8 candidate features. Unknown to the system, exactly 2 of the 8 features are highly collinear. Find the probability that the selected subset contains at least one of the collinear features.",
@@ -178,7 +178,6 @@ export const PROB_STATS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Rare Disease Diagnostic & Base Rate Fallacy",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Do not confuse P(Positive | Disease) = 0.98 with the desired posterior P(Disease | Positive).",
               solutionSteps: [
                 "Problem: A rare medical disease D affects 0.5% of a population (prior P(D) = 0.005). A diagnostic test has 98% sensitivity (P(+ | D) = 0.98) and 95% specificity (P(- | D^c) = 0.95). If a randomly chosen patient tests positive, what is the posterior probability that they actually have the disease?",
@@ -269,7 +268,6 @@ export const PROB_STATS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Poisson Queueing Arrivals",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Remember that P(X >= 2) = 1 - P(X = 0) - P(X = 1).",
               solutionSteps: [
                 "Problem: Network requests arrive at an API server following a Poisson process with an average rate of lambda = 3 requests per minute. Find the exact probability that at least 2 requests arrive in a given 1-minute interval.",
@@ -349,7 +347,6 @@ export const PROB_STATS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Memoryless Exponential Survival",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Do not compute complex conditional integration; apply the memoryless property directly.",
               solutionSteps: [
                 "Problem: The lifetime of a server GPU (in thousands of hours) follows an Exponential distribution with rate parameter lambda = 0.5. Given that a GPU has already operated without failure for 2,000 hours (X > 2), compute the probability that it will survive for at least 5,000 hours in total (X > 5).",
@@ -426,7 +423,6 @@ export const PROB_STATS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Standard Normal Interval Probability",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Use the symmetry identity Phi(-z) = 1 - Phi(z) to evaluate negative Z-scores.",
               solutionSteps: [
                 "Problem: Model accuracy scores across 1000 cross-validation splits follow a normal distribution with mean mu = 75% and standard deviation sigma = 8%. Given Phi(1.0) = 0.8413 and Phi(2.0) = 0.9772, find the proportion of models scoring between 67% and 91%.",
@@ -518,7 +514,6 @@ export const PROB_STATS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Coupled Triangle Domain Joint PDF",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "When finding f_X(x), integrate y from x to 1; do NOT integrate from 0 to 1.",
               solutionSteps: [
                 "Problem: Let (X, Y) have joint PDF f(x, y) = c * x for 0 <= x <= y <= 1, and 0 elsewhere. Find the normalization constant c and the marginal expectation E[Y].",
@@ -601,7 +596,6 @@ export const PROB_STATS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Variance of Linear Combination",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Notice the negative coefficient on Y: (-3)^2 = +9, and the cross-term has 2 * (2) * (-3) * Cov(X, Y).",
               solutionSteps: [
                 "Problem: Random variables X and Y have Var(X) = 16, Var(Y) = 25, and Pearson correlation coefficient rho = 0.6. Find the variance of the linear combination W = 2X - 3Y + 7.",
@@ -637,6 +631,7 @@ export const PROB_STATS_COURSE: CourseMeta = {
         },
         {
           id: "chebyshev-inequality-lln-and-central-limit-theorem",
+            syllabusScope: "Optional enrichment beyond the named GATE 2027 DA probability/statistics list",
           title: "Chebyshev's Inequality, Law of Large Numbers & Central Limit Theorem",
           slug: "chebyshev-inequality-lln-and-central-limit-theorem",
           order: 3,
@@ -678,7 +673,6 @@ export const PROB_STATS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Chebyshev Conservative Bound",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Identify the number of standard deviations k: deviation 15 divided by sigma = 5 gives k = 3.",
               solutionSteps: [
                 "Problem: A random variable X has mean mu = 50 and variance Var(X) = 25. Its probability distribution is completely unknown. Using Chebyshev's inequality, determine the guaranteed minimum probability that X falls strictly between 35 and 65.",
@@ -726,6 +720,7 @@ export const PROB_STATS_COURSE: CourseMeta = {
       lessons: [
         {
           id: "sampling-distributions-chisquare-t-and-f",
+            syllabusScope: "t and chi-square tests are GATE 2027 DA core; F distribution is enrichment",
           title: "Sampling Distributions: Chi-Square, Student's t & F-Distributions",
           slug: "sampling-distributions-chisquare-t-and-f",
           order: 1,
@@ -767,7 +762,6 @@ export const PROB_STATS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Identifying Sampling Distribution Constructs",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Ensure the denominator chi-square variable is divided by its own degrees of freedom before taking the square root.",
               solutionSteps: [
                 "Problem: Let Z1, Z2, Z3, Z4, Z5 be independent standard normal random variables ~ N(0, 1). Identify the exact distribution (including parameter values) of: W = Z1 / sqrt[ (Z2^2 + Z3^2 + Z4^2 + Z5^2) / 4 ].",
@@ -801,6 +795,7 @@ export const PROB_STATS_COURSE: CourseMeta = {
         },
         {
           id: "point-estimation-mle-and-method-of-moments",
+            syllabusScope: "MLE and method of moments are optional enrichment beyond the named GATE 2027 DA list",
           title: "Point Estimation: Maximum Likelihood Estimation (MLE)",
           slug: "point-estimation-mle-and-method-of-moments",
           order: 2,
@@ -841,7 +836,6 @@ export const PROB_STATS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: Gaussian MLE Derivation",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Notice that the MLE estimator for variance sigma^2 divides by n, not n-1.",
               solutionSteps: [
                 "Problem: For an i.i.d. sample x1, x2, ..., xn drawn from N(mu, sigma^2), derive the Maximum Likelihood Estimator for the mean parameter mu.",
@@ -934,7 +928,6 @@ export const PROB_STATS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "2. Worked Practice Problem: One-Sample z-Test & Confidence Interval",
-              weightage: "2 Marks (Original Practice Problem · Modeled on GATE DA Pattern)",
               trap: "Two-tailed tests place alpha/2 probability mass in EACH tail (e.g. 0.025 in each tail for alpha = 0.05).",
               solutionSteps: [
                 "Problem: A benchmark latency test on n = 36 query evaluations yields a sample mean latency of X_bar = 42.0 ms. The population standard deviation is known to be sigma = 6.0 ms. Construct a 95% confidence interval for the true mean latency mu, and test H0: mu = 40.0 ms vs H1: mu != 40.0 ms at alpha = 0.05.",
@@ -978,6 +971,7 @@ export const PROB_STATS_COURSE: CourseMeta = {
             },
           ],
         },
+        PS_T_AND_CHISQUARE_TESTS_LESSON,
       ],
     },
   ],

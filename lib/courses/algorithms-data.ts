@@ -116,7 +116,6 @@ export const ALGORITHMS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Asymptotic Ranking of Non-Trivial Functions",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "When comparing exponential forms, take the base-2 logarithm of each function to compare exponents, but remember that f(n) < g(n) does not always mean log f(n) < log g(n) with the same asymptotic separation unless differences are polynomial.",
               solutionSteps: [
                 "Problem: Arrange the following four functions in strictly increasing order of asymptotic growth rate:",
@@ -215,7 +214,6 @@ export const ALGORITHMS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Multi-Factor Extended Recurrence",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Do not confuse Case 1 with Case 2 when logarithmic terms multiply n^{log_b a}. Even if k > 0, if the base power is n^{log_b a}, it belongs strictly to Case 2.",
               solutionSteps: [
                 "Problem: Find the asymptotically tight bound for T(n) = 4 * T(n/2) + n^2 * (log_2 n)^2, with T(1) = Theta(1).",
@@ -315,7 +313,6 @@ export const ALGORITHMS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Partition Comparisons & Worst-Case Depth",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Remember that in Hoare's partition, the pivot is not necessarily placed at its final sorted position after one partition call; it merely separates the array into <= pivot and >= pivot segments.",
               solutionSteps: [
                 "Problem: An array A contains n distinct elements. QuickSort is executed using the deterministic median-of-medians algorithm to select the pivot at each step. Find the recurrence for the number of comparisons C(n) and prove that C(n) = O(n log n) or O(n).",
@@ -414,7 +411,6 @@ export const ALGORITHMS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Maximum Swaps in Build-Heap",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Heapify operates top-down from index floor(n/2) down to 1. Count height from leaves (leaves are height 0).",
               solutionSteps: [
                 "Problem: For an array of size n = 15 arranged in strictly ascending order, calculate the maximum number of element swaps performed by Build-Max-Heap.",
@@ -518,7 +514,6 @@ export const ALGORITHMS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Huffman Tree Construction & Compression Ratio",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Remember that the two lowest frequencies MUST be merged first. When merging two subtrees, their combined weight must be re-inserted into the candidate set.",
               solutionSteps: [
                 "Problem: A file contains 5 characters with frequencies: A (0.40), B (0.25), C (0.15), D (0.10), E (0.10). Construct the optimal Huffman code and find the expected code length.",
@@ -614,7 +609,6 @@ export const ALGORITHMS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Minimum Weight Spanning Tree Edge Inclusion",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Always verify whether the cut property isolates a subset. If multiple edges share the minimum weight across a cut, any of them may appear in some MST, but not necessarily all.",
               solutionSteps: [
                 "Problem: Graph G has 5 vertices {A, B, C, D, E} and edges with weights: (A, B)=1, (B, C)=2, (C, D)=3, (D, E)=4, (E, A)=5, (A, C)=2, (B, D)=3, (C, E)=4. Find the total weight of the MST and check whether it is unique.",
@@ -707,7 +701,6 @@ export const ALGORITHMS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: LCS Matrix Table & String Reconstruction",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "When backtracking in the LCS table, if c[i-1][j] == c[i][j-1], both directions lead to valid optimal LCS strings of equal length.",
               solutionSteps: [
                 "Problem: Given strings X = 'BDCABA' (length 6) and Y = 'ABCBDAB' (length 7), compute the length of their Longest Common Subsequence and reconstruct one LCS string.",
@@ -806,7 +799,6 @@ export const ALGORITHMS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: 4-Matrix Optimal Parenthesization Table",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Ensure dimensions array p corresponds to matrix A_i having size p_{i-1} x p_i.",
               solutionSteps: [
                 "Problem: Find minimum scalar multiplications to multiply 4 matrices with dimensions: A1 (10x20), A2 (20x30), A3 (30x40), A4 (40x30). Dimension vector p = [10, 20, 30, 40, 30].",
@@ -924,7 +916,6 @@ export const ALGORITHMS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: DFS Edge Classification & Timestamp Tracing",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Alphabetical neighbor tie-breaking affects discovery times, but the topological property and existence of back edges remains invariant.",
               solutionSteps: [
                 "Problem: A directed graph G has vertices {1, 2, 3, 4} and edges (1, 2), (1, 3), (2, 4), (3, 2), (4, 3). Run DFS starting at vertex 1 (exploring lower numerical vertex first). Classify all edges and determine whether G contains a cycle.",
@@ -1025,7 +1016,6 @@ export const ALGORITHMS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Floyd-Warshall Matrix Update Iteration",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "At step k, the k-th row and k-th column of the distance matrix never change because d[k, k] = 0.",
               solutionSteps: [
                 "Problem: A 3-vertex directed graph has adjacency weight matrix D^{(0)}:",
@@ -1086,6 +1076,7 @@ export const ALGORITHMS_COURSE: CourseMeta = {
       lessons: [
         {
           id: "computational-complexity-and-np-completeness",
+            syllabusScope: "Optional enrichment beyond the named GATE 2027 CS/IT algorithms topics",
           title: "Complexity Classes P, NP, NP-Complete & Reductions",
           slug: "computational-complexity-and-np-completeness",
           order: 1,
@@ -1154,7 +1145,6 @@ export const ALGORITHMS_COURSE: CourseMeta = {
             {
               type: "gate-analysis",
               heading: "3. Worked Problem: Directionality & Consequences of Reductions",
-              weightage: "Original Practice Problem · Modeled on GATE Pattern (2 Marks)",
               trap: "Carefully read whether problem A reduces to problem B (A <=_p B) or vice versa. If an NP-complete problem reduces to X, X is at least as hard as NP.",
               solutionSteps: [
                 "Problem: Let P1 and P2 be two decision problems. Suppose P1 is known to be NP-Complete. Consider the following statements:",
