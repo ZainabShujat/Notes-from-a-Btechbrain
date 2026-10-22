@@ -225,3 +225,5 @@ body:has(.mzr-stage) .updates-widget { display: none; }
 /* The book is designed at one size and scaled to fit, so it looks the same everywhere. */
 .mzr-frame { position: relative; margin: 0 auto; }
 .mzr-frame > .mzr-stage { position: absolute; top: 0; left: 0; transform-origin: top left; }
+/* Native option lists ignore the page theme and default to white, so set their colours. */
+.mzr-jump option { background: var(--theme-raised); color: var(--theme-ink-1); }
