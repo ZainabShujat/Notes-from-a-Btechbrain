@@ -116,7 +116,16 @@ a.hm-tile:hover .hm-tile-title { color: var(--theme-highlight); }
 .hm-t-notes { grid-column: span 7; grid-row: span 2; }
 .hm-t-lab { grid-column: span 5; grid-row: span 2; }
 .hm-t-sheet, .hm-t-wonder, .hm-t-map { grid-column: span 4; }
-.hm-t-vibe, .hm-t-ed { grid-column: span 6; }
+.hm-t-vibe, .hm-t-ed, .hm-t-reels { grid-column: span 4; }
+.hm-reel-stack { display: flex; height: 132px; padding-left: 6px; }
+.hm-reel-stack img {
+  height: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 10px; margin-left: -14px;
+  border: 2px solid var(--theme-raised); box-shadow: 0 12px 24px -12px rgba(0, 0, 0, .8);
+  transition: transform .25s ease-out;
+}
+.hm-reel-stack img:nth-child(odd) { transform: rotate(-4deg); }
+.hm-reel-stack img:nth-child(even) { transform: rotate(3deg) translateY(6px); }
+a.hm-tile:hover .hm-reel-stack img { transform: none; }
 .hm-kicker { font-size: 11px; letter-spacing: .16em; color: var(--theme-ink-3); }
 .hm-tile-title { margin: 0; font-weight: 900; letter-spacing: -0.025em; line-height: 1.1; font-size: 24px; color: var(--theme-ink-1); transition: color .2s; }
 .hm-cta { margin-top: auto; font-weight: 700; font-size: 15px; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; color: var(--theme-accent-soft); }
@@ -146,14 +155,15 @@ a.hm-tile:hover .hm-tile-title { color: var(--theme-highlight); }
 .hm-bento > .hm-armed.hm-in:nth-child(5) { transition-delay: .24s; }
 .hm-bento > .hm-armed.hm-in:nth-child(6) { transition-delay: .3s; }
 .hm-bento > .hm-armed.hm-in:nth-child(7) { transition-delay: .36s; }
+.hm-bento > .hm-armed.hm-in:nth-child(8) { transition-delay: .42s; }
 
 /* ---------- responsive ---------- */
 @container hm (max-width: 1240px) { .hm-scrap { display: none; } }
 @container hm (max-width: 980px) {
-  .hm-t-notes, .hm-t-lab, .hm-t-sheet, .hm-t-wonder, .hm-t-map, .hm-t-vibe, .hm-t-ed { grid-column: span 6; grid-row: auto; }
+  .hm-t-notes, .hm-t-lab, .hm-t-sheet, .hm-t-wonder, .hm-t-map, .hm-t-vibe, .hm-t-ed, .hm-t-reels { grid-column: span 6; grid-row: auto; }
 }
 @container hm (max-width: 720px) {
-  .hm-t-notes, .hm-t-lab, .hm-t-sheet, .hm-t-wonder, .hm-t-map, .hm-t-vibe, .hm-t-ed { grid-column: span 12; }
+  .hm-t-notes, .hm-t-lab, .hm-t-sheet, .hm-t-wonder, .hm-t-map, .hm-t-vibe, .hm-t-ed, .hm-t-reels { grid-column: span 12; }
   .hm-row .hm-meta { display: none; }
   .hm-spark { display: none; }
 }

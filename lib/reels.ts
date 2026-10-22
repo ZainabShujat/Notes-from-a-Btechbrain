@@ -6,8 +6,8 @@
  * they just watched. Content mirrors the reel's save-worthy carousel.
  */
 
-/** Set this to the profile URL to show "Follow" buttons across /reels. */
-export const INSTAGRAM_URL: string | null = null;
+/** Profile URL for the "Follow" buttons across /reels and the homepage. */
+export const INSTAGRAM_URL: string | null = "https://www.instagram.com/notes.fromabtechbrain/";
 
 export type ReelPillar = "decoded" | "wonder";
 
