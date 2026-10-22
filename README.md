@@ -27,7 +27,8 @@ The platform is structured into core Worlds:
 ## 💡 What This Project Does
 
 A fully-functional Next.js platform that:
-- Serves as a **digital archive** of 50+ published articles
+- Serves as a **digital archive** of 99 editions, bound into 12 magazines you can read cover to cover with real page turns
+- Gives every Instagram reel a **companion page** with the full explanation and sources
 - Houses **The Notebooks**: Curriculum-mapped CS study manuscripts with skeuomorphic engineering notebook design
 - Includes **Interactive CS Simulators**: Full CPU schedulers (FCFS, SJF, SRTF, Priority, Round Robin) and Banker's Algorithm deadlock avoidance
 - Features **Dedicated Topic Cheat Sheets** & **"Don't Feel Dumb" Glossary** with clipped-corner octagon geometry
@@ -55,6 +56,9 @@ A fully-functional Next.js platform that:
 
 ## 🚀 Current Status (October 2026)
 
+* ✅ **Magazine shelf**: every series is a magazine with a collage cover, read as a page-turning book at one fixed design scaled to any screen
+* ✅ **Reels**: `/reels` landing page for the Instagram bio link, with a companion page per reel
+* ✅ **When Sci-Fi Meets Science**: 14-part film series published
 * ✅ **v1.2.0 Live**: Released The Notebooks library with physical skeuomorphic covers and reading desks
 * ✅ **Interactive CS Labs**: Multi-algorithm CPU scheduling Gantt simulator and Banker's algorithm safe-state matrix
 * ✅ **Dedicated Topic Cheat Sheets & Glossary**: Subtopic quick revision modals and "Don't Feel Dumb" popups with chamfered clipped octagon geometry
@@ -71,7 +75,7 @@ A fully-functional Next.js platform that:
 
 ## 📊 Content Statistics
 
-- **Total Articles & Notes:** 50+ published articles + complete subject notebooks
+- **Total Articles & Notes:** 99 editions across 12 magazines + complete subject notebooks
 - **Active Worlds:** 6 
 - **Latest Milestone:** v1.2.0 Released (October 2026)  
 - **Content Types:** Personal essays, tech explainers, daily micro-observations, interactive maps, academic CS notebooks
@@ -92,6 +96,12 @@ A fully-functional Next.js platform that:
 - **Clipped Corner Octagon Popups:**
   - Unique chamfered octagon shapes on glossary definitions, topic cheat sheets, and release updates.
 
+- **Magazine Shelf & Reader:**
+  - `/editions` shows each category as a magazine with a collage cover built from its banners. `/editions/[magazine]` paginates every edition into fixed 560×760 pages offscreen, then turns them with a 3D page flip: spreads on wide screens, single pages on phones, scaled without reflowing.
+
+- **Reels Companion Pages:**
+  - `/reels` and `/reels/[slug]` give each Instagram reel its full story, key stat and sources, driven by `lib/reels.ts`.
+
 - **Brain Map Visualization:**
   - A content-backed force graph indexes editions, Wonder notes, notebooks, lessons, embedded interactive lesson sections and the shared labs catalog, categories, an in-progress book, and published browser games. Explicit course structure, category metadata, and authored links produce the verified relationships; tags are searchable metadata only. The map includes type/category filters, search, details with original links, reduced-motion support, and a keyboard-accessible resource index.
 
@@ -111,14 +121,12 @@ A fully-functional Next.js platform that:
   - Each post displays real-time view and like counts via a Supabase backend.
 
 - **Category-Based Navigation:**  
-  Clean dynamic routes (`/post/[slug]`, `/category/[category]`, `/wonder/[id]`, `/notes/[subject]/[lessonSlug]`).
+  Clean dynamic routes (`/post/[slug]`, `/editions/[magazine]`, `/reels/[slug]`, `/category/[category]`, `/wonder/[id]`, `/notes/[subject]/[lessonSlug]`).
 
 ---
 
 ## 🔮 Future Enhancements
 
-- **Subscriptions Backend:**  
-  Rebuilding the newsletter subscriber infrastructure using Supabase and Resend.
 - **Reading Time Estimates:**  
   Automatic calculation of article reading time.  
 - **Unified content feeds:**
@@ -154,7 +162,7 @@ This project is where both sides of my brain finally meet."*
 | **Phase 11** | Site Architecture simplification (5 Worlds) | ✅ Completed |
 | **Phase 12** | Wonder Timeline, OG Images, Games Hub | ✅ Completed |
 | **Phase 13** | Subject Notebooks, Interactive CS Labs & v1.2.0 Release | ✅ Completed |
-| **Phase 14** | Newsletter subscriptions rebuilt | 🔜 Next Up |
+| **Phase 14** | Magazine shelf, page-turning reader, reels pages & sci-fi series | ✅ Completed |
 
 ---
 
