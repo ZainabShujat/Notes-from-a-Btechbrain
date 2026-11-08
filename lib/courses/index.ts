@@ -17,6 +17,8 @@ import { LINEAR_ALGEBRA_COURSE } from "./linear-algebra-data";
 import { CALCULUS_OPTIMIZATION_COURSE } from "./calculus-opt-data";
 import { MACHINE_LEARNING_COURSE } from "./machine-learning-data";
 import { ARTIFICIAL_INTELLIGENCE_COURSE } from "./artificial-intelligence-data";
+import { LESSON_EXTRAS } from "./practice";
+import { withExtras } from "./practice/helpers";
 
 /**
  * Course Registry.
@@ -51,12 +53,16 @@ function normalizeCourse(course: CourseMeta): CourseMeta {
     ...course,
     modules: course.modules.map((module) => ({
       ...module,
-      lessons: module.lessons.map((lesson) => ({
-        ...lesson,
-        hasInteractive: lesson.sections.some((section) => section.type === "interactive"),
-        hasGATE: lesson.sections.some((section) => section.type === "gate-lens"),
-        hasPractice: lesson.sections.some((section) => section.type === "practice"),
-      })),
+      lessons: module.lessons.map((lesson) => {
+        const sections = withExtras(lesson.sections, LESSON_EXTRAS[lesson.id]);
+        return {
+          ...lesson,
+          sections,
+          hasInteractive: sections.some((section) => section.type === "interactive"),
+          hasGATE: sections.some((section) => section.type === "gate-lens"),
+          hasPractice: sections.some((section) => section.type === "practice"),
+        };
+      }),
     })),
   };
 }
