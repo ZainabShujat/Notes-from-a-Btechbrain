@@ -2,7 +2,8 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import PageHeader from "../components/ui/PageHeader";
 import { pageMetadata } from "../../lib/seo";
-import { INSTAGRAM_URL, PILLARS, REELS } from "../../lib/reels";
+import { ALL_REELS, INSTAGRAM_URL, SERIES } from "../../lib/reels";
+import ReelCover from "./ReelCover";
 
 export const metadata = pageMetadata({
   title: "Reels",
@@ -18,10 +19,14 @@ const ELSEWHERE = [
 ];
 
 export default function ReelsPage() {
-  const reels = [...REELS].sort((a, b) => +new Date(b.date) - +new Date(a.date));
+  // Series in their set order; within a series, the order they were made in.
+  const series = SERIES.map((s) => ({
+    ...s,
+    reels: ALL_REELS.filter((r) => (r.series ?? "decoded") === s.key),
+  })).filter((s) => s.reels.length > 0);
 
   return (
-    <main className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 py-16 md:py-24">
+    <main className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 pt-8 pb-16 md:pt-10 md:pb-24">
       <PageHeader
         eyebrow="🎬 Came from a reel?"
         title="The story behind every reel"
@@ -40,38 +45,43 @@ export default function ReelsPage() {
         }
       />
 
-      <ul className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 list-none p-0 m-0">
-        {reels.map((reel) => (
-          <li key={reel.slug}>
-            <Link
-              href={`/reels/${reel.slug}`}
-              style={{ "--ac": reel.accent } as CSSProperties}
-              className="group block overflow-hidden rounded-xl border border-hairline bg-surface-1 transition-all duration-300 hover:-translate-y-0.5 hover:border-hairline-strong hover:shadow-lift"
-            >
-              <div className="relative aspect-[9/16] overflow-hidden bg-black">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={reel.cover}
-                  alt=""
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-                <span className="absolute left-2 top-2 rounded-full bg-black/70 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--ac)]">
-                  {PILLARS[reel.pillar].label}
-                </span>
-              </div>
-              <div className="border-t-4 border-[var(--ac)] p-3 sm:p-4">
-                <h2 className="m-0 text-sm sm:text-base font-bold leading-snug text-ink-1">
-                  {reel.title}
-                </h2>
-                <p className="mt-1 mb-0 text-xs sm:text-sm text-ink-3">
-                  Read the full story →
-                </p>
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <p className="mt-0 mb-10 text-sm font-semibold uppercase tracking-wider text-ink-3">
+        {ALL_REELS.length} reels · {series.length} series
+      </p>
+
+      {series.map(({ key, label, blurb, reels }) => (
+        <section key={key} className="mb-14" aria-labelledby={`series-${key}`}>
+          <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <h2 id={`series-${key}`} className="m-0 text-2xl md:text-3xl font-bold text-ink-1">
+              {label}
+            </h2>
+            <p className="m-0 text-sm text-ink-3">
+              {reels.length} reel{reels.length === 1 ? "" : "s"} · {blurb}
+            </p>
+          </div>
+          <ul className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4 list-none p-0 m-0">
+            {reels.map((reel) => (
+              <li key={reel.slug}>
+                <Link
+                  href={`/reels/${reel.slug}`}
+                  style={{ "--ac": reel.accent } as CSSProperties}
+                  className="group block overflow-hidden rounded-xl border border-hairline bg-surface-1 transition-all duration-300 hover:-translate-y-0.5 hover:border-hairline-strong hover:shadow-lift"
+                >
+                  <div className="relative overflow-hidden bg-black">
+                    <ReelCover reel={reel} className="transition-transform duration-500 group-hover:scale-[1.03]" />
+                  </div>
+                  <div className="border-t-4 border-[var(--ac)] p-3 sm:p-4">
+                    <h3 className="m-0 text-sm sm:text-base font-bold leading-snug text-ink-1">{reel.title}</h3>
+                    <p className="mt-1 mb-0 text-xs sm:text-sm text-ink-3">
+                      {reel.facts ? "Facts and sources →" : "Read the full story →"}
+                    </p>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
 
       <section className="mt-20">
         <h2 className="text-2xl md:text-3xl font-bold text-ink-1 mb-2">

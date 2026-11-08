@@ -3,7 +3,7 @@ import { getCombinedPosts } from "../lib/posts";
 import { OBSERVATIONS } from "./wonder/data";
 import { SUBJECT_NOTEBOOKS } from "../lib/notebooks/data";
 import { COURSE_LABS } from "../lib/labs";
-import { INSTAGRAM_URL, REELS } from "../lib/reels";
+import { ALL_REELS, INSTAGRAM_URL } from "../lib/reels";
 import MorphEmblem from "./components/home/MorphEmblem";
 import HomeMotion from "./components/home/HomeMotion";
 import "./components/home/home.css";
@@ -64,7 +64,7 @@ export default async function Home() {
   const editions = posts.filter((post) => post.slug && post.title && post.category?.toLowerCase() !== "i-wonder-why");
   const edition = editions.find((post) => post.slug !== VIBE_POST_SLUG);
   const wonder = OBSERVATIONS[0];
-  const latestReels = [...REELS].sort((a, b) => +new Date(b.date) - +new Date(a.date)).slice(0, 3);
+  const latestReels = ALL_REELS.filter((r) => r.cover).sort((a, b) => +new Date(b.date) - +new Date(a.date)).slice(0, 3);
 
   const subjectCount = SUBJECT_NOTEBOOKS.length;
   const noteCount = SUBJECT_NOTEBOOKS.reduce((sum, nb) => sum + nb.stats.notesCount, 0);
@@ -281,7 +281,7 @@ export default async function Home() {
             )}
 
             <Link href="/reels" className="hm-tile hm-t-reels" data-reveal>
-              <span className="hm-mono hm-kicker">REELS · {REELS.length} SO FAR</span>
+              <span className="hm-mono hm-kicker">REELS · {ALL_REELS.length} SO FAR</span>
               <div className="hm-reel-stack" aria-hidden="true">
                 {latestReels.map((reel) => (
                   // eslint-disable-next-line @next/next/no-img-element
