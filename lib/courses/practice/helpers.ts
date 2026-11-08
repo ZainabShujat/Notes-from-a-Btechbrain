@@ -22,7 +22,8 @@ export function mcq(
     prompt,
     type: "single-choice",
     options: options.map(([text, isCorrect, why], i) => ({
-      id: `${id}-${String.fromCharCode(97 + i)}`,
+      // Shown as the option's label, and only needs to be unique within its question.
+      id: String.fromCharCode(97 + i),
       text,
       isCorrect,
       explanation: why,

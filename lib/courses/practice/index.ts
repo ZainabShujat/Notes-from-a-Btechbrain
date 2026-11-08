@@ -15,6 +15,8 @@ import { LINEAR_ALGEBRA_EXTRAS } from "./linear-algebra";
 import { CALCULUS_OPT_EXTRAS } from "./calculus-optimization";
 import { ML_EXTRAS } from "./machine-learning";
 import { AI_EXTRAS } from "./artificial-intelligence";
+import { OS_EXTRAS } from "./operating-systems";
+import { DBMS_EXTRAS } from "./dbms";
 
 /** Worked examples and practice for every subject, keyed by lesson id. */
 export const LESSON_EXTRAS: LessonExtras = {
@@ -34,4 +36,6 @@ export const LESSON_EXTRAS: LessonExtras = {
   ...CALCULUS_OPT_EXTRAS,
   ...ML_EXTRAS,
   ...AI_EXTRAS,
+  ...OS_EXTRAS,
+  ...DBMS_EXTRAS,
 };
