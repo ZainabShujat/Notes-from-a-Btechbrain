@@ -294,6 +294,43 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* ============ BEHIND THE REELS ============ */}
+        {/* Built from the "How a reel gets written" reel: its character, paper, sticker text and script. */}
+        <section aria-labelledby="bts-title" className="mx-auto max-w-[1280px] px-5 pb-12" data-reveal>
+          <div className="hm-bts">
+            <div className="hm-bts-art">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/assets/reels/claude-edit-sprite.webp" alt="The page's pixel-art character typing at a tiny keyboard" width={390} height={430} />
+              <span className="hm-bts-you" aria-hidden="true">
+                you
+                <svg viewBox="0 0 120 50" preserveAspectRatio="none"><path d="M14 30 C 10 8, 104 4, 110 22 C 116 42, 22 48, 8 34" /></svg>
+              </span>
+            </div>
+            <div className="hm-bts-copy">
+              <p className="hm-hand m-0 text-[26px] text-[#7c3aed]">behind the reels</p>
+              <h2 id="bts-title" className="hm-bts-sticker">
+                No camera. No studio. <span>Just text.</span>
+              </h2>
+              <ol className="hm-bts-steps">
+                <li>A prompt becomes a plan.</li>
+                <li>A plan becomes code.</li>
+                <li>Code becomes triangles.</li>
+                <li>Triangles become frames.</li>
+                <li>Two thousand screenshots, stitched into one.</li>
+              </ol>
+              <p className="hm-bts-coda">All of it, one word at a time.</p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/reels" className="hm-btn bg-[#1b1712] text-[#fef3c7]">Watch the reels →</Link>
+                {INSTAGRAM_URL && (
+                  <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="hm-btn border-2 border-[#1b1712] text-[#1b1712]">
+                    Follow on Instagram ↗
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ============ LAST-MINUTE ============ */}
         <section aria-labelledby="lm-title" className="relative py-3.5" data-reveal>
           <div className="-rotate-[1.4deg] bg-[#facc15] text-[#1a1405] shadow-[0_0_80px_-10px_rgba(250,204,21,.45)]">
