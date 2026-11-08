@@ -3,14 +3,15 @@ import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { pageMetadata } from "../../../lib/seo";
-import { getReel, INSTAGRAM_URL, PILLARS, REELS, type Reel } from "../../../lib/reels";
+import { ALL_REELS, getReel, INSTAGRAM_URL, PILLARS, SERIES, type Reel } from "../../../lib/reels";
+import ReelCover from "../ReelCover";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return REELS.map((reel) => ({ slug: reel.slug }));
+  return ALL_REELS.map((reel) => ({ slug: reel.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -31,8 +32,10 @@ export default async function ReelPage({ params }: PageProps) {
   const reel = getReel(slug);
   if (!reel) notFound();
 
-  const index = REELS.indexOf(reel);
-  const next = REELS[(index + 1) % REELS.length];
+  // Next reel in the same series, so a series reads in order.
+  const inSeries = ALL_REELS.filter((r) => (r.series ?? "decoded") === (reel.series ?? "decoded"));
+  const next = inSeries[(inSeries.indexOf(reel) + 1) % inSeries.length];
+  const seriesLabel = SERIES.find((s) => s.key === (reel.series ?? "decoded"))?.label ?? PILLARS[reel.pillar].label;
   const followUrl = reel.instagram ?? INSTAGRAM_URL;
 
   return (
@@ -47,8 +50,7 @@ export default async function ReelPage({ params }: PageProps) {
       <div className="mt-8 grid gap-10 md:grid-cols-[260px_1fr] md:gap-14">
         <aside className="md:sticky md:top-28 md:self-start">
           <div className="mx-auto max-w-[220px] overflow-hidden rounded-xl border border-hairline bg-black shadow-lift md:max-w-none">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={reel.cover} alt={`Cover of the reel: ${reel.title}`} className="aspect-[9/16] w-full object-cover" />
+            <ReelCover reel={reel} />
           </div>
           {followUrl && (
             <a
@@ -65,7 +67,7 @@ export default async function ReelPage({ params }: PageProps) {
         <article className="min-w-0">
           <p className="m-0 text-xs font-bold uppercase tracking-[0.18em] text-ink-3">
             <span className="mr-2 inline-block h-2 w-2 rounded-full bg-[var(--ac)]" aria-hidden="true" />
-            {PILLARS[reel.pillar].label}
+            {seriesLabel}
           </p>
           <h1 className="mt-3 mb-0 text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.1] tracking-tight text-ink-1">
             {reel.title}
@@ -75,6 +77,27 @@ export default async function ReelPage({ params }: PageProps) {
           {reel.lead === "stat" && reel.stat && <Stat stat={reel.stat} />}
           {reel.lead === "list" && reel.list && <List list={reel.list} />}
 
+          {reel.facts && (
+            <section className="mt-10">
+              <h2 className="m-0 text-2xl font-bold text-ink-1">What&apos;s true, with sources</h2>
+              <p className="mt-2 mb-0 text-sm text-ink-3">Every claim in the reel, checked before it was voiced.</p>
+              <ol className="mt-6 list-none space-y-5 p-0">
+                {reel.facts.map((fact, i) => (
+                  <li key={fact.claim} className="flex gap-4">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--ac)] text-sm font-black text-[#120e22]">
+                      {i + 1}
+                    </span>
+                    <div>
+                      <p className="m-0 text-ink-1 leading-relaxed">{fact.claim}</p>
+                      <p className="mt-1 mb-0 text-sm text-ink-3">Source: {fact.source}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
+
+          {reel.steps && (
           <ol className="mt-10 list-none space-y-6 p-0">
             {reel.steps.map((step, i) => (
               <li key={step.heading} className="flex gap-4">
@@ -88,13 +111,16 @@ export default async function ReelPage({ params }: PageProps) {
               </li>
             ))}
           </ol>
+          )}
 
           {reel.lead !== "stat" && reel.stat && <Stat stat={reel.stat} />}
           {reel.lead !== "list" && reel.list && <List list={reel.list} />}
 
-          <p className="mt-12 mb-0 border-l-4 border-[var(--ac)] pl-4 text-2xl font-bold leading-snug text-ink-1">
-            {reel.closer}
-          </p>
+          {reel.closer && (
+            <p className="mt-12 mb-0 border-l-4 border-[var(--ac)] pl-4 text-2xl font-bold leading-snug text-ink-1">
+              {reel.closer}
+            </p>
+          )}
 
           {reel.related && (
             <div className="mt-8 flex flex-wrap gap-3">
@@ -110,6 +136,7 @@ export default async function ReelPage({ params }: PageProps) {
             </div>
           )}
 
+          {reel.sources && (
           <section className="mt-12 border-t border-hairline pt-6">
             <h2 className="m-0 text-xs font-bold uppercase tracking-[0.18em] text-ink-3">Sources</h2>
             <ul className="mt-3 mb-0 space-y-1.5 pl-5 text-sm text-ink-2 leading-relaxed">
@@ -118,6 +145,7 @@ export default async function ReelPage({ params }: PageProps) {
               ))}
             </ul>
           </section>
+          )}
 
           {next !== reel && (
             <Link

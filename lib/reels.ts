@@ -3,8 +3,10 @@
  *
  * Each reel on Instagram gets a page here with the full explanation and
  * its sources, so people coming from the bio link land on the same story
- * they just watched. Content mirrors the reel's save-worthy carousel.
+ * they just watched. Older reels mirror their carousel; newer ones list
+ * every claim with its source, from the reel's fact-check.
  */
+import { LIBRARY_REELS } from "./reel-library";
 
 /** Profile URL for the "Follow" buttons across /reels and the homepage. */
 export const INSTAGRAM_URL: string | null = "https://www.instagram.com/notes.fromabtechbrain/";
@@ -22,6 +24,26 @@ export const PILLARS: Record<ReelPillar, { label: string; blurb: string }> = {
   },
 };
 
+export type ReelSeries =
+  | "stay-curious"
+  | "btech-visualised"
+  | "language-wars"
+  | "work-we-do"
+  | "what-is-love"
+  | "decoded-news"
+  | "decoded";
+
+/** Series in the order /reels shows them. */
+export const SERIES: { key: ReelSeries; label: string; blurb: string }[] = [
+  { key: "stay-curious", label: "Stay Curious", blurb: "Thirty days of everyday questions, two a day." },
+  { key: "btech-visualised", label: "B.Tech, Visualised", blurb: "Exam topics animated in 40 seconds, each linked to the full lesson." },
+  { key: "language-wars", label: "Language Wars", blurb: "Hot takes on programming languages, with the facts in the middle." },
+  { key: "work-we-do", label: "The Work We Do", blurb: "The jobs behind everyday life, one field at a time." },
+  { key: "decoded", label: "Decoded", blurb: "How everyday things actually work." },
+  { key: "what-is-love", label: "What Is Love?", blurb: "The science of crushes, love and heartbreak." },
+  { key: "decoded-news", label: "Decoded: the news", blurb: "The money and tech stories everyone's talking about." },
+];
+
 export type Reel = {
   slug: string;
   title: string;
@@ -29,18 +51,23 @@ export type Reel = {
   /** The line the reel opens on. */
   hook: string;
   date: string;
-  cover: string;
+  /** Series it belongs to; older carousel reels default to Decoded. */
+  series?: ReelSeries;
+  /** Missing covers fall back to a designed title card. */
+  cover?: string;
   /** Accent colour, taken from the reel's carousel. */
   accent: string;
   /** Link to the reel itself once it's posted. */
   instagram?: string;
   /** Which block, if any, comes before the steps (as in the carousel). */
   lead?: "stat" | "list";
-  steps: { heading: string; body: string }[];
+  steps?: { heading: string; body: string }[];
+  /** Every claim the reel makes, with its source, from its fact-check. */
+  facts?: { claim: string; source: string }[];
   stat?: { big: string; heading: string; body: string };
   list?: { title: string; items: { icon: string; title: string; body: string }[] };
-  closer: string;
-  sources: string[];
+  closer?: string;
+  sources?: string[];
   related?: { label: string; href: string }[];
 };
 
@@ -257,6 +284,9 @@ export const REELS: Reel[] = [
   },
 ];
 
+/** Every reel, the carousel ones and the fact-checked library. */
+export const ALL_REELS: Reel[] = [...REELS, ...LIBRARY_REELS];
+
 export function getReel(slug: string): Reel | undefined {
-  return REELS.find((r) => r.slug === slug);
+  return ALL_REELS.find((r) => r.slug === slug);
 }
