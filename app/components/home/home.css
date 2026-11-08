@@ -186,3 +186,66 @@ a.hm-tile:hover .hm-reel-stack img { transform: none; }
   .hm-emblem-anim { display: none !important; }
   .hm-emblem-still { display: block !important; }
 }
+
+/* ---------- behind the reels: built from the "How a reel gets written" reel ---------- */
+/* Paper stays paper in both themes, like the reel itself. */
+.hm-bts {
+  display: grid; grid-template-columns: minmax(220px, 360px) 1fr; gap: 28px; align-items: center;
+  padding: 28px 28px 28px 72px; border-radius: 6px 18px 10px 14px; color: #2a241c; position: relative; overflow: hidden;
+  background:
+    linear-gradient(90deg, transparent 52px, rgba(220, 38, 38, .45) 52px 54px, transparent 54px),
+    repeating-linear-gradient(transparent 0 31px, rgba(120, 100, 70, .16) 31px 32px),
+    #efe6d2;
+  box-shadow: 0 24px 60px -22px rgba(0, 0, 0, .85); transform: rotate(-.6deg);
+}
+.hm-bts-art { position: relative; justify-self: center; width: 100%; max-width: 320px; }
+.hm-bts-art img {
+  display: block; width: 100%; height: auto; image-rendering: pixelated;
+  -webkit-mask-image: radial-gradient(closest-side, #000 78%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 78%, transparent 100%);
+}
+.hm-bts-you { position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%); font: 800 22px var(--font-sans); color: #1b1712; padding: 4px 14px; }
+.hm-bts-you svg { position: absolute; inset: -6px -14px; width: calc(100% + 28px); height: calc(100% + 12px); overflow: visible; }
+.hm-bts-you path { fill: none; stroke: #dc2626; stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 260; }
+/* Drawn by default; once the scroll reveal is armed, it's drawn in as the section appears. */
+.hm-armed .hm-bts-you path { stroke-dashoffset: 260; }
+.hm-armed.hm-in .hm-bts-you path { animation: hm-bts-ink 1.1s .5s ease-out forwards; }
+@keyframes hm-bts-ink { to { stroke-dashoffset: 0; } }
+
+.hm-bts-sticker {
+  margin: 4px 0 14px; font-weight: 900; line-height: .98; letter-spacing: -0.005em; text-transform: uppercase;
+  font-size: clamp(30px, 4.2cqi, 54px); color: #fff;
+  -webkit-text-stroke: 1.5px #1b1712; paint-order: stroke fill; text-shadow: 3px 3px 0 #1b1712;
+}
+.hm-bts-sticker span { display: block; color: #38bdf8; transform: rotate(-3deg); transform-origin: left; margin-top: 4px; }
+
+/* The script plays line by line: each step lights up in turn, on a loop. */
+.hm-bts-steps { margin: 0 0 10px; padding: 0; list-style: none; counter-reset: bts; }
+.hm-bts-steps li {
+  counter-increment: bts; display: flex; gap: 12px; align-items: baseline; padding: 4px 8px; margin-left: -8px; border-radius: 6px;
+  font-size: 18px; font-weight: 600; line-height: 32px; color: #5b5045;
+  animation: hm-bts-step 10s infinite both;
+}
+.hm-bts-steps li::before { content: counter(bts, decimal-leading-zero); font: 800 12px var(--font-sans); color: #a3967f; }
+.hm-bts-steps li:nth-child(2) { animation-delay: 2s; }
+.hm-bts-steps li:nth-child(3) { animation-delay: 4s; }
+.hm-bts-steps li:nth-child(4) { animation-delay: 6s; }
+.hm-bts-steps li:nth-child(5) { animation-delay: 8s; }
+@keyframes hm-bts-step {
+  0%, 20% { color: #1b1712; background: rgba(253, 224, 71, .55); }
+  24%, 100% { color: #5b5045; background: transparent; }
+}
+.hm-bts-coda { margin: 0 0 18px; font: 700 26px var(--font-handwriting); color: #7c3aed; }
+
+@container hm (max-width: 720px) {
+  .hm-bts { grid-template-columns: 1fr; padding: 24px 18px 24px 44px; transform: none; }
+  .hm-bts { background:
+    linear-gradient(90deg, transparent 30px, rgba(220, 38, 38, .45) 30px 32px, transparent 32px),
+    repeating-linear-gradient(transparent 0 31px, rgba(120, 100, 70, .16) 31px 32px), #efe6d2; }
+  .hm-bts-art { max-width: 220px; }
+  .hm-bts-steps li { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hm-bts-steps li { animation: none; }
+  .hm-bts-you path { stroke-dashoffset: 0; animation: none !important; }
+}
